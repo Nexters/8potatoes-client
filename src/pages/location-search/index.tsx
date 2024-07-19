@@ -1,119 +1,72 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
-import { useInfiniteQuery } from '@tanstack/react-query';
+import SearchBox from '#/features/location/search-box';
+import { LocationInformationType } from '#/types/location';
 
-import { getLocationSearchData } from '#/apis/tmap';
-import {
-    GeolocationCoordinatesType,
-    LocationInformationType,
-} from '#/types/location';
-import { debounce } from '#/utils/common';
+const SEARCH_OPTION = {
+    ORIGIN: 'origin',
+    DESTINATION: 'destination',
+};
+type SearchOptionType = (typeof SEARCH_OPTION)[keyof typeof SEARCH_OPTION];
 
 function LocationSearch() {
-    const searchInputRef = useRef<HTMLInputElement>(null);
-    const lastItemRef = useRef<HTMLDivElement>(null);
-
-    const [searchKeyword, setSearchKeyword] = useState<string>('');
-    const [geolocationCoordinates, setGeolocationCoordinates] =
-        useState<GeolocationCoordinatesType>({ latitude: 0, longitude: 0 });
-
-    const { data, hasNextPage, fetchNextPage } = useInfiniteQuery({
-        queryKey: ['search', searchKeyword],
-        queryFn: ({ pageParam = 1 }) =>
-            getLocationSearchData({
-                page: pageParam,
-                searchKeyword,
-                centerLat: geolocationCoordinates.latitude,
-                centerLon: geolocationCoordinates.longitude,
-                appKey: import.meta.env.VITE_TMAP_APP_KEY,
-            }),
-        initialPageParam: 1,
-        select: ({ pages }) =>
-            pages.reduce(
-                (acc, val) => [...acc, ...val.searchPoiInfo.pois.poi],
-                [] as LocationInformationType[],
-            ),
-        getNextPageParam: (lastPage) => {
-            const {
-                searchPoiInfo: { page, count, totalCount },
-            } = lastPage;
-            return page * count >= totalCount ? undefined : page + 1;
-        },
-        enabled: !!searchKeyword,
+    const [routeLocation, setRouteLocation] = useState<
+        Record<SearchOptionType, LocationInformationType | null>
+    >({
+        origin: null,
+        destination: null,
     });
+    const [searchType, setSearchType] = useState<SearchOptionType | null>(null);
 
-    useEffect(() => {
-        function handleSuccess(position: GeolocationPosition) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
+    const handleClickLabel = (searchType: SearchOptionType) => {
+        setSearchType(searchType);
+    };
 
-            setGeolocationCoordinates({ latitude, longitude });
-        }
-
-        navigator.geolocation.getCurrentPosition(handleSuccess);
-    }, []);
-    useEffect(() => {
-        if (!lastItemRef.current) {
+    const handleSelectLocation = (location: LocationInformationType) => {
+        if (!searchType) {
             return;
         }
 
-        const observerCallback = (entries: IntersectionObserverEntry[]) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting && hasNextPage) {
-                    fetchNextPage();
-                }
-            });
-        };
+        setRouteLocation({ ...routeLocation, [searchType]: location });
+        setSearchType(null);
+    };
 
-        const observer = new IntersectionObserver(observerCallback);
-        observer.observe(lastItemRef.current);
-
-        return () => {
-            if (!lastItemRef.current) {
-                return;
-            }
-            observer.unobserve(lastItemRef.current);
-        };
-    }, [fetchNextPage, hasNextPage]);
-
-    const handleChangeSearchInput = useCallback(
-        debounce(() => {
-            if (!searchInputRef.current) {
-                return;
-            }
-            setSearchKeyword(searchInputRef.current.value);
-        }),
-        [],
-    );
+    const handleCancelSelect = () => {
+        setSearchType(null);
+    };
 
     return (
         <div>
-            <input
-                ref={searchInputRef}
-                type="text"
-                onChange={handleChangeSearchInput}
-            />
-
-            {data && (
-                <ul style={{ listStyle: 'none' }}>
-                    {data.map((item: LocationInformationType) => (
-                        <li
-                            key={item.pkey}
-                            style={{ border: '1px solid black' }}
-                        >
-                            <p>{item.name}</p>
-                            <p>{item.lowerBizName}</p>
-                            <p>{item.radius}km</p>
-                            {item.newAddressList.newAddress.map(
-                                (address, idx: number) => (
-                                    <p key={idx}>{address.fullAddressRoad}</p>
-                                ),
-                            )}
-                        </li>
-                    ))}
-                </ul>
+            {searchType !== null ? (
+                <SearchBox
+                    onSelect={handleSelectLocation}
+                    onCancel={handleCancelSelect}
+                />
+            ) : (
+                <>
+                    <div
+                        style={{ padding: '8px' }}
+                        onClick={() => handleClickLabel(SEARCH_OPTION.ORIGIN)}
+                    >
+                        <p>
+                            {routeLocation.origin?.name ??
+                                '출발지를 선택해주세요'}
+                        </p>
+                    </div>
+                    <div
+                        style={{ padding: '8px' }}
+                        onClick={() =>
+                            handleClickLabel(SEARCH_OPTION.DESTINATION)
+                        }
+                    >
+                        <p>
+                            {routeLocation.destination?.name ??
+                                '도착지를 선택해주세요'}
+                        </p>
+                    </div>
+                    <button>Continue</button>
+                </>
             )}
-            <div ref={lastItemRef}></div>
         </div>
     );
 }
