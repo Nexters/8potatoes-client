@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { getLocationSearchData } from '#/apis/tmap';
+import useIntersectionObserver from '#/hooks/useIntersectionObserver';
 import {
     GeolocationCoordinatesType,
     LocationInformationType,
@@ -16,7 +17,6 @@ interface SearchBoxPropsType {
 
 function SearchBox({ onSelect, onCancel }: SearchBoxPropsType) {
     const searchInputRef = useRef<HTMLInputElement>(null);
-    const lastItemRef = useRef<HTMLDivElement>(null);
 
     const [searchKeyword, setSearchKeyword] = useState<string>('');
     const [geolocationCoordinates, setGeolocationCoordinates] =
@@ -47,6 +47,11 @@ function SearchBox({ onSelect, onCancel }: SearchBoxPropsType) {
         enabled: !!searchKeyword,
     });
 
+    const { targetRef } = useIntersectionObserver<HTMLDivElement>({
+        onIntersect: fetchNextPage,
+        enabled: !!hasNextPage,
+    });
+
     useEffect(() => {
         function handleSuccess(position: GeolocationPosition) {
             const latitude = position.coords.latitude;
@@ -60,29 +65,6 @@ function SearchBox({ onSelect, onCancel }: SearchBoxPropsType) {
 
         navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
     }, []);
-    useEffect(() => {
-        if (!lastItemRef.current) {
-            return;
-        }
-
-        const observerCallback = (entries: IntersectionObserverEntry[]) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting && hasNextPage) {
-                    fetchNextPage();
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(observerCallback);
-        observer.observe(lastItemRef.current);
-
-        return () => {
-            if (!lastItemRef.current) {
-                return;
-            }
-            observer.unobserve(lastItemRef.current);
-        };
-    }, [fetchNextPage, hasNextPage]);
 
     const handleChangeSearchInput = useCallback(
         debounce(() => {
@@ -123,7 +105,7 @@ function SearchBox({ onSelect, onCancel }: SearchBoxPropsType) {
                     ))}
                 </ul>
             )}
-            <div ref={lastItemRef}></div>
+            <div ref={targetRef}></div>
         </div>
     );
 }
