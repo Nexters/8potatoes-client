@@ -10,9 +10,9 @@ export interface LocationSearchParams {
 
 export interface LocationSearchResponse {
     searchPoiInfo: {
-        totalCount: number;
-        count: number;
-        page: number;
+        totalCount: string;
+        count: string;
+        page: string;
         pois: {
             poi: LocationInformationType[];
         };

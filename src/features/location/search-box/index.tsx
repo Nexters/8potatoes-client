@@ -38,10 +38,10 @@ function SearchBox({ onSelect, onCancel }: SearchBoxPropsType) {
                 (acc, val) => [...acc, ...val.searchPoiInfo.pois.poi],
                 [] as LocationInformationType[],
             ),
-        getNextPageParam: (lastPage) => {
-            const {
-                searchPoiInfo: { page, count, totalCount },
-            } = lastPage;
+        getNextPageParam: ({ searchPoiInfo }) => {
+            const page = parseInt(searchPoiInfo.page);
+            const count = parseInt(searchPoiInfo.count);
+            const totalCount = parseInt(searchPoiInfo.totalCount);
             return page * count >= totalCount ? undefined : page + 1;
         },
         enabled: !!searchKeyword,
