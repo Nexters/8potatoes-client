@@ -1,9 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { useInfiniteQuery } from '@tanstack/react-query';
-
-import { getLocationSearchData } from '#/apis/tmap';
 import useIntersectionObserver from '#/hooks/useIntersectionObserver';
+import { useGetLocationSearch } from '#/query-hooks/location/query';
 import {
     GeolocationCoordinatesType,
     LocationInformationType,
@@ -22,29 +20,9 @@ function SearchBox({ onSelect, onCancel }: SearchBoxPropsType) {
     const [geolocationCoordinates, setGeolocationCoordinates] =
         useState<GeolocationCoordinatesType>({ latitude: 0, longitude: 0 });
 
-    const { data, hasNextPage, fetchNextPage } = useInfiniteQuery({
-        queryKey: ['search', searchKeyword],
-        queryFn: ({ pageParam = 1 }) =>
-            getLocationSearchData({
-                page: pageParam,
-                searchKeyword,
-                centerLat: geolocationCoordinates.latitude,
-                centerLon: geolocationCoordinates.longitude,
-                appKey: import.meta.env.VITE_TMAP_APP_KEY,
-            }),
-        initialPageParam: 1,
-        select: ({ pages }) =>
-            pages.reduce(
-                (acc, val) => [...acc, ...val.searchPoiInfo.pois.poi],
-                [] as LocationInformationType[],
-            ),
-        getNextPageParam: ({ searchPoiInfo }) => {
-            const page = parseInt(searchPoiInfo.page);
-            const count = parseInt(searchPoiInfo.count);
-            const totalCount = parseInt(searchPoiInfo.totalCount);
-            return page * count >= totalCount ? undefined : page + 1;
-        },
-        enabled: !!searchKeyword,
+    const { data, hasNextPage, fetchNextPage } = useGetLocationSearch({
+        searchKeyword,
+        geolocationCoordinates,
     });
 
     const { targetRef } = useIntersectionObserver<HTMLDivElement>({
