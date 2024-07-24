@@ -17,11 +17,10 @@ function useIntersectionObserver<T extends HTMLElement>({
         }
 
         const observerCallback = (entries: IntersectionObserverEntry[]) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    onIntersect();
-                }
-            });
+            const isIntersect = entries.some((entry) => entry.isIntersecting);
+            if (isIntersect) {
+                onIntersect();
+            }
         };
 
         const observer = new IntersectionObserver(observerCallback);
