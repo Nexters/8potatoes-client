@@ -10,7 +10,7 @@ interface SearchBoxPropsType {
 
 const LOCATION_TYPE = {
     ROAD: '도로명',
-    LOT: '지번',
+    LOT: '지역명',
 };
 
 function SearchBox({ location, searchInput, onSelect }: SearchBoxPropsType) {
@@ -18,9 +18,10 @@ function SearchBox({ location, searchInput, onSelect }: SearchBoxPropsType) {
         location.newAddressList.newAddress.length >= 1
             ? LOCATION_TYPE.ROAD
             : LOCATION_TYPE.LOT;
-    const address = LOCATION_TYPE.ROAD
-        ? location.newAddressList.newAddress[0].fullAddressRoad
-        : location.name;
+    const address =
+        locationType === LOCATION_TYPE.ROAD
+            ? location.newAddressList.newAddress[0].fullAddressRoad
+            : location.name;
 
     const getHighlightedText = (text: string, keyword: string) => {
         const textArr = text.split(new RegExp(`(${keyword})`, 'gi'));
