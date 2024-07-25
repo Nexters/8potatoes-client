@@ -50,14 +50,15 @@ function SearchList({ onSelect, onCancel }: SearchListPropsType) {
     }, []);
 
     const handleSearchDebounce = useCallback(
-        debounce(() => {
-            setSearchKeyword(searchInput);
+        debounce((searchInput) => {
+            const search = searchInput as string;
+            setSearchKeyword(search);
         }),
-        [searchInput],
+        [],
     );
 
     useEffect(() => {
-        handleSearchDebounce();
+        handleSearchDebounce(searchInput);
     }, [searchInput, handleSearchDebounce]);
 
     const handleChangeSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -72,9 +73,9 @@ function SearchList({ onSelect, onCancel }: SearchListPropsType) {
                 onReset={() => setSearchInput('')}
             />
 
-            {searchInput.length !== 0 && (
+            {searchKeyword.length !== 0 && (
                 <S.KeywordContainer>
-                    <S.Keyword>{searchInput}</S.Keyword> 검색된 주소
+                    <S.Keyword>{searchKeyword}</S.Keyword> 검색된 주소
                 </S.KeywordContainer>
             )}
 
