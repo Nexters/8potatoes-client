@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import SearchBox from '#/features/location/search-box';
+import SearchList from '#/features/location/search-list';
 import { LocationInformationType } from '#/types/location';
 
 const SEARCH_OPTION = {
@@ -38,7 +38,7 @@ function LocationSearch() {
     return (
         <div>
             {searchType !== null ? (
-                <SearchBox
+                <SearchList
                     onSelect={handleSelectLocation}
                     onCancel={handleCancelSelect}
                 />
