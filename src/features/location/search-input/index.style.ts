@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div<{ isFocused: boolean }>`
+export const Container = styled.div<{ isActive: boolean }>`
     padding: 12px;
     display: inline-flex;
     align-items: center;
     gap: 6px;
 
-    background-color: ${({ isFocused }) => (isFocused ? '#ffffff' : '#F4F0EA')};
-    border: ${({ isFocused }) =>
-        `1px solid ${isFocused ? '#ff7512' : '#D2CEC6'}`};
+    background-color: ${({ isActive }) => (isActive ? '#ffffff' : '#F4F0EA')};
+    border: ${({ isActive }) =>
+        `1px solid ${isActive ? '#ff7512' : '#D2CEC6'}`};
     border-radius: 8px;
 `;
 

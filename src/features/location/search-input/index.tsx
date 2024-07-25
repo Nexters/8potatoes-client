@@ -14,8 +14,10 @@ interface SearchInputProps {
 function SearchInput({ value, onChangeValue, onReset }: SearchInputProps) {
     const [isFocused, setIsFocused] = useState<boolean>(false);
 
+    const isActive = isFocused || value.length !== 0;
+
     return (
-        <S.Container isFocused={isFocused}>
+        <S.Container isActive={isActive}>
             <SearchButton />
             <S.Input
                 value={value}
@@ -25,7 +27,7 @@ function SearchInput({ value, onChangeValue, onReset }: SearchInputProps) {
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
             />
-            {(isFocused || value.length !== 0) && (
+            {isActive && (
                 <S.ResetButton onClick={onReset}>
                     <ResetButton />
                 </S.ResetButton>
