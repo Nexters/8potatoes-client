@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
 import useIntersectionObserver from '#/hooks/useIntersectionObserver';
 import { useGetLocationSearch } from '#/query-hooks/location/query';
@@ -9,6 +9,9 @@ import {
 import { debounce } from '#/utils/common';
 
 import SearchBox from '../search-box';
+import SearchInput from '../search-input';
+
+import * as S from './index.style';
 
 interface SearchListPropsType {
     onSelect: (location: LocationInformationType) => void;
@@ -63,12 +66,17 @@ function SearchList({ onSelect, onCancel }: SearchListPropsType) {
 
     return (
         <div>
-            <input
+            <SearchInput
                 value={searchInput}
-                type="text"
-                onChange={handleChangeSearchInput}
+                onChangeValue={handleChangeSearchInput}
+                onReset={() => setSearchInput('')}
             />
-            <button onClick={onCancel}>X</button>
+
+            {searchInput.length !== 0 && (
+                <S.KeywordContainer>
+                    <S.Keyword>{searchInput}</S.Keyword> 검색된 주소
+                </S.KeywordContainer>
+            )}
 
             {data && (
                 <ul style={{ listStyle: 'none' }}>
