@@ -10,6 +10,7 @@ import { debounce } from '#/utils/common';
 
 import SearchBox from '../search-box';
 import SearchInput from '../search-input';
+import SearchTip from '../search-tip';
 
 import * as S from './index.style';
 
@@ -78,6 +79,8 @@ function SearchList({ onSelect, onCancel }: SearchListPropsType) {
                     <S.Keyword>{searchKeyword}</S.Keyword> 검색된 주소
                 </S.KeywordContainer>
             )}
+
+            {searchKeyword.length === 0 && !data && <SearchTip />}
 
             {data && (
                 <ul style={{ listStyle: 'none' }}>
