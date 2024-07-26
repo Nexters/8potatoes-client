@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div<{ isActive: boolean }>`
+    box-sizing: border-box;
     padding: 12px;
     display: inline-flex;
     align-items: center;

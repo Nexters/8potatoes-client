@@ -6,6 +6,8 @@ export const TipHighlight = styled.span`
 
 export const Header = styled.div`
     font-weight: 600;
+
+    margin-top: 20px;
 `;
 
 export const TipContent = styled.div`

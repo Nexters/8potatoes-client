@@ -80,6 +80,8 @@ function SearchList({ onSelect, onCancel }: SearchListPropsType) {
                 </S.KeywordContainer>
             )}
 
+            <S.DottedBorder />
+
             {searchKeyword.length === 0 && !data && <SearchTip />}
 
             {data && (

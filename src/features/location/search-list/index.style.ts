@@ -11,3 +11,14 @@ export const KeywordContainer = styled.div`
 export const Keyword = styled.span`
     color: #ff7512;
 `;
+
+export const DottedBorder = styled.div`
+    height: 2px;
+    background: repeating-linear-gradient(
+        to right,
+        #f7ede1,
+        #f7ede1 7px,
+        transparent 7px,
+        transparent 15px
+    );
+`;

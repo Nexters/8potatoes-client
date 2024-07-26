@@ -10,7 +10,7 @@ interface SearchBoxPropsType {
 
 const LOCATION_TYPE = {
     ROAD: '도로명',
-    LOT: '지역명',
+    LOT: '지번',
 };
 
 function SearchBox({ location, searchInput, onSelect }: SearchBoxPropsType) {
