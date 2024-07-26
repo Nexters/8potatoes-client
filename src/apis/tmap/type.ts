@@ -18,3 +18,36 @@ export interface LocationSearchResponse {
         };
     };
 }
+
+export interface ReverseGeocodingParams {
+    lat: number;
+    lon: number;
+    appKey: string;
+}
+
+export interface ReverseGeocodingResponse {
+    addressInfo: {
+        fullAddress: string;
+        city_do: string;
+        gu_gun: string;
+        eup_myun: string;
+        ri: string;
+        roadName: string;
+        buildingIndex: string;
+        buildingName: string;
+        mappingDistance: number;
+        bunji: string;
+        adminDongCoord: {
+            lat: string;
+            lon: string;
+        };
+        legalDongCoord: {
+            lat: string;
+            lon: string;
+        };
+        roadCoord: {
+            lat: string;
+            lon: string;
+        };
+    };
+}

@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { NavermapsProvider } from 'react-naver-maps';
@@ -17,9 +19,11 @@ const queryClient = new QueryClient({
 
 const InitializedDataProvider = () => (
     <QueryClientProvider client={queryClient}>
-        <NavermapsProvider finClientId="">
-            <ReactQueryDevtools />
-            <Outlet />
+        <NavermapsProvider ncpClientId="h3e8buxdyc">
+            <Suspense fallback={<div>Loading</div>}>
+                <ReactQueryDevtools />
+                <Outlet />
+            </Suspense>
         </NavermapsProvider>
     </QueryClientProvider>
 );

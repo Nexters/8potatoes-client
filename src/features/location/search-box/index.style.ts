@@ -5,6 +5,8 @@ export const Container = styled.li`
     display: flex;
     flex-direction: column;
     gap: 8px;
+
+    cursor: pointer;
 `;
 
 export const LocationName = styled.div`

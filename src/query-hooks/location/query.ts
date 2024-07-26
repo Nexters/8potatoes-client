@@ -1,6 +1,6 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-import { getLocationSearchData } from '#/apis/tmap';
+import { getLocationSearchData, getReverseGeocodingData } from '#/apis/tmap';
 import {
     GeolocationCoordinatesType,
     LocationInformationType,
@@ -38,5 +38,26 @@ export const useGetLocationSearch = ({
             return page * count >= totalCount ? undefined : page + 1;
         },
         enabled: !!searchKeyword,
+    });
+};
+
+interface ReverseGeocodingQueryParams {
+    centerLocation: GeolocationCoordinatesType;
+    isLoaded: boolean;
+}
+
+export const useGetReverseGeocoding = ({
+    centerLocation,
+    isLoaded,
+}: ReverseGeocodingQueryParams) => {
+    return useQuery({
+        queryKey: [centerLocation.latitude, centerLocation.longitude],
+        queryFn: () =>
+            getReverseGeocodingData({
+                lat: centerLocation.latitude,
+                lon: centerLocation.longitude,
+                appKey: import.meta.env.VITE_TMAP_APP_KEY,
+            }),
+        enabled: isLoaded,
     });
 };

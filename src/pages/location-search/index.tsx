@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ArrowSwitchHorizontalIcon from '#/assets/icons/arrow-switch-horizontal.svg?react';
 import RouteIcon from '#/assets/icons/route.svg?react';
 import LocationSelectField from '#/features/location/location-select-field';
-import SearchList from '#/features/location/search-list';
+import Search from '#/features/location/search';
 import { LocationInformationType } from '#/types/location';
 
 import * as S from './index.style';
@@ -59,9 +59,9 @@ function LocationSearch() {
     return (
         <div>
             {searchType !== null ? (
-                <SearchList
+                <Search
                     onSelect={handleSelectLocation}
-                    onCancel={handleCancelSelect}
+                    onClose={handleCancelSelect}
                 />
             ) : (
                 <>
