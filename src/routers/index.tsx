@@ -25,7 +25,7 @@ const InitializedDataProvider = () => (
     <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
             <NavermapsProvider
-                finClientId={import.meta.env.VITE_X_NCP_APIGW_API_KEY_ID}
+                ncpClientId={import.meta.env.VITE_X_NCP_APIGW_API_KEY_ID}
             >
                 <ReactQueryDevtools />
                 <GlobalStyle />

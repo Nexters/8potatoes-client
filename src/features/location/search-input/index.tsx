@@ -28,9 +28,9 @@ function SearchInput({ value, onChangeValue, onReset }: SearchInputProps) {
                 onBlur={() => setIsFocused(false)}
             />
             {isActive && (
-                <S.ResetButton onClick={onReset}>
+                <button onClick={onReset}>
                     <ResetButton />
-                </S.ResetButton>
+                </button>
             )}
         </S.Container>
     );

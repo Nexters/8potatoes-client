@@ -1,8 +1,10 @@
 import styled from '@emotion/styled';
 
-export const Title = styled.p`
-    margin-top: 40px;
+export const Container = styled.div`
+    height: 100%;
+`;
 
+export const Title = styled.p`
     font-size: 24px;
     font-weight: 700;
 `;

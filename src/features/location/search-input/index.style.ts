@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const Container = styled.div<{ isActive: boolean }>`
     box-sizing: border-box;
+    width: 100%;
     padding: 12px;
     display: inline-flex;
     align-items: center;
@@ -14,12 +15,7 @@ export const Container = styled.div<{ isActive: boolean }>`
 `;
 
 export const Input = styled.input`
-    width: 262px;
+    flex: 1;
 
     font-size: 16px;
-`;
-
-export const ResetButton = styled.button`
-    width: 24px;
-    height: 24px;
 `;

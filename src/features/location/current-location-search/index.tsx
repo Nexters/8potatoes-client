@@ -82,7 +82,7 @@ function CurrentLocationSearch({
     return (
         <>
             {isLoaded && (
-                <>
+                <S.Wrapper>
                     <S.MapContainer>
                         <NaverMap
                             center={
@@ -119,7 +119,7 @@ function CurrentLocationSearch({
                             이 위치로 주소 등록
                         </button>
                     </S.BottomContainer>
-                </>
+                </S.Wrapper>
             )}
         </>
     );

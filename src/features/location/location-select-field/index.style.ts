@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
 
+export const Container = styled.div`
+    cursor: pointer;
+`;
+
 export const InputLabel = styled.span`
     color: #bcb6ad;
 

@@ -16,7 +16,7 @@ function LocationSelectField({
     locationName,
 }: LocationSelectFieldProps) {
     return (
-        <div onClick={handleClick}>
+        <S.Container onClick={handleClick}>
             <S.InputLabel>
                 {label}
                 <S.InputRequired> *</S.InputRequired>
@@ -29,7 +29,7 @@ function LocationSelectField({
                     <S.UnSelectedLocation>{placeholder}</S.UnSelectedLocation>
                 )}
             </S.SelectField>
-        </div>
+        </S.Container>
     );
 }
 

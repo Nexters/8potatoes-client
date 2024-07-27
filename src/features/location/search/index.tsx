@@ -78,67 +78,73 @@ function Search({ onSelect, onClose }: SearchListPropsType) {
     };
 
     return (
-        <div>
+        <S.Wrapper>
             {isCurrentLocationSearch ? (
                 <CurrentLocationSearch
                     onSelect={onSelect}
                     onCloseSearch={onClose}
                 />
             ) : (
-                <>
-                    <SearchInput
-                        value={searchInput}
-                        onChangeValue={handleChangeSearchInput}
-                        onReset={() => setSearchInput('')}
-                    />
+                <S.ContentsContainer>
+                    <S.HeaderContents>
+                        <SearchInput
+                            value={searchInput}
+                            onChangeValue={handleChangeSearchInput}
+                            onReset={() => setSearchInput('')}
+                        />
 
-                    <S.CurrentLocation
-                        onClick={() => setIsCurrentLocationSearch(true)}
-                    >
-                        <LocationPointerIcon width={24} height={24} />
-                        <S.CurrentLocationText>
-                            현재 위치로 주소 찾기
-                        </S.CurrentLocationText>
-                    </S.CurrentLocation>
+                        <S.CurrentLocation
+                            onClick={() => setIsCurrentLocationSearch(true)}
+                        >
+                            <LocationPointerIcon width={24} height={24} />
+                            <S.CurrentLocationText>
+                                현재 위치로 주소 찾기
+                            </S.CurrentLocationText>
+                        </S.CurrentLocation>
 
-                    <S.SearchContainer>
-                        {searchKeyword.length !== 0 &&
-                            !isLoading &&
-                            isSuccess && (
-                                <S.SearchText>
-                                    <S.Keyword>{searchKeyword}</S.Keyword>{' '}
-                                    검색된 주소
-                                </S.SearchText>
-                            )}
-                        {searchKeyword.length !== 0 &&
-                            !isLoading &&
-                            !isSuccess && (
-                                <S.NoContentText>
-                                    검색 결과가 없습니다.
-                                </S.NoContentText>
-                            )}
-                    </S.SearchContainer>
+                        <S.SearchContainer>
+                            {searchKeyword.length !== 0 &&
+                                !isLoading &&
+                                isSuccess && (
+                                    <S.SearchText>
+                                        <S.Keyword>{searchKeyword}</S.Keyword>{' '}
+                                        검색된 주소
+                                    </S.SearchText>
+                                )}
+                            {searchKeyword.length !== 0 &&
+                                !isLoading &&
+                                !isSuccess && (
+                                    <S.NoContentText>
+                                        검색 결과가 없습니다.
+                                    </S.NoContentText>
+                                )}
+                        </S.SearchContainer>
 
-                    <S.DottedBorder />
+                        <S.DottedBorder />
+                    </S.HeaderContents>
 
-                    {searchKeyword.length === 0 && !isSuccess && <SearchTip />}
+                    <S.ListContents>
+                        {searchKeyword.length === 0 && !isSuccess && (
+                            <SearchTip />
+                        )}
 
-                    {isSuccess && (
-                        <ul>
-                            {data.map((item: LocationInformationType) => (
-                                <SearchBox
-                                    key={item.pkey}
-                                    searchInput={searchInput}
-                                    location={item}
-                                    onSelect={onSelect}
-                                />
-                            ))}
-                        </ul>
-                    )}
-                    <div ref={targetRef}></div>
-                </>
+                        {isSuccess && (
+                            <ul>
+                                {data.map((item: LocationInformationType) => (
+                                    <SearchBox
+                                        key={item.pkey}
+                                        searchInput={searchInput}
+                                        location={item}
+                                        onSelect={onSelect}
+                                    />
+                                ))}
+                            </ul>
+                        )}
+                        <div ref={targetRef}></div>
+                    </S.ListContents>
+                </S.ContentsContainer>
             )}
-        </div>
+        </S.Wrapper>
     );
 }
 
