@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import Button from '#/components/button';
+
 export const Container = styled.div`
     height: 100%;
 `;

@@ -4,6 +4,7 @@ import { NaverMap, useNavermaps } from 'react-naver-maps';
 
 import CurrentPositionIcon from '#/assets/icons/current-position.svg?react';
 import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
+import Button from '#/components/button';
 import { useGetReverseGeocoding } from '#/query-hooks/location/query';
 import {
     GeolocationCoordinatesType,
@@ -111,13 +112,14 @@ function CurrentLocationSearch({
                                 {data.addressInfo?.buildingName}
                             </S.CurrentAddress>
                         )}
-                        <button
+                        <Button
+                            isValid
                             onClick={() =>
                                 handleSelectLocation(data?.addressInfo ?? {})
                             }
                         >
                             이 위치로 주소 등록
-                        </button>
+                        </Button>
                     </S.BottomContainer>
                 </S.Wrapper>
             )}

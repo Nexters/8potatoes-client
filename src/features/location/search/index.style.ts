@@ -44,6 +44,7 @@ export const CurrentLocation = styled.button`
     gap: 8px;
 
     margin-top: 16px;
+    cursor: pointer;
 `;
 
 export const CurrentLocationText = styled.p`

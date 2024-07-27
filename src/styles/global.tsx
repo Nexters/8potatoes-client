@@ -43,7 +43,6 @@ const globalCss = css`
     button {
         background: none;
         border: none;
-        cursor: pointer;
     }
 
     input {

@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import ArrowSwitchHorizontalIcon from '#/assets/icons/arrow-switch-horizontal.svg?react';
 import RouteIcon from '#/assets/icons/route.svg?react';
+import Button from '#/components/button';
 import LocationSelectField from '#/features/location/location-select-field';
 import Search from '#/features/location/search';
 import Contents from '#/pages/templates/contents';
@@ -55,6 +56,10 @@ function LocationSearch() {
 
             setRouteLocation({ origin: destination, destination: origin });
         }
+    };
+
+    const handleClickSearch = () => {
+        console.log('search');
     };
 
     return (
@@ -120,7 +125,12 @@ function LocationSearch() {
                             </button>
                         </S.RouteContainer>
 
-                        <button>검색</button>
+                        <Button
+                            isValid={isSelectedOrigin && isSelectedDestination}
+                            onClick={handleClickSearch}
+                        >
+                            검색
+                        </Button>
                     </Contents>
                 </S.Container>
             )}
