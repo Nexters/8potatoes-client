@@ -30,7 +30,14 @@ function Search({ onSelect, onClose }: SearchListPropsType) {
     const [geolocationCoordinates, setGeolocationCoordinates] =
         useState<GeolocationCoordinatesType>({ latitude: 0, longitude: 0 });
 
-    const { data, hasNextPage, fetchNextPage } = useGetLocationSearch({
+    const {
+        data,
+
+        isLoading,
+        isSuccess,
+        hasNextPage,
+        fetchNextPage,
+    } = useGetLocationSearch({
         searchKeyword,
         geolocationCoordinates,
     });
@@ -95,25 +102,29 @@ function Search({ onSelect, onClose }: SearchListPropsType) {
                     </S.CurrentLocation>
 
                     <S.SearchContainer>
-                        {searchKeyword.length !== 0 && data && (
-                            <S.SearchText>
-                                <S.Keyword>{searchKeyword}</S.Keyword> 검색된
-                                주소
-                            </S.SearchText>
-                        )}
-                        {searchKeyword.length !== 0 && !data && (
-                            <S.NoContentText>
-                                검색 결과가 없습니다.
-                            </S.NoContentText>
-                        )}
+                        {searchKeyword.length !== 0 &&
+                            !isLoading &&
+                            isSuccess && (
+                                <S.SearchText>
+                                    <S.Keyword>{searchKeyword}</S.Keyword>{' '}
+                                    검색된 주소
+                                </S.SearchText>
+                            )}
+                        {searchKeyword.length !== 0 &&
+                            !isLoading &&
+                            !isSuccess && (
+                                <S.NoContentText>
+                                    검색 결과가 없습니다.
+                                </S.NoContentText>
+                            )}
                     </S.SearchContainer>
 
                     <S.DottedBorder />
 
-                    {searchKeyword.length === 0 && !data && <SearchTip />}
+                    {searchKeyword.length === 0 && !isSuccess && <SearchTip />}
 
-                    {data && (
-                        <ul style={{ listStyle: 'none' }}>
+                    {isSuccess && (
+                        <ul>
                             {data.map((item: LocationInformationType) => (
                                 <SearchBox
                                     key={item.pkey}

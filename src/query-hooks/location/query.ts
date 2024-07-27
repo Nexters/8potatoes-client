@@ -28,7 +28,7 @@ export const useGetLocationSearch = ({
         initialPageParam: 1,
         select: ({ pages }) =>
             pages.reduce<LocationInformationType[]>(
-                (acc, val) => [...acc, ...val.searchPoiInfo.pois.poi],
+                (acc, val) => [...acc, ...(val.searchPoiInfo.pois.poi ?? [])],
                 [],
             ),
         getNextPageParam: ({ searchPoiInfo }) => {

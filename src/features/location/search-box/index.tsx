@@ -18,7 +18,7 @@ function SearchBox({ location, searchInput, onSelect }: SearchBoxPropsType) {
         location.newAddressList.newAddress.length >= 1
             ? LOCATION_TYPE.ROAD
             : LOCATION_TYPE.LOT;
-    const address =
+    const roadAddress =
         locationType === LOCATION_TYPE.ROAD
             ? location.newAddressList.newAddress[0].fullAddressRoad
             : location.name;
@@ -42,7 +42,13 @@ function SearchBox({ location, searchInput, onSelect }: SearchBoxPropsType) {
             <S.AddressContainer>
                 <S.Tag>{locationType}</S.Tag>
                 <S.Address>
-                    {getHighlightedText(address ?? '', searchInput)}
+                    {getHighlightedText(roadAddress ?? '', searchInput)}
+                </S.Address>
+            </S.AddressContainer>
+            <S.AddressContainer>
+                <S.Tag>{locationType}</S.Tag>
+                <S.Address>
+                    {getHighlightedText(roadAddress ?? '', searchInput)}
                 </S.Address>
             </S.AddressContainer>
         </S.Container>
