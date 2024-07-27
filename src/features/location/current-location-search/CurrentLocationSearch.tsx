@@ -5,6 +5,7 @@ import { NaverMap, useNavermaps } from 'react-naver-maps';
 import CurrentPositionIcon from '#/assets/icons/current-position.svg?react';
 import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
 import { Button } from '#/components/button';
+import { Tooltip } from '#/components/tooltip';
 import { useGetReverseGeocoding } from '#/query-hooks/location/query';
 import {
     GeolocationCoordinatesType,
@@ -96,9 +97,11 @@ export function CurrentLocationSearch({
                             onCenterChanged={handleCenterChanged}
                         ></NaverMap>
 
-                        <S.CurrentPositionContainer>
-                            <CurrentPositionIcon />
-                        </S.CurrentPositionContainer>
+                        <Tooltip content="표시된 위치가 맞나요?">
+                            <S.CurrentPositionContainer>
+                                <CurrentPositionIcon />
+                            </S.CurrentPositionContainer>
+                        </Tooltip>
                     </S.MapContainer>
 
                     <S.LocationPointerContainer onClick={getCurrentPosition}>

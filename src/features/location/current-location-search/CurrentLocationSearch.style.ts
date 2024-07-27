@@ -8,6 +8,10 @@ export const Wrapper = styled.div`
 export const MapContainer = styled(Container)`
     width: 100%;
     height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const BottomContainer = styled.div`
@@ -34,9 +38,5 @@ export const LocationPointerContainer = styled.div`
 `;
 
 export const CurrentPositionContainer = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     pointer-events: none;
 `;
