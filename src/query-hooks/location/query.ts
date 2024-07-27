@@ -32,6 +32,9 @@ export const useGetLocationSearch = ({
                 [],
             ),
         getNextPageParam: ({ searchPoiInfo }) => {
+            if (!searchPoiInfo) {
+                return undefined;
+            }
             const page = parseInt(searchPoiInfo.page);
             const count = parseInt(searchPoiInfo.count);
             const totalCount = parseInt(searchPoiInfo.totalCount);
