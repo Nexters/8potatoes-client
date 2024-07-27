@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
 import ArrowSwitchHorizontalIcon from '#/assets/icons/arrow-switch-horizontal.svg?react';
-import RouteIcon from '#/assets/icons/route.svg?react';
+import DestinationIcon from '#/assets/icons/destination.svg?react';
+import OriginIcon from '#/assets/icons/origin.svg?react';
 import { Button } from '#/components/button';
 import { LocationSelectField } from '#/features/location/location-select-field';
 import { Search } from '#/features/location/search';
@@ -71,7 +72,7 @@ export function LocationSearch() {
                 />
             ) : (
                 <S.Container>
-                    <img src="" style={{ width: '100vw', height: '327px' }} />
+                    <img src="" style={{ width: '100%', height: '327px' }} />
 
                     <Contents style={{ marginTop: '40px' }}>
                         <S.Title>
@@ -81,7 +82,11 @@ export function LocationSearch() {
                         </S.Title>
 
                         <S.RouteContainer>
-                            <RouteIcon />
+                            <S.RouteIconContainer>
+                                <OriginIcon />
+                                <S.DottedLine />
+                                <DestinationIcon />
+                            </S.RouteIconContainer>
 
                             <S.Location>
                                 <LocationSelectField

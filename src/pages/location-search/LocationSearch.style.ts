@@ -25,3 +25,24 @@ export const RouteContainer = styled.div`
 
     margin-top: 50px;
 `;
+
+export const RouteIconContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    height: 100px;
+`;
+
+export const DottedLine = styled.div`
+    flex: 1;
+    width: 1.5px;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 3px,
+        transparent 3px,
+        transparent 7px
+    );
+`;
