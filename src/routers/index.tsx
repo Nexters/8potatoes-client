@@ -5,6 +5,7 @@ import { Outlet, createBrowserRouter } from 'react-router-dom';
 
 import App from '#/App';
 import { MobileView } from '#/pages/templates/mobile-view';
+import LocationSearch from '#/pages/location-search';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -28,15 +29,21 @@ const InitializedDataProvider = () => (
     </QueryClientProvider>
 );
 
-export const applicationRouter = createBrowserRouter([
-    {
-        element: <InitializedDataProvider />,
-        children: [
-            {
-                path: '/',
-                errorElement: <div>에러</div>,
-                element: <App />,
-            },
-        ],
-    },
-]);
+export const applicationRouter: ReturnType<typeof createBrowserRouter> =
+    createBrowserRouter([
+        {
+            element: <InitializedDataProvider />,
+            children: [
+                {
+                    path: '/',
+                    errorElement: <div>에러</div>,
+                    element: <App />,
+                },
+                {
+                    path: '/location-search',
+                    errorElement: <div>에러</div>,
+                    element: <LocationSearch />,
+                },
+            ],
+        },
+    ]);

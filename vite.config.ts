@@ -7,4 +7,13 @@ export default defineConfig({
         alias: [{ find: '#/', replacement: '/src/' }],
     },
     plugins: [react()],
+    server: {
+        proxy: {
+            '/tmap': {
+                target: 'https://apis.openapi.sk.com',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, ''),
+            },
+        },
+    },
 });
