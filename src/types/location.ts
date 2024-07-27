@@ -10,6 +10,12 @@ export interface LocationInformationType {
     telNo?: string;
     noorLat?: string;
     noorLon?: string;
+    upperAddrName?: string;
+    middleAddrName?: string;
+    lowerAddrName?: string;
+    detailAddrName?: string;
+    firstNo?: string;
+    secondNo?: string;
     upperBizName?: string;
     middleBizName?: string;
     lowerBizName?: string;

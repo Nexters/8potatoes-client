@@ -8,20 +8,11 @@ interface SearchBoxPropsType {
     onSelect: (location: LocationInformationType) => void;
 }
 
-const LOCATION_TYPE = {
-    ROAD: '도로명',
-    LOT: '지번',
-};
-
 function SearchBox({ location, searchInput, onSelect }: SearchBoxPropsType) {
-    const locationType =
-        location.newAddressList.newAddress.length >= 1
-            ? LOCATION_TYPE.ROAD
-            : LOCATION_TYPE.LOT;
     const roadAddress =
-        locationType === LOCATION_TYPE.ROAD
+        location.newAddressList.newAddress.length >= 1
             ? location.newAddressList.newAddress[0].fullAddressRoad
-            : location.name;
+            : undefined;
 
     const getHighlightedText = (text: string, keyword: string) => {
         const textArr = text.split(new RegExp(`(${keyword})`, 'gi'));
@@ -34,22 +25,49 @@ function SearchBox({ location, searchInput, onSelect }: SearchBoxPropsType) {
         );
     };
 
+    const getLotNumberAddress = (location: LocationInformationType) => {
+        const {
+            upperAddrName = '',
+            middleAddrName = '',
+            lowerAddrName = '',
+            detailAddrName = '',
+            firstNo = '0',
+            secondNo = '0',
+        } = location;
+
+        const locationFirstNumber = firstNo === '0' ? '' : firstNo;
+        const locationSecondNumber = secondNo === '0' ? '' : secondNo;
+        const locationNumber =
+            locationFirstNumber +
+            (locationSecondNumber ? `-${locationSecondNumber}` : '');
+
+        const addressParts = [
+            upperAddrName,
+            middleAddrName,
+            lowerAddrName,
+            detailAddrName,
+            locationNumber,
+        ];
+
+        return addressParts.join(' ');
+    };
+
     return (
         <S.Container onClick={() => onSelect(location)}>
             <S.LocationName>
                 {getHighlightedText(location.name ?? '', searchInput)}
             </S.LocationName>
+            {roadAddress && (
+                <S.AddressContainer>
+                    <S.Tag>도로명</S.Tag>
+                    <S.Address>
+                        {getHighlightedText(roadAddress, searchInput)}
+                    </S.Address>
+                </S.AddressContainer>
+            )}
             <S.AddressContainer>
-                <S.Tag>{locationType}</S.Tag>
-                <S.Address>
-                    {getHighlightedText(roadAddress ?? '', searchInput)}
-                </S.Address>
-            </S.AddressContainer>
-            <S.AddressContainer>
-                <S.Tag>{locationType}</S.Tag>
-                <S.Address>
-                    {getHighlightedText(roadAddress ?? '', searchInput)}
-                </S.Address>
+                <S.Tag>지번</S.Tag>
+                <S.Address>{getLotNumberAddress(location)}</S.Address>
             </S.AddressContainer>
         </S.Container>
     );
