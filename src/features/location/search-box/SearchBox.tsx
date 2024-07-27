@@ -3,7 +3,7 @@ import {
     SelectedLocationType,
 } from '#/types/location';
 
-import * as S from './index.style';
+import * as S from './SearchBox.style';
 
 interface SearchBoxPropsType {
     location: LocationInformationType;
@@ -11,7 +11,11 @@ interface SearchBoxPropsType {
     onSelect: (location: SelectedLocationType) => void;
 }
 
-function SearchBox({ location, searchInput, onSelect }: SearchBoxPropsType) {
+export function SearchBox({
+    location,
+    searchInput,
+    onSelect,
+}: SearchBoxPropsType) {
     const roadAddress =
         location.newAddressList.newAddress.length >= 1
             ? location.newAddressList.newAddress[0].fullAddressRoad
@@ -85,5 +89,3 @@ function SearchBox({ location, searchInput, onSelect }: SearchBoxPropsType) {
         </S.Container>
     );
 }
-
-export default SearchBox;

@@ -1,6 +1,6 @@
-import * as S from './index.style';
+import * as S from './SearchTip.style';
 
-function SearchTip() {
+export function SearchTip() {
     const tipContents = [
         {
             title: '도로명 + 건물번호',
@@ -32,5 +32,3 @@ function SearchTip() {
         </>
     );
 }
-
-export default SearchTip;

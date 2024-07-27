@@ -1,0 +1,1 @@
+import { SearchTip } from './SearchTip';

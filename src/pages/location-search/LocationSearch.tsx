@@ -2,13 +2,13 @@ import { useState } from 'react';
 
 import ArrowSwitchHorizontalIcon from '#/assets/icons/arrow-switch-horizontal.svg?react';
 import RouteIcon from '#/assets/icons/route.svg?react';
-import Button from '#/components/button';
-import LocationSelectField from '#/features/location/location-select-field';
-import Search from '#/features/location/search';
-import Contents from '#/pages/templates/contents';
+import { Button } from '#/components/button';
+import { LocationSelectField } from '#/features/location/location-select-field';
+import { Search } from '#/features/location/search';
+import { Contents } from '#/pages/templates/contents';
 import { SelectedLocationType } from '#/types/location';
 
-import * as S from './index.style';
+import * as S from './LocationSearch.style';
 
 const SEARCH_OPTION = {
     ORIGIN: 'origin',
@@ -16,7 +16,7 @@ const SEARCH_OPTION = {
 };
 type SearchOptionType = (typeof SEARCH_OPTION)[keyof typeof SEARCH_OPTION];
 
-function LocationSearch() {
+export function LocationSearch() {
     const [routeLocation, setRouteLocation] = useState<
         Record<SearchOptionType, SelectedLocationType | null>
     >({
@@ -137,5 +137,3 @@ function LocationSearch() {
         </>
     );
 }
-
-export default LocationSearch;

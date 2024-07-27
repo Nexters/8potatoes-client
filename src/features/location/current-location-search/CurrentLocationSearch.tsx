@@ -4,7 +4,7 @@ import { NaverMap, useNavermaps } from 'react-naver-maps';
 
 import CurrentPositionIcon from '#/assets/icons/current-position.svg?react';
 import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
-import Button from '#/components/button';
+import { Button } from '#/components/button';
 import { useGetReverseGeocoding } from '#/query-hooks/location/query';
 import {
     GeolocationCoordinatesType,
@@ -14,7 +14,7 @@ import {
 } from '#/types/location';
 import { debounce } from '#/utils/common';
 
-import * as S from './index.style';
+import * as S from './CurrentLocationSearch.style';
 
 interface CurrentLocationSearchProps {
     onCloseSearch: () => void;
@@ -23,7 +23,7 @@ interface CurrentLocationSearchProps {
 
 const DEFAULT_ZOOM = 19;
 
-function CurrentLocationSearch({
+export function CurrentLocationSearch({
     onSelect,
     onCloseSearch,
 }: CurrentLocationSearchProps) {
@@ -126,5 +126,3 @@ function CurrentLocationSearch({
         </>
     );
 }
-
-export default CurrentLocationSearch;

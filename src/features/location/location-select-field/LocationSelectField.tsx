@@ -1,4 +1,4 @@
-import * as S from './index.style';
+import * as S from './LocationSelectField.style';
 
 interface LocationSelectFieldProps {
     handleClick: () => void;
@@ -8,7 +8,7 @@ interface LocationSelectFieldProps {
     locationName: string | undefined;
 }
 
-function LocationSelectField({
+export function LocationSelectField({
     handleClick,
     label,
     placeholder,
@@ -32,5 +32,3 @@ function LocationSelectField({
         </S.Container>
     );
 }
-
-export default LocationSelectField;

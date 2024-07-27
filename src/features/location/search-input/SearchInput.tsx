@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from 'react';
 import ResetButton from '#/assets/icons/reset-button.svg?react';
 import SearchButton from '#/assets/icons/search-button.svg?react';
 
-import * as S from './index.style';
+import * as S from './SearchInput.style';
 
 interface SearchInputProps {
     value: string;
@@ -11,7 +11,11 @@ interface SearchInputProps {
     onReset: () => void;
 }
 
-function SearchInput({ value, onChangeValue, onReset }: SearchInputProps) {
+export function SearchInput({
+    value,
+    onChangeValue,
+    onReset,
+}: SearchInputProps) {
     const [isFocused, setIsFocused] = useState<boolean>(false);
 
     const isActive = isFocused || value.length !== 0;
@@ -35,5 +39,3 @@ function SearchInput({ value, onChangeValue, onReset }: SearchInputProps) {
         </S.Container>
     );
 }
-
-export default SearchInput;

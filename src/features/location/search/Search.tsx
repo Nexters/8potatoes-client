@@ -10,19 +10,19 @@ import {
 } from '#/types/location';
 import { debounce } from '#/utils/common';
 
-import CurrentLocationSearch from '../current-location-search';
-import SearchBox from '../search-box';
-import SearchInput from '../search-input';
-import SearchTip from '../search-tip';
+import { CurrentLocationSearch } from '../current-location-search';
+import { SearchBox } from '../search-box/SearchBox';
+import { SearchInput } from '../search-input/SearchInput';
+import { SearchTip } from '../search-tip/SearchTip';
 
-import * as S from './index.style';
+import * as S from './Search.style';
 
 interface SearchListPropsType {
     onSelect: (location: SelectedLocationType) => void;
     onClose: () => void;
 }
 
-function Search({ onSelect, onClose }: SearchListPropsType) {
+export function Search({ onSelect, onClose }: SearchListPropsType) {
     const [isCurrentLocationSearch, setIsCurrentLocationSearch] =
         useState<boolean>(false);
 
@@ -147,5 +147,3 @@ function Search({ onSelect, onClose }: SearchListPropsType) {
         </S.Wrapper>
     );
 }
-
-export default Search;

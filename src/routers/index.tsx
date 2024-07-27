@@ -7,7 +7,7 @@ import { NavermapsProvider } from 'react-naver-maps';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 
 import App from '#/App';
-import LocationSearch from '#/pages/location-search';
+import { LocationSearch } from '#/pages/location-search';
 import { MobileView } from '#/pages/templates/mobile-view';
 import { GlobalStyle } from '#/styles/global';
 import { theme } from '#/styles/theme';
