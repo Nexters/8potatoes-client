@@ -5,8 +5,8 @@ import { NavermapsProvider } from 'react-naver-maps';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 
 import App from '#/App';
-import { MobileView } from '#/pages/templates/mobile-view';
 import LocationSearch from '#/pages/location-search';
+import { MobileView } from '#/pages/templates/mobile-view';
 import { theme } from '#/styles/theme';
 
 const queryClient = new QueryClient({
@@ -23,7 +23,9 @@ const InitializedDataProvider = () => (
         <ThemeProvider theme={theme}>
             <NavermapsProvider finClientId="">
                 <ReactQueryDevtools />
-                <Outlet />
+                <MobileView>
+                    <Outlet />
+                </MobileView>
             </NavermapsProvider>
         </ThemeProvider>
     </QueryClientProvider>
