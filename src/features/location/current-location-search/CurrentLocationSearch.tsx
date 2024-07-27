@@ -81,6 +81,10 @@ export function CurrentLocationSearch({
         onSelect(selectedLocation);
     };
 
+    const handleZoomChanged = (level: number) => {
+        setZoom(level);
+    };
+
     return (
         <>
             {isLoaded && (
@@ -94,6 +98,7 @@ export function CurrentLocationSearch({
                                 )
                             }
                             zoom={zoom}
+                            onZoomChanged={handleZoomChanged}
                             onCenterChanged={handleCenterChanged}
                         ></NaverMap>
 
