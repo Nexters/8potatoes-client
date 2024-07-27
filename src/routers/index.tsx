@@ -7,6 +7,7 @@ import { Outlet, createBrowserRouter } from 'react-router-dom';
 import App from '#/App';
 import LocationSearch from '#/pages/location-search';
 import { MobileView } from '#/pages/templates/mobile-view';
+import { GlobalStyle } from '#/styles/global';
 import { theme } from '#/styles/theme';
 
 const queryClient = new QueryClient({
@@ -21,8 +22,11 @@ const queryClient = new QueryClient({
 const InitializedDataProvider = () => (
     <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
-            <NavermapsProvider finClientId="">
+            <NavermapsProvider
+                finClientId={import.meta.env.VITE_X_NCP_APIGW_API_KEY_ID}
+            >
                 <ReactQueryDevtools />
+                <GlobalStyle />
                 <MobileView>
                     <Outlet />
                 </MobileView>

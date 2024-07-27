@@ -1,11 +1,10 @@
-import { Theme } from '@emotion/react';
-
 import { COLOR } from './color';
-import { FONT_WEIGHT } from './font';
+import { FONT_WEIGHT, FONT_FAMILY } from './font';
 
-export const theme: Theme = {
+export const theme = {
     color: COLOR,
     font: {
+        family: FONT_FAMILY,
         weight: FONT_WEIGHT,
     }
-};
+} as const;

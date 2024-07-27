@@ -1,4 +1,4 @@
-export const FONT = {
+export const FONT_FAMILY = {
     suit: 'SUIT Variable',
 }
 
