@@ -77,12 +77,16 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
         setSearchInput(e.target.value);
     };
 
+    const handleCloseCurrentLocationSearch = () => {
+        setIsCurrentLocationSearch(false);
+    };
+
     return (
         <S.Wrapper>
             {isCurrentLocationSearch ? (
                 <CurrentLocationSearch
                     onSelect={onSelect}
-                    onCloseSearch={onClose}
+                    onCloseSearch={handleCloseCurrentLocationSearch}
                 />
             ) : (
                 <S.ContentsContainer>
