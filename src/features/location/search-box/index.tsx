@@ -1,11 +1,14 @@
-import { LocationInformationType } from '#/types/location';
+import {
+    LocationInformationType,
+    SelectedLocationType,
+} from '#/types/location';
 
 import * as S from './index.style';
 
 interface SearchBoxPropsType {
     location: LocationInformationType;
     searchInput: string;
-    onSelect: (location: LocationInformationType) => void;
+    onSelect: (location: SelectedLocationType) => void;
 }
 
 function SearchBox({ location, searchInput, onSelect }: SearchBoxPropsType) {
@@ -52,8 +55,18 @@ function SearchBox({ location, searchInput, onSelect }: SearchBoxPropsType) {
         return addressParts.join(' ');
     };
 
+    const handleSelectLocation = (location: LocationInformationType) => {
+        const selectedLocation = {
+            lat: parseInt(location.noorLat ?? ''),
+            lon: parseInt(location.noorLon ?? ''),
+            addressName: location.name ?? '',
+        };
+
+        onSelect(selectedLocation);
+    };
+
     return (
-        <S.Container onClick={() => onSelect(location)}>
+        <S.Container onClick={() => handleSelectLocation(location)}>
             <S.LocationName>
                 {getHighlightedText(location.name ?? '', searchInput)}
             </S.LocationName>

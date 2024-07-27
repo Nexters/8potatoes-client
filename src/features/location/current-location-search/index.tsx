@@ -7,7 +7,9 @@ import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
 import { useGetReverseGeocoding } from '#/query-hooks/location/query';
 import {
     GeolocationCoordinatesType,
-    LocationInformationType,
+    GeolocationPointType,
+    ReverseGeocodingInformationType,
+    SelectedLocationType,
 } from '#/types/location';
 import { debounce } from '#/utils/common';
 
@@ -15,7 +17,7 @@ import * as S from './index.style';
 
 interface CurrentLocationSearchProps {
     onCloseSearch: () => void;
-    onSelect: (location: LocationInformationType) => void;
+    onSelect: (location: SelectedLocationType) => void;
 }
 
 const DEFAULT_ZOOM = 19;
@@ -57,11 +59,25 @@ function CurrentLocationSearch({
     };
 
     const handleCenterChanged = useCallback(
-        debounce(({ x, y }: any) => {
+        debounce(({ x, y }: GeolocationPointType) => {
             setCenterLocation({ latitude: y, longitude: x });
         }),
         [],
     );
+
+    const handleSelectLocation = (
+        geocoding: ReverseGeocodingInformationType,
+    ) => {
+        const { fullAddress = '', buildingName = '' } = geocoding;
+
+        const selectedLocation = {
+            lat: centerLocation.latitude,
+            lon: centerLocation.longitude,
+            addressName: buildingName || fullAddress,
+        };
+
+        onSelect(selectedLocation);
+    };
 
     return (
         <>
@@ -91,15 +107,13 @@ function CurrentLocationSearch({
                     <S.BottomContainer>
                         {data && (
                             <S.CurrentAddress>
-                                {data.addressInfo.fullAddress}{' '}
-                                {data.addressInfo.buildingName}
+                                {data.addressInfo?.fullAddress}{' '}
+                                {data.addressInfo?.buildingName}
                             </S.CurrentAddress>
                         )}
                         <button
                             onClick={() =>
-                                onSelect({
-                                    name: 'select',
-                                } as LocationInformationType)
+                                handleSelectLocation(data?.addressInfo ?? {})
                             }
                         >
                             이 위치로 주소 등록

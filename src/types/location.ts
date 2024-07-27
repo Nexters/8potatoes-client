@@ -3,6 +3,11 @@ export interface GeolocationCoordinatesType {
     longitude: number;
 }
 
+export interface GeolocationPointType {
+    x: number;
+    y: number;
+}
+
 export interface LocationInformationType {
     id?: string;
     pkey?: string;
@@ -28,4 +33,35 @@ export interface LocationInformationType {
             fullAddressRoad?: string;
         }[];
     };
+}
+
+export interface ReverseGeocodingInformationType {
+    fullAddress?: string;
+    city_do?: string;
+    gu_gun?: string;
+    eup_myun?: string;
+    ri?: string;
+    roadName?: string;
+    buildingIndex?: string;
+    buildingName?: string;
+    mappingDistance?: number;
+    bunji?: string;
+    adminDongCoord?: {
+        lat?: string;
+        lon?: string;
+    };
+    legalDongCoord?: {
+        lat?: string;
+        lon?: string;
+    };
+    roadCoord?: {
+        lat?: string;
+        lon?: string;
+    };
+}
+
+export interface SelectedLocationType {
+    lat: number;
+    lon: number;
+    addressName: string;
 }

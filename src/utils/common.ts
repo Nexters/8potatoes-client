@@ -3,7 +3,7 @@
  * @param callback 사용자 입력이 끝난 후 실행될 함수
  * @param wait 입력 대기 시간
  */
-export function debounce<T extends (...args: unknown[]) => void>(
+export function debounce<T extends (...args: never[]) => void>(
     callback: T,
     wait: number = 500,
 ): (...args: Parameters<T>) => void {

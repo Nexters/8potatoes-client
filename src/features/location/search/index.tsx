@@ -6,6 +6,7 @@ import { useGetLocationSearch } from '#/query-hooks/location/query';
 import {
     GeolocationCoordinatesType,
     LocationInformationType,
+    SelectedLocationType,
 } from '#/types/location';
 import { debounce } from '#/utils/common';
 
@@ -17,7 +18,7 @@ import SearchTip from '../search-tip';
 import * as S from './index.style';
 
 interface SearchListPropsType {
-    onSelect: (location: LocationInformationType) => void;
+    onSelect: (location: SelectedLocationType) => void;
     onClose: () => void;
 }
 
@@ -62,9 +63,8 @@ function Search({ onSelect, onClose }: SearchListPropsType) {
     }, []);
 
     const handleSearchDebounce = useCallback(
-        debounce((searchInput) => {
-            const search = searchInput as string;
-            setSearchKeyword(search);
+        debounce((searchInput: string) => {
+            setSearchKeyword(searchInput);
         }),
         [],
     );

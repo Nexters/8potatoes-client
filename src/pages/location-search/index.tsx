@@ -4,7 +4,7 @@ import ArrowSwitchHorizontalIcon from '#/assets/icons/arrow-switch-horizontal.sv
 import RouteIcon from '#/assets/icons/route.svg?react';
 import LocationSelectField from '#/features/location/location-select-field';
 import Search from '#/features/location/search';
-import { LocationInformationType } from '#/types/location';
+import { SelectedLocationType } from '#/types/location';
 
 import * as S from './index.style';
 
@@ -16,7 +16,7 @@ type SearchOptionType = (typeof SEARCH_OPTION)[keyof typeof SEARCH_OPTION];
 
 function LocationSearch() {
     const [routeLocation, setRouteLocation] = useState<
-        Record<SearchOptionType, LocationInformationType | null>
+        Record<SearchOptionType, SelectedLocationType | null>
     >({
         origin: null,
         destination: null,
@@ -30,7 +30,7 @@ function LocationSearch() {
         setSearchType(searchType);
     };
 
-    const handleSelectLocation = (location: LocationInformationType) => {
+    const handleSelectLocation = (location: SelectedLocationType) => {
         if (!searchType) {
             return;
         }
@@ -47,10 +47,10 @@ function LocationSearch() {
         if (isSelectedOrigin && isSelectedDestination) {
             const origin = {
                 ...routeLocation.origin,
-            } as LocationInformationType;
+            } as SelectedLocationType;
             const destination = {
                 ...routeLocation.destination,
-            } as LocationInformationType;
+            } as SelectedLocationType;
 
             setRouteLocation({ origin: destination, destination: origin });
         }
@@ -84,7 +84,7 @@ function LocationSearch() {
                                 label="출발지 입력"
                                 placeholder="출발지를 선택해주세요"
                                 isSelected={isSelectedOrigin}
-                                locationName={routeLocation.origin?.name}
+                                locationName={routeLocation.origin?.addressName}
                             />
 
                             <S.BorderLine />
@@ -96,7 +96,9 @@ function LocationSearch() {
                                 label="도착지 입력"
                                 placeholder="도착지를 선택해주세요"
                                 isSelected={isSelectedDestination}
-                                locationName={routeLocation.destination?.name}
+                                locationName={
+                                    routeLocation.destination?.addressName
+                                }
                             />
                         </S.Location>
 
