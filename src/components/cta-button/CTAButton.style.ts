@@ -1,10 +1,15 @@
 import styled from '@emotion/styled';
 
+const PADDING = 20;
+
 export const Button = styled.button<{ isValid: boolean }>`
-    width: 100%;
+    position: absolute;
+    bottom: 28px;
+    width: ${`calc(100% - ${PADDING * 2}px)`};
+
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: ${PADDING}px;
     border-radius: 16px;
 
     background-color: ${({ isValid }) => (isValid ? '#000000' : '#D2CEC6')};
