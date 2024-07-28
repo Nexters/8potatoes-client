@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ArrowSwitchHorizontalIcon from '#/assets/icons/arrow-switch-horizontal.svg?react';
 import DestinationIcon from '#/assets/icons/destination.svg?react';
 import OriginIcon from '#/assets/icons/origin.svg?react';
-import { Button } from '#/components/button';
+import { CTAButton } from '#/components/cta-button';
 import { LocationSelectField } from '#/features/location/location-select-field';
 import { Search } from '#/features/location/search';
 import { Contents } from '#/pages/templates/contents';
@@ -128,12 +128,12 @@ export function LocationSearch() {
                             </button>
                         </S.RouteContainer>
 
-                        <Button
+                        <CTAButton
                             isValid={isSelectEnd}
                             onClick={handleClickSearch}
                         >
                             검색
-                        </Button>
+                        </CTAButton>
                     </Contents>
                 </S.Container>
             )}

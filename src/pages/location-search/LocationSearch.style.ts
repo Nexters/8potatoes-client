@@ -23,7 +23,7 @@ export const RouteContainer = styled.div`
     align-items: center;
     gap: 20px;
 
-    margin-top: 50px;
+    margin-top: 64px;
 `;
 
 export const RouteIconContainer = styled.div`

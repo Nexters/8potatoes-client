@@ -1,10 +1,6 @@
 import styled from '@emotion/styled';
 import { Container } from 'react-naver-maps';
 
-export const Wrapper = styled.div`
-    position: relative;
-`;
-
 export const MapContainer = styled(Container)`
     width: 100%;
     height: 100dvh;

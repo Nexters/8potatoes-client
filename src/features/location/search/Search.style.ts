@@ -43,7 +43,7 @@ export const CurrentLocation = styled.button`
     align-items: center;
     gap: 8px;
 
-    margin-top: 16px;
+    margin-top: 20px;
     cursor: pointer;
 `;
 

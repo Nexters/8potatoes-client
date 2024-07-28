@@ -4,7 +4,7 @@ import { NaverMap, useNavermaps } from 'react-naver-maps';
 
 import CurrentPositionIcon from '#/assets/icons/current-position.svg?react';
 import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
-import { Button } from '#/components/button';
+import { CTAButton } from '#/components/cta-button';
 import { Header } from '#/components/header';
 import { Tooltip } from '#/components/tooltip';
 import { useGetReverseGeocoding } from '#/query-hooks/location/query';
@@ -35,6 +35,7 @@ export function CurrentLocationSearch({
             longitude: 0,
         });
     const [zoom, setZoom] = useState<number>(DEFAULT_ZOOM);
+    const [centerLocationName, setCenterLocationName] = useState<string>('');
 
     const navermaps = useNavermaps();
 
@@ -46,6 +47,15 @@ export function CurrentLocationSearch({
     useEffect(() => {
         getCurrentPosition();
     }, []);
+
+    useEffect(() => {
+        if (!data) {
+            return;
+        }
+
+        const locationName = `${data.addressInfo?.fullAddress} ${data.addressInfo?.buildingName}`;
+        setCenterLocationName(locationName);
+    }, [data]);
 
     const getCurrentPosition = () => {
         function handleSuccess(position: GeolocationPosition) {
@@ -98,7 +108,7 @@ export function CurrentLocationSearch({
                 onClickBackspace={onCloseSearch}
             />
             {isLoaded && (
-                <S.Wrapper>
+                <>
                     <S.MapContainer>
                         <NaverMap
                             center={
@@ -126,20 +136,19 @@ export function CurrentLocationSearch({
                     <S.BottomContainer>
                         {data && (
                             <S.CurrentAddress>
-                                {data.addressInfo?.fullAddress}{' '}
-                                {data.addressInfo?.buildingName}
+                                {centerLocationName}
                             </S.CurrentAddress>
                         )}
-                        <Button
+                        <CTAButton
                             isValid
                             onClick={() =>
                                 handleSelectLocation(data?.addressInfo)
                             }
                         >
                             이 위치로 주소 등록
-                        </Button>
+                        </CTAButton>
                     </S.BottomContainer>
-                </S.Wrapper>
+                </>
             )}
         </>
     );
