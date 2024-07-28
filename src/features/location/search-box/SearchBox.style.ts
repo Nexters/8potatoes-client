@@ -35,6 +35,5 @@ export const AddressContainer = styled.div`
 
 export const Address = styled.span`
     color: #90887d;
-
     font-size: 14px;
 `;

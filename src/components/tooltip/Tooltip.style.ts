@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { Z_INDEX } from '#/constants/z-index';
+
 export const Arrow = styled.div`
     position: absolute;
     left: 50%;
@@ -14,6 +16,7 @@ export const Arrow = styled.div`
 `;
 
 export const Container = styled.div`
+    z-index: ${Z_INDEX.TOOLTIP};
     position: relative;
     pointer-events: none;
 `;
@@ -22,7 +25,6 @@ export const TooltipContents = styled.div<{ left: string; top: string }>`
     position: absolute;
     left: ${({ left }) => left};
     top: ${({ top }) => top};
-    z-index: 10;
 
     border-radius: 10px;
     padding: 8px 12px;

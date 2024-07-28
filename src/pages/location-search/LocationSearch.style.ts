@@ -10,7 +10,7 @@ export const Title = styled.p`
 `;
 
 export const Location = styled.div`
-    width: 266px;
+    flex: 1;
 `;
 
 export const BorderLine = styled.div`
@@ -27,12 +27,11 @@ export const RouteContainer = styled.div`
 `;
 
 export const RouteIconContainer = styled.div`
+    height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 4px;
-
-    height: 100px;
 `;
 
 export const DottedLine = styled.div`

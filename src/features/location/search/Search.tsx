@@ -31,22 +31,19 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
     const [geolocationCoordinates, setGeolocationCoordinates] =
         useState<GeolocationCoordinatesType>({ latitude: 0, longitude: 0 });
 
-    const {
-        data,
-
-        isLoading,
-        isSuccess,
-        hasNextPage,
-        fetchNextPage,
-    } = useGetLocationSearch({
-        searchKeyword,
-        geolocationCoordinates,
-    });
+    const { data, isLoading, isSuccess, hasNextPage, fetchNextPage } =
+        useGetLocationSearch({
+            searchKeyword,
+            geolocationCoordinates,
+        });
 
     const { targetRef } = useIntersectionObserver<HTMLDivElement>({
         onIntersect: fetchNextPage,
         enabled: !!hasNextPage,
     });
+
+    const hasResult = searchKeyword.length !== 0 && !isLoading && isSuccess;
+    const hasNoResult = searchKeyword.length !== 0 && !isLoading && !isSuccess;
 
     useEffect(() => {
         function handleSuccess(position: GeolocationPosition) {
@@ -107,21 +104,17 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
                         </S.CurrentLocation>
 
                         <S.SearchContainer>
-                            {searchKeyword.length !== 0 &&
-                                !isLoading &&
-                                isSuccess && (
-                                    <S.SearchText>
-                                        <S.Keyword>{searchKeyword}</S.Keyword>{' '}
-                                        검색된 주소
-                                    </S.SearchText>
-                                )}
-                            {searchKeyword.length !== 0 &&
-                                !isLoading &&
-                                !isSuccess && (
-                                    <S.NoContentText>
-                                        검색 결과가 없습니다.
-                                    </S.NoContentText>
-                                )}
+                            {hasResult && (
+                                <S.SearchText>
+                                    <S.Keyword>{searchKeyword}</S.Keyword>{' '}
+                                    검색된 주소
+                                </S.SearchText>
+                            )}
+                            {hasNoResult && (
+                                <S.NoContentText>
+                                    검색 결과가 없습니다.
+                                </S.NoContentText>
+                            )}
                         </S.SearchContainer>
 
                         <S.DottedBorder />

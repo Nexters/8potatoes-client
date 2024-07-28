@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 
+import { Z_INDEX } from '#/constants/z-index';
+
 export const Container = styled.div`
     position: absolute;
     top: 0;
-    z-index: 999;
+    z-index: ${Z_INDEX.HEADER};
 
     width: 100%;
     height: 64px;

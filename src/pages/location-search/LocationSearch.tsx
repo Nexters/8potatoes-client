@@ -28,6 +28,7 @@ export function LocationSearch() {
 
     const isSelectedOrigin = !!routeLocation.origin;
     const isSelectedDestination = !!routeLocation.destination;
+    const isSelectEnd = isSelectedOrigin && isSelectedDestination;
 
     const handleClickLabel = (searchType: SearchOptionType) => {
         setSearchType(searchType);
@@ -47,20 +48,22 @@ export function LocationSearch() {
     };
 
     const handleSwitchLocation = () => {
-        if (isSelectedOrigin && isSelectedDestination) {
-            const origin = {
-                ...routeLocation.origin,
-            } as SelectedLocationType;
-            const destination = {
-                ...routeLocation.destination,
-            } as SelectedLocationType;
-
-            setRouteLocation({ origin: destination, destination: origin });
+        if (!isSelectEnd) {
+            return;
         }
+
+        const origin = {
+            ...routeLocation.origin,
+        } as SelectedLocationType;
+        const destination = {
+            ...routeLocation.destination,
+        } as SelectedLocationType;
+
+        setRouteLocation({ origin: destination, destination: origin });
     };
 
     const handleClickSearch = () => {
-        console.log('search');
+        // TODO: 검색 결과 페이지로 이동
     };
 
     return (
@@ -120,18 +123,13 @@ export function LocationSearch() {
 
                             <button onClick={handleSwitchLocation}>
                                 <ArrowSwitchHorizontalIcon
-                                    stroke={
-                                        isSelectedOrigin &&
-                                        isSelectedDestination
-                                            ? '#FF7512'
-                                            : '#FFD6B8'
-                                    }
+                                    stroke={isSelectEnd ? '#FF7512' : '#FFD6B8'}
                                 />
                             </button>
                         </S.RouteContainer>
 
                         <Button
-                            isValid={isSelectedOrigin && isSelectedDestination}
+                            isValid={isSelectEnd}
                             onClick={handleClickSearch}
                         >
                             검색

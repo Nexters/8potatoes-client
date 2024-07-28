@@ -11,6 +11,8 @@ interface SearchBoxPropsType {
     onSelect: (location: SelectedLocationType) => void;
 }
 
+const DEFAULT_LOT_NUMBER = '0';
+
 export function SearchBox({
     location,
     searchInput,
@@ -38,12 +40,14 @@ export function SearchBox({
             middleAddrName = '',
             lowerAddrName = '',
             detailAddrName = '',
-            firstNo = '0',
-            secondNo = '0',
+            firstNo = DEFAULT_LOT_NUMBER,
+            secondNo = DEFAULT_LOT_NUMBER,
         } = location;
 
-        const locationFirstNumber = firstNo === '0' ? '' : firstNo;
-        const locationSecondNumber = secondNo === '0' ? '' : secondNo;
+        const locationFirstNumber =
+            firstNo === DEFAULT_LOT_NUMBER ? '' : firstNo;
+        const locationSecondNumber =
+            secondNo === DEFAULT_LOT_NUMBER ? '' : secondNo;
         const locationNumber =
             locationFirstNumber +
             (locationSecondNumber ? `-${locationSecondNumber}` : '');
@@ -56,14 +60,15 @@ export function SearchBox({
             locationNumber,
         ];
 
-        return addressParts.join(' ');
+        return addressParts.filter(Boolean).join(' ');
     };
 
     const handleSelectLocation = (location: LocationInformationType) => {
+        const { noorLat = '', noorLon = '', name = '' } = location;
         const selectedLocation = {
-            lat: parseInt(location.noorLat ?? ''),
-            lon: parseInt(location.noorLon ?? ''),
-            addressName: location.name ?? '',
+            lat: parseInt(noorLat),
+            lon: parseInt(noorLon),
+            addressName: name,
         };
 
         onSelect(selectedLocation);
@@ -84,7 +89,12 @@ export function SearchBox({
             )}
             <S.AddressContainer>
                 <S.Tag>지번</S.Tag>
-                <S.Address>{getLotNumberAddress(location)}</S.Address>
+                <S.Address>
+                    {getHighlightedText(
+                        getLotNumberAddress(location),
+                        searchInput,
+                    )}
+                </S.Address>
             </S.AddressContainer>
         </S.Container>
     );

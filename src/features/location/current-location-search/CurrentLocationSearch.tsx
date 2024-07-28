@@ -35,6 +35,7 @@ export function CurrentLocationSearch({
             longitude: 0,
         });
     const [zoom, setZoom] = useState<number>(DEFAULT_ZOOM);
+
     const navermaps = useNavermaps();
 
     const isLoaded =
@@ -69,8 +70,12 @@ export function CurrentLocationSearch({
     );
 
     const handleSelectLocation = (
-        geocoding: ReverseGeocodingInformationType,
+        geocoding: ReverseGeocodingInformationType | undefined,
     ) => {
+        if (!geocoding) {
+            return;
+        }
+
         const { fullAddress = '', buildingName = '' } = geocoding;
 
         const selectedLocation = {
@@ -128,7 +133,7 @@ export function CurrentLocationSearch({
                         <Button
                             isValid
                             onClick={() =>
-                                handleSelectLocation(data?.addressInfo ?? {})
+                                handleSelectLocation(data?.addressInfo)
                             }
                         >
                             이 위치로 주소 등록
