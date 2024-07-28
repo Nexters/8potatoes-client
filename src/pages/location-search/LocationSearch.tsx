@@ -23,27 +23,29 @@ export function LocationSearch() {
         origin: null,
         destination: null,
     });
-    const [searchType, setSearchType] = useState<SearchOptionType | null>(null);
+    const [searchOption, setSearchOption] = useState<SearchOptionType | null>(
+        null,
+    );
 
     const isSelectedOrigin = !!routeLocation.origin;
     const isSelectedDestination = !!routeLocation.destination;
     const isSelectEnd = isSelectedOrigin && isSelectedDestination;
 
-    const handleClickLabel = (searchType: SearchOptionType) => {
-        setSearchType(searchType);
+    const handleClickSearchOption = (selectedOption: SearchOptionType) => {
+        setSearchOption(selectedOption);
     };
 
     const handleSelectLocation = (location: SelectedLocationType) => {
-        if (!searchType) {
+        if (!searchOption) {
             return;
         }
 
-        setRouteLocation({ ...routeLocation, [searchType]: location });
-        setSearchType(null);
+        setRouteLocation({ ...routeLocation, [searchOption]: location });
+        setSearchOption(null);
     };
 
     const handleCancelSelect = () => {
-        setSearchType(null);
+        setSearchOption(null);
     };
 
     const handleSwitchLocation = () => {
@@ -67,7 +69,7 @@ export function LocationSearch() {
 
     return (
         <>
-            {searchType !== null ? (
+            {searchOption !== null ? (
                 <Search
                     onSelect={handleSelectLocation}
                     onClose={handleCancelSelect}
@@ -93,7 +95,9 @@ export function LocationSearch() {
                             <S.Location>
                                 <LocationSelectField
                                     handleClick={() =>
-                                        handleClickLabel(SEARCH_OPTION.ORIGIN)
+                                        handleClickSearchOption(
+                                            SEARCH_OPTION.ORIGIN,
+                                        )
                                     }
                                     label="출발지 입력"
                                     placeholder="출발지를 선택해주세요"
@@ -107,7 +111,7 @@ export function LocationSearch() {
 
                                 <LocationSelectField
                                     handleClick={() =>
-                                        handleClickLabel(
+                                        handleClickSearchOption(
                                             SEARCH_OPTION.DESTINATION,
                                         )
                                     }

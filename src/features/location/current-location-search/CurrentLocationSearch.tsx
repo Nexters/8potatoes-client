@@ -39,10 +39,13 @@ export function CurrentLocationSearch({
 
     const navermaps = useNavermaps();
 
-    const isLoaded =
+    const isLoadedLocation =
         centerLocation.latitude !== 0 && centerLocation.longitude !== 0;
 
-    const { data } = useGetReverseGeocoding({ isLoaded, centerLocation });
+    const { data } = useGetReverseGeocoding({
+        isLoaded: isLoadedLocation,
+        centerLocation,
+    });
 
     useEffect(() => {
         getCurrentPosition();
@@ -79,6 +82,13 @@ export function CurrentLocationSearch({
         [],
     );
 
+    const handleZoomChanged = useCallback(
+        debounce((level: number) => {
+            setZoom(level);
+        }),
+        [],
+    );
+
     const handleSelectLocation = (
         geocoding: ReverseGeocodingInformationType | undefined,
     ) => {
@@ -97,17 +107,13 @@ export function CurrentLocationSearch({
         onSelect(selectedLocation);
     };
 
-    const handleZoomChanged = (level: number) => {
-        setZoom(level);
-    };
-
     return (
         <>
             <Header
                 title="지도에서 위치 확인"
                 onClickBackspace={onCloseSearch}
             />
-            {isLoaded && (
+            {isLoadedLocation && (
                 <>
                     <S.MapContainer>
                         <NaverMap
