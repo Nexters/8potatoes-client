@@ -4,6 +4,11 @@ export const Container = styled.div`
     height: 100%;
 `;
 
+export const Contents = styled.div`
+    padding: 0 20px;
+    margin-top: 40px;
+`;
+
 export const Title = styled.p`
     font-size: 24px;
     font-weight: 700;

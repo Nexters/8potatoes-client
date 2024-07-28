@@ -6,7 +6,6 @@ import OriginIcon from '#/assets/icons/origin.svg?react';
 import { CTAButton } from '#/components/cta-button';
 import { LocationSelectField } from '#/features/location/location-select-field';
 import { Search } from '#/features/location/search';
-import { Contents } from '#/pages/templates/contents';
 import { SelectedLocationType } from '#/types/location';
 
 import * as S from './LocationSearch.style';
@@ -77,7 +76,7 @@ export function LocationSearch() {
                 <S.Container>
                     <img src="" style={{ width: '100%', height: '327px' }} />
 
-                    <Contents style={{ marginTop: '40px' }}>
+                    <S.Contents>
                         <S.Title>
                             쥬쥬와 함께
                             <br />
@@ -134,7 +133,7 @@ export function LocationSearch() {
                         >
                             검색
                         </CTAButton>
-                    </Contents>
+                    </S.Contents>
                 </S.Container>
             )}
         </>
