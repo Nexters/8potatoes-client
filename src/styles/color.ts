@@ -38,17 +38,14 @@ const sub1 = {
 
 const good = {
     100: '#1E82F1',
-    10: '#E9F3FE',
 } as const;
 
 const select = {
     100: '#1E82F1',
-    10: '#EAF9F0',
 } as const;
 
 const error = {
     100: '#FF3B30',
-    10: '#FFEBEA',
 } as const;
 
 const naver = '#34C11D';
