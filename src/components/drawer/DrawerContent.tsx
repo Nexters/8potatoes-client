@@ -1,4 +1,4 @@
-import { type PropsWithChildren, useState } from 'react';
+import { type PropsWithChildren } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import {
@@ -9,18 +9,32 @@ import {
     useTransform,
 } from 'framer-motion';
 
+import { useDrawerContext } from './Drawer';
 import * as S from './Drawer.style';
 
-export const DrawerContent = ({ children }: PropsWithChildren<unknown>) => {
-    const [isDrawerOpen, setDrawerOpen] = useState(false);
+type DrawerContentProps = PropsWithChildren<{
+    heightStepList: number[];
+    threshold?: number;
+}>;
+
+export const DrawerContent = ({
+    children,
+    heightStepList,
+    threshold = 30,
+    ...restProps
+}: DrawerContentProps) => {
+    const { isDrawerOpen, currentHeightIndex, closeDrawer } =
+        useDrawerContext();
+
+    const stepAmount = heightStepList.length;
+    const heightStepIndexList = [...Array(stepAmount).keys()];
 
     const startY = useMotionValue(0);
-    const currentHeightIndex = useMotionValue(0);
 
     const targetHeight = useTransform(
         currentHeightIndex,
-        [0, 1, 2],
-        [25, 50, 90],
+        heightStepIndexList,
+        heightStepList,
     );
     const animatedHeight = useSpring(targetHeight, {
         stiffness: 200,
@@ -30,25 +44,21 @@ export const DrawerContent = ({ children }: PropsWithChildren<unknown>) => {
     const height = useTransform(animatedHeight, (h) => `${h}dvh`);
     const top = useTransform(height, (h) => `calc(100dvh - ${h})`);
 
-    const handleOpenDialogChange = (open: boolean) => {
-        setDrawerOpen(open);
-        currentHeightIndex.set(0);
-    };
-
     const handlePanStart = (_event: PointerEvent, info: PanInfo) => {
         startY.set(info.point.y);
     };
 
     const handlePanEnd = (_event: PointerEvent, info: PanInfo) => {
         const deltaY = info.point.y - startY.get();
-        const threshold = 30;
-
         let updatedHeightIndex = currentHeightIndex.get();
 
         if (deltaY < -threshold && updatedHeightIndex < 2) {
             updatedHeightIndex += 1;
+            currentHeightIndex.set(updatedHeightIndex);
         } else if (deltaY > threshold && updatedHeightIndex > 0) {
             updatedHeightIndex -= 1;
+        } else if (deltaY > threshold && updatedHeightIndex === 0) {
+            closeDrawer();
         }
 
         currentHeightIndex.set(updatedHeightIndex);
@@ -64,9 +74,10 @@ export const DrawerContent = ({ children }: PropsWithChildren<unknown>) => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3 }}
+                            onClick={closeDrawer}
                         />
                     </Dialog.Overlay>
-                    <Dialog.Content forceMount asChild>
+                    <Dialog.Content forceMount asChild {...restProps}>
                         <S.Content
                             initial={{ opacity: 0, y: '100%' }}
                             animate={{ opacity: 1, y: '0%' }}
@@ -76,19 +87,13 @@ export const DrawerContent = ({ children }: PropsWithChildren<unknown>) => {
                                 height,
                                 top,
                             }}
+                            onPanStart={handlePanStart}
+                            onPanEnd={handlePanEnd}
                         >
-                            <S.HolderWrapper
-                                onPanStart={handlePanStart}
-                                onPanEnd={handlePanEnd}
-                            >
+                            <S.HolderWrapper>
                                 <S.Holder />
                             </S.HolderWrapper>
                             {children}
-                            <Dialog.Close asChild>
-                                <button onClick={() => setDrawerOpen(false)}>
-                                    Close
-                                </button>
-                            </Dialog.Close>
                         </S.Content>
                     </Dialog.Content>
                 </>

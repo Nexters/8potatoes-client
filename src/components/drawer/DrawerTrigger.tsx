@@ -2,12 +2,22 @@ import type { ComponentProps, PropsWithChildren } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 
+import { useDrawerContext } from './Drawer';
+
+type DrawerTriggerProps = Omit<
+    ComponentProps<typeof Dialog.Trigger>,
+    'asChild'
+>;
 
 export const DrawerTrigger = ({
     children,
     ...restProps
-}: PropsWithChildren<ComponentProps<typeof Dialog.Trigger>>) => (
-    <Dialog.Trigger asChild {...restProps}>
-        {children}
-    </Dialog.Trigger>
-);
+}: DrawerTriggerProps) => {
+    const { openDrawer } = useDrawerContext();
+
+    return (
+        <Dialog.Trigger onClick={openDrawer} asChild {...restProps}>
+            {children}
+        </Dialog.Trigger>
+    );
+};

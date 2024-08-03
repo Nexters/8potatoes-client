@@ -9,7 +9,7 @@ export const Overlay = styled(motion.div)`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
 `;
 
 export const Content = styled(motion.div)`
@@ -45,9 +45,9 @@ export const HolderWrapper = styled(motion.div)`
 `
 
 export const Holder = styled.div`
-    width: 50px;
-    height: 5px;
+    width: 32px;
+    height: 4px;
 
-    background-color: ${theme.color.blk[30]};
-    border-radius: 2.5px;
+    background-color: ${theme.color.blk[20]};
+    border-radius: 100px;
 `;
