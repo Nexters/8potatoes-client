@@ -4,7 +4,8 @@ import { NaverMap, useNavermaps } from 'react-naver-maps';
 
 import CurrentPositionIcon from '#/assets/icons/current-position.svg?react';
 import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
-import { CTAButton } from '#/components/cta-button';
+import { BottomSection } from '#/components/bottom-section';
+import { Button } from '#/components/button';
 import { Header } from '#/components/header';
 import { Tooltip } from '#/components/tooltip';
 import { useGetReverseGeocoding } from '#/query-hooks/location/query';
@@ -145,14 +146,16 @@ export function CurrentLocationSearch({
                                 {centerLocationName}
                             </S.CurrentAddress>
                         )}
-                        <CTAButton
-                            isValid
-                            onClick={() =>
-                                handleSelectLocation(data?.addressInfo)
-                            }
-                        >
-                            이 위치로 주소 등록
-                        </CTAButton>
+                        <BottomSection style={{ padding: '28px 20px' }}>
+                            <Button
+                                isValid
+                                onClick={() =>
+                                    handleSelectLocation(data?.addressInfo)
+                                }
+                            >
+                                이 위치로 주소 등록
+                            </Button>
+                        </BottomSection>
                     </S.BottomContainer>
                 </>
             )}

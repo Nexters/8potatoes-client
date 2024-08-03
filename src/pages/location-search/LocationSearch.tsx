@@ -3,7 +3,8 @@ import { useState } from 'react';
 import ArrowSwitchHorizontalIcon from '#/assets/icons/arrow-switch-horizontal.svg?react';
 import LocationIcon from '#/assets/icons/location.svg?react';
 import OriginIcon from '#/assets/icons/origin.svg?react';
-import { CTAButton } from '#/components/cta-button';
+import { BottomSection } from '#/components/bottom-section';
+import { Button } from '#/components/button';
 import { LocationSelectField } from '#/features/location/location-select-field';
 import { Search } from '#/features/location/search';
 import { theme } from '#/styles/theme';
@@ -140,12 +141,14 @@ export function LocationSearch() {
                             </button>
                         </S.RouteContainer>
 
-                        <CTAButton
-                            isValid={isSelectEnd}
-                            onClick={handleClickSearch}
-                        >
-                            휴게소 찾기
-                        </CTAButton>
+                        <BottomSection style={{ padding: '28px 20px' }}>
+                            <Button
+                                isValid={isSelectEnd}
+                                onClick={handleClickSearch}
+                            >
+                                휴게소 찾기
+                            </Button>
+                        </BottomSection>
                     </S.Contents>
                 </>
             )}

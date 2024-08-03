@@ -123,7 +123,7 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
                     </S.HeaderContents>
 
                     <S.ListContents>
-                        {(isEmptyInput || !isSuccess) && (
+                        {(isEmptyInput || hasNoResult) && (
                             <SearchTip>
                                 {isEmptyInput
                                     ? '위치를 입력해주세요.'
