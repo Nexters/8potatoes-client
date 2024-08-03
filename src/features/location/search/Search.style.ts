@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
 export const SearchList = styled.ul`
     display: flex;
     flex-direction: column;
+    margin: 20px 0;
     gap: 32px;
 `;
 

@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div<{ isFocused: boolean; isValid: boolean }>`
+export const Container = styled.div<{
+    isActive: boolean;
+    isValid: boolean;
+    isInvalid: boolean;
+}>`
     box-sizing: border-box;
     width: 100%;
     padding: 12px 16px;
@@ -8,10 +12,10 @@ export const Container = styled.div<{ isFocused: boolean; isValid: boolean }>`
     align-items: center;
     gap: 6px;
 
-    background-color: ${({ isFocused, theme }) =>
-        isFocused ? theme.color.wht[100] : theme.color.blk[5]};
-    border: ${({ isFocused, isValid, theme }) =>
-        `1px solid ${isFocused || isValid ? theme.color.select[100] : isFocused && !isValid ? theme.color.error[100] : 'transparent'}`};
+    background-color: ${({ isActive, theme }) =>
+        isActive ? theme.color.wht[100] : theme.color.blk[5]};
+    border: ${({ isValid, isInvalid, theme }) =>
+        `1px solid ${isInvalid ? theme.color.error[100] : isValid ? theme.color.select[100] : 'transparent'}`};
     border-radius: 16px;
 `;
 

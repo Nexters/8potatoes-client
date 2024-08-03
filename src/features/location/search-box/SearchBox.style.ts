@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const Container = styled.li`
     display: flex;
+    align-items: flex-start;
     gap: 8px;
 
     cursor: pointer;

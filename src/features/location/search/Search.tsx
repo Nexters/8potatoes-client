@@ -91,6 +91,7 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
                     <S.HeaderContents>
                         <SearchInput
                             value={searchInput}
+                            isInvalid={hasNoResult}
                             isValid={hasResult}
                             placeholder="지번, 도로명, 건물명으로 검색"
                             onChangeValue={handleChangeSearchInput}
@@ -122,7 +123,7 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
                     </S.HeaderContents>
 
                     <S.ListContents>
-                        {isEmptyInput && !isSuccess && (
+                        {(isEmptyInput || !isSuccess) && (
                             <SearchTip>
                                 {isEmptyInput
                                     ? '위치를 입력해주세요.'

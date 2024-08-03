@@ -27,10 +27,12 @@ export const TooltipContents = styled.div<{ left: string; top: string }>`
     top: ${({ top }) => top};
 
     border-radius: 16px;
-    padding: 8px 12px;
+    padding: 8px 20px;
     background-color: ${({ theme }) => theme.color.main[100]};
+    filter: drop-shadow(2px 4px 4px rgba(255, 117, 18, 0.2));
 
     font-size: 16px;
+    font-weight: 700;
     color: ${({ theme }) => theme.color.wht[100]};
 
     white-space: nowrap;

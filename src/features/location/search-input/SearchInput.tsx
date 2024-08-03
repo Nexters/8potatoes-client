@@ -7,7 +7,8 @@ import * as S from './SearchInput.style';
 
 interface SearchInputProps {
     value: string;
-    isValid?: boolean;
+    isInvalid: boolean;
+    isValid: boolean;
     placeholder?: string;
     onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
     onReset: () => void;
@@ -15,7 +16,8 @@ interface SearchInputProps {
 
 export function SearchInput({
     value,
-    isValid = true,
+    isInvalid,
+    isValid,
     placeholder = '',
     onChangeValue,
     onReset,
@@ -25,7 +27,11 @@ export function SearchInput({
     const isActive = isFocused || value.length !== 0;
 
     return (
-        <S.Container isFocused={isFocused} isValid={isValid}>
+        <S.Container
+            isActive={isActive}
+            isValid={isFocused || isValid}
+            isInvalid={isInvalid}
+        >
             <SearchButton />
             <S.Input
                 value={value}

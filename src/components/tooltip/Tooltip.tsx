@@ -11,7 +11,7 @@ interface PositionType {
     left: number;
 }
 
-const TOOLTIP_GAP = 20;
+const TOOLTIP_GAP = 12;
 
 export function Tooltip({ content, children }: TooltipProps) {
     const [position, setPosition] = useState<PositionType>({
