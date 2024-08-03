@@ -1,3 +1,5 @@
+import LocationIcon from '#/assets/icons/location.svg?react';
+import { theme } from '#/styles/theme';
 import {
     LocationInformationType,
     SelectedLocationType,
@@ -76,29 +78,32 @@ export function SearchBox({
 
     return (
         <S.Container onClick={() => handleSelectLocation(location)}>
-            <S.LocationName>
-                {getHighlightedText(location.name ?? '', searchInput)}
-            </S.LocationName>
-            <S.Addresses>
-                {roadAddress && (
+            <LocationIcon width={24} height={24} fill={theme.color.main[30]} />
+            <S.Contents>
+                <S.LocationName>
+                    {getHighlightedText(location.name ?? '', searchInput)}
+                </S.LocationName>
+                <S.Addresses>
+                    {roadAddress && (
+                        <S.AddressContainer>
+                            <S.Tag>도로명</S.Tag>
+                            <S.Address>
+                                {getHighlightedText(roadAddress, searchInput)}
+                            </S.Address>
+                        </S.AddressContainer>
+                    )}
+
                     <S.AddressContainer>
-                        <S.Tag>도로명</S.Tag>
+                        <S.Tag>지번</S.Tag>
                         <S.Address>
-                            {getHighlightedText(roadAddress, searchInput)}
+                            {getHighlightedText(
+                                getLotNumberAddress(location),
+                                searchInput,
+                            )}
                         </S.Address>
                     </S.AddressContainer>
-                )}
-
-                <S.AddressContainer>
-                    <S.Tag>지번</S.Tag>
-                    <S.Address>
-                        {getHighlightedText(
-                            getLotNumberAddress(location),
-                            searchInput,
-                        )}
-                    </S.Address>
-                </S.AddressContainer>
-            </S.Addresses>
+                </S.Addresses>
+            </S.Contents>
         </S.Container>
     );
 }

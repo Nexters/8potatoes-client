@@ -24,8 +24,6 @@ export function SearchInput({
 
     const isActive = isFocused || value.length !== 0;
 
-    console.log(isValid, isFocused);
-
     return (
         <S.Container isFocused={isFocused} isValid={isValid}>
             <SearchButton />

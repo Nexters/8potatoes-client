@@ -2,10 +2,15 @@ import styled from '@emotion/styled';
 
 export const Container = styled.li`
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    gap: 8px;
 
     cursor: pointer;
+`;
+
+export const Contents = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 `;
 
 export const LocationName = styled.div`

@@ -105,7 +105,7 @@ export function LocationSearch() {
                                         )
                                     }
                                     label="출발지 입력"
-                                    placeholder="출발지를 선택해주세요"
+                                    placeholder="어디서 출발하세요?"
                                     isSelected={isSelectedOrigin}
                                     locationName={
                                         routeLocation.origin?.addressName
@@ -121,7 +121,7 @@ export function LocationSearch() {
                                         )
                                     }
                                     label="도착지 입력"
-                                    placeholder="도착지를 선택해주세요"
+                                    placeholder="어디까지 가세요?"
                                     isSelected={isSelectedDestination}
                                     locationName={
                                         routeLocation.destination?.addressName
@@ -144,7 +144,7 @@ export function LocationSearch() {
                             isValid={isSelectEnd}
                             onClick={handleClickSearch}
                         >
-                            검색
+                            휴게소 찾기
                         </CTAButton>
                     </S.Contents>
                 </>
