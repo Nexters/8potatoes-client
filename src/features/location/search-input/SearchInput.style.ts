@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div<{ isActive: boolean }>`
+export const Container = styled.div<{ isFocused: boolean; isValid: boolean }>`
     box-sizing: border-box;
     width: 100%;
     padding: 12px 16px;
@@ -8,13 +8,20 @@ export const Container = styled.div<{ isActive: boolean }>`
     align-items: center;
     gap: 6px;
 
-    background-color: ${({ isActive }) => (isActive ? '#ffffff' : '#F4F0EA')};
-    border: ${({ isActive }) =>
-        `1px solid ${isActive ? '#ff7512' : '#D2CEC6'}`};
+    background-color: ${({ isFocused, theme }) =>
+        isFocused ? theme.color.wht[100] : theme.color.blk[5]};
+    border: ${({ isFocused, isValid, theme }) =>
+        `1px solid ${isFocused || isValid ? theme.color.select[100] : isFocused && !isValid ? theme.color.error[100] : 'transparent'}`};
     border-radius: 16px;
 `;
 
 export const Input = styled.input`
     flex: 1;
     font-size: 16px;
+
+    color: ${({ theme }) => theme.color.blk[100]};
+
+    ::placeholder {
+        color: ${({ theme }) => theme.color.blk[40]};
+    }
 `;

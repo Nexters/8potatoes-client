@@ -42,8 +42,9 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
         enabled: !!hasNextPage,
     });
 
-    const hasResult = searchKeyword.length !== 0 && !isLoading && isSuccess;
-    const hasNoResult = searchKeyword.length !== 0 && !isLoading && !isSuccess;
+    const isEmptyInput = searchKeyword.length === 0;
+    const hasResult = !isEmptyInput && !isLoading && isSuccess;
+    const hasNoResult = !isEmptyInput && !isLoading && !isSuccess;
 
     useEffect(() => {
         function handleSuccess(position: GeolocationPosition) {
@@ -90,6 +91,8 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
                     <S.HeaderContents>
                         <SearchInput
                             value={searchInput}
+                            isValid={hasResult}
+                            placeholder="지번, 도로명, 건물명으로 검색"
                             onChangeValue={handleChangeSearchInput}
                             onReset={() => setSearchInput('')}
                         />
@@ -97,7 +100,9 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
                         <S.CurrentLocation
                             onClick={() => setIsCurrentLocationSearch(true)}
                         >
-                            <LocationPointerIcon width={24} height={24} />
+                            <S.LocationPointerContainer>
+                                <LocationPointerIcon width={12} height={12} />
+                            </S.LocationPointerContainer>
                             <S.CurrentLocationText>
                                 현재 위치로 주소 찾기
                             </S.CurrentLocationText>
@@ -105,28 +110,28 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
 
                         <S.SearchContainer>
                             {hasResult && (
-                                <S.SearchText>
-                                    <S.Keyword>{searchKeyword}</S.Keyword>{' '}
-                                    검색된 주소
-                                </S.SearchText>
-                            )}
-                            {hasNoResult && (
-                                <S.NoContentText>
-                                    검색 결과가 없습니다.
-                                </S.NoContentText>
+                                <>
+                                    <S.SearchText>
+                                        <S.Keyword>{searchKeyword}</S.Keyword>{' '}
+                                        검색된 주소
+                                    </S.SearchText>
+                                    <S.DottedBorder />
+                                </>
                             )}
                         </S.SearchContainer>
-
-                        <S.DottedBorder />
                     </S.HeaderContents>
 
                     <S.ListContents>
-                        {searchKeyword.length === 0 && !isSuccess && (
-                            <SearchTip />
+                        {isEmptyInput && !isSuccess && (
+                            <SearchTip>
+                                {isEmptyInput
+                                    ? '위치를 입력해주세요.'
+                                    : '검색 결과가 없습니다.'}
+                            </SearchTip>
                         )}
 
                         {isSuccess && (
-                            <ul>
+                            <S.SearchList>
                                 {data.map((item: LocationInformationType) => (
                                     <SearchBox
                                         key={item.pkey}
@@ -135,7 +140,7 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
                                         onSelect={onSelect}
                                     />
                                 ))}
-                            </ul>
+                            </S.SearchList>
                         )}
                         <div ref={targetRef}></div>
                     </S.ListContents>

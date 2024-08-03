@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.li`
-    padding: 20px 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 
     cursor: pointer;
 `;
@@ -15,16 +14,22 @@ export const LocationName = styled.div`
 `;
 
 export const Highlight = styled.span`
-    color: #ff7512;
+    color: ${({ theme }) => theme.color.main[100]};
 `;
 
 export const Tag = styled.span`
     padding: 6px 8px;
-    color: #90887d;
-    border: 1px solid #eae0d6;
+    color: ${({ theme }) => theme.color.blk[60]};
+    border: ${({ theme }) => `1px solid ${theme.color.bg[100]}`};
     border-radius: 4px;
 
     font-size: 14px;
+`;
+
+export const Addresses = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 `;
 
 export const AddressContainer = styled.div`
@@ -34,6 +39,6 @@ export const AddressContainer = styled.div`
 `;
 
 export const Address = styled.span`
-    color: #90887d;
+    color: ${({ theme }) => theme.color.blk[60]};
     font-size: 14px;
 `;

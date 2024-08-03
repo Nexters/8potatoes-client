@@ -31,6 +31,10 @@ export const LocationPointerContainer = styled.div`
     position: absolute;
     right: 20px;
     bottom: 214px;
+
+    padding: 14px;
+    background-color: ${({ theme }) => theme.color.wht[100]};
+    border-radius: 30px;
 `;
 
 export const CurrentPositionContainer = styled.div`

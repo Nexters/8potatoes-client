@@ -5,14 +5,14 @@ export const Container = styled.div`
 `;
 
 export const InputLabel = styled.span`
-    color: #bcb6ad;
+    color: ${({ theme }) => theme.color.blk[30]};
 
     font-size: 14px;
     font-weight: 400;
 `;
 
 export const InputRequired = styled.span`
-    color: #ff3b30;
+    color: ${({ theme }) => theme.color.error[100]};
 `;
 
 export const SelectField = styled.div`
@@ -23,9 +23,9 @@ export const SelectField = styled.div`
 `;
 
 export const UnSelectedLocation = styled.p`
-    color: #bcb6ad;
+    color: ${({ theme }) => theme.color.blk[40]};
 `;
 
 export const SelectedLocation = styled.p`
-    color: #201404;
+    color: ${({ theme }) => theme.color.blk[100]};
 `;

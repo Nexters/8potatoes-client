@@ -12,8 +12,9 @@ export const Button = styled.button<{ isValid: boolean }>`
     padding: ${PADDING}px;
     border-radius: 16px;
 
-    background-color: ${({ isValid }) => (isValid ? '#000000' : '#D2CEC6')};
-    color: #ffffff;
+    background-color: ${({ isValid, theme }) =>
+        isValid ? theme.color.main[100] : theme.color.blk[20]};
+    color: ${({ theme }) => theme.color.wht[100]};
 
     font-size: 16px;
     font-weight: 700;

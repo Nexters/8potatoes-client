@@ -32,9 +32,12 @@ export function Tooltip({ content, children }: TooltipProps) {
         const percentToAdditionWidth = (tooltipRect.width * 50) / 100;
 
         setPosition({
-            top: window.scrollY - tooltipRect.height - TOOLTIP_GAP,
+            top:
+                triggerRef.current.scrollTop - tooltipRect.height - TOOLTIP_GAP,
             left:
-                window.scrollX - percentToAdditionWidth + triggerRect.width / 2,
+                triggerRef.current.scrollLeft -
+                percentToAdditionWidth +
+                triggerRect.width / 2,
         });
     }, []);
 

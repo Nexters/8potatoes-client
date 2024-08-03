@@ -12,7 +12,7 @@ export const Arrow = styled.div`
 
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-top: 12px solid #ffffff;
+    border-top: ${({ theme }) => `12px solid ${theme.color.main[100]}`};
 `;
 
 export const Container = styled.div`
@@ -26,10 +26,12 @@ export const TooltipContents = styled.div<{ left: string; top: string }>`
     left: ${({ left }) => left};
     top: ${({ top }) => top};
 
-    border-radius: 10px;
+    border-radius: 16px;
     padding: 8px 12px;
-    background-color: #ffffff;
+    background-color: ${({ theme }) => theme.color.main[100]};
+
     font-size: 16px;
+    color: ${({ theme }) => theme.color.wht[100]};
 
     white-space: nowrap;
 `;

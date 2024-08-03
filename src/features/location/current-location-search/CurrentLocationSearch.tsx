@@ -136,7 +136,7 @@ export function CurrentLocationSearch({
                     </S.MapContainer>
 
                     <S.LocationPointerContainer onClick={getCurrentPosition}>
-                        <LocationPointerIcon width={40} height={40} />
+                        <LocationPointerIcon width={20} height={20} />
                     </S.LocationPointerContainer>
 
                     <S.BottomContainer>

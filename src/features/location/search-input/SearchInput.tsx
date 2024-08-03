@@ -7,12 +7,16 @@ import * as S from './SearchInput.style';
 
 interface SearchInputProps {
     value: string;
+    isValid?: boolean;
+    placeholder?: string;
     onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
     onReset: () => void;
 }
 
 export function SearchInput({
     value,
+    isValid = true,
+    placeholder = '',
     onChangeValue,
     onReset,
 }: SearchInputProps) {
@@ -20,13 +24,15 @@ export function SearchInput({
 
     const isActive = isFocused || value.length !== 0;
 
+    console.log(isValid, isFocused);
+
     return (
-        <S.Container isActive={isActive}>
+        <S.Container isFocused={isFocused} isValid={isValid}>
             <SearchButton />
             <S.Input
                 value={value}
                 type="text"
-                placeholder="지번, 도로명, 건물명으로 검색"
+                placeholder={placeholder}
                 onChange={onChangeValue}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}

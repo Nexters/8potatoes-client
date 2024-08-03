@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
 import ArrowSwitchHorizontalIcon from '#/assets/icons/arrow-switch-horizontal.svg?react';
-import DestinationIcon from '#/assets/icons/destination.svg?react';
+import LocationIcon from '#/assets/icons/location.svg?react';
 import OriginIcon from '#/assets/icons/origin.svg?react';
 import { CTAButton } from '#/components/cta-button';
 import { LocationSelectField } from '#/features/location/location-select-field';
 import { Search } from '#/features/location/search';
+import { theme } from '#/styles/theme';
 import { SelectedLocationType } from '#/types/location';
 
 import * as S from './LocationSearch.style';
@@ -75,7 +76,7 @@ export function LocationSearch() {
                     onClose={handleCancelSelect}
                 />
             ) : (
-                <S.Container>
+                <>
                     <img src="" style={{ width: '100%', height: '327px' }} />
 
                     <S.Contents>
@@ -89,7 +90,11 @@ export function LocationSearch() {
                             <S.RouteIconContainer>
                                 <OriginIcon />
                                 <S.DottedLine />
-                                <DestinationIcon />
+                                <LocationIcon
+                                    fill={theme.color.main[100]}
+                                    width={24}
+                                    height={24}
+                                />
                             </S.RouteIconContainer>
 
                             <S.Location>
@@ -107,7 +112,7 @@ export function LocationSearch() {
                                     }
                                 />
 
-                                <S.BorderLine />
+                                <S.BorderLine isFill={isSelectEnd} />
 
                                 <LocationSelectField
                                     handleClick={() =>
@@ -126,7 +131,11 @@ export function LocationSearch() {
 
                             <button onClick={handleSwitchLocation}>
                                 <ArrowSwitchHorizontalIcon
-                                    stroke={isSelectEnd ? '#FF7512' : '#FFD6B8'}
+                                    stroke={
+                                        isSelectEnd
+                                            ? theme.color.main[100]
+                                            : theme.color.main[30]
+                                    }
                                 />
                             </button>
                         </S.RouteContainer>
@@ -138,7 +147,7 @@ export function LocationSearch() {
                             검색
                         </CTAButton>
                     </S.Contents>
-                </S.Container>
+                </>
             )}
         </>
     );

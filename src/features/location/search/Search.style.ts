@@ -6,6 +6,12 @@ export const Wrapper = styled.div`
     height: 100%;
 `;
 
+export const SearchList = styled.ul`
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+`;
+
 export const SearchContainer = styled.div`
     margin-top: 20px;
 `;
@@ -13,29 +19,29 @@ export const SearchContainer = styled.div`
 export const SearchText = styled.div`
     font-size: 16px;
     font-weight: 700;
-    color: #000000;
+    color: ${({ theme }) => theme.color.blk[100]};
 `;
 
 export const Keyword = styled.span`
-    color: #ff7512;
+    color: ${({ theme }) => theme.color.main[100]};
 `;
 
 export const DottedBorder = styled.div`
     margin-top: 20px;
     height: 2px;
-    background: repeating-linear-gradient(
+    background: ${({ theme }) => `repeating-linear-gradient(
         to right,
-        #f7ede1,
-        #f7ede1 7px,
+        ${theme.color.bg[50]},
+        ${theme.color.bg[50]} 7px,
         transparent 7px,
         transparent 15px
-    );
+    )`};
 `;
 
-export const NoContentText = styled.div`
-    font-size: 16px;
-    font-weight: 500;
-    color: #90887d;
+export const LocationPointerContainer = styled.div`
+    padding: 0 5px 5px;
+    background-color: ${({ theme }) => theme.color.main[10]};
+    border-radius: 30px;
 `;
 
 export const CurrentLocation = styled.button`
@@ -50,7 +56,7 @@ export const CurrentLocation = styled.button`
 export const CurrentLocationText = styled.p`
     font-size: 14px;
     font-weight: 600;
-    color: rgba(25, 25, 25, 0.5);
+    color: ${({ theme }) => theme.color.blk[60]};
 `;
 
 export const ContentsContainer = styled.div`
@@ -66,7 +72,7 @@ export const HeaderContents = styled.div`
     flex-direction: column;
     justify-content: center;
 
-    background-color: #ffffff;
+    background-color: ${({ theme }) => theme.color.wht[100]};
 `;
 
 export const ListContents = styled.div`

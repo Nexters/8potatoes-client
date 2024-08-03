@@ -79,23 +79,26 @@ export function SearchBox({
             <S.LocationName>
                 {getHighlightedText(location.name ?? '', searchInput)}
             </S.LocationName>
-            {roadAddress && (
+            <S.Addresses>
+                {roadAddress && (
+                    <S.AddressContainer>
+                        <S.Tag>도로명</S.Tag>
+                        <S.Address>
+                            {getHighlightedText(roadAddress, searchInput)}
+                        </S.Address>
+                    </S.AddressContainer>
+                )}
+
                 <S.AddressContainer>
-                    <S.Tag>도로명</S.Tag>
+                    <S.Tag>지번</S.Tag>
                     <S.Address>
-                        {getHighlightedText(roadAddress, searchInput)}
+                        {getHighlightedText(
+                            getLotNumberAddress(location),
+                            searchInput,
+                        )}
                     </S.Address>
                 </S.AddressContainer>
-            )}
-            <S.AddressContainer>
-                <S.Tag>지번</S.Tag>
-                <S.Address>
-                    {getHighlightedText(
-                        getLotNumberAddress(location),
-                        searchInput,
-                    )}
-                </S.Address>
-            </S.AddressContainer>
+            </S.Addresses>
         </S.Container>
     );
 }
