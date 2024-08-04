@@ -135,7 +135,7 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
                                                 </S.Keyword>{' '}
                                                 검색된 주소
                                             </S.SearchText>
-                                            <S.DottedBorder />
+                                            <S.DashedBorder />
                                         </>
                                     )}
                                 </S.SearchContainer>

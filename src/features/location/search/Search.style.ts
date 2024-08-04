@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import dashedLine from '#/assets/icons/dashed-line.svg';
+
 export const Wrapper = styled.div`
     height: 100dvh;
 `;
@@ -26,16 +28,12 @@ export const Keyword = styled.span`
     color: ${({ theme }) => theme.color.main[100]};
 `;
 
-export const DottedBorder = styled.div`
+export const DashedBorder = styled.div`
     margin-top: 20px;
     height: 2px;
-    background: ${({ theme }) => `repeating-linear-gradient(
-        to right,
-        ${theme.color.bg[50]},
-        ${theme.color.bg[50]} 7px,
-        transparent 7px,
-        transparent 15px
-    )`};
+
+    background-image: url(${dashedLine});
+    background-repeat: repeat-y;
 `;
 
 export const LocationPointerContainer = styled.div`

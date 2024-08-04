@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import dottedLine from '#/assets/icons/dotted-line.svg';
+
 export const Contents = styled.div`
     padding: 0 20px;
     margin-top: 40px;
@@ -40,12 +42,8 @@ export const RouteIconContainer = styled.div`
 
 export const DottedLine = styled.div`
     flex: 1;
-    width: 1.5px;
-    background: ${({ theme }) => `repeating-linear-gradient(
-        to bottom,
-        ${theme.color.main[30]},
-        ${theme.color.main[30]} 3px,
-        transparent 2px,
-        transparent 6px
-    )`};
+    width: 2px;
+
+    background-image: url(${dottedLine});
+    background-repeat: repeat-y;
 `;
