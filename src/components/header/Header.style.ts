@@ -26,3 +26,9 @@ export const BackSpace = styled.div`
     left: 12px;
     cursor: pointer;
 `;
+
+export const Close = styled.div`
+    position: absolute;
+    right: 16px;
+    cursor: pointer;
+`;

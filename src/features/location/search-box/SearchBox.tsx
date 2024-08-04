@@ -26,12 +26,12 @@ export function SearchBox({
             : undefined;
 
     const getHighlightedText = (text: string, keyword: string) => {
-        const textArr = text.split(new RegExp(`(${keyword})`, 'gi'));
-        return textArr.map((_text, idx) =>
-            _text.toLowerCase() === keyword.toLowerCase() ? (
-                <S.Highlight key={idx}>{_text}</S.Highlight>
+        const splitText = text.split(new RegExp(`(${keyword})`, 'gi'));
+        return splitText.map((part, idx) =>
+            part.toLowerCase() === keyword.toLowerCase() ? (
+                <S.Highlight key={idx}>{part}</S.Highlight>
             ) : (
-                _text
+                part
             ),
         );
     };

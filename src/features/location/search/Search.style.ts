@@ -1,16 +1,15 @@
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
-    position: relative;
-    width: 100%;
-    height: 100%;
+    height: 100dvh;
 `;
 
 export const SearchList = styled.ul`
     display: flex;
     flex-direction: column;
-    margin: 20px 0;
     gap: 32px;
+
+    margin: 20px 0;
 `;
 
 export const SearchContainer = styled.div`
@@ -46,11 +45,13 @@ export const LocationPointerContainer = styled.div`
 `;
 
 export const CurrentLocation = styled.button`
+    width: fit-content;
     display: flex;
     align-items: center;
     gap: 8px;
 
     margin-top: 20px;
+
     cursor: pointer;
 `;
 
@@ -61,11 +62,12 @@ export const CurrentLocationText = styled.p`
 `;
 
 export const ContentsContainer = styled.div`
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100dvh;
-    padding: 0 20px;
+
+    padding: 20px 20px 0;
 `;
 
 export const HeaderContents = styled.div`
@@ -79,4 +81,9 @@ export const HeaderContents = styled.div`
 export const ListContents = styled.div`
     flex: 1;
     overflow-y: auto;
+`;
+
+export const SearchTipContainer = styled.div`
+    height: 100%;
+    padding-bottom: 30%;
 `;

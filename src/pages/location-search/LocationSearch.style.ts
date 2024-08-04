@@ -12,7 +12,7 @@ export const Title = styled.p`
     color: ${({ theme }) => theme.color.blk[100]};
 `;
 
-export const Location = styled.div`
+export const Route = styled.div`
     flex: 1;
 `;
 

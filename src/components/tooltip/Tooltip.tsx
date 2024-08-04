@@ -29,14 +29,12 @@ export function Tooltip({ content, children }: TooltipProps) {
         const triggerRect = triggerRef.current.getBoundingClientRect();
         const tooltipRect = tooltipRef.current.getBoundingClientRect();
 
-        const percentToAdditionWidth = (tooltipRect.width * 50) / 100;
-
         setPosition({
             top:
                 triggerRef.current.scrollTop - tooltipRect.height - TOOLTIP_GAP,
             left:
                 triggerRef.current.scrollLeft -
-                percentToAdditionWidth +
+                tooltipRect.width / 2 +
                 triggerRect.width / 2,
         });
     }, []);

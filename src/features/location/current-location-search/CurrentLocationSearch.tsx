@@ -57,7 +57,10 @@ export function CurrentLocationSearch({
             return;
         }
 
-        const locationName = `${data.addressInfo?.fullAddress} ${data.addressInfo?.buildingName}`;
+        const locationName =
+            data.addressInfo?.buildingName ||
+            data.addressInfo?.fullAddress ||
+            '';
         setCenterLocationName(locationName);
     }, [data]);
 
@@ -111,7 +114,8 @@ export function CurrentLocationSearch({
     return (
         <>
             <Header
-                title="지도에서 위치 확인"
+                title="지도에서 위치 설정"
+                isVisibleBackspace
                 onClickBackspace={onCloseSearch}
             />
             {isLoadedLocation && (

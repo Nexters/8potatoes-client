@@ -25,11 +25,11 @@ export const Highlight = styled.span`
 
 export const Tag = styled.span`
     padding: 6px 8px;
+
+    font-size: 14px;
     color: ${({ theme }) => theme.color.blk[60]};
     border: ${({ theme }) => `1px solid ${theme.color.bg[100]}`};
     border-radius: 4px;
-
-    font-size: 14px;
 `;
 
 export const Addresses = styled.div`

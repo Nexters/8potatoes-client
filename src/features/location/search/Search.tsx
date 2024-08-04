@@ -1,7 +1,9 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
 import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
+import { Header } from '#/components/header';
 import useIntersectionObserver from '#/hooks/useIntersectionObserver';
+import { HeaderContents } from '#/pages/templates/header-contents';
 import { useGetLocationSearch } from '#/query-hooks/location/query';
 import {
     GeolocationCoordinatesType,
@@ -75,6 +77,11 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
         setSearchInput(e.target.value);
     };
 
+    const handleOpenCurrentLocationSearch = () => {
+        setSearchInput('');
+        setIsCurrentLocationSearch(true);
+    };
+
     const handleCloseCurrentLocationSearch = () => {
         setIsCurrentLocationSearch(false);
     };
@@ -87,65 +94,83 @@ export function Search({ onSelect, onClose }: SearchListPropsType) {
                     onCloseSearch={handleCloseCurrentLocationSearch}
                 />
             ) : (
-                <S.ContentsContainer>
-                    <S.HeaderContents>
-                        <SearchInput
-                            value={searchInput}
-                            isInvalid={hasNoResult}
-                            isValid={hasResult}
-                            placeholder="지번, 도로명, 건물명으로 검색"
-                            onChangeValue={handleChangeSearchInput}
-                            onReset={() => setSearchInput('')}
-                        />
+                <>
+                    <Header
+                        title="위치 검색"
+                        isVisibleClose
+                        onClickClose={onClose}
+                    />
+                    <HeaderContents>
+                        <S.ContentsContainer>
+                            <S.HeaderContents>
+                                <SearchInput
+                                    value={searchInput}
+                                    isInvalid={hasNoResult}
+                                    isValid={hasResult}
+                                    placeholder="지번, 도로명, 건물명으로 검색"
+                                    onChangeValue={handleChangeSearchInput}
+                                    onReset={() => setSearchInput('')}
+                                />
 
-                        <S.CurrentLocation
-                            onClick={() => setIsCurrentLocationSearch(true)}
-                        >
-                            <S.LocationPointerContainer>
-                                <LocationPointerIcon width={12} height={12} />
-                            </S.LocationPointerContainer>
-                            <S.CurrentLocationText>
-                                현재 위치로 주소 찾기
-                            </S.CurrentLocationText>
-                        </S.CurrentLocation>
+                                <S.CurrentLocation
+                                    onClick={handleOpenCurrentLocationSearch}
+                                >
+                                    <S.LocationPointerContainer>
+                                        <LocationPointerIcon
+                                            width={12}
+                                            height={12}
+                                        />
+                                    </S.LocationPointerContainer>
+                                    <S.CurrentLocationText>
+                                        현재 위치로 주소 찾기
+                                    </S.CurrentLocationText>
+                                </S.CurrentLocation>
 
-                        <S.SearchContainer>
-                            {hasResult && (
-                                <>
-                                    <S.SearchText>
-                                        <S.Keyword>{searchKeyword}</S.Keyword>{' '}
-                                        검색된 주소
-                                    </S.SearchText>
-                                    <S.DottedBorder />
-                                </>
-                            )}
-                        </S.SearchContainer>
-                    </S.HeaderContents>
+                                <S.SearchContainer>
+                                    {hasResult && (
+                                        <>
+                                            <S.SearchText>
+                                                <S.Keyword>
+                                                    {searchKeyword}
+                                                </S.Keyword>{' '}
+                                                검색된 주소
+                                            </S.SearchText>
+                                            <S.DottedBorder />
+                                        </>
+                                    )}
+                                </S.SearchContainer>
+                            </S.HeaderContents>
 
-                    <S.ListContents>
-                        {(isEmptyInput || hasNoResult) && (
-                            <SearchTip>
-                                {isEmptyInput
-                                    ? '위치를 입력해주세요.'
-                                    : '검색 결과가 없습니다.'}
-                            </SearchTip>
-                        )}
+                            <S.ListContents>
+                                {(isEmptyInput || hasNoResult) && (
+                                    <S.SearchTipContainer>
+                                        <SearchTip>
+                                            {isEmptyInput
+                                                ? '위치를 입력해주세요.'
+                                                : '검색 결과가 없습니다.'}
+                                        </SearchTip>
+                                    </S.SearchTipContainer>
+                                )}
 
-                        {isSuccess && (
-                            <S.SearchList>
-                                {data.map((item: LocationInformationType) => (
-                                    <SearchBox
-                                        key={item.pkey}
-                                        searchInput={searchInput}
-                                        location={item}
-                                        onSelect={onSelect}
-                                    />
-                                ))}
-                            </S.SearchList>
-                        )}
-                        <div ref={targetRef}></div>
-                    </S.ListContents>
-                </S.ContentsContainer>
+                                {isSuccess && (
+                                    <S.SearchList>
+                                        {data.map(
+                                            (item: LocationInformationType) => (
+                                                <SearchBox
+                                                    key={item.pkey}
+                                                    searchInput={searchInput}
+                                                    location={item}
+                                                    onSelect={onSelect}
+                                                />
+                                            ),
+                                        )}
+                                    </S.SearchList>
+                                )}
+                                <div ref={targetRef}></div>
+                            </S.ListContents>
+                        </S.ContentsContainer>
+                    </HeaderContents>
+                </>
             )}
         </S.Wrapper>
     );

@@ -5,8 +5,10 @@ import LocationIcon from '#/assets/icons/location.svg?react';
 import OriginIcon from '#/assets/icons/origin.svg?react';
 import { BottomSection } from '#/components/bottom-section';
 import { Button } from '#/components/button';
+import { Header } from '#/components/header';
 import { LocationSelectField } from '#/features/location/location-select-field';
 import { Search } from '#/features/location/search';
+import { HeaderContents } from '#/pages/templates/header-contents';
 import { theme } from '#/styles/theme';
 import { SelectedLocationType } from '#/types/location';
 
@@ -78,78 +80,85 @@ export function LocationSearch() {
                 />
             ) : (
                 <>
-                    <img src="" style={{ width: '100%', height: '327px' }} />
+                    <Header title="로고" />
+                    <HeaderContents>
+                        <img
+                            src=""
+                            style={{ width: '100%', height: '327px' }}
+                        />
 
-                    <S.Contents>
-                        <S.Title>
-                            쥬쥬와 함께
-                            <br />
-                            휴게소 맛집을 찾아보세요!
-                        </S.Title>
+                        <S.Contents>
+                            <S.Title>
+                                쥬쥬와 함께
+                                <br />
+                                휴게소 맛집을 찾아보세요!
+                            </S.Title>
 
-                        <S.RouteContainer>
-                            <S.RouteIconContainer>
-                                <OriginIcon />
-                                <S.DottedLine />
-                                <LocationIcon
-                                    fill={theme.color.main[100]}
-                                    width={24}
-                                    height={24}
-                                />
-                            </S.RouteIconContainer>
+                            <S.RouteContainer>
+                                <S.RouteIconContainer>
+                                    <OriginIcon />
+                                    <S.DottedLine />
+                                    <LocationIcon
+                                        fill={theme.color.main[100]}
+                                        width={24}
+                                        height={24}
+                                    />
+                                </S.RouteIconContainer>
 
-                            <S.Location>
-                                <LocationSelectField
-                                    handleClick={() =>
-                                        handleClickSearchOption(
-                                            SEARCH_OPTION.ORIGIN,
-                                        )
-                                    }
-                                    label="출발지 입력"
-                                    placeholder="어디서 출발하세요?"
-                                    isSelected={isSelectedOrigin}
-                                    locationName={
-                                        routeLocation.origin?.addressName
-                                    }
-                                />
+                                <S.Route>
+                                    <LocationSelectField
+                                        handleClick={() =>
+                                            handleClickSearchOption(
+                                                SEARCH_OPTION.ORIGIN,
+                                            )
+                                        }
+                                        label="출발지 입력"
+                                        placeholder="어디서 출발하세요?"
+                                        isSelected={isSelectedOrigin}
+                                        locationName={
+                                            routeLocation.origin?.addressName
+                                        }
+                                    />
 
-                                <S.BorderLine isFill={isSelectEnd} />
+                                    <S.BorderLine isFill={isSelectEnd} />
 
-                                <LocationSelectField
-                                    handleClick={() =>
-                                        handleClickSearchOption(
-                                            SEARCH_OPTION.DESTINATION,
-                                        )
-                                    }
-                                    label="도착지 입력"
-                                    placeholder="어디까지 가세요?"
-                                    isSelected={isSelectedDestination}
-                                    locationName={
-                                        routeLocation.destination?.addressName
-                                    }
-                                />
-                            </S.Location>
+                                    <LocationSelectField
+                                        handleClick={() =>
+                                            handleClickSearchOption(
+                                                SEARCH_OPTION.DESTINATION,
+                                            )
+                                        }
+                                        label="도착지 입력"
+                                        placeholder="어디까지 가세요?"
+                                        isSelected={isSelectedDestination}
+                                        locationName={
+                                            routeLocation.destination
+                                                ?.addressName
+                                        }
+                                    />
+                                </S.Route>
 
-                            <button onClick={handleSwitchLocation}>
-                                <ArrowSwitchHorizontalIcon
-                                    stroke={
-                                        isSelectEnd
-                                            ? theme.color.main[100]
-                                            : theme.color.main[30]
-                                    }
-                                />
-                            </button>
-                        </S.RouteContainer>
+                                <button onClick={handleSwitchLocation}>
+                                    <ArrowSwitchHorizontalIcon
+                                        stroke={
+                                            isSelectEnd
+                                                ? theme.color.main[100]
+                                                : theme.color.main[30]
+                                        }
+                                    />
+                                </button>
+                            </S.RouteContainer>
 
-                        <BottomSection style={{ padding: '28px 20px' }}>
-                            <Button
-                                isValid={isSelectEnd}
-                                onClick={handleClickSearch}
-                            >
-                                휴게소 찾기
-                            </Button>
-                        </BottomSection>
-                    </S.Contents>
+                            <BottomSection style={{ padding: '28px 20px' }}>
+                                <Button
+                                    isValid={isSelectEnd}
+                                    onClick={handleClickSearch}
+                                >
+                                    휴게소 찾기
+                                </Button>
+                            </BottomSection>
+                        </S.Contents>
+                    </HeaderContents>
                 </>
             )}
         </>
