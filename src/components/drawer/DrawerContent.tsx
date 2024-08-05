@@ -5,15 +5,19 @@ import {
     AnimatePresence,
     type PanInfo,
     useMotionValue,
-    useSpring,
     useTransform,
 } from 'framer-motion';
 
 import { useDrawerContext } from './Drawer';
 import * as S from './Drawer.style';
 
+type HeightStepType = {
+    unit: 'px' | 'dvh' | 'vh' | '%';
+    value: number;
+};
+
 type DrawerContentProps = PropsWithChildren<{
-    heightStepList: number[];
+    heightStepList: HeightStepType[];
     threshold?: number;
 }>;
 
@@ -26,22 +30,18 @@ export const DrawerContent = ({
     const { isDrawerOpen, currentHeightIndex, closeDrawer } =
         useDrawerContext();
 
-    const stepAmount = heightStepList.length;
-    const heightStepIndexList = [...Array(stepAmount).keys()];
-
     const startY = useMotionValue(0);
 
-    const targetHeight = useTransform(
-        currentHeightIndex,
-        heightStepIndexList,
-        heightStepList,
-    );
-    const animatedHeight = useSpring(targetHeight, {
-        stiffness: 200,
-        damping: 20,
+    const stepAmount = heightStepList.length;
+    const stepUnitList = heightStepList.map(({ unit }) => unit);
+    const stepValueList = heightStepList.map(({ value }) => value);
+
+    const height = useTransform(currentHeightIndex, (index) => {
+        const height = stepValueList[index];
+        const unit = stepUnitList[index];
+        return `${height}${unit}`;
     });
 
-    const height = useTransform(animatedHeight, (h) => `${h}dvh`);
     const top = useTransform(height, (h) => `calc(100dvh - ${h})`);
 
     const handlePanStart = (_event: PointerEvent, info: PanInfo) => {
@@ -52,9 +52,8 @@ export const DrawerContent = ({
         const deltaY = info.point.y - startY.get();
         let updatedHeightIndex = currentHeightIndex.get();
 
-        if (deltaY < -threshold && updatedHeightIndex < 2) {
+        if (deltaY < -threshold && updatedHeightIndex < stepAmount - 1) {
             updatedHeightIndex += 1;
-            currentHeightIndex.set(updatedHeightIndex);
         } else if (deltaY > threshold && updatedHeightIndex > 0) {
             updatedHeightIndex -= 1;
         } else if (deltaY > threshold && updatedHeightIndex === 0) {
@@ -78,23 +77,23 @@ export const DrawerContent = ({
                         />
                     </Dialog.Overlay>
                     <Dialog.Content forceMount asChild {...restProps}>
-                        <S.Content
+                        <S.ContentWrapper
                             initial={{ opacity: 0, y: '100%' }}
                             animate={{ opacity: 1, y: '0%' }}
                             exit={{ opacity: 0, y: '100%' }}
-                            transition={{ duration: 0.3 }}
                             style={{
                                 height,
                                 top,
                             }}
+                            layout
                             onPanStart={handlePanStart}
                             onPanEnd={handlePanEnd}
                         >
                             <S.HolderWrapper>
                                 <S.Holder />
                             </S.HolderWrapper>
-                            {children}
-                        </S.Content>
+                            <S.Content>{children}</S.Content>
+                        </S.ContentWrapper>
                     </Dialog.Content>
                 </>
             )}
