@@ -33,7 +33,7 @@ export const ContentWrapper = styled(motion.div)`
     flex-direction: column;
     justify-content: space-between;
 
-    overflow: auto;
+    overflow: hidden;
 `;
 
 export const Content = styled.div`
