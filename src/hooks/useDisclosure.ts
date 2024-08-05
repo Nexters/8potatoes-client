@@ -7,8 +7,8 @@ export const useDisclosure = (initialState: boolean = false) => {
         () => ({
             state: booleanState,
             setState: setBooleanState,
-            true: () => setBooleanState(true),
-            false: () => setBooleanState(false),
+            setTrue: () => setBooleanState(true),
+            setFalse: () => setBooleanState(false),
             toggle: () => setBooleanState((prevState) => !prevState),
         }),
         [booleanState],

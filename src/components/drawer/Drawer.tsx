@@ -30,8 +30,8 @@ export const DrawerRoot = ({
 }: DrawerRootProps) => {
     const {
         state: isDrawerOpen,
-        true: openDrawer,
-        false: closeDrawer,
+        setTrue: openDrawer,
+        setFalse: closeDrawer,
     } = useDisclosure(initialOpen);
 
     const currentHeightIndex = useMotionValue(0);
