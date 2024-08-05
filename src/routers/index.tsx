@@ -6,6 +6,7 @@ import { Outlet, createBrowserRouter } from 'react-router-dom';
 
 import App from '#/App';
 import LocationSearch from '#/pages/location-search';
+import RestAreaMapPage from '#/pages/rest-area-map';
 import { MobileView } from '#/pages/templates/mobile-view';
 import { GlobalStyle } from '#/styles/global';
 import { theme } from '#/styles/theme';
@@ -49,6 +50,11 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                     path: '/location-search',
                     errorElement: <div>에러</div>,
                     element: <LocationSearch />,
+                },
+                {
+                    path: '/rest-area-map',
+                    errorElement: <div>에러</div>,
+                    element: <RestAreaMapPage />,
                 },
             ],
         },
