@@ -8,13 +8,15 @@ import {
 
 import { DestinationIndicator } from '#/features/rest-area/destination-indicator';
 import { DestinationMarker } from '#/features/rest-area/destination-marker';
-import { DestinationMarkerImpl } from '#/features/rest-area/destination-marker/DestinationMarker';
+import { RestAreaBubbleMarker } from '#/features/rest-area/rest-area-bubble-marker';
 
 const RestAreaMapPage = ({ children }: PropsWithChildren<unknown>) => {
     const naverMaps = useNavermaps();
 
     return (
-        <><NaverMapContainer style={{ height: '100dvh' }}>
+        <>
+        <RestAreaBubbleMarker/>
+        <NaverMapContainer style={{ height: '100dvh' }}>
             <DestinationIndicator start="서울" end="부산" />
             <NaverMap>
                 <DestinationMarker
