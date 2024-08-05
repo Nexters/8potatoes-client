@@ -1,15 +1,30 @@
 import { type PropsWithChildren } from 'react';
 
-import { NaverMap, Container as NaverMapContainer } from 'react-naver-maps';
+import {
+    NaverMap,
+    Container as NaverMapContainer,
+    useNavermaps,
+} from 'react-naver-maps';
 
 import { DestinationIndicator } from '#/features/rest-area/destination-indicator';
+import { DestinationMarker } from '#/features/rest-area/destination-marker';
+import { DestinationMarkerImpl } from '#/features/rest-area/destination-marker/DestinationMarker';
 
 const RestAreaMapPage = ({ children }: PropsWithChildren<unknown>) => {
+    const naverMaps = useNavermaps();
+
     return (
-        <NaverMapContainer style={{ height: '100dvh' }}>
+        <><NaverMapContainer style={{ height: '100dvh' }}>
             <DestinationIndicator start="서울" end="부산" />
-            <NaverMap>{children}</NaverMap>
-        </NaverMapContainer>
+            <NaverMap>
+                <DestinationMarker
+                    isStart
+                    position={new naverMaps.LatLng(37.3595704, 127.105399)} />
+                <DestinationMarker
+                    position={new naverMaps.LatLng(37.4595704, 127.105399)} />
+                {children}
+            </NaverMap>
+        </NaverMapContainer></>
     );
 };
 
