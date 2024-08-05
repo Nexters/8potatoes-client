@@ -15,7 +15,7 @@ const RestAreaMapPage = ({ children }: PropsWithChildren<unknown>) => {
 
     return (
         <>
-        <RestAreaBubbleMarker/>
+        <RestAreaBubbleMarker isCenter direction='부산' restAreaName='천안삼거리' />
         <NaverMapContainer style={{ height: '100dvh' }}>
             <DestinationIndicator start="서울" end="부산" />
             <NaverMap>

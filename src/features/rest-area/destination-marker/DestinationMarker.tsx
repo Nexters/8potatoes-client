@@ -28,9 +28,8 @@ export const DestinationMarkerImpl = ({
     );
 };
 
-type DestinationMarkerProps = ComponentProps<typeof Marker> & {
-    isStart?: boolean;
-};
+type DestinationMarkerProps = ComponentProps<typeof Marker> &
+    DestinationMarkerImplProp;
 
 export const DestinationMarker = ({
     isStart,
