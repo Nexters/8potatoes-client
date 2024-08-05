@@ -26,8 +26,8 @@ export const ContentWrapper = styled(motion.div)`
         top 0.1s cubic-bezier(0.14, 0.99, 0.98, 0.98);
 
     background-color: ${theme.color.wht[100]};
-    border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 16px 16px 0 0;
 
     display: flex;
     flex-direction: column;
