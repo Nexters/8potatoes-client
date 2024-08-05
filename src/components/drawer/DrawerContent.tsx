@@ -33,14 +33,20 @@ export const DrawerContent = ({
     const startY = useMotionValue(0);
 
     const stepAmount = heightStepList.length;
-    const stepUnitList = heightStepList.map(({ unit }) => unit);
-    const stepValueList = heightStepList.map(({ value }) => value);
+    const [stepUnitList, stepValueList] = heightStepList.reduce<
+        [string[], number[]]
+    >(
+        ([currentUnitList, currentValueList], { unit, value }) => [
+            [...currentUnitList, unit],
+            [...currentValueList, value],
+        ],
+        [[], []],
+    );
 
-    const height = useTransform(currentHeightIndex, (index) => {
-        const height = stepValueList[index];
-        const unit = stepUnitList[index];
-        return `${height}${unit}`;
-    });
+    const height = useTransform(
+        currentHeightIndex,
+        (index) => `${stepValueList[index]}${stepUnitList[index]}`,
+    );
 
     const top = useTransform(height, (h) => `calc(100dvh - ${h})`);
 
@@ -55,9 +61,7 @@ export const DrawerContent = ({
         if (deltaY < -threshold && updatedHeightIndex < stepAmount - 1) {
             updatedHeightIndex += 1;
         } else if (deltaY > threshold && updatedHeightIndex > 0) {
-            updatedHeightIndex -= 1;
-        } else if (deltaY > threshold && updatedHeightIndex === 0) {
-            closeDrawer();
+            updatedHeightIndex > 0 ? (updatedHeightIndex -= 1) : closeDrawer();
         }
 
         currentHeightIndex.set(updatedHeightIndex);
