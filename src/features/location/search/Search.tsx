@@ -1,4 +1,11 @@
-import { ChangeEvent, Dispatch, useCallback, useEffect, useState } from 'react';
+import {
+    ChangeEvent,
+    Dispatch,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 
 import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
 import { Header } from '#/components/header';
@@ -39,9 +46,12 @@ export function Search({
             geolocationCoordinates,
         });
 
+    const rootRef = useRef<HTMLDivElement>(null);
     const { targetRef } = useIntersectionObserver<HTMLDivElement>({
         onIntersect: fetchNextPage,
         enabled: !!hasNextPage,
+        root: rootRef.current,
+        rootMargin: '40px',
     });
 
     const isEmptyInput = searchKeyword.length === 0;
@@ -83,7 +93,7 @@ export function Search({
     };
 
     return (
-        <S.Wrapper>
+        <>
             <Header title="위치 검색" isVisibleClose onClickClose={onClose} />
 
             <S.ContentsContainer>
@@ -111,7 +121,7 @@ export function Search({
                     <S.DashedBorder />
                 </S.HeaderContents>
 
-                <S.ListContents>
+                <S.ListContents ref={rootRef}>
                     {(isEmptyInput || hasNoResult) && (
                         <S.SearchTipContainer>
                             <SearchTip>
@@ -123,20 +133,22 @@ export function Search({
                     )}
 
                     {isSuccess && (
-                        <S.SearchList>
-                            {data.map((item: LocationInformationType) => (
-                                <SearchBox
-                                    key={item.pkey}
-                                    searchInput={searchInput}
-                                    location={item}
-                                    onSelect={onSelect}
-                                />
-                            ))}
-                        </S.SearchList>
+                        <>
+                            <S.SearchList>
+                                {data.map((item: LocationInformationType) => (
+                                    <SearchBox
+                                        key={item.pkey}
+                                        searchInput={searchInput}
+                                        location={item}
+                                        onSelect={onSelect}
+                                    />
+                                ))}
+                                <div ref={targetRef}></div>
+                            </S.SearchList>
+                        </>
                     )}
-                    <div ref={targetRef}></div>
                 </S.ListContents>
             </S.ContentsContainer>
-        </S.Wrapper>
+        </>
     );
 }

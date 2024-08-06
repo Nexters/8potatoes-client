@@ -2,11 +2,8 @@ import styled from '@emotion/styled';
 
 import dashedLine from '#/assets/icons/dashed-line.svg';
 
-export const Wrapper = styled.div`
-    height: 100dvh;
-`;
-
 export const SearchList = styled.ul`
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -65,9 +62,11 @@ export const HeaderContents = styled.div`
 export const ListContents = styled.div`
     flex: 1;
     overflow-y: auto;
+
+    display: flex;
+    justify-content: center;
 `;
 
 export const SearchTipContainer = styled.div`
-    height: 100%;
     padding-bottom: 30%;
 `;
