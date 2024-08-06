@@ -42,7 +42,7 @@ export function LocationSearch() {
             {isCurrentLocationSearch ? (
                 <CurrentLocationSearch
                     onSelect={handleSelectLocation}
-                    onClose={handleCancelSelect}
+                    onClose={() => setIsCurrentLocationSearch(false)}
                 />
             ) : (
                 <Route
