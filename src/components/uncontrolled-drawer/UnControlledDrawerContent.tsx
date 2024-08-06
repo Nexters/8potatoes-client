@@ -24,7 +24,7 @@ type UnControlledDrawerContentProps = PropsWithChildren<{
 export const UnControlledDrawerContent = ({
     children,
     heightStepList,
-    threshold = 30,
+    threshold = 20,
     ...restProps
 }: UnControlledDrawerContentProps) => {
     const { isDrawerOpen, currentHeightIndex, closeDrawer } =
@@ -80,7 +80,13 @@ export const UnControlledDrawerContent = ({
                             onClick={closeDrawer}
                         />
                     </Dialog.Overlay>
-                    <Dialog.Content forceMount asChild {...restProps}>
+                    <Dialog.Content
+                        forceMount
+                        aria-describedby={undefined}
+                        aria-label="Drawer"
+                        asChild
+                        {...restProps}
+                    >
                         <S.ContentWrapper
                             initial={{ opacity: 0, y: '100%' }}
                             animate={{ opacity: 1, y: '0%' }}
