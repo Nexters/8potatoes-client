@@ -41,8 +41,6 @@ export const DrawerRoot = ({
         currentHeightIndex.set(0);
     };
 
-    console.log(isDrawerOpen);
-
     const value = useMemo(
         () => ({
             isDrawerOpen,
