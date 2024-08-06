@@ -1,9 +1,14 @@
-import { type ComponentProps, createContext, useContext, useMemo } from 'react';
+import {
+    type ComponentProps,
+    type Dispatch,
+    type SetStateAction,
+    createContext,
+    useContext,
+    useMemo,
+} from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { AnimatePresence, MotionValue, useMotionValue } from 'framer-motion';
-
-import { useDisclosure } from '#/hooks/useDisclosure';
 
 import { DrawerClose } from './DrawerClose';
 import { DrawerContent } from './DrawerContent';
@@ -20,34 +25,32 @@ const DrawerContext = createContext<DrawerContextType | null>(null);
 
 interface DrawerRootProps
     extends Omit<ComponentProps<typeof Dialog.Root>, 'open' | 'onOpenChange'> {
-    initialOpen?: boolean;
+    isDrawerOpen: boolean;
+    setDrawerOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export const DrawerRoot = ({
     children,
-    initialOpen = false,
+    isDrawerOpen,
+    setDrawerOpen,
     ...restProps
 }: DrawerRootProps) => {
-    const {
-        state: isDrawerOpen,
-        setTrue: openDrawer,
-        setFalse: closeDrawer,
-    } = useDisclosure(initialOpen);
-
     const currentHeightIndex = useMotionValue(0);
 
     const handleChangeDrawerOpen = () => {
         currentHeightIndex.set(0);
     };
 
+    console.log(isDrawerOpen);
+
     const value = useMemo(
         () => ({
             isDrawerOpen,
             currentHeightIndex,
-            openDrawer,
-            closeDrawer,
+            openDrawer: () => setDrawerOpen(true),
+            closeDrawer: () => setDrawerOpen(false),
         }),
-        [isDrawerOpen, currentHeightIndex, openDrawer, closeDrawer],
+        [isDrawerOpen, currentHeightIndex, setDrawerOpen],
     );
 
     return (
