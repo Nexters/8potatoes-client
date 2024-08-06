@@ -20,7 +20,7 @@ import { debounce } from '#/utils/common';
 import * as S from './CurrentLocationSearch.style';
 
 interface CurrentLocationSearchProps {
-    onCloseSearch: () => void;
+    onClose: () => void;
     onSelect: (location: SelectedLocationType) => void;
 }
 
@@ -28,7 +28,7 @@ const DEFAULT_ZOOM = 19;
 
 export function CurrentLocationSearch({
     onSelect,
-    onCloseSearch,
+    onClose,
 }: CurrentLocationSearchProps) {
     const [centerLocation, setCenterLocation] =
         useState<GeolocationCoordinatesType>({
@@ -116,7 +116,7 @@ export function CurrentLocationSearch({
             <Header
                 title="지도에서 위치 설정"
                 isVisibleBackspace
-                onClickBackspace={onCloseSearch}
+                onClickBackspace={onClose}
             />
             {isLoadedLocation && (
                 <>

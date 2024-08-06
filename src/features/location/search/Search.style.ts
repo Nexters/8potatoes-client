@@ -14,22 +14,8 @@ export const SearchList = styled.ul`
     margin: 20px 0;
 `;
 
-export const SearchContainer = styled.div`
-    margin-top: 20px;
-`;
-
-export const SearchText = styled.div`
-    font-size: 16px;
-    font-weight: 700;
-    color: ${({ theme }) => theme.color.blk[100]};
-`;
-
-export const Keyword = styled.span`
-    color: ${({ theme }) => theme.color.main[100]};
-`;
-
 export const DashedBorder = styled.div`
-    margin-top: 20px;
+    margin-top: 40px;
     height: 2px;
 
     background-image: url(${dashedLine});
@@ -65,7 +51,7 @@ export const ContentsContainer = styled.div`
     display: flex;
     flex-direction: column;
 
-    padding: 20px 20px 0;
+    padding-top: 40px;
 `;
 
 export const HeaderContents = styled.div`

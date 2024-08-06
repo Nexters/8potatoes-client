@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import { Z_INDEX } from '#/constants/z-index';
 
-export const Container = styled.div`
+export const Container = styled.header`
     position: absolute;
     top: 0;
     z-index: ${Z_INDEX.HEADER};
