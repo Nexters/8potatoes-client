@@ -20,6 +20,8 @@ export function LocationSearch() {
         null,
     );
 
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+
     const [isCurrentLocationSearch, setIsCurrentLocationSearch] =
         useState<boolean>(false);
 
@@ -28,28 +30,32 @@ export function LocationSearch() {
             return;
         }
 
+        setIsDrawerOpen(false);
         setRouteLocation({ ...routeLocation, [searchOption]: location });
         setSearchOption(null);
         setIsCurrentLocationSearch(false);
     };
 
     const handleOpenCurrentLocation = () => {
-        // Drawer 닫기 로직
-        setIsCurrentLocationSearch(true);
+        setIsDrawerOpen(false);
+        setTimeout(() => {
+            setIsCurrentLocationSearch(true);
+        }, 0);
     };
 
     const handleCancelSelect = () => {
+        setIsDrawerOpen(false);
         setSearchOption(null);
         setIsCurrentLocationSearch(false);
     };
 
     const handleCloseCurrentLocation = () => {
-        // Drawer 열기 로직
+        setIsDrawerOpen(true);
         setIsCurrentLocationSearch(false);
     };
 
     return (
-        <Drawer>
+        <Drawer isDrawerOpen={isDrawerOpen} setDrawerOpen={setIsDrawerOpen}>
             {isCurrentLocationSearch ? (
                 <CurrentLocationSearch
                     onSelect={handleSelectLocation}

@@ -94,7 +94,12 @@ export function Search({
 
     return (
         <>
-            <Header title="위치 검색" isVisibleClose onClickClose={onClose} />
+            <Header
+                title="위치 검색"
+                isVisibleClose
+                onClickClose={onClose}
+                style={{ width: 'calc(100% - 16px)' }}
+            />
 
             <S.ContentsContainer>
                 <S.HeaderContents>

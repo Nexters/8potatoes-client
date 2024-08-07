@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+
 import ArrowLeftIcon from '#/assets/icons/arrow-left.svg?react';
 import CloseIcon from '#/assets/icons/close.svg?react';
 
@@ -9,6 +11,7 @@ interface HeaderProps {
     onClickBackspace?: () => void;
     isVisibleClose?: boolean;
     onClickClose?: () => void;
+    style?: CSSProperties;
 }
 
 export function Header({
@@ -17,9 +20,10 @@ export function Header({
     isVisibleClose = false,
     onClickClose,
     title,
+    style,
 }: HeaderProps) {
     return (
-        <S.Container>
+        <S.Container style={style}>
             {isVisibleBackspace && (
                 <S.BackSpace onClick={onClickBackspace}>
                     <ArrowLeftIcon />
