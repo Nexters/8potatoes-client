@@ -155,7 +155,7 @@ export function CurrentLocationSearch({
                                     handleSelectLocation(data?.addressInfo)
                                 }
                             >
-                                이 위치로 주소 등록
+                                이 위치로 설정하기
                             </Button>
                         </BottomSection>
                     </S.BottomContainer>

@@ -110,7 +110,7 @@ export function Search({
                         </S.CurrentLocationText>
                     </S.CurrentLocation>
 
-                    <S.DashedBorder />
+                    {isSuccess && <S.DashedBorder />}
                 </S.HeaderContents>
 
                 <S.ListContents ref={rootRef}>

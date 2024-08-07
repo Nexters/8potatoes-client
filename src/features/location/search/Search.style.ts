@@ -12,6 +12,7 @@ export const SearchList = styled.ul`
 `;
 
 export const DashedBorder = styled.div`
+    width: 100%;
     margin-top: 40px;
     height: 2px;
 
