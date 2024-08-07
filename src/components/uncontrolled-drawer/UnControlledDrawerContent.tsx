@@ -8,27 +8,27 @@ import {
     useTransform,
 } from 'framer-motion';
 
-import { useDrawerContext } from './Drawer';
-import * as S from './Drawer.style';
+import { useUnControlledDrawerContext } from './UnControlledDrawer';
+import * as S from './UnControlledDrawer.style';
 
 type HeightStepType = {
     unit: 'px' | 'dvh' | 'vh' | '%';
     value: number;
 };
 
-type DrawerContentProps = PropsWithChildren<{
+type UnControlledDrawerContentProps = PropsWithChildren<{
     heightStepList: HeightStepType[];
     threshold?: number;
 }>;
 
-export const DrawerContent = ({
+export const UnControlledDrawerContent = ({
     children,
     heightStepList,
     threshold = 20,
     ...restProps
-}: DrawerContentProps) => {
+}: UnControlledDrawerContentProps) => {
     const { isDrawerOpen, currentHeightIndex, closeDrawer } =
-        useDrawerContext();
+        useUnControlledDrawerContext();
 
     const startY = useMotionValue(0);
 

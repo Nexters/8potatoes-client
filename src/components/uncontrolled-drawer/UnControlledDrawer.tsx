@@ -1,40 +1,39 @@
-import {
-    type ComponentProps,
-    type Dispatch,
-    type SetStateAction,
-    createContext,
-    useContext,
-    useMemo,
-} from 'react';
+import { type ComponentProps, createContext, useContext, useMemo } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { AnimatePresence, MotionValue, useMotionValue } from 'framer-motion';
 
-import { DrawerClose } from './DrawerClose';
-import { DrawerContent } from './DrawerContent';
-import { DrawerTrigger } from './DrawerTrigger';
+import { useDisclosure } from '#/hooks/useDisclosure';
 
-interface DrawerContextType {
+import { UnControlledDrawerClose } from './UnControlledDrawerClose';
+import { UnControlledDrawerContent } from './UnControlledDrawerContent';
+import { UnControlledDrawerTrigger } from './UnControlledDrawerTrigger';
+
+interface UnControlledDrawerContextType {
     isDrawerOpen: boolean;
     currentHeightIndex: MotionValue<number>;
     openDrawer: () => void;
     closeDrawer: () => void;
 }
 
-const DrawerContext = createContext<DrawerContextType | null>(null);
+const DrawerContext = createContext<UnControlledDrawerContextType | null>(null);
 
-interface DrawerRootProps
+interface UnControlledDrawerRootProps
     extends Omit<ComponentProps<typeof Dialog.Root>, 'open' | 'onOpenChange'> {
-    isDrawerOpen: boolean;
-    setDrawerOpen: Dispatch<SetStateAction<boolean>>;
+    initialOpen?: boolean;
 }
 
-export const DrawerRoot = ({
+export const UnControlledDrawerRoot = ({
     children,
-    isDrawerOpen,
-    setDrawerOpen,
+    initialOpen = false,
     ...restProps
-}: DrawerRootProps) => {
+}: UnControlledDrawerRootProps) => {
+    const {
+        state: isDrawerOpen,
+        setTrue: openDrawer,
+        setFalse: closeDrawer,
+    } = useDisclosure(initialOpen);
+
     const currentHeightIndex = useMotionValue(0);
 
     const handleChangeDrawerOpen = () => {
@@ -45,10 +44,10 @@ export const DrawerRoot = ({
         () => ({
             isDrawerOpen,
             currentHeightIndex,
-            openDrawer: () => setDrawerOpen(true),
-            closeDrawer: () => setDrawerOpen(false),
+            openDrawer,
+            closeDrawer,
         }),
-        [isDrawerOpen, currentHeightIndex, setDrawerOpen],
+        [isDrawerOpen, currentHeightIndex, openDrawer, closeDrawer],
     );
 
     return (
@@ -64,7 +63,7 @@ export const DrawerRoot = ({
     );
 };
 
-export const useDrawerContext = () => {
+export const useUnControlledDrawerContext = () => {
     const drawerContext = useContext(DrawerContext);
 
     if (!drawerContext)
@@ -75,8 +74,8 @@ export const useDrawerContext = () => {
     return drawerContext;
 };
 
-export const Drawer = Object.assign(DrawerRoot, {
-    Trigger: DrawerTrigger,
-    Close: DrawerClose,
-    Content: DrawerContent,
+export const UnControlledDrawer = Object.assign(UnControlledDrawerRoot, {
+    Trigger: UnControlledDrawerTrigger,
+    Close: UnControlledDrawerClose,
+    Content: UnControlledDrawerContent,
 });
