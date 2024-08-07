@@ -10,6 +10,9 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px 0;
+
+    background-color: rgba(255, 241, 231, 0.7);
+    border-radius: 20px;
 `;
 
 export const TopSection = styled.div`
@@ -34,8 +37,20 @@ export const RestAreaSection = styled.div`
 
 export const DetailSection = styled.div`
     display: flex;
-    gap: 0 8px;
+    align-items: center;
 `;
+
+export const NaverRating = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0 2px;
+    color: ${theme.color.naver};
+
+    & > svg {
+        margin: auto 0;
+    }
+`
 
 export const OpenStateBadge = styled.div<{ isRestAreaOpen: boolean }>(
     ({ isRestAreaOpen }) => {
@@ -47,10 +62,15 @@ export const OpenStateBadge = styled.div<{ isRestAreaOpen: boolean }>(
             : theme.color.blk[60];
 
         return css`
+            height: fit-content;
             padding: 8px;
             border-radius: 8px;
             background-color: ${backgroundColor};
             color: ${color};
+
+            display: flex;
+            align-items: center;
+            gap: 0 4px;
 
             & > svg {
                 color: ${color};

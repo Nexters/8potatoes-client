@@ -1,41 +1,24 @@
-import { useState } from 'react';
+import { RestAreaInformation } from '#/features/rest-area/rest-area-information';
 
-import { Drawer } from './components/drawer';
+import { Text } from './components/text/Text';
+import { theme } from './styles/theme';
 
 function App() {
-    const [count, setCount] = useState(0);
-
     return (
         <>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
-            <Drawer>
-                <Drawer.Trigger>
-                    <button>Trigger Drawer</button>
-                </Drawer.Trigger>
-                <Drawer.Content
-                    heightStepList={[
-                        { value: 80, unit: 'px' },
-                        { value: 50, unit: 'dvh' },
-                        { value: 90, unit: 'dvh' },
-                    ]}
-                >
-                    <h1>test Text</h1>
-                    <Drawer.Close>
-                        <button>close button</button>
-                    </Drawer.Close>
-                </Drawer.Content>
-            </Drawer>
+            <Text as="h1" color={theme.color.main[100]} typography="headingBold20">
+                테스트 메세지
+            </Text>
+            <RestAreaInformation
+                restAreaName="서울만남의광장"
+                direction="부산"
+                naverRating={4.1}
+                gasolinePrice={1600}
+                dieselPrice={1100}
+                menuAmount={17}
+                openDate={new Date('2024-08-07')}
+                closeDate={new Date('2024-08-08')}
+            />
         </>
     );
 }
