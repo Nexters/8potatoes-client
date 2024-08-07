@@ -27,13 +27,13 @@ import * as S from './Search.style';
 interface SearchListPropsType {
     onSelect: (location: SelectedLocationType) => void;
     onClose: () => void;
-    setCurrentLocationSearch: Dispatch<boolean>;
+    handleOpenCurrentLocation: () => void;
 }
 
 export function Search({
     onSelect,
     onClose,
-    setCurrentLocationSearch,
+    handleOpenCurrentLocation,
 }: SearchListPropsType) {
     const [searchInput, setSearchInput] = useState<string>('');
     const [searchKeyword, setSearchKeyword] = useState<string>('');
@@ -89,7 +89,7 @@ export function Search({
 
     const handleOpenCurrentLocationSearch = () => {
         setSearchInput('');
-        setCurrentLocationSearch(true);
+        handleOpenCurrentLocation();
     };
 
     return (

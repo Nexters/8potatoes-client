@@ -19,22 +19,16 @@ type SearchOptionType = (typeof SEARCH_OPTION)[keyof typeof SEARCH_OPTION];
 
 interface RouteProps {
     routeLocation: Record<SearchOptionType, SelectedLocationType | null>;
-    onClose: () => void;
-    onSelect: (location: SelectedLocationType) => void;
     setSearchOption: Dispatch<SearchOptionType | null>;
     setRouteLocation: Dispatch<
         Record<SearchOptionType, SelectedLocationType | null>
     >;
-    setIsCurrentLocationSearch: Dispatch<boolean>;
 }
 
 export function Route({
     routeLocation,
-    onSelect,
-    onClose,
     setSearchOption,
     setRouteLocation,
-    setIsCurrentLocationSearch,
 }: RouteProps) {
     const isSelectedOrigin = !!routeLocation.origin;
     const isSelectedDestination = !!routeLocation.destination;
@@ -150,14 +144,6 @@ export function Route({
                     </BottomSection>
                 </S.Contents>
             </S.Container>
-
-            <Drawer.Content heightStepList={[{ value: 90, unit: 'dvh' }]}>
-                <Search
-                    onSelect={onSelect}
-                    onClose={onClose}
-                    setCurrentLocationSearch={setIsCurrentLocationSearch}
-                />
-            </Drawer.Content>
         </>
     );
 }
