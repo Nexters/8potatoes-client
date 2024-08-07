@@ -9,6 +9,7 @@ import {
 
 import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
 import { Header } from '#/components/header';
+import { useGeolocationPosition } from '#/hooks/useGeolocationPosition';
 import useIntersectionObserver from '#/hooks/useIntersectionObserver';
 import { useGetLocationSearch } from '#/query-hooks/location/query';
 import {
@@ -37,8 +38,8 @@ export function Search({
 }: SearchListPropsType) {
     const [searchInput, setSearchInput] = useState<string>('');
     const [searchKeyword, setSearchKeyword] = useState<string>('');
-    const [geolocationCoordinates, setGeolocationCoordinates] =
-        useState<GeolocationCoordinatesType>({ latitude: 0, longitude: 0 });
+
+    const { geolocationCoordinates } = useGeolocationPosition();
 
     const { data, isLoading, isSuccess, hasNextPage, fetchNextPage } =
         useGetLocationSearch({
@@ -57,20 +58,6 @@ export function Search({
     const isEmptyInput = searchKeyword.length === 0;
     const hasResult = !isEmptyInput && !isLoading && isSuccess;
     const hasNoResult = !isEmptyInput && !isLoading && !isSuccess;
-
-    useEffect(() => {
-        function handleSuccess(position: GeolocationPosition) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-
-            setGeolocationCoordinates({ latitude, longitude });
-        }
-        function handleError(error: GeolocationPositionError) {
-            console.error(error);
-        }
-
-        navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
-    }, []);
 
     const handleSearchDebounce = useCallback(
         debounce((searchInput: string) => {

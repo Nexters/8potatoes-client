@@ -8,6 +8,7 @@ import { BottomSection } from '#/components/bottom-section';
 import { Button } from '#/components/button';
 import { Header } from '#/components/header';
 import { Tooltip } from '#/components/tooltip';
+import { useGeolocationPosition } from '#/hooks/useGeolocationPosition';
 import { useGetReverseGeocoding } from '#/query-hooks/location/query';
 import {
     GeolocationCoordinatesType,
@@ -43,14 +44,16 @@ export function CurrentLocationSearch({
     const isLoadedLocation =
         centerLocation.latitude !== 0 && centerLocation.longitude !== 0;
 
+    const { geolocationCoordinates } = useGeolocationPosition();
+
     const { data } = useGetReverseGeocoding({
         isLoaded: isLoadedLocation,
         centerLocation,
     });
 
     useEffect(() => {
-        getCurrentPosition();
-    }, []);
+        getCurrentPosition(geolocationCoordinates);
+    }, [geolocationCoordinates]);
 
     useEffect(() => {
         if (!data) {
@@ -64,19 +67,10 @@ export function CurrentLocationSearch({
         setCenterLocationName(locationName);
     }, [data]);
 
-    const getCurrentPosition = () => {
-        function handleSuccess(position: GeolocationPosition) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-
-            setCenterLocation({ latitude, longitude });
-            setZoom(DEFAULT_ZOOM);
-        }
-        function handleError(error: GeolocationPositionError) {
-            console.error(error);
-        }
-
-        navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
+    const getCurrentPosition = (
+        geolocationCoordinates: GeolocationCoordinatesType,
+    ) => {
+        setCenterLocation(geolocationCoordinates);
     };
 
     const handleCenterChanged = useCallback(
@@ -140,7 +134,11 @@ export function CurrentLocationSearch({
                         </Tooltip>
                     </S.MapContainer>
 
-                    <S.LocationPointerContainer onClick={getCurrentPosition}>
+                    <S.LocationPointerContainer
+                        onClick={() =>
+                            getCurrentPosition(geolocationCoordinates)
+                        }
+                    >
                         <LocationPointerIcon width={20} height={20} />
                     </S.LocationPointerContainer>
 
