@@ -46,7 +46,7 @@ export const RestAreaInformation = ({
         <S.Container>
             <FlexBox row gap={20}>
                 {isCenter && <CenterRestAreaBanner />}
-                <FlexBox gap={[16, 0]} flexOption={{ flexGrow: 1 }}>
+                <FlexBox gap={[8, 0]} flexOption={{ flexGrow: 1 }}>
                     <Text typography="headingBold18">{`${restAreaName} 휴게소`}</Text>
                     <S.DetailSection>
                         <Text

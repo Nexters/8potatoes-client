@@ -13,6 +13,20 @@ export const Container = styled.div`
 
     background-color: rgba(255, 241, 231, 0.7);
     border-radius: 20px;
+
+    &:not(:last-child) {
+        position: relative;
+    
+        &::after {
+            z-index: 1;
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 20px;
+            width: calc(100% - 40px);
+            border-bottom: 4px dashed ${theme.color.main[30]};
+        }
+    }
 `;
 
 export const TopSection = styled.div`
@@ -24,9 +38,8 @@ export const BottomSection = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 20px;
+    padding: 12px;
     gap: 0 8px;
-
 
     background-color: ${theme.color.wht[100]};
     border-radius: 12px;
@@ -54,7 +67,7 @@ export const NaverRating = styled.div`
     & > svg {
         margin: auto 0;
     }
-`
+`;
 
 export const OpenStateBadge = styled.div<{ isRestAreaOpen: boolean }>(
     ({ isRestAreaOpen }) => {
@@ -87,9 +100,9 @@ export const Divider = styled.div`
     width: 1px;
     height: 12px;
     margin: 0 8px;
-    
+
     background-color: ${theme.color.blk[30]};
-`
+`;
 
 // CenterBanner Style
 export const BannerContainer = styled.div`
@@ -98,4 +111,4 @@ export const BannerContainer = styled.div`
 
     background-color: rgba(255, 214, 184, 50%);
     color: ${theme.color.main[100]};
-`
+`;
