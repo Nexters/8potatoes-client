@@ -4,11 +4,13 @@ import { renderToString } from 'react-dom/server';
 import { Marker } from 'react-naver-maps';
 
 import MarkerFlagIcon from '#/assets/icons/marker-flag.svg?react';
+import { FlexBox } from '#/components/flex-box';
 import { theme } from '#/styles/theme';
 
 import * as S from './RestAreaBubbleMarker.style';
 
-export interface RestAreaBubbleMarkerImplProps {
+export interface RestAreaBubbleMarkerImplProps
+    extends ComponentProps<typeof FlexBox> {
     isCenter?: boolean;
     restAreaName: string;
     direction: string;
@@ -18,9 +20,10 @@ export const RestAreaBubbleMarkerImpl = ({
     isCenter,
     restAreaName,
     direction,
+    ...restProps
 }: RestAreaBubbleMarkerImplProps) => {
     return (
-        <S.Container isCenter={isCenter}>
+        <S.Container {...restProps} row gap={4} isCenter={isCenter}>
             {isCenter ? <MarkerFlagIcon color={theme.color.wht[100]} /> : null}
             <S.RestAreaName>{`${restAreaName}(${direction})휴게소`}</S.RestAreaName>
         </S.Container>

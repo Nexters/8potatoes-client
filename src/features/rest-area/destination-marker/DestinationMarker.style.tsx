@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
-    display: flex;
+import { FlexBox } from '#/components/flex-box';
+
+export const Container = styled(FlexBox)`
     flex-direction: column;
     align-items: center;
-    gap: 4px 0;
 
     width: fit-content;
 `

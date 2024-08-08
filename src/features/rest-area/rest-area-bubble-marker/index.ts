@@ -1,1 +1,1 @@
-export { RestAreaBubbleMarker } from './RestAreaBubbleMarker';
+export { RestAreaBubbleMarker, RestAreaBubbleMarkerImpl } from './RestAreaBubbleMarker';
