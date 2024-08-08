@@ -80,7 +80,11 @@ const RestAreaDrawerHeightStepList: HeightStepType[] = [
 
 export const RestAreaListDrawer = () => {
     return (
-        <UnControlledDrawer initialOpen={true} isOverlayExist={false}>
+        <UnControlledDrawer
+            initialOpen={true}
+            isOverlayExist={false}
+            isCloseWhenSlideDown={false}
+        >
             <UnControlledDrawer.Content
                 heightStepList={RestAreaDrawerHeightStepList}
             >
