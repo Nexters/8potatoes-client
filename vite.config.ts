@@ -15,6 +15,13 @@ export default defineConfig({
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, ''),
             },
+            '/naver-map': {
+                target: 'https://naveropenapi.apigw.ntruss.com',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/naver-map/, ''),
+                secure: false,
+                ws: true,
+            },
         },
     },
 });
