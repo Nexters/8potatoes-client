@@ -48,7 +48,7 @@ const error = {
     100: '#FF3B30',
 } as const;
 
-const naver = '#34C11D';
+const naver = '#34C11D' as const;
 
 export const COLOR = {
     blk,
