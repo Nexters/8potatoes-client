@@ -18,7 +18,7 @@ export const ContentWrapper = styled(motion.div)`
     max-width: 375px;
     max-height: 90dvh;
 
-    padding: 0 16px 16px 16px;
+    padding: 0 16px;
 
     transform: translate(-50%, -50%);
     transition:
@@ -35,11 +35,6 @@ export const ContentWrapper = styled(motion.div)`
 
     overflow: hidden;
 `;
-
-export const Content = styled.div`
-    flex: 1;
-    overflow: auto;
-`
 
 export const HolderWrapper = styled(motion.div)`
     width: 375px;

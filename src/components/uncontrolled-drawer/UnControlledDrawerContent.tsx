@@ -11,7 +11,7 @@ import {
 import { useUnControlledDrawerContext } from './UnControlledDrawer';
 import * as S from './UnControlledDrawer.style';
 
-type HeightStepType = {
+export type HeightStepType = {
     unit: 'px' | 'dvh' | 'vh' | '%';
     value: number;
 };
@@ -27,8 +27,13 @@ export const UnControlledDrawerContent = ({
     threshold = 20,
     ...restProps
 }: UnControlledDrawerContentProps) => {
-    const { isDrawerOpen, currentHeightIndex, closeDrawer } =
-        useUnControlledDrawerContext();
+    const {
+        isDrawerOpen,
+        isOverlayExist,
+        isCloseWhenSlideDown,
+        currentHeightIndex,
+        closeDrawer,
+    } = useUnControlledDrawerContext();
 
     const startY = useMotionValue(0);
 
@@ -61,7 +66,13 @@ export const UnControlledDrawerContent = ({
         if (deltaY < -threshold && updatedHeightIndex < stepAmount - 1) {
             updatedHeightIndex += 1;
         } else if (deltaY > threshold && updatedHeightIndex > 0) {
-            updatedHeightIndex > 0 ? (updatedHeightIndex -= 1) : closeDrawer();
+            updatedHeightIndex -= 1;
+        } else if (
+            deltaY > threshold &&
+            updatedHeightIndex === 0 &&
+            isCloseWhenSlideDown
+        ) {
+            closeDrawer();
         }
 
         currentHeightIndex.set(updatedHeightIndex);
@@ -71,15 +82,17 @@ export const UnControlledDrawerContent = ({
         <AnimatePresence>
             {isDrawerOpen && (
                 <>
-                    <Dialog.Overlay forceMount asChild>
-                        <S.Overlay
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            onClick={closeDrawer}
-                        />
-                    </Dialog.Overlay>
+                    {isOverlayExist ? (
+                        <Dialog.Overlay forceMount asChild>
+                            <S.Overlay
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                onClick={closeDrawer}
+                            />
+                        </Dialog.Overlay>
+                    ) : null}
                     <Dialog.Content
                         forceMount
                         aria-describedby={undefined}
@@ -92,7 +105,7 @@ export const UnControlledDrawerContent = ({
                             animate={{ opacity: 1, y: '0%' }}
                             exit={{ opacity: 0, y: '100%' }}
                             style={{
-                                height,
+                                maxHeight: height,
                                 top,
                             }}
                             layout
@@ -102,7 +115,7 @@ export const UnControlledDrawerContent = ({
                             <S.HolderWrapper>
                                 <S.Holder />
                             </S.HolderWrapper>
-                            <S.Content>{children}</S.Content>
+                            {children}
                         </S.ContentWrapper>
                     </Dialog.Content>
                 </>

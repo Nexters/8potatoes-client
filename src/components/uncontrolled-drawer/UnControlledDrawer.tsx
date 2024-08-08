@@ -10,6 +10,8 @@ import { UnControlledDrawerContent } from './UnControlledDrawerContent';
 import { UnControlledDrawerTrigger } from './UnControlledDrawerTrigger';
 
 interface UnControlledDrawerContextType {
+    isOverlayExist: boolean;
+    isCloseWhenSlideDown: boolean;
     isDrawerOpen: boolean;
     currentHeightIndex: MotionValue<number>;
     openDrawer: () => void;
@@ -21,11 +23,17 @@ const DrawerContext = createContext<UnControlledDrawerContextType | null>(null);
 interface UnControlledDrawerRootProps
     extends Omit<ComponentProps<typeof Dialog.Root>, 'open' | 'onOpenChange'> {
     initialOpen?: boolean;
+    /** Drawer 의 Dim 영역을 보이게 할지 설정하는 변수 isOverlayExist */
+    isOverlayExist?: boolean;
+    /** Drawer 를 맨 아래로 내렸을 경우 컴포넌트를 Unmount 할지를 정하는 변수 isCloseWhenSlideDown */
+    isCloseWhenSlideDown?: boolean;
 }
 
 export const UnControlledDrawerRoot = ({
     children,
     initialOpen = false,
+    isOverlayExist = true,
+    isCloseWhenSlideDown = true,
     ...restProps
 }: UnControlledDrawerRootProps) => {
     const {
@@ -43,11 +51,20 @@ export const UnControlledDrawerRoot = ({
     const value = useMemo(
         () => ({
             isDrawerOpen,
+            isOverlayExist,
+            isCloseWhenSlideDown,
             currentHeightIndex,
             openDrawer,
             closeDrawer,
         }),
-        [isDrawerOpen, currentHeightIndex, openDrawer, closeDrawer],
+        [
+            isDrawerOpen,
+            isOverlayExist,
+            isCloseWhenSlideDown,
+            currentHeightIndex,
+            openDrawer,
+            closeDrawer,
+        ],
     );
 
     return (
