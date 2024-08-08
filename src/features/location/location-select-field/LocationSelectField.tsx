@@ -1,3 +1,6 @@
+import { Text } from '#/components/text';
+import { theme } from '#/styles/theme';
+
 import * as S from './LocationSelectField.style';
 
 interface LocationSelectFieldProps {
@@ -17,18 +20,19 @@ export function LocationSelectField({
 }: LocationSelectFieldProps) {
     return (
         <S.Container onClick={handleClick}>
-            <S.InputLabel>
-                {label}
-                <S.InputRequired> *</S.InputRequired>
-            </S.InputLabel>
+            <Text typography="bodyMedium14" color={theme.color.blk[30]}>
+                {label} <span style={{ color: theme.color.error[100] }}>*</span>
+            </Text>
 
-            <S.SelectField>
-                {isSelected ? (
-                    <S.SelectedLocation>{locationName}</S.SelectedLocation>
-                ) : (
-                    <S.UnSelectedLocation>{placeholder}</S.UnSelectedLocation>
-                )}
-            </S.SelectField>
+            {isSelected ? (
+                <Text typography="bodySemiBold18" color={theme.color.blk[100]}>
+                    {locationName}
+                </Text>
+            ) : (
+                <Text typography="bodySemiBold18" color={theme.color.blk[40]}>
+                    {placeholder}
+                </Text>
+            )}
         </S.Container>
     );
 }

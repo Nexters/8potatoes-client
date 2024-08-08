@@ -7,6 +7,7 @@ import { BottomSection } from '#/components/bottom-section';
 import { Button } from '#/components/button';
 import { Drawer } from '#/components/drawer';
 import { Header } from '#/components/header';
+import { Text } from '#/components/text';
 import { SEARCH_OPTION } from '#/constants/location';
 import { LocationSelectField } from '#/features/location/location-select-field';
 import { Search } from '#/features/location/search';
@@ -65,11 +66,14 @@ export function Route({
                 <img src="" style={{ width: '100%', height: '327px' }} />
 
                 <S.Contents>
-                    <S.Title>
+                    <Text
+                        typography="headingBold24"
+                        color={theme.color.blk[100]}
+                    >
                         쥬쥬와 함께
                         <br />
                         휴게소 맛집을 찾아보세요!
-                    </S.Title>
+                    </Text>
 
                     <S.RouteContainer>
                         <S.RouteIconContainer>

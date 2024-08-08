@@ -11,13 +11,6 @@ export const Contents = styled.div`
     margin-top: 40px;
 `;
 
-export const Title = styled.p`
-    font-size: 24px;
-    font-weight: 700;
-
-    color: ${({ theme }) => theme.color.blk[100]};
-`;
-
 export const Route = styled.div`
     flex: 1;
 `;

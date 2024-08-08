@@ -9,9 +9,11 @@ import {
 
 import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
 import { Header } from '#/components/header';
+import { Text } from '#/components/text';
 import { useGeolocationPosition } from '#/hooks/useGeolocationPosition';
 import useIntersectionObserver from '#/hooks/useIntersectionObserver';
 import { useGetLocationSearch } from '#/query-hooks/location/query';
+import { theme } from '#/styles/theme';
 import {
     GeolocationCoordinatesType,
     LocationInformationType,
@@ -105,9 +107,12 @@ export function Search({
                         <S.LocationPointerContainer>
                             <LocationPointerIcon width={12} height={12} />
                         </S.LocationPointerContainer>
-                        <S.CurrentLocationText>
+                        <Text
+                            typography="bodySemiBold14"
+                            color={theme.color.blk[40]}
+                        >
                             현재 위치로 주소 찾기
-                        </S.CurrentLocationText>
+                        </Text>
                     </S.CurrentLocation>
 
                     {isSuccess && <S.DashedBorder />}

@@ -1,5 +1,9 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
+import { theme } from '#/styles/theme';
+
+import { Text } from '../text';
+
 import * as S from './Tooltip.style';
 
 export interface TooltipProps {
@@ -48,7 +52,9 @@ export function Tooltip({ content, children }: TooltipProps) {
                 left={`${position.left}px`}
                 top={`${position.top}px`}
             >
-                {content}
+                <Text typography="bodyBold16" color={theme.color.wht[100]}>
+                    {content}
+                </Text>
                 <S.Arrow />
             </S.TooltipContents>
         </S.Container>

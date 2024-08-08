@@ -37,12 +37,6 @@ export const CurrentLocation = styled.button`
     cursor: pointer;
 `;
 
-export const CurrentLocationText = styled.p`
-    font-size: 14px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.color.blk[60]};
-`;
-
 export const ContentsContainer = styled.div`
     width: 100%;
     height: 100%;

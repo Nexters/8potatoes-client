@@ -2,6 +2,9 @@ import { CSSProperties } from 'react';
 
 import ArrowLeftIcon from '#/assets/icons/arrow-left.svg?react';
 import CloseIcon from '#/assets/icons/close.svg?react';
+import { theme } from '#/styles/theme';
+
+import { Text } from '../text';
 
 import * as S from './Header.style';
 
@@ -29,7 +32,9 @@ export function Header({
                     <ArrowLeftIcon />
                 </S.BackSpace>
             )}
-            <S.Title>{title}</S.Title>
+            <Text typography="headingBold18" color={theme.color.blk[100]}>
+                {title}
+            </Text>
             {isVisibleClose && (
                 <S.Close onClick={onClickClose}>
                     <CloseIcon />

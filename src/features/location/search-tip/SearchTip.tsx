@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react';
 
 import LocationIcon from '#/assets/icons/location.svg?react';
+import { Text } from '#/components/text';
 import { theme } from '#/styles/theme';
 
 import * as S from './SearchTip.style';
@@ -15,7 +16,9 @@ export function SearchTip({ children }: PropsWithChildren) {
                     height={40}
                 />
             </S.IconBackground>
-            <S.Tip>{children}</S.Tip>
+            <S.Tip typography="bodyMedium16" color={theme.color.blk[40]}>
+                {children}
+            </S.Tip>
         </S.Container>
     );
 }

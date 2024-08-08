@@ -7,9 +7,11 @@ import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
 import { BottomSection } from '#/components/bottom-section';
 import { Button } from '#/components/button';
 import { Header } from '#/components/header';
+import { Text } from '#/components/text';
 import { Tooltip } from '#/components/tooltip';
 import { useGeolocationPosition } from '#/hooks/useGeolocationPosition';
 import { useGetReverseGeocoding } from '#/query-hooks/location/query';
+import { theme } from '#/styles/theme';
 import {
     GeolocationCoordinatesType,
     GeolocationPointType,
@@ -144,9 +146,12 @@ export function CurrentLocationSearch({
 
                     <S.BottomContainer>
                         {data && (
-                            <S.CurrentAddress>
+                            <Text
+                                typography="headingBold18"
+                                color={theme.color.blk[100]}
+                            >
                                 {centerLocationName}
-                            </S.CurrentAddress>
+                            </Text>
                         )}
                         <BottomSection style={{ padding: '28px 20px' }}>
                             <Button

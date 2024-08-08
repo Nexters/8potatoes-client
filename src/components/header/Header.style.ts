@@ -16,11 +16,6 @@ export const Container = styled.header`
     align-items: center;
 `;
 
-export const Title = styled.p`
-    font-size: 18px;
-    font-weight: 700;
-`;
-
 export const BackSpace = styled.div`
     position: absolute;
     left: 12px;

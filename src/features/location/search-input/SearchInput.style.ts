@@ -15,13 +15,14 @@ export const Container = styled.div<{
     background-color: ${({ isActive, theme }) =>
         isActive ? theme.color.wht[100] : theme.color.blk[5]};
     border: ${({ isValid, isInvalid, theme }) =>
-        `1px solid ${isInvalid ? theme.color.error[100] : isValid ? theme.color.select[100] : 'transparent'}`};
+        `1px solid ${isInvalid ? theme.color.error[100] : isValid ? theme.color.select[100] : theme.color.blk[20]}`};
     border-radius: 16px;
 `;
 
 export const Input = styled.input`
     flex: 1;
     font-size: 16px;
+    font-weight: 500;
 
     color: ${({ theme }) => theme.color.blk[100]};
 

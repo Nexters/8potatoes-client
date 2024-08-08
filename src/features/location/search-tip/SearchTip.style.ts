@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { Text } from '#/components/text';
+
 export const Container = styled.span`
     height: 100%;
     display: flex;
@@ -14,10 +16,6 @@ export const IconBackground = styled.div`
     padding: 10px;
 `;
 
-export const Tip = styled.div`
-    font-weight: 500;
-    font-size: 16px;
-    color: ${({ theme }) => theme.color.blk[40]};
-
+export const Tip = styled(Text)`
     margin-top: 20px;
 `;

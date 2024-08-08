@@ -1,4 +1,5 @@
 import LocationIcon from '#/assets/icons/location.svg?react';
+import { Text } from '#/components/text';
 import { theme } from '#/styles/theme';
 import {
     LocationInformationType,
@@ -80,27 +81,43 @@ export function SearchBox({
         <S.Container onClick={() => handleSelectLocation(location)}>
             <LocationIcon width={24} height={24} fill={theme.color.main[30]} />
             <S.Contents>
-                <S.LocationName>
+                <Text typography="bodyBold16" color={theme.color.blk[100]}>
                     {getHighlightedText(location.name ?? '', searchInput)}
-                </S.LocationName>
+                </Text>
                 <S.Addresses>
                     {roadAddress && (
                         <S.AddressContainer>
-                            <S.Tag>도로명</S.Tag>
-                            <S.Address>
+                            <S.Tag
+                                typography="bodyMedium14"
+                                color={theme.color.blk[60]}
+                            >
+                                도로명
+                            </S.Tag>
+                            <Text
+                                typography="bodyMedium14"
+                                color={theme.color.blk[60]}
+                            >
                                 {getHighlightedText(roadAddress, searchInput)}
-                            </S.Address>
+                            </Text>
                         </S.AddressContainer>
                     )}
 
                     <S.AddressContainer>
-                        <S.Tag>지번</S.Tag>
-                        <S.Address>
+                        <S.Tag
+                            typography="bodyMedium14"
+                            color={theme.color.blk[60]}
+                        >
+                            지번
+                        </S.Tag>
+                        <Text
+                            typography="bodyMedium14"
+                            color={theme.color.blk[60]}
+                        >
                             {getHighlightedText(
                                 getLotNumberAddress(location),
                                 searchInput,
                             )}
-                        </S.Address>
+                        </Text>
                     </S.AddressContainer>
                 </S.Addresses>
             </S.Contents>
