@@ -21,7 +21,7 @@ interface RestAreaInformationProps {
 }
 
 const CenterRestAreaBanner = () => (
-    <S.BannerContainer>
+    <S.BannerContainer row gap={8}>
         <MarkerFlagIcon color={theme.color.main[100]} width={16} height={16} />
         <Text typography="smallTextBold12" color={theme.color.main[100]}>
             중간 지점에 위치한 최고의 휴식 장소
@@ -48,13 +48,16 @@ export const RestAreaInformation = ({
                 {isCenter && <CenterRestAreaBanner />}
                 <FlexBox gap={[8, 0]} flexOption={{ flexGrow: 1 }}>
                     <Text typography="headingBold18">{`${restAreaName} 휴게소`}</Text>
-                    <S.DetailSection>
+                    <FlexBox row flexOption={{ alignItems: 'center' }}>
                         <Text
                             color={theme.color.blk[60]}
                             typography="smallTextMedium12"
                         >{`${direction} 방향`}</Text>
                         <S.Divider />
-                        <S.NaverRating>
+                        <S.NaverRating
+                            row
+                            gap={2}
+                        >
                             <Text typography="smallTextBold12">
                                 네이버 평점
                             </Text>
@@ -63,14 +66,17 @@ export const RestAreaInformation = ({
                                 {naverRating}
                             </Text>
                         </S.NaverRating>
-                    </S.DetailSection>
+                    </FlexBox>
                 </FlexBox>
                 <S.OpenStateBadge isRestAreaOpen={isRestAreaOpen}>
                     <FolkSpoonIcon width={16} height={16} />
                     <Text typography="smallTextBold12">{`식당 영업${isRestAreaOpen ? '중' : '끝'}`}</Text>
                 </S.OpenStateBadge>
             </FlexBox>
-            <S.BottomSection>
+            <S.BottomSection
+                row
+                gap={8}
+            >
                 <FlexBox row gap={4} flexOption={{ alignItems: 'center' }}>
                     <Text typography="bodyMedium14" color={theme.color.blk[40]}>
                         휘발유

@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 
 import { Text } from '#/components/text';
-import { theme } from '#/styles/theme';
 import { FlexBox } from '#/components/flex-box';
 
 export const Container = styled(FlexBox)`
@@ -9,10 +8,7 @@ export const Container = styled(FlexBox)`
     height: inherit;
 `
 
-export const Header = styled.div`
-    display: flex;
-    flex-direction: column;
-
+export const Header = styled(FlexBox)`
     text-align: center;
 `;
 

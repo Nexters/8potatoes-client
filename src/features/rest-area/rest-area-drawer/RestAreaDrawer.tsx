@@ -110,11 +110,11 @@ export const RestAreaListDrawer = () => {
                         </Text>
                     </S.Header>
                     <S.RestAreaList>
-                        <S.RestAreaListInner>
+                        <FlexBox>
                             {mockUpRestAreaList.map((restArea) => (
                                 <RestAreaInformation {...restArea} />
                             ))}
-                        </S.RestAreaListInner>
+                        </FlexBox>
                     </S.RestAreaList>
                 </S.Container>
             </UnControlledDrawer.Content>

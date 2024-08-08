@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { theme } from '#/styles/theme';
+import { FlexBox } from '#/components/flex-box';
 
 export const Container = styled.div`
     width: 100%;
@@ -29,39 +30,19 @@ export const Container = styled.div`
     }
 `;
 
-export const TopSection = styled.div`
-    display: flex;
-    gap: 0 20px;
-`;
-
-export const BottomSection = styled.div`
-    display: flex;
+export const BottomSection = styled(FlexBox)`
     align-items: center;
     justify-content: center;
     padding: 12px;
-    gap: 0 8px;
 
     background-color: ${theme.color.wht[100]};
     border-radius: 12px;
 `;
 
-export const RestAreaSection = styled.div`
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    gap: 16px 0;
-`;
-
-export const DetailSection = styled.div`
-    display: flex;
-    align-items: center;
-`;
-
-export const NaverRating = styled.div`
-    display: flex;
+export const NaverRating = styled(FlexBox)`
     justify-content: center;
     align-items: center;
-    gap: 0 2px;
+
     color: ${theme.color.naver};
 
     & > svg {
@@ -105,10 +86,7 @@ export const Divider = styled.div`
 `;
 
 // CenterBanner Style
-export const BannerContainer = styled.div`
-    display: flex;
-    gap: 0 8px;
-
+export const BannerContainer = styled(FlexBox)`
     background-color: rgba(255, 214, 184, 50%);
     color: ${theme.color.main[100]};
 `;
