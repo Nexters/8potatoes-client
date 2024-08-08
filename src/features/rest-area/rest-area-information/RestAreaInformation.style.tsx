@@ -22,7 +22,11 @@ export const TopSection = styled.div`
 
 export const BottomSection = styled.div`
     display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 12px 20px;
+    gap: 0 8px;
+
 
     background-color: ${theme.color.wht[100]};
     border-radius: 12px;
@@ -85,5 +89,13 @@ export const Divider = styled.div`
     margin: 0 8px;
     
     background-color: ${theme.color.blk[30]};
+`
 
+// CenterBanner Style
+export const BannerContainer = styled.div`
+    display: flex;
+    gap: 0 8px;
+
+    background-color: rgba(255, 214, 184, 50%);
+    color: ${theme.color.main[100]};
 `
