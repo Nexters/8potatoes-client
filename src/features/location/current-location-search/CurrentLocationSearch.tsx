@@ -4,7 +4,6 @@ import { NaverMap, useNavermaps } from 'react-naver-maps';
 
 import CurrentPositionIcon from '#/assets/icons/current-position.svg?react';
 import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
-import { BottomSection } from '#/components/bottom-section';
 import { Button } from '#/components/button';
 import { Header } from '#/components/header';
 import { Text } from '#/components/text';
@@ -153,7 +152,7 @@ export function CurrentLocationSearch({
                                 {centerLocationName}
                             </Text>
                         )}
-                        <BottomSection style={{ padding: '28px 20px' }}>
+                        <S.CTABottomSection>
                             <Button
                                 isValid
                                 onClick={() =>
@@ -162,7 +161,7 @@ export function CurrentLocationSearch({
                             >
                                 이 위치로 설정하기
                             </Button>
-                        </BottomSection>
+                        </S.CTABottomSection>
                     </S.BottomContainer>
                 </>
             )}

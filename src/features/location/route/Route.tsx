@@ -3,14 +3,12 @@ import { Dispatch } from 'react';
 import ArrowSwitchHorizontalIcon from '#/assets/icons/arrow-switch-horizontal.svg?react';
 import LocationIcon from '#/assets/icons/location.svg?react';
 import OriginIcon from '#/assets/icons/origin.svg?react';
-import { BottomSection } from '#/components/bottom-section';
 import { Button } from '#/components/button';
 import { Drawer } from '#/components/drawer';
 import { Header } from '#/components/header';
 import { Text } from '#/components/text';
 import { SEARCH_OPTION } from '#/constants/location';
 import { LocationSelectField } from '#/features/location/location-select-field';
-import { Search } from '#/features/location/search';
 import { theme } from '#/styles/theme';
 import { SelectedLocationType } from '#/types/location';
 
@@ -138,14 +136,14 @@ export function Route({
                         </button>
                     </S.RouteContainer>
 
-                    <BottomSection style={{ padding: '28px 20px' }}>
+                    <S.CTABottomSection>
                         <Button
                             isValid={isSelectEnd}
                             onClick={handleClickSearch}
                         >
                             휴게소 찾기
                         </Button>
-                    </BottomSection>
+                    </S.CTABottomSection>
                 </S.Contents>
             </S.Container>
         </>

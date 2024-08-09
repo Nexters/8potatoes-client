@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import { Container } from 'react-naver-maps';
 
+import { BottomSection } from '#/components/bottom-section';
+
 export const MapContainer = styled(Container)`
     width: 100%;
     height: 100dvh;
@@ -20,6 +22,10 @@ export const BottomContainer = styled.div`
     padding: 28px 20px;
     background-color: ${({ theme }) => theme.color.wht[100]};
     border-radius: 20px 20px 0 0;
+`;
+
+export const CTABottomSection = styled(BottomSection)`
+    padding: 28px 20px;
 `;
 
 export const LocationPointerContainer = styled.div`

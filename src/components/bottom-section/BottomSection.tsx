@@ -1,11 +1,9 @@
-import { CSSProperties, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 import * as S from './BottomSection.style';
 
-interface BottomSectionProps extends PropsWithChildren {
-    style?: CSSProperties;
-}
+export interface BottomSectionProps extends PropsWithChildren {}
 
-export function BottomSection({ children, style }: BottomSectionProps) {
-    return <S.Container style={style}>{children}</S.Container>;
+export function BottomSection({ children }: BottomSectionProps) {
+    return <S.Container>{children}</S.Container>;
 }

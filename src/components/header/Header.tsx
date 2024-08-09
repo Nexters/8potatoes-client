@@ -8,13 +8,12 @@ import { Text } from '../text';
 
 import * as S from './Header.style';
 
-interface HeaderProps {
+export interface HeaderProps {
     title: string;
     isVisibleBackspace?: boolean;
     onClickBackspace?: () => void;
     isVisibleClose?: boolean;
     onClickClose?: () => void;
-    style?: CSSProperties;
 }
 
 export function Header({
@@ -23,10 +22,9 @@ export function Header({
     isVisibleClose = false,
     onClickClose,
     title,
-    style,
 }: HeaderProps) {
     return (
-        <S.Container style={style}>
+        <S.Container>
             {isVisibleBackspace && (
                 <S.BackSpace onClick={onClickBackspace}>
                     <ArrowLeftIcon />

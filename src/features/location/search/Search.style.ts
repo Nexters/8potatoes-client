@@ -1,6 +1,11 @@
 import styled from '@emotion/styled';
 
 import dashedLine from '#/assets/icons/dashed-line.svg';
+import { Header } from '#/components/header';
+
+export const SearchHeader = styled(Header)`
+    width: calc(100% - 16px);
+`;
 
 export const SearchList = styled.ul`
     width: 100%;

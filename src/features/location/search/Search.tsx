@@ -1,11 +1,4 @@
-import {
-    ChangeEvent,
-    Dispatch,
-    useCallback,
-    useEffect,
-    useRef,
-    useState,
-} from 'react';
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
 import { Header } from '#/components/header';
@@ -15,7 +8,6 @@ import useIntersectionObserver from '#/hooks/useIntersectionObserver';
 import { useGetLocationSearch } from '#/query-hooks/location/query';
 import { theme } from '#/styles/theme';
 import {
-    GeolocationCoordinatesType,
     LocationInformationType,
     SelectedLocationType,
 } from '#/types/location';
@@ -83,11 +75,10 @@ export function Search({
 
     return (
         <>
-            <Header
+            <S.SearchHeader
                 title="위치 검색"
                 isVisibleClose
                 onClickClose={onClose}
-                style={{ width: 'calc(100% - 16px)' }}
             />
 
             <S.ContentsContainer>

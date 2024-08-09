@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import dottedLine from '#/assets/icons/dotted-line.svg';
+import { BottomSection } from '#/components/bottom-section';
 
 export const Container = styled.div`
     padding-top: 64px;
@@ -27,6 +28,10 @@ export const RouteContainer = styled.div`
     gap: 20px;
 
     margin-top: 64px;
+`;
+
+export const CTABottomSection = styled(BottomSection)`
+    padding: 28px 20px;
 `;
 
 export const RouteIconContainer = styled.div`
