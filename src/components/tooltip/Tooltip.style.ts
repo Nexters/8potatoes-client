@@ -4,18 +4,34 @@ import styled from '@emotion/styled';
 import { Z_INDEX } from '#/constants/z-index';
 import { theme } from '#/styles/theme';
 
-export const Arrow = styled.div`
-    position: absolute;
-    left: 50%;
-    bottom: -10px;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
+export const Arrow = styled.div<{ direction: 'top' | 'bottom' }>(
+    ({ direction }) => {
+        const directionTop = {
+            'border-top': `12px solid ${theme.color.main[100]}`,
+            bottom: '-10px',
+        };
+        const directionBottom = {
+            'border-bottom': `12px solid ${theme.color.main[100]}`,
+            top: '-10px',
+        };
 
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-top: 12px solid ${theme.color.main[100]};
-`;
+        const arrowOption =
+            direction === 'top' ? directionTop : directionBottom;
+
+        return css`
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+
+            ${arrowOption}
+        `;
+    },
+);
 
 export const Container = styled.div`
     z-index: ${Z_INDEX.TOOLTIP};
