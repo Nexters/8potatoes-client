@@ -1,6 +1,7 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { getLocationSearchData, getReverseGeocodingData } from '#/apis/tmap';
+import { LOCATION_QUERY_KEY } from '#/constants/query-key';
 import {
     GeolocationCoordinatesType,
     LocationInformationType,
@@ -16,7 +17,7 @@ export const useGetLocationSearch = ({
     geolocationCoordinates,
 }: LocationSearchQueryParams) => {
     return useInfiniteQuery({
-        queryKey: ['search', searchKeyword],
+        queryKey: LOCATION_QUERY_KEY.search(searchKeyword),
         queryFn: ({ pageParam = 1 }) =>
             getLocationSearchData({
                 page: pageParam,
@@ -54,7 +55,7 @@ export const useGetReverseGeocoding = ({
     isLoaded,
 }: ReverseGeocodingQueryParams) => {
     return useQuery({
-        queryKey: [centerLocation.latitude, centerLocation.longitude],
+        queryKey: LOCATION_QUERY_KEY.reverseGeocoding(centerLocation),
         queryFn: () =>
             getReverseGeocodingData({
                 lat: centerLocation.latitude,
