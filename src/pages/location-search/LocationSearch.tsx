@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { flushSync } from 'react-dom';
+
 import { Drawer } from '#/components/drawer';
 import { SEARCH_OPTION } from '#/constants/location';
 import { CurrentLocationSearch } from '#/features/location/current-location-search';
@@ -37,10 +39,8 @@ export function LocationSearch() {
     };
 
     const handleOpenCurrentLocation = () => {
-        setIsDrawerOpen(false);
-        setTimeout(() => {
-            setIsCurrentLocationSearch(true);
-        }, 0);
+        flushSync(() => setIsDrawerOpen(false));
+        setIsCurrentLocationSearch(true);
     };
 
     const handleCancelSelect = () => {
