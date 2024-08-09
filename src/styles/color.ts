@@ -9,11 +9,11 @@ const blk = {
     30: '#BCB6AD',
     20: '#D2CEC6',
     10: '#E9E5DE',
-    5: '#F4F0EA'
+    5: '#F4F0EA',
 } as const;
 
 const wht = {
-    100: '#FFFFFF'
+    100: '#FFFFFF',
 } as const;
 
 const main = {
@@ -33,15 +33,15 @@ const sub1 = {
     100: '#96A8FE',
     50: '#CAD3FE',
     30: '#E0E5FF',
-    10: '#F5F6FF'
-}
+    10: '#F5F6FF',
+};
 
 const good = {
     100: '#1E82F1',
 } as const;
 
 const select = {
-    100: '#1E82F1',
+    100: '#29BF6A',
 } as const;
 
 const error = {

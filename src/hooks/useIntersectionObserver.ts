@@ -3,11 +3,15 @@ import { useEffect, useRef } from 'react';
 interface UseIntersectionObserverOptions<T> {
     onIntersect: () => void;
     enabled: boolean;
+    root?: Element | null;
+    rootMargin?: string;
 }
 
 function useIntersectionObserver<T extends HTMLElement>({
     onIntersect,
     enabled,
+    root = document.body,
+    rootMargin = '0px',
 }: UseIntersectionObserverOptions<T>) {
     const targetRef = useRef<T>(null);
 
@@ -23,7 +27,10 @@ function useIntersectionObserver<T extends HTMLElement>({
             }
         };
 
-        const observer = new IntersectionObserver(observerCallback);
+        const observer = new IntersectionObserver(observerCallback, {
+            root,
+            rootMargin,
+        });
         observer.observe(targetRef.current);
 
         return () => {
@@ -31,7 +38,7 @@ function useIntersectionObserver<T extends HTMLElement>({
                 observer.unobserve(targetRef.current);
             }
         };
-    }, [targetRef, onIntersect, enabled]);
+    }, [targetRef, root, onIntersect, enabled]);
 
     return { targetRef };
 }

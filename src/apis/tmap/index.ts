@@ -1,6 +1,11 @@
 import { API } from '../api';
 
-import { LocationSearchParams, LocationSearchResponse } from './type';
+import {
+    LocationSearchParams,
+    LocationSearchResponse,
+    ReverseGeocodingParams,
+    ReverseGeocodingResponse,
+} from './type';
 
 export async function getLocationSearchData({
     page,
@@ -16,5 +21,21 @@ export async function getLocationSearchData({
         centerLat,
         appKey,
     });
+    return data;
+}
+
+export async function getReverseGeocodingData({
+    lat,
+    lon,
+    appKey,
+}: ReverseGeocodingParams): Promise<ReverseGeocodingResponse> {
+    const data = await API.get<ReverseGeocodingParams>(
+        `/tmap/geo/reversegeocoding`,
+        {
+            lat,
+            lon,
+            appKey,
+        },
+    );
     return data;
 }

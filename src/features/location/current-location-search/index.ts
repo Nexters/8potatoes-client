@@ -1,0 +1,1 @@
+export { CurrentLocationSearch } from './CurrentLocationSearch';
