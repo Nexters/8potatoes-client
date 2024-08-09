@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Drawer } from './components/drawer';
+import { RestAreaOtherInformation } from './features/rest-area/rest-area-other-information';
 
 function App() {
     const [count, setCount] = useState(0);
@@ -36,6 +37,8 @@ function App() {
                     </Drawer.Close>
                 </Drawer.Content>
             </Drawer>
+
+            <RestAreaOtherInformation />
         </>
     );
 }
