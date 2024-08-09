@@ -2,8 +2,10 @@ import { PropsWithChildren } from 'react';
 
 import * as S from './BottomSection.style';
 
-export interface BottomSectionProps extends PropsWithChildren {}
+export interface BottomSectionProps extends PropsWithChildren {
+    className?: string;
+}
 
-export function BottomSection({ children }: BottomSectionProps) {
-    return <S.Container>{children}</S.Container>;
+export function BottomSection({ children, className }: BottomSectionProps) {
+    return <S.Container className={className}>{children}</S.Container>;
 }

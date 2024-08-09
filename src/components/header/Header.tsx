@@ -12,6 +12,7 @@ export interface HeaderProps {
     onClickBackspace?: () => void;
     isVisibleClose?: boolean;
     onClickClose?: () => void;
+    className?: string;
 }
 
 export function Header({
@@ -20,9 +21,10 @@ export function Header({
     isVisibleClose = false,
     onClickClose,
     title,
+    className,
 }: HeaderProps) {
     return (
-        <S.Container>
+        <S.Container className={className}>
             {isVisibleBackspace && (
                 <S.BackSpace onClick={onClickBackspace}>
                     <ArrowLeftIcon />
