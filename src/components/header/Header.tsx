@@ -1,5 +1,3 @@
-import { CSSProperties } from 'react';
-
 import ArrowLeftIcon from '#/assets/icons/arrow-left.svg?react';
 import CloseIcon from '#/assets/icons/close.svg?react';
 import { theme } from '#/styles/theme';

@@ -11,7 +11,7 @@ import { Tooltip } from '#/components/tooltip';
 import { useGeolocationPosition } from '#/hooks/useGeolocationPosition';
 import { useGetReverseGeocoding } from '#/query-hooks/location/query';
 import { theme } from '#/styles/theme';
-import {
+import type {
     GeolocationCoordinatesType,
     GeolocationPointType,
     ReverseGeocodingInformationType,

@@ -1,7 +1,6 @@
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
-import { Header } from '#/components/header';
 import { Text } from '#/components/text';
 import { useGeolocationPosition } from '#/hooks/useGeolocationPosition';
 import useIntersectionObserver from '#/hooks/useIntersectionObserver';

@@ -1,7 +1,6 @@
 import { PropsWithChildren } from 'react';
 
 import LocationIcon from '#/assets/icons/location.svg?react';
-import { Text } from '#/components/text';
 import { theme } from '#/styles/theme';
 
 import * as S from './SearchTip.style';

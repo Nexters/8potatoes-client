@@ -1,1 +1,1 @@
-import { SearchTip } from './SearchTip';
+export { SearchTip } from './SearchTip';
