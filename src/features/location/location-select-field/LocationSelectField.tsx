@@ -21,7 +21,14 @@ export function LocationSelectField({
     return (
         <S.Container onClick={handleClick}>
             <Text typography="bodyMedium14" color={theme.color.blk[30]}>
-                {label} <span style={{ color: theme.color.error[100] }}>*</span>
+                {label}{' '}
+                <Text
+                    as="span"
+                    typography="bodyMedium14"
+                    color={theme.color.error[100]}
+                >
+                    *
+                </Text>
             </Text>
 
             {isSelected ? (
