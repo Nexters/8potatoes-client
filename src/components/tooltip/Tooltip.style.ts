@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { Z_INDEX } from '#/constants/z-index';
@@ -22,15 +23,21 @@ export const Container = styled.div`
     pointer-events: none;
 `;
 
-export const TooltipContents = styled.div<{ left: string; top: string }>`
-    position: absolute;
-    left: ${({ left }) => left};
-    top: ${({ top }) => top};
+export const TooltipContents = styled.div<{ left: string; top: string }>(
+    (props) => {
+        const { left, top } = props;
 
-    border-radius: 16px;
-    padding: 8px 20px;
-    background-color: ${theme.color.main[100]};
-    filter: drop-shadow(2px 4px 4px rgba(255, 117, 18, 0.2));
+        return css`
+            position: absolute;
+            left: ${left};
+            top: ${top};
 
-    white-space: nowrap;
-`;
+            border-radius: 16px;
+            padding: 8px 20px;
+            background-color: ${theme.color.main[100]};
+            filter: drop-shadow(2px 4px 4px rgba(255, 117, 18, 0.2));
+
+            white-space: nowrap;
+        `;
+    },
+);

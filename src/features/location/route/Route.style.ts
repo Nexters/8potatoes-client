@@ -1,7 +1,9 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import dottedLine from '#/assets/icons/dotted-line.svg';
 import { BottomSection } from '#/components/bottom-section';
+import { theme } from '#/styles/theme';
 
 export const Container = styled.div`
     padding-top: 64px;
@@ -16,11 +18,14 @@ export const Route = styled.div`
     flex: 1;
 `;
 
-export const BorderLine = styled.div<{ isFill: boolean }>`
-    margin: 20px 0;
-    border-top: ${({ isFill, theme }) =>
-        `1px solid ${isFill ? theme.color.main[30] : theme.color.bg[100]}`};
-`;
+export const BorderLine = styled.div<{ isFill: boolean }>(({ isFill }) => {
+    const borderTop = `1px solid ${isFill ? theme.color.main[30] : theme.color.bg[100]}`;
+
+    return css`
+        margin: 20px 0;
+        border-top: ${borderTop};
+    `;
+});
 
 export const RouteContainer = styled.div`
     display: flex;

@@ -1,14 +1,22 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const Button = styled.button<{ isValid: boolean }>`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 16px;
-    border-radius: 16px;
+import { theme } from '#/styles/theme';
 
-    background-color: ${({ isValid, theme }) =>
-        isValid ? theme.color.main[100] : theme.color.blk[20]};
+export const Button = styled.button<{ isValid: boolean }>(({ isValid }) => {
+    const backgroundColor = isValid
+        ? theme.color.main[100]
+        : theme.color.blk[20];
+    const cursor = isValid ? 'pointer' : 'default';
 
-    cursor: ${({ isValid }) => (isValid ? 'pointer' : 'default')};
-`;
+    return css`
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 16px;
+        border-radius: 16px;
+
+        background-color: ${backgroundColor};
+        cursor: ${cursor};
+    `;
+});
