@@ -38,16 +38,16 @@ export function Route({
     };
 
     const handleSwitchLocation = () => {
-        if (!isSelectEnd) {
+        if (!routeLocation.origin || !routeLocation.destination) {
             return;
         }
 
-        const origin = {
+        const origin: SelectedLocationType = {
             ...routeLocation.origin,
-        } as SelectedLocationType;
-        const destination = {
+        };
+        const destination: SelectedLocationType = {
             ...routeLocation.destination,
-        } as SelectedLocationType;
+        };
 
         setRouteLocation({ origin: destination, destination: origin });
     };
