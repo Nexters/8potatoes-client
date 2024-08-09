@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { Z_INDEX } from '#/constants/z-index';
+import { theme } from '#/styles/theme';
 
 export const Container = styled.header`
     position: absolute;
@@ -9,7 +10,7 @@ export const Container = styled.header`
 
     width: 100%;
     height: 64px;
-    background-color: ${({ theme }) => theme.color.wht[100]};
+    background-color: ${theme.color.wht[100]};
 
     display: flex;
     justify-content: center;

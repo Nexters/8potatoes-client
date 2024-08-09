@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { Text } from '#/components/text';
+import { theme } from '#/styles/theme';
 
 export const Container = styled.span`
     height: 100%;
@@ -12,7 +13,7 @@ export const Container = styled.span`
 
 export const IconBackground = styled.div`
     border-radius: 30px;
-    background-color: ${({ theme }) => theme.color.main[10]};
+    background-color: ${theme.color.main[10]};
     padding: 10px;
 `;
 

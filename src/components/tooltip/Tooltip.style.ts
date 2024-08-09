@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { Z_INDEX } from '#/constants/z-index';
+import { theme } from '#/styles/theme';
 
 export const Arrow = styled.div`
     position: absolute;
@@ -12,7 +13,7 @@ export const Arrow = styled.div`
 
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-top: ${({ theme }) => `12px solid ${theme.color.main[100]}`};
+    border-top: 12px solid ${theme.color.main[100]};
 `;
 
 export const Container = styled.div`
@@ -28,7 +29,7 @@ export const TooltipContents = styled.div<{ left: string; top: string }>`
 
     border-radius: 16px;
     padding: 8px 20px;
-    background-color: ${({ theme }) => theme.color.main[100]};
+    background-color: ${theme.color.main[100]};
     filter: drop-shadow(2px 4px 4px rgba(255, 117, 18, 0.2));
 
     white-space: nowrap;

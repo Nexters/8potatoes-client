@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 import dashedLine from '#/assets/icons/dashed-line.svg';
 import { Header } from '#/components/header';
+import { theme } from '#/styles/theme';
 
 export const SearchHeader = styled(Header)`
     width: calc(100% - 16px);
@@ -27,7 +28,7 @@ export const DashedBorder = styled.div`
 
 export const LocationPointerContainer = styled.div`
     padding: 0 5px 5px;
-    background-color: ${({ theme }) => theme.color.main[10]};
+    background-color: ${theme.color.main[10]};
     border-radius: 30px;
 `;
 
@@ -56,7 +57,7 @@ export const HeaderContents = styled.div`
     flex-direction: column;
     justify-content: center;
 
-    background-color: ${({ theme }) => theme.color.wht[100]};
+    background-color: ${theme.color.wht[100]};
 `;
 
 export const ListContents = styled.div`

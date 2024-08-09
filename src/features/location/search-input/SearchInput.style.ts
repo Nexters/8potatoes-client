@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { theme } from '#/styles/theme';
+
 export const Container = styled.div<{
     isActive: boolean;
     isValid: boolean;
@@ -24,9 +26,9 @@ export const Input = styled.input`
     font-size: 16px;
     font-weight: 500;
 
-    color: ${({ theme }) => theme.color.blk[100]};
+    color: ${theme.color.blk[100]};
 
     ::placeholder {
-        color: ${({ theme }) => theme.color.blk[40]};
+        color: ${theme.color.blk[40]};
     }
 `;

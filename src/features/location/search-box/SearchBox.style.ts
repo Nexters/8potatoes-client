@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { Text } from '#/components/text';
+import { theme } from '#/styles/theme';
 
 export const Container = styled.li`
     display: flex;
@@ -17,13 +18,13 @@ export const Contents = styled.div`
 `;
 
 export const Highlight = styled.span`
-    color: ${({ theme }) => theme.color.main[100]};
+    color: ${theme.color.main[100]};
 `;
 
 export const Tag = styled(Text)`
     padding: 4px 6px;
 
-    border: ${({ theme }) => `1px solid ${theme.color.bg[100]}`};
+    border: 1px solid ${theme.color.bg[100]};
     border-radius: 4px;
 `;
 
