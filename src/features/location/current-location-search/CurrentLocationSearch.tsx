@@ -81,12 +81,9 @@ export function CurrentLocationSearch({
         [],
     );
 
-    const handleZoomChanged = useCallback(
-        debounce((level: number) => {
-            setZoom(level);
-        }),
-        [],
-    );
+    const handleZoomChanged = (level: number) => {
+        setZoom(level);
+    };
 
     const handleSelectLocation = (
         geocoding: ReverseGeocodingInformationType | undefined,
