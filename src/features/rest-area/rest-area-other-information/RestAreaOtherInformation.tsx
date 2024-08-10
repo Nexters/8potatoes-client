@@ -7,52 +7,31 @@ import { theme } from '#/styles/theme';
 
 import * as S from './RestAreaOtherInformation.style';
 
-const BrandData = [
-    {
-        title: 'BBQ',
-        img: 'src',
-    },
-    {
-        title: '파리바게뜨',
-        img: 'src',
-    },
-    {
-        title: '코바코',
-        img: 'src',
-    },
-    {
-        title: '뚜레쥬르',
-        img: 'src',
-    },
-    {
-        title: 'BHC',
-        img: 'src',
-    },
-];
-const AmenitiesData = [
-    {
-        title: '내고장특산물',
-        img: 'src',
-    },
-    {
-        title: '세차장',
-        img: 'src',
-    },
-    {
-        title: '약국',
-        img: 'src',
-    },
-    {
-        title: '수유실',
-        img: 'src',
-    },
-    {
-        title: '화장실',
-        img: 'src',
-    },
-];
+interface RestAreaOtherInformationProps {
+    otherInformation: {
+        workingHours: {
+            title: string;
+            hour: string;
+        }[];
+        brands: {
+            title: string;
+            img: string;
+        }[];
+        amenities: {
+            title: string;
+            img: string;
+        }[];
+        address: string;
+        cellphone: string;
+    };
+}
 
-export function RestAreaOtherInformation() {
+export function RestAreaOtherInformation({
+    otherInformation,
+}: RestAreaOtherInformationProps) {
+    const { workingHours, brands, amenities, address, cellphone } =
+        otherInformation;
+
     const handleCopyToClipboard = async (text: string) => {
         try {
             await navigator.clipboard.writeText(text);
@@ -80,34 +59,26 @@ export function RestAreaOtherInformation() {
                 </S.Title>
 
                 <S.HourList as="ul" gap={12}>
-                    <S.HourListItem>
-                        <Text
-                            typography="bodyBold16"
-                            color={theme.color.blk[60]}
+                    {workingHours.map((working) => (
+                        <FlexBox
+                            row
+                            flexOption={{ justifyContent: 'space-between' }}
+                            key={working.title}
                         >
-                            식당가 (라면/우동)
-                        </Text>
-                        <Text
-                            typography="bodyBold16"
-                            color={theme.color.blk[100]}
-                        >
-                            08:00 - 23:30
-                        </Text>
-                    </S.HourListItem>
-                    <S.HourListItem>
-                        <Text
-                            typography="bodyBold16"
-                            color={theme.color.blk[60]}
-                        >
-                            식당가 (한식)
-                        </Text>
-                        <Text
-                            typography="bodyBold16"
-                            color={theme.color.blk[100]}
-                        >
-                            08:00 - 23:30
-                        </Text>
-                    </S.HourListItem>
+                            <Text
+                                typography="bodyBold16"
+                                color={theme.color.blk[60]}
+                            >
+                                {working.title}
+                            </Text>
+                            <Text
+                                typography="bodyBold16"
+                                color={theme.color.blk[100]}
+                            >
+                                {working.hour}
+                            </Text>
+                        </FlexBox>
+                    ))}
                 </S.HourList>
             </S.Section>
 
@@ -130,7 +101,7 @@ export function RestAreaOtherInformation() {
                 </S.Title>
 
                 <S.FacilityList>
-                    {BrandData.map((brand) => (
+                    {brands.map((brand) => (
                         <S.FacilityListItem as="li" key={brand.title}>
                             <S.Image
                                 alt={`${brand.title} 브랜드 이미지`}
@@ -166,7 +137,7 @@ export function RestAreaOtherInformation() {
                 </S.Title>
 
                 <S.FacilityList>
-                    {AmenitiesData.map((amenity) => (
+                    {amenities.map((amenity) => (
                         <S.FacilityListItem as="li" key={amenity.title}>
                             <S.Image
                                 alt={`${amenity.title} 편의시설 이미지`}
@@ -215,7 +186,7 @@ export function RestAreaOtherInformation() {
                                 typography="bodySemiBold16"
                                 color={theme.color.blk[100]}
                             >
-                                충남 천안시 동남구 쉼1길 42
+                                {address}
                             </Text>
                         </FlexBox>
 
@@ -223,22 +194,21 @@ export function RestAreaOtherInformation() {
                             cursor="pointer"
                             width={24}
                             height={24}
-                            onClick={() =>
-                                handleCopyToClipboard(
-                                    '충남 천안시 동남구 쉼1길 42',
-                                )
-                            }
+                            onClick={() => handleCopyToClipboard(address)}
                         />
                     </S.InformationBox>
-                    <S.InformationBox gap={12}>
-                        <CallIcon width={24} height={24} />
-                        <Text
-                            typography="bodySemiBold16"
-                            color={theme.color.blk[100]}
-                        >
-                            041-441-2480
-                        </Text>
-                    </S.InformationBox>
+
+                    <a href={`tel:${cellphone}`}>
+                        <S.InformationBox gap={12}>
+                            <CallIcon width={24} height={24} />
+                            <Text
+                                typography="bodySemiBold16"
+                                color={theme.color.blk[100]}
+                            >
+                                {cellphone}
+                            </Text>
+                        </S.InformationBox>
+                    </a>
                 </S.OtherInformationContainer>
             </S.Section>
 

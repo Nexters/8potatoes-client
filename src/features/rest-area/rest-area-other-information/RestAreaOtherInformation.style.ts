@@ -25,11 +25,6 @@ export const HourList = styled(FlexBox)`
     width: 100%;
 `;
 
-export const HourListItem = styled(FlexBox)`
-    justify-content: space-between;
-    flex-direction: row;
-`;
-
 export const FacilityList = styled(FlexBox)`
     flex-direction: row;
     overflow: auto;
