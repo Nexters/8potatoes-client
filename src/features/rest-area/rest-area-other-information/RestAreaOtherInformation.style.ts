@@ -57,3 +57,9 @@ export const InformationBox = styled.div`
 export const Description = styled.div`
     padding: 0 20px 60px;
 `;
+
+export const Image = styled.img`
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+`;

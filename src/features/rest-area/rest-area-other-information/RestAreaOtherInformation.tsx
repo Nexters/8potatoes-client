@@ -128,11 +128,9 @@ export function RestAreaOtherInformation() {
                 <S.FacilityList>
                     {BrandData.map((brand) => (
                         <S.FacilityListItem key={brand.title}>
-                            <img
+                            <S.Image
                                 alt={`${brand.title} 브랜드 이미지`}
                                 src={brand.img}
-                                width={80}
-                                height={80}
                             />
                             <Text
                                 typography="bodySemiBold16"
@@ -166,11 +164,9 @@ export function RestAreaOtherInformation() {
                 <S.FacilityList>
                     {AmenitiesData.map((amenity) => (
                         <S.FacilityListItem key={amenity.title}>
-                            <img
+                            <S.Image
                                 alt={`${amenity.title} 편의시설 이미지`}
                                 src={amenity.img}
-                                width={80}
-                                height={80}
                             />
                             <Text
                                 typography="bodySemiBold16"
