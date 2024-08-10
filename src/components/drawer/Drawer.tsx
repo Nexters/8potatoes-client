@@ -15,6 +15,8 @@ import { DrawerContent } from './DrawerContent';
 import { DrawerTrigger } from './DrawerTrigger';
 
 interface DrawerContextType {
+    isOverlayExist: boolean;
+    isCloseWhenSlideDown: boolean;
     isDrawerOpen: boolean;
     currentHeightIndex: MotionValue<number>;
     openDrawer: () => void;
@@ -27,12 +29,18 @@ interface DrawerRootProps
     extends Omit<ComponentProps<typeof Dialog.Root>, 'open' | 'onOpenChange'> {
     isDrawerOpen: boolean;
     setDrawerOpen: Dispatch<SetStateAction<boolean>>;
+    /** Drawer 의 Dim 영역을 보이게 할지 설정하는 변수 isOverlayExist */
+    isOverlayExist?: boolean;
+    /** Drawer 를 맨 아래로 내렸을 경우 컴포넌트를 Unmount 할지를 정하는 변수 isCloseWhenSlideDown */
+    isCloseWhenSlideDown?: boolean;
 }
 
 export const DrawerRoot = ({
     children,
     isDrawerOpen,
     setDrawerOpen,
+    isOverlayExist = true,
+    isCloseWhenSlideDown = true,
     ...restProps
 }: DrawerRootProps) => {
     const currentHeightIndex = useMotionValue(0);
@@ -44,11 +52,19 @@ export const DrawerRoot = ({
     const value = useMemo(
         () => ({
             isDrawerOpen,
+            isOverlayExist,
+            isCloseWhenSlideDown,
             currentHeightIndex,
             openDrawer: () => setDrawerOpen(true),
             closeDrawer: () => setDrawerOpen(false),
         }),
-        [isDrawerOpen, currentHeightIndex, setDrawerOpen],
+        [
+            isDrawerOpen,
+            isOverlayExist,
+            isCloseWhenSlideDown,
+            currentHeightIndex,
+            setDrawerOpen,
+        ],
     );
 
     return (
