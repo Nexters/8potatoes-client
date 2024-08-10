@@ -204,15 +204,31 @@ export function RestAreaOtherInformation() {
                         gap: '12px',
                     }}
                 >
-                    <S.InformationBox>
-                        <Text
-                            typography="bodySemiBold16"
-                            color={theme.color.blk[100]}
-                        >
-                            충남 천안시 동남구 쉼1길 42
-                        </Text>
+                    <S.InformationBox
+                        style={{ justifyContent: 'space-between' }}
+                    >
+                        <div style={{ display: 'flex' }}>
+                            <img src="" width={24} height={24} />
+                            <Text
+                                typography="bodySemiBold16"
+                                color={theme.color.blk[100]}
+                            >
+                                충남 천안시 동남구 쉼1길 42
+                            </Text>
+                        </div>
+                        <img
+                            src=""
+                            width={24}
+                            height={24}
+                            onClick={() =>
+                                handleCopyToClipboard(
+                                    '충남 천안시 동남구 쉼1길 42',
+                                )
+                            }
+                        />
                     </S.InformationBox>
                     <S.InformationBox>
+                        <img src="" width={24} height={24} />
                         <Text
                             typography="bodySemiBold16"
                             color={theme.color.blk[100]}
