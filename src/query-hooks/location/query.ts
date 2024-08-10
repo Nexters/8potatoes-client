@@ -1,6 +1,7 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-import { getLocationSearchData } from '#/apis/tmap';
+import { getLocationSearchData, getReverseGeocodingData } from '#/apis/tmap';
+import { LOCATION_QUERY_KEY } from '#/constants/query-key';
 import {
     GeolocationCoordinatesType,
     LocationInformationType,
@@ -16,7 +17,7 @@ export const useGetLocationSearch = ({
     geolocationCoordinates,
 }: LocationSearchQueryParams) => {
     return useInfiniteQuery({
-        queryKey: ['search', searchKeyword],
+        queryKey: LOCATION_QUERY_KEY.search(searchKeyword),
         queryFn: ({ pageParam = 1 }) =>
             getLocationSearchData({
                 page: pageParam,
@@ -28,15 +29,39 @@ export const useGetLocationSearch = ({
         initialPageParam: 1,
         select: ({ pages }) =>
             pages.reduce<LocationInformationType[]>(
-                (acc, val) => [...acc, ...val.searchPoiInfo.pois.poi],
+                (acc, val) => [...acc, ...(val.searchPoiInfo.pois.poi ?? [])],
                 [],
             ),
         getNextPageParam: ({ searchPoiInfo }) => {
+            if (!searchPoiInfo) {
+                return undefined;
+            }
             const page = parseInt(searchPoiInfo.page);
             const count = parseInt(searchPoiInfo.count);
             const totalCount = parseInt(searchPoiInfo.totalCount);
             return page * count >= totalCount ? undefined : page + 1;
         },
         enabled: !!searchKeyword,
+    });
+};
+
+interface ReverseGeocodingQueryParams {
+    centerLocation: GeolocationCoordinatesType;
+    isLoaded: boolean;
+}
+
+export const useGetReverseGeocoding = ({
+    centerLocation,
+    isLoaded,
+}: ReverseGeocodingQueryParams) => {
+    return useQuery({
+        queryKey: LOCATION_QUERY_KEY.reverseGeocoding(centerLocation),
+        queryFn: () =>
+            getReverseGeocodingData({
+                lat: centerLocation.latitude,
+                lon: centerLocation.longitude,
+                appKey: import.meta.env.VITE_TMAP_APP_KEY,
+            }),
+        enabled: isLoaded,
     });
 };

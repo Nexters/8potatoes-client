@@ -1,5 +1,7 @@
 import { LocationInformationType } from '#/types/location';
 
+import { ReverseGeocodingInformationType } from '../../types/location';
+
 export interface LocationSearchParams {
     page: number;
     searchKeyword: string;
@@ -17,4 +19,14 @@ export interface LocationSearchResponse {
             poi: LocationInformationType[];
         };
     };
+}
+
+export interface ReverseGeocodingParams {
+    lat: number;
+    lon: number;
+    appKey: string;
+}
+
+export interface ReverseGeocodingResponse {
+    addressInfo?: ReverseGeocodingInformationType;
 }
