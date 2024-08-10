@@ -1,3 +1,4 @@
+import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
 import { theme } from '#/styles/theme';
 
@@ -75,7 +76,7 @@ export function RestAreaOtherInformation() {
                     </Text>
                 </S.Title>
 
-                <S.HourList>
+                <S.HourList as="ul" gap={12}>
                     <S.HourListItem>
                         <Text
                             typography="bodyBold16"
@@ -127,7 +128,7 @@ export function RestAreaOtherInformation() {
 
                 <S.FacilityList>
                     {BrandData.map((brand) => (
-                        <S.FacilityListItem key={brand.title}>
+                        <S.FacilityListItem as="li" key={brand.title}>
                             <S.Image
                                 alt={`${brand.title} 브랜드 이미지`}
                                 src={brand.img}
@@ -163,7 +164,7 @@ export function RestAreaOtherInformation() {
 
                 <S.FacilityList>
                     {AmenitiesData.map((amenity) => (
-                        <S.FacilityListItem key={amenity.title}>
+                        <S.FacilityListItem as="li" key={amenity.title}>
                             <S.Image
                                 alt={`${amenity.title} 편의시설 이미지`}
                                 src={amenity.img}
@@ -197,17 +198,11 @@ export function RestAreaOtherInformation() {
                     </Text>
                 </S.Title>
 
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '12px',
-                    }}
-                >
+                <S.OtherInformationContainer>
                     <S.InformationBox
-                        style={{ justifyContent: 'space-between' }}
+                        flexOption={{ justifyContent: 'space-between' }}
                     >
-                        <div style={{ display: 'flex' }}>
+                        <FlexBox row gap={12}>
                             <img src="" width={24} height={24} />
                             <Text
                                 typography="bodySemiBold16"
@@ -215,7 +210,7 @@ export function RestAreaOtherInformation() {
                             >
                                 충남 천안시 동남구 쉼1길 42
                             </Text>
-                        </div>
+                        </FlexBox>
                         <img
                             src=""
                             width={24}
@@ -227,7 +222,7 @@ export function RestAreaOtherInformation() {
                             }
                         />
                     </S.InformationBox>
-                    <S.InformationBox>
+                    <S.InformationBox gap={12}>
                         <img src="" width={24} height={24} />
                         <Text
                             typography="bodySemiBold16"
@@ -236,7 +231,7 @@ export function RestAreaOtherInformation() {
                             041-441-2480
                         </Text>
                     </S.InformationBox>
-                </div>
+                </S.OtherInformationContainer>
             </S.Section>
 
             <S.Description>
