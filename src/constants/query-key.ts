@@ -13,4 +13,10 @@ export const LOCATION_QUERY_KEY = {
         centerLocation.latitude,
         centerLocation.longitude,
     ],
+    destinationPath: (start: string, end: string) => [
+        ...LOCATION_QUERY_KEY.base,
+        'destination-path',
+        start,
+        end,
+    ]
 };

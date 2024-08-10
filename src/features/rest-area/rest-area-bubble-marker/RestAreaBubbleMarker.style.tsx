@@ -11,13 +11,16 @@ export const Container = styled.div(({ isCenter }: ContainerProps) => {
     const backgroundColor = isCenter
         ? theme.color.main[100]
         : theme.color.wht[100];
+    const borderColor = isCenter ? 'transparent' : theme.color.main[100];
     const color = isCenter ? theme.color.wht[100] : theme.color.main[100];
 
     return css`
-        width: fit-content;
+        width: max-content;
         padding: 4px 12px;
         border-radius: 8px;
         background-color: ${backgroundColor};
+        border: 1px solid ${borderColor};
+        box-sizing: border-box;
         color: ${color};
         position: relative;
 
