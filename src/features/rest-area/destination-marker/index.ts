@@ -1,1 +1,1 @@
-export { DestinationMarker } from './DestinationMarker';
+export { DestinationMarker, DestinationMarkerImpl } from './DestinationMarker';

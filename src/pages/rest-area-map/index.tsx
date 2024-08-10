@@ -15,7 +15,6 @@ const RestAreaMapPage = ({ children }: PropsWithChildren<unknown>) => {
 
     return (
         <>
-        <RestAreaBubbleMarker/>
         <NaverMapContainer style={{ height: '100dvh' }}>
             <DestinationIndicator start="서울" end="부산" />
             <NaverMap>
@@ -24,6 +23,11 @@ const RestAreaMapPage = ({ children }: PropsWithChildren<unknown>) => {
                     position={new naverMaps.LatLng(37.3595704, 127.105399)} />
                 <DestinationMarker
                     position={new naverMaps.LatLng(37.4595704, 127.105399)} />
+                <RestAreaBubbleMarker 
+                    position={new naverMaps.LatLng(37.4595704, 127.105399)}
+                    restAreaName="경부고속도로"
+                    direction="서울"
+                />
                 {children}
             </NaverMap>
         </NaverMapContainer></>

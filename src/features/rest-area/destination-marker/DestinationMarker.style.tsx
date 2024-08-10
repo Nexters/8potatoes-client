@@ -1,10 +1,21 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px 0;
+import { theme } from '#/styles/theme';
 
-    width: fit-content;
-`
+import { DestinationMarkerImplProp } from './DestinationMarker';
+
+type ContainerProps = Pick<DestinationMarkerImplProp, 'isStart'>;
+
+export const Container = styled.div(({ isStart }: ContainerProps) => {
+    const color = isStart ? theme.color.error[100] : theme.color.good[100];
+    return css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px 0;
+
+        width: fit-content;
+        color: ${color};
+    `;
+});
