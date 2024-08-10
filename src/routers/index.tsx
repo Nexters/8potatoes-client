@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { ThemeProvider } from '@emotion/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -5,7 +7,7 @@ import { NavermapsProvider } from 'react-naver-maps';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 
 import App from '#/App';
-import LocationSearch from '#/pages/location-search';
+import { LocationSearch } from '#/pages/location-search';
 import RestAreaMapPage from '#/pages/rest-area-map';
 import { MobileView } from '#/pages/templates/mobile-view';
 import { GlobalStyle } from '#/styles/global';
@@ -28,9 +30,11 @@ const InitializedDataProvider = () => (
             >
                 <ReactQueryDevtools />
                 <GlobalStyle />
-                <MobileView>
-                    <Outlet />
-                </MobileView>
+                <Suspense fallback={<div>Loading</div>}>
+                    <MobileView>
+                        <Outlet />
+                    </MobileView>
+                </Suspense>
             </NavermapsProvider>
         </ThemeProvider>
     </QueryClientProvider>

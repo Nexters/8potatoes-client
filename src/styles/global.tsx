@@ -40,6 +40,19 @@ const globalCss = css`
         background-size: cover;
     }
 
+    button {
+        background: none;
+        border: none;
+    }
+
+    input {
+        border: none;
+        background: none;
+    }
+    input:focus {
+        outline: none;
+    }
+
     input,
     button,
     textarea,
@@ -61,7 +74,8 @@ const globalCss = css`
     @font-face {
         font-family: 'SUIT Variable';
         font-weight: 100 900;
-        src: url('./src/assets/fonts/SUIT-Variable.woff2') format('woff2-variations');
+        src: url('./src/assets/fonts/SUIT-Variable.woff2')
+            format('woff2-variations');
     }
 `;
 
