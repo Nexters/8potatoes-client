@@ -1,3 +1,6 @@
+import CallIcon from '#/assets/icons/call.svg?react';
+import CopyIcon from '#/assets/icons/copy.svg?react';
+import LocationIcon from '#/assets/icons/location.svg?react';
 import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
 import { theme } from '#/styles/theme';
@@ -59,7 +62,7 @@ export function RestAreaOtherInformation() {
     };
 
     return (
-        <div>
+        <>
             <S.Section>
                 <S.Title>
                     <img
@@ -203,7 +206,11 @@ export function RestAreaOtherInformation() {
                         flexOption={{ justifyContent: 'space-between' }}
                     >
                         <FlexBox row gap={12}>
-                            <img src="" width={24} height={24} />
+                            <LocationIcon
+                                width={24}
+                                height={24}
+                                fill={theme.color.main[100]}
+                            />
                             <Text
                                 typography="bodySemiBold16"
                                 color={theme.color.blk[100]}
@@ -211,8 +218,9 @@ export function RestAreaOtherInformation() {
                                 충남 천안시 동남구 쉼1길 42
                             </Text>
                         </FlexBox>
-                        <img
-                            src=""
+
+                        <CopyIcon
+                            cursor="pointer"
                             width={24}
                             height={24}
                             onClick={() =>
@@ -223,7 +231,7 @@ export function RestAreaOtherInformation() {
                         />
                     </S.InformationBox>
                     <S.InformationBox gap={12}>
-                        <img src="" width={24} height={24} />
+                        <CallIcon width={24} height={24} />
                         <Text
                             typography="bodySemiBold16"
                             color={theme.color.blk[100]}
@@ -255,6 +263,6 @@ export function RestAreaOtherInformation() {
                     </Text>
                 </Text>
             </S.Description>
-        </div>
+        </>
     );
 }
