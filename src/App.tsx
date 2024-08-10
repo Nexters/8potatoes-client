@@ -67,24 +67,6 @@ const data = {
 function App() {
     return (
         <>
-            <Drawer>
-                <Drawer.Trigger>
-                    <button>Trigger Drawer</button>
-                </Drawer.Trigger>
-                <Drawer.Content
-                    heightStepList={[
-                        { value: 80, unit: 'px' },
-                        { value: 50, unit: 'dvh' },
-                        { value: 90, unit: 'dvh' },
-                    ]}
-                >
-                    <h1>test Text</h1>
-                    <Drawer.Close>
-                        <button>close button</button>
-                    </Drawer.Close>
-                </Drawer.Content>
-            </Drawer>
-
             <RestAreaOtherInformation otherInformation={data} />
             <Text
                 as="h1"
