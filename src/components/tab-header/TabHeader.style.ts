@@ -13,25 +13,6 @@ export const Container = styled.div`
     height: 100dvh;
 `;
 
-// export const HeaderContents = styled.div<{
-//     translateY: number;
-//     height: number;
-// }>(({ translateY, height }) => {
-//     return css`
-//         padding-top: 64px;
-//         position: relative;
-//         display: flex;
-//         flex-direction: column;
-//         align-items: center;
-
-//         transform: ${`translateY(${translateY}px);`};
-//         height: ${height}px;
-//         transition: all 0.3s;
-
-//         background-color: ${theme.color.wht[100]};
-//     `;
-// });
-
 export const HeaderContents = styled(motion.div)`
     padding-top: 64px;
     position: relative;
