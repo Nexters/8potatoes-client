@@ -1,0 +1,1 @@
+export { RestAreaFuelPage } from './RestAreaFuelPage';
