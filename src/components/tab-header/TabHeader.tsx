@@ -1,5 +1,7 @@
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 
+import { useNavigate, useParams } from 'react-router-dom';
+
 import DotIcon from '#/assets/icons/dot.svg?react';
 import StarIcon from '#/assets/icons/star.svg?react';
 import { theme } from '#/styles/theme';
@@ -10,7 +12,7 @@ import { Text } from '../text';
 
 import * as S from './TabHeader.style';
 
-type TabContentType = { title: ReactNode; component: ReactNode };
+type TabTitleType = { title: ReactNode; url: string };
 
 interface TabHeaderProps {
     headerInformation: {
@@ -20,16 +22,18 @@ interface TabHeaderProps {
         endTime: string;
         ranking: number;
     };
-    tabContents: TabContentType[];
+    tabTitles: TabTitleType[];
 }
 
 const TOTAL_HEADER_HEIGHT = 166;
 const HEADER_CONTENTS_HEIGHT = 95;
 
-export function TabHeader({ headerInformation, tabContents }: TabHeaderProps) {
+export function TabHeader({ headerInformation, tabTitles }: TabHeaderProps) {
+    const { restAreaId } = useParams();
+    const navigate = useNavigate();
+
     const { title, direction, isWorking, endTime, ranking } = headerInformation;
 
-    const [selectedIdx, setSelectedIdx] = useState(0);
     const [scrollHeight, setScrollHeight] = useState(0);
 
     const isMinSize = scrollHeight > 30;
@@ -125,8 +129,8 @@ export function TabHeader({ headerInformation, tabContents }: TabHeaderProps) {
             </S.HeaderContents>
 
             <S.TabContainer>
-                {tabContents.map((content, idx) => {
-                    const isSelected = idx === selectedIdx;
+                {tabTitles.map((tabTitle, idx) => {
+                    const isSelected = tabTitle.url === restAreaId;
                     return (
                         <S.Tab key={idx}>
                             <S.TabTitle
@@ -138,19 +142,15 @@ export function TabHeader({ headerInformation, tabContents }: TabHeaderProps) {
                                         ? theme.color.main[100]
                                         : theme.color.blk[40]
                                 }
-                                onClick={() => setSelectedIdx(idx)}
+                                onClick={() => navigate(tabTitle.url)}
                             >
-                                {content.title}
+                                {tabTitle.title}
                             </S.TabTitle>
                             {isSelected && <S.SelectBorder />}
                         </S.Tab>
                     );
                 })}
             </S.TabContainer>
-
-            <S.TabContent ref={contentRef}>
-                {tabContents[selectedIdx].component}
-            </S.TabContent>
         </S.Container>
     );
 }

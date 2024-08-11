@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 
@@ -10,7 +9,9 @@ import { Text } from '../text';
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    height: 100dvh;
+
+    position: sticky;
+    top: 0;
 `;
 
 export const HeaderContents = styled(motion.div)`
@@ -42,7 +43,8 @@ export const TabContainer = styled.div`
     justify-content: space-evenly;
     width: 100%;
 
-    border-bottom: ${({ theme }) => `2px solid ${theme.color.blk[5]}`};
+    border-bottom: 2px solid ${theme.color.blk[5]};
+    background-color: ${theme.color.wht[100]};
 `;
 
 export const Tab = styled.div`

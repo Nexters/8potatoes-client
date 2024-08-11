@@ -13,23 +13,17 @@ const restInformation = {
     ranking: 4.2,
 };
 
-const tabContents = [
-    {
-        title: '먹거리',
-        component: <div style={{ height: '200dvh' }}>먹거리</div>,
-    },
+const tabTitles = [
+    { title: '먹거리', url: '/rest-area/foods' },
     {
         title: (
             <>
                 주유 <DotIcon /> 주차
             </>
         ),
-        component: <div style={{ height: '200dvh' }}>주유·주차</div>,
+        url: '/rest-area/fuel-parking',
     },
-    {
-        title: '기타정보',
-        component: <div style={{ height: '200dvh' }}>기타정보</div>,
-    },
+    { title: '기타정보', url: '/rest-area/other-information' },
 ];
 
 function App() {
@@ -37,9 +31,11 @@ function App() {
         <div style={{ height: '100dvh' }}>
             <TabHeader
                 headerInformation={restInformation}
-                tabContents={tabContents}
+                tabTitles={tabTitles}
             />
-            <Text
+            <div style={{ height: '200dvh', overflow: 'scroll' }}>hih</div>
+
+            {/* <Text
                 as="h1"
                 color={theme.color.main[100]}
                 typography="headingBold20"
@@ -55,7 +51,7 @@ function App() {
                 menuAmount={17}
                 openDate={new Date('2024-08-07')}
                 closeDate={new Date('2024-08-08')}
-            />
+            /> */}
         </div>
     );
 }
