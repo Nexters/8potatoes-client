@@ -29,8 +29,8 @@ const HEADER_CONTENTS_HEIGHT = 95;
 export function TabHeader({ headerInformation, tabContents }: TabHeaderProps) {
     const { title, direction, isWorking, endTime, ranking } = headerInformation;
 
-    const [selectedIdx, setSelectedIdx] = useState<number>(0);
-    const [scrollHeight, setScrollHeight] = useState<number>(0);
+    const [selectedIdx, setSelectedIdx] = useState(0);
+    const [scrollHeight, setScrollHeight] = useState(0);
 
     const isMinSize = scrollHeight > 30;
     const headerTranslateY = isMinSize
