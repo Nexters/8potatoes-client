@@ -1,1 +1,0 @@
-export { DestinationPath } from './DestinationPath';
