@@ -28,6 +28,10 @@ const globalCss = css`
         scroll-behavior: smooth;
     }
 
+    a {
+        text-decoration: none;
+    }
+
     a:not([class]) {
         text-decoration-skip-ink: auto;
     }
