@@ -61,6 +61,7 @@ export function RestAreaOtherInformation({
                 <S.HourList as="ul" gap={12}>
                     {workingHours.map((working) => (
                         <FlexBox
+                            as="li"
                             row
                             flexOption={{ justifyContent: 'space-between' }}
                             key={working.title}
