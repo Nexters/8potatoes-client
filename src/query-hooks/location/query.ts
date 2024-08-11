@@ -118,6 +118,6 @@ export const useGetDestinationPath = ({
                     }
                     return acc;
                 }, []),
-        staleTime: 1000 * 20,
+        staleTime: 1000 * 60,
     });
 };

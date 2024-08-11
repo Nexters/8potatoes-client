@@ -1,5 +1,4 @@
 import ArrowRightIcon from '#/assets/icons/arrow-right.svg?react';
-import { Text } from '#/components/text';
 import { theme } from '#/styles/theme';
 
 import * as S from './DestinationIndicator.style';
@@ -10,8 +9,8 @@ interface DestinationIndicatorProps {
 }
 
 export const DestinationIndicator = ({
-    start,
-    end,
+    start = '',
+    end = '',
 }: DestinationIndicatorProps) => {
     return (
         <S.Container>

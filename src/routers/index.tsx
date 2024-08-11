@@ -59,7 +59,7 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                     path: '/map',
                     errorElement: <div>에러</div>,
                     element: <RestAreaMapPage />
-                }
+                },
             ],
         },
     ]);

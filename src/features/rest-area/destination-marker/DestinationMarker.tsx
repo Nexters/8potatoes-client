@@ -32,14 +32,20 @@ type DestinationMarkerProps = ComponentProps<typeof Marker> &
 
 export const DestinationMarker = ({
     isStart,
+    position,
     ...restProps
 }: DestinationMarkerProps) => {
     const icon = {
         content: renderToString(<DestinationMarkerImpl isStart={isStart} />),
+        anchor: new naver.maps.Point(16, 48),
     };
     return (
         <>
-            <Marker icon={icon} {...restProps} />
+            <Marker
+                icon={icon}
+                position={position}
+                {...restProps}
+            />
             <DestinationMarkerImpl
                 isStart={isStart}
                 style={{ display: 'none' }}

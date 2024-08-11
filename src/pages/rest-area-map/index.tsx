@@ -1,5 +1,3 @@
-import { type PropsWithChildren } from 'react';
-
 import {
     NaverMap,
     Container as NaverMapContainer,
@@ -38,12 +36,25 @@ const RestAreaMapPage = () => {
         west: Math.min(origin.lon, destination.lon),
     };
 
+    const startPosition = isValidJourney
+        ? journeyPathList[0]
+        : new naverMaps.LatLng(origin.lat, origin.lon);
+    const endPosition = isValidJourney
+        ? journeyPathList.at(-1)
+        : new naverMaps.LatLng(destination.lat, destination.lon);
+
     return (
         <>
-            {/* <RestAreaListDrawer /> */}
             <NaverMapContainer style={{ height: '100dvh' }}>
-                <DestinationIndicator start={origin.addressName} end={destination.addressName} />
-                <NaverMap bounds={mapBound}>
+                <DestinationIndicator
+                    start={origin.addressName}
+                    end={destination.addressName}
+                />
+                <RestAreaListDrawer />
+                <NaverMap
+                    maxBounds={mapBound}
+                    overlayZoomEffect="all"
+                >
                     {isValidJourney && (
                         <>
                             <Polyline
@@ -52,21 +63,13 @@ const RestAreaMapPage = () => {
                                 strokeLineJoin="round"
                                 strokeWeight={6}
                                 strokeStyle="solid"
+                                clickable={false}
                             />
                             <DestinationMarker
                                 isStart
-                                position={
-                                    new naverMaps.LatLng(origin.lat, origin.lon)
-                                }
+                                position={startPosition}
                             />
-                            <DestinationMarker
-                                position={
-                                    new naverMaps.LatLng(
-                                        destination.lat,
-                                        destination.lon,
-                                    )
-                                }
-                            />
+                            <DestinationMarker position={endPosition} />
                         </>
                     )}
                 </NaverMap>
