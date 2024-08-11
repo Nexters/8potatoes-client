@@ -1,8 +1,13 @@
 import { Global, css } from '@emotion/react';
 
-import { theme } from './theme';
-
 const globalCss = css`
+    @font-face {
+        font-family: 'SUIT Variable';
+        font-weight: 100 900;
+        src: url('./src/assets/fonts/SUIT-Variable.woff2')
+            format('woff2-variations');
+    }
+
     *,
     *::before,
     *::after {
@@ -66,16 +71,9 @@ const globalCss = css`
         scroll-behavior: smooth;
         margin: 0;
 
-        font-family: ${theme.font.family.suit};
+        font-family: 'SUIT Variable';
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-    }
-
-    @font-face {
-        font-family: 'SUIT Variable';
-        font-weight: 100 900;
-        src: url('./src/assets/fonts/SUIT-Variable.woff2')
-            format('woff2-variations');
     }
 `;
 

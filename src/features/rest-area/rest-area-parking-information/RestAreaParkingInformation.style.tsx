@@ -21,6 +21,8 @@ export const Card = styled(FlexBox)`
     padding: 24px;
     align-items: center;
     flex-grow: 1;
+    text-align: center;
+    white-space: nowrap;
 `
 
 export const UpdateNotice = styled(FlexBox)`

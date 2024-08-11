@@ -45,7 +45,7 @@ export const RestAreaFuelInformation = ({
                             color={theme.color.blk[100]}
                             typography="headingBold18"
                         >
-                            {gasolinePrice.toLocaleString()}원
+                            {`${gasolinePrice.toLocaleString()}원`}
                         </Text>
                     </S.Card>
                 )}
@@ -61,7 +61,7 @@ export const RestAreaFuelInformation = ({
                             color={theme.color.blk[100]}
                             typography="headingBold18"
                         >
-                            {dieselPrice.toLocaleString()}원
+                            {`${dieselPrice.toLocaleString()}원`}
                         </Text>
                     </S.Card>
                 )}
@@ -77,7 +77,7 @@ export const RestAreaFuelInformation = ({
                             color={theme.color.blk[100]}
                             typography="headingBold18"
                         >
-                            {lpgPrice.toLocaleString()}원
+                            {`${lpgPrice.toLocaleString()}원`}
                         </Text>
                     </S.Card>
                 )}
