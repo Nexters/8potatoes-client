@@ -1,0 +1,1 @@
+export { RestAreaFoodCategory } from './RestAreaFoodCategory';
