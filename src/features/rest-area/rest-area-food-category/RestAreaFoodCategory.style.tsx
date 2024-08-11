@@ -1,39 +1,42 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { FlexBox } from '#/components/flex-box';
 import { theme } from '#/styles/theme';
 
-export const Section = styled(FlexBox)`
-    padding: 40px 20px;
-    background-color: ${theme.color.wht[100]};
-`;
-
-export const Title = styled(FlexBox)`
-    align-items: center;
-`;
-
-export const CategoryWrapper = styled.div`
+export const Container = styled.div`
     width: 100%;
     overflow-x: auto;
 
     &::-webkit-scrollbar {
         display: none;
     }
-`
+`;
 
 export const CategoryList = styled(FlexBox)`
+    width: max-content;
 `
 
-export const CategoryOption = styled(FlexBox)`
-    text-align: center;
-`
+type CategoryOptionType = { isSelected?: boolean };
 
-export const CategoryIcon = styled.div`
-    width: 64px;
-    height: 64px;
-    padding: 16px;
+export const CategoryOption = styled(FlexBox)(({
+    isSelected,
+}: CategoryOptionType) => {
+    const color = isSelected ? theme.color.main[100] : theme.color.blk[100];
+    const borderColor = isSelected ? theme.color.main[100] : 'transparent';
 
-    border: 1px solid ${theme.color.main[100]};
-    background-color: ${theme.color.wht[100]};
-    border-radius: 64px;
-`
+    return css`
+        color: ${color};
+        align-items: center;
+        text-align: center;
+
+        & > img {
+            width: 64px;
+            height: 64px;
+
+            border: 1px solid ${borderColor};
+            background-color: ${theme.color.wht[100]};
+            border-radius: 64px;
+        }
+    `;
+});
