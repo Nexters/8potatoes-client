@@ -1,0 +1,1 @@
+export { RestAreaFuelInformation } from './RestAreaFuelInformation';
