@@ -1,0 +1,1 @@
+export { RestAreaDetailSection } from "./RestAreaDetailSection";
