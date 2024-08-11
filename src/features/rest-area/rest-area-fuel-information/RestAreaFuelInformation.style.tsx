@@ -23,3 +23,13 @@ export const Card = styled(FlexBox)`
     flex-grow: 1;
 `
 
+export const AvailableChargeOption = styled(FlexBox)`
+    width: 100%;
+    align-items: center;
+`
+
+export const DashedLine = styled.div`
+    flex-grow: 1;
+    height: 1px;
+    border-bottom: 1px dashed ${theme.color.blk[10]}
+`
