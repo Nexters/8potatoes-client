@@ -3,7 +3,6 @@ import {
     useQuery,
     useSuspenseQuery,
 } from '@tanstack/react-query';
-import { useNavermaps } from 'react-naver-maps';
 
 import {
     getLocationSearchData,
@@ -88,8 +87,7 @@ export const useGetDestinationPath = ({
     endX,
     endY,
 }: DestinationPathQueryParams) => {
-    const naverMaps = useNavermaps();
-    return useSuspenseQuery({
+    return useQuery({
         queryKey: LOCATION_QUERY_KEY.destinationPath('start', 'end'),
         queryFn: () =>
             getVehiclePath({
@@ -98,19 +96,28 @@ export const useGetDestinationPath = ({
                 endX,
                 endY,
             }),
-        select: ({ features }) => {
-            const path = [];
-            features.slice(0, -1).forEach((feature) => {
-                if (
-                    feature.geometry.type === 'LineString' &&
-                    feature.properties?.description !==
-                        '경유지와 연결된 가상의 라인입니다'
-                ) {
-                    feature.geometry.coordinates.forEach(([lng, lat]) =>
-                        path.push(new naver.map.LatLng(lat, lng)),
-                    );
-                }
-            });
-        }
+        select: ({ features }) =>
+            features
+                .slice(0, -1)
+                .reduce<naver.maps.LatLng[]>((acc, feature) => {
+                    if (
+                        feature.geometry.type === 'LineString' &&
+                        feature.properties?.description !==
+                            '경유지와 연결된 가상의 라인입니다'
+                    ) {
+                        const coordinates = feature.geometry.coordinates
+                            .map(
+                                ([lng, lat]) => new naver.maps.LatLng(lat, lng),
+                            )
+                            .slice(1, -1);
+                        acc.push(...coordinates);
+                    }
+                    if (feature.geometry.type === 'Point') {
+                        const [lng, lat] = feature.geometry.coordinates;
+                        acc.push(new naver.maps.LatLng(lat, lng));
+                    }
+                    return acc;
+                }, []),
+        staleTime: 1000 * 20,
     });
 };
