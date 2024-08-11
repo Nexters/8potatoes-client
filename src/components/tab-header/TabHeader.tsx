@@ -1,7 +1,6 @@
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 
-import { motion } from 'framer-motion';
-
+import DotIcon from '#/assets/icons/dot.svg?react';
 import StarIcon from '#/assets/icons/star.svg?react';
 import { theme } from '#/styles/theme';
 
@@ -11,7 +10,7 @@ import { Text } from '../text';
 
 import * as S from './TabHeader.style';
 
-type TabContentType = { title: string; component: ReactNode };
+type TabContentType = { title: ReactNode; component: ReactNode };
 
 interface TabHeaderProps {
     headerInformation: {
@@ -110,12 +109,15 @@ export function TabHeader({ headerInformation, tabContents }: TabHeaderProps) {
                             typography="bodySemiBold14"
                             color={theme.color.blk[60]}
                         >
-                            식당 {isWorking ? '영업중' : '마감시간'} · {endTime}
+                            식당 {isWorking ? '영업중' : '마감시간'} <DotIcon />{' '}
+                            {endTime}
                             까지
                         </Text>
                         <S.RankingInformation>
                             <StarIcon width={12} height={12} />
-                            <Text typography="bodyBold14">{ranking} ·</Text>
+                            <Text typography="bodyBold14">
+                                {ranking} <DotIcon />
+                            </Text>
                             <Text typography="bodySemiBold14">네이버평점</Text>
                         </S.RankingInformation>
                     </FlexBox>

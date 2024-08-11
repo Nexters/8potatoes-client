@@ -1,3 +1,4 @@
+import DotIcon from '#/assets/icons/dot.svg?react';
 import { RestAreaInformation } from '#/features/rest-area/rest-area-information';
 
 import { TabHeader } from './components/tab-header';
@@ -18,7 +19,11 @@ const tabContents = [
         component: <div style={{ height: '200dvh' }}>먹거리</div>,
     },
     {
-        title: '주유·주차',
+        title: (
+            <>
+                주유 <DotIcon /> 주차
+            </>
+        ),
         component: <div style={{ height: '200dvh' }}>주유·주차</div>,
     },
     {
