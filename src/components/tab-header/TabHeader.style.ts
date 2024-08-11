@@ -12,6 +12,7 @@ export const Container = styled.div`
 
     position: sticky;
     top: 0;
+    background-color: ${theme.color.wht[100]};
 `;
 
 export const HeaderContents = styled(motion.div)`
@@ -22,8 +23,6 @@ export const HeaderContents = styled(motion.div)`
     align-items: center;
 
     transition: all 0.3s;
-
-    background-color: ${theme.color.wht[100]};
 `;
 
 export const RankingInformation = styled(FlexBox)`
@@ -44,7 +43,6 @@ export const TabContainer = styled.div`
     width: 100%;
 
     border-bottom: 2px solid ${theme.color.blk[5]};
-    background-color: ${theme.color.wht[100]};
 `;
 
 export const Tab = styled.div`

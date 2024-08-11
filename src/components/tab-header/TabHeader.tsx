@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import { ReactNode, forwardRef, useMemo } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -23,48 +23,31 @@ interface TabHeaderProps {
         ranking: number;
     };
     tabTitles: TabTitleType[];
+    isMinSize: boolean;
 }
 
 const TOTAL_HEADER_HEIGHT = 166;
 const HEADER_CONTENTS_HEIGHT = 95;
 
-export function TabHeader({ headerInformation, tabTitles }: TabHeaderProps) {
+const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
+    { headerInformation, tabTitles, isMinSize },
+    ref,
+) {
     const { restAreaId } = useParams();
     const navigate = useNavigate();
 
     const { title, direction, isWorking, endTime, ranking } = headerInformation;
 
-    const [scrollHeight, setScrollHeight] = useState(0);
-
-    const isMinSize = scrollHeight > 30;
-    const headerTranslateY = isMinSize
-        ? -HEADER_CONTENTS_HEIGHT
-        : -scrollHeight;
-    const headerHeight = TOTAL_HEADER_HEIGHT + headerTranslateY;
-
-    const contentRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (!contentRef.current) {
-            return;
-        }
-
-        function handleScroll() {
-            if (!contentRef.current) {
-                return;
-            }
-            const scrollTop = contentRef.current.scrollTop;
-            setScrollHeight(scrollTop);
-        }
-
-        contentRef.current.addEventListener('scroll', handleScroll);
-
-        return () => {
-            if (contentRef.current) {
-                contentRef.current.removeEventListener('scroll', handleScroll);
-            }
-        };
-    }, []);
+    const headerVariants = {
+        min: {
+            y: -TOTAL_HEADER_HEIGHT,
+            height: TOTAL_HEADER_HEIGHT - HEADER_CONTENTS_HEIGHT,
+        },
+        max: {
+            y: 0,
+            height: TOTAL_HEADER_HEIGHT,
+        },
+    };
 
     const headerTitle = useMemo(() => {
         return isMinSize ? (
@@ -83,12 +66,13 @@ export function TabHeader({ headerInformation, tabTitles }: TabHeaderProps) {
     }, [isMinSize, title, direction]);
 
     return (
-        <S.Container>
+        <S.Container ref={ref}>
             <Header title={headerTitle} isVisibleBackspace />
 
             <S.HeaderContents
-                initial={{ height: headerHeight }}
-                animate={{ translateY: headerTranslateY, height: headerHeight }}
+                initial={{ y: 0 }}
+                variants={headerVariants}
+                animate={isMinSize ? 'min' : 'max'}
                 transition={{ duration: 0.2 }}
             >
                 <FlexBox gap={16}>
@@ -153,4 +137,6 @@ export function TabHeader({ headerInformation, tabTitles }: TabHeaderProps) {
             </S.TabContainer>
         </S.Container>
     );
-}
+});
+
+export { TabHeader };

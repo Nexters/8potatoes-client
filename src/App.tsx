@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react';
+
 import DotIcon from '#/assets/icons/dot.svg?react';
 import { RestAreaInformation } from '#/features/rest-area/rest-area-information';
 
@@ -27,13 +29,24 @@ const tabTitles = [
 ];
 
 function App() {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+    const tabHeaderRef = useRef<HTMLDivElement>(null);
+
     return (
-        <div style={{ height: '100dvh' }}>
+        <div style={{ height: '100dvh' }} ref={containerRef}>
             <TabHeader
+                ref={tabHeaderRef}
                 headerInformation={restInformation}
                 tabTitles={tabTitles}
+                isMinSize={false}
             />
-            <div style={{ height: '200dvh', overflow: 'scroll' }}>hih</div>
+            <div
+                ref={contentRef}
+                style={{ height: '200dvh', overflow: 'scroll' }}
+            >
+                hih
+            </div>
 
             {/* <Text
                 as="h1"
