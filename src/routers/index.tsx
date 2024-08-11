@@ -8,10 +8,10 @@ import { Outlet, createBrowserRouter } from 'react-router-dom';
 
 import App from '#/App';
 import { LocationSearch } from '#/pages/location-search';
-import RestAreaMapPage from '#/pages/rest-area-map';
 import { MobileView } from '#/pages/templates/mobile-view';
 import { GlobalStyle } from '#/styles/global';
 import { theme } from '#/styles/theme';
+import RestAreaMapPage from '#/pages/rest-area-map';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -56,10 +56,10 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                     element: <LocationSearch />,
                 },
                 {
-                    path: '/rest-area-map',
+                    path: '/map',
                     errorElement: <div>에러</div>,
-                    element: <RestAreaMapPage />,
-                },
+                    element: <RestAreaMapPage />
+                }
             ],
         },
     ]);
