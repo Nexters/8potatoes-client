@@ -14,7 +14,7 @@ import { useGetDestinationPath } from '#/query-hooks/location/query';
 import { theme } from '#/styles/theme';
 import type { SearchOptionType, SelectedLocationType } from '#/types/location';
 
-const RestAreaMapPage = () => {
+export const RestAreaMapPage = () => {
     const naverMaps = useNavermaps();
     const location: Location<Record<SearchOptionType, SelectedLocationType>> =
         useLocation();
@@ -77,5 +77,3 @@ const RestAreaMapPage = () => {
         </>
     );
 };
-
-export default RestAreaMapPage;
