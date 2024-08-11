@@ -1,0 +1,1 @@
+export { RestAreaParkingInformation } from './RestAreaParkingInformation';
