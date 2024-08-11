@@ -4,6 +4,7 @@ import LocationIcon from '#/assets/icons/location.svg?react';
 import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
 import { theme } from '#/styles/theme';
+import { handleCopyToClipboard } from '#/utils/common';
 
 import * as S from './RestAreaOtherInformation.style';
 
@@ -31,14 +32,6 @@ export function RestAreaOtherInformation({
 }: RestAreaOtherInformationProps) {
     const { workingHours, brands, amenities, address, cellphone } =
         otherInformation;
-
-    const handleCopyToClipboard = async (text: string) => {
-        try {
-            await navigator.clipboard.writeText(text);
-        } catch (err) {
-            console.error('Failed to copy: ', err);
-        }
-    };
 
     return (
         <S.Container gap={8}>
