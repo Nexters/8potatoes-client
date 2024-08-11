@@ -3,21 +3,21 @@ import styled from '@emotion/styled';
 import { FlexBox } from '#/components/flex-box';
 import { theme } from '#/styles/theme';
 
+export const Container = styled(FlexBox)`
+    background-color: #f9f9f9;
+`;
+
 export const Section = styled(FlexBox)`
     gap: 24px;
     padding: 40px 20px;
+
+    background-color: ${theme.color.wht[100]};
 `;
 
 export const Title = styled(FlexBox)`
     flex-direction: row;
     gap: 12px;
     align-items: center;
-`;
-
-export const Divider = styled.div`
-    width: 100%;
-    height: 8px;
-    background-color: #f9f9f9;
 `;
 
 export const HourList = styled(FlexBox)`
@@ -53,7 +53,7 @@ export const InformationBox = styled(FlexBox)`
 `;
 
 export const Description = styled.div`
-    padding: 0 20px 60px;
+    background-color: ${theme.color.wht[100]};
 `;
 
 export const Image = styled.img`

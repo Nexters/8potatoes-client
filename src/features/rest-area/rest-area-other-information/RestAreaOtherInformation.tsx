@@ -41,7 +41,7 @@ export function RestAreaOtherInformation({
     };
 
     return (
-        <>
+        <S.Container gap={8}>
             <S.Section>
                 <S.Title>
                     <img
@@ -83,8 +83,6 @@ export function RestAreaOtherInformation({
                 </S.HourList>
             </S.Section>
 
-            <S.Divider />
-
             <S.Section>
                 <S.Title>
                     <img
@@ -119,8 +117,6 @@ export function RestAreaOtherInformation({
                 </S.FacilityList>
             </S.Section>
 
-            <S.Divider />
-
             <S.Section>
                 <S.Title>
                     <img
@@ -154,8 +150,6 @@ export function RestAreaOtherInformation({
                     ))}
                 </S.FacilityList>
             </S.Section>
-
-            <S.Divider />
 
             <S.Section>
                 <S.Title>
@@ -211,29 +205,30 @@ export function RestAreaOtherInformation({
                         </S.InformationBox>
                     </a>
                 </S.OtherInformationContainer>
-            </S.Section>
 
-            <S.Description>
-                <Text
-                    typography="smallTextMedium12"
-                    color={theme.color.blk[30]}
-                >
-                    본 정보는 특정 시점에 수집되어 실제 가격과 다를 수 있습니다.
-                </Text>
-                <Text
-                    typography="smallTextMedium12"
-                    color={theme.color.blk[30]}
-                >
-                    제공{' '}
+                <S.Description>
                     <Text
-                        as="span"
                         typography="smallTextMedium12"
-                        color={theme.color.good[100]}
+                        color={theme.color.blk[30]}
                     >
-                        한국도로공사
+                        본 정보는 특정 시점에 수집되어 실제 가격과 다를 수
+                        있습니다.
                     </Text>
-                </Text>
-            </S.Description>
-        </>
+                    <Text
+                        typography="smallTextMedium12"
+                        color={theme.color.blk[30]}
+                    >
+                        제공{' '}
+                        <Text
+                            as="span"
+                            typography="smallTextMedium12"
+                            color={theme.color.good[100]}
+                        >
+                            한국도로공사
+                        </Text>
+                    </Text>
+                </S.Description>
+            </S.Section>
+        </S.Container>
     );
 }
