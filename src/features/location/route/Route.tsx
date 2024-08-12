@@ -1,5 +1,7 @@
 import { Dispatch } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import ArrowSwitchHorizontalIcon from '#/assets/icons/arrow-switch-horizontal.svg?react';
 import LocationIcon from '#/assets/icons/location.svg?react';
 import OriginIcon from '#/assets/icons/origin.svg?react';
@@ -10,11 +12,9 @@ import { Text } from '#/components/text';
 import { SEARCH_OPTION } from '#/constants/location';
 import { LocationSelectField } from '#/features/location/location-select-field';
 import { theme } from '#/styles/theme';
-import { SelectedLocationType } from '#/types/location';
+import type { SearchOptionType, SelectedLocationType } from '#/types/location';
 
 import * as S from './Route.style';
-
-type SearchOptionType = (typeof SEARCH_OPTION)[keyof typeof SEARCH_OPTION];
 
 interface RouteProps {
     routeLocation: Record<SearchOptionType, SelectedLocationType | null>;
@@ -29,6 +29,8 @@ export function Route({
     setSearchOption,
     setRouteLocation,
 }: RouteProps) {
+    const navigate = useNavigate();
+
     const isSelectedOrigin = !!routeLocation.origin;
     const isSelectedDestination = !!routeLocation.destination;
     const isSelectEnd = isSelectedOrigin && isSelectedDestination;
@@ -53,7 +55,8 @@ export function Route({
     };
 
     const handleClickSearch = () => {
-        // TODO: 검색 결과 페이지로 이동
+        console.log(routeLocation);
+        navigate('/map', { state: routeLocation });
     };
 
     return (
