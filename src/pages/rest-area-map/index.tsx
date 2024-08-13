@@ -11,6 +11,7 @@ import { DestinationMarker } from '#/features/rest-area/destination-marker';
 import { RestAreaBubbleMarker } from '#/features/rest-area/rest-area-bubble-marker';
 import { RestAreaListDrawer } from '#/features/rest-area/rest-area-drawer';
 import { useGetDestinationPath } from '#/query-hooks/location/query';
+import { useGetHighwayRestAreaList } from '#/query-hooks/rest-area/query';
 import { theme } from '#/styles/theme';
 import type { SearchOptionType, SelectedLocationType } from '#/types/location';
 
@@ -21,13 +22,28 @@ export const RestAreaMapPage = () => {
 
     const { origin, destination } = location.state;
 
-    const { data: journeyPathList, isSuccess: isValidJourney } =
-        useGetDestinationPath({
-            startX: origin.lon,
-            startY: origin.lat,
-            endX: destination.lon,
-            endY: destination.lat,
-        });
+    const {
+        data: {journeyPathList = [], roadNames = []} = {},
+        isSuccess: isValidJourney,
+    } = useGetDestinationPath({
+        startX: origin.lon,
+        startY: origin.lat,
+        endX: destination.lon,
+        endY: destination.lat,
+    });
+
+    const { data: restAreaList } = useGetHighwayRestAreaList(
+        {
+            from: `${origin.lat},${origin.lon}`,
+            to: `${destination.lat},${destination.lon}`,
+            roadNames: [...new Set(roadNames)]
+                .map((highway) => highway.replace(/ 고속도로$/, '선'))
+                .join(','),
+        },
+        { enabled: isValidJourney },
+    );
+
+    console.log(journeyPathList, roadNames, isValidJourney);
 
     const mapBound = {
         north: Math.max(origin.lat, destination.lat),
@@ -51,10 +67,7 @@ export const RestAreaMapPage = () => {
                     end={destination.addressName}
                 />
                 <RestAreaListDrawer />
-                <NaverMap
-                    maxBounds={mapBound}
-                    overlayZoomEffect="all"
-                >
+                <NaverMap maxBounds={mapBound} overlayZoomEffect="all">
                     {isValidJourney && (
                         <>
                             <Polyline

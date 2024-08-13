@@ -59,6 +59,7 @@ export interface VehiclePathResponse {
             description: string;
             totalDistance: number;
             totalTime: number;
+            roadType: number;
             pointType: 'S' | 'E' | 'B1' | 'B2' | 'B3' | 'N';
         };
     }[];
