@@ -1,7 +1,6 @@
 import {
     useInfiniteQuery,
     useQuery,
-    useSuspenseQuery,
 } from '@tanstack/react-query';
 
 import {

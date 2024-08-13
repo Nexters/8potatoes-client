@@ -1,8 +1,10 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
 
 export const API = {
-    get: async <T>(url: string, params?: T) => {
-        const response = await axios.get(url, { params });
+    get: async <T, D = unknown>(url: string, config?: AxiosRequestConfig) =>{
+        const response = await axios.get<T, AxiosResponse<T, D>, D>(url, {
+            ...config,
+        });
         return response.data;
     },
     post: async <T, D>(url: string, data: D, config?: AxiosRequestConfig) => {
