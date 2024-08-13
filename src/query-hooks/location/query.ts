@@ -81,6 +81,11 @@ interface DestinationPathQueryParams {
     endY: number;
 }
 
+interface DestinationPathSelectedResult {
+    pathList: naver.maps.LatLng[];
+    roadNameList: string[];
+}
+
 export const useGetDestinationPath = ({
     startX,
     startY,
@@ -97,34 +102,43 @@ export const useGetDestinationPath = ({
                 endY,
             }),
         select: ({ features }) => {
-            const [pathList, roadNameList] = features
+            const { pathList, roadNameList } = features
                 .slice(0, -1)
-                .reduce<[naver.maps.LatLng[], string[]]>(
-                    ([pathList, roadNameList], feature) => {
+                .reduce<DestinationPathSelectedResult>(
+                    (
+                        {
+                            pathList: accPathList,
+                            roadNameList: accRoadNameList,
+                        },
+                        { geometry, properties },
+                    ) => {
                         if (
-                            feature.geometry.type === 'LineString' &&
-                            feature.properties?.description !==
+                            geometry.type === 'LineString' &&
+                            properties?.description !==
                                 '경유지와 연결된 가상의 라인입니다'
                         ) {
-                            const coordinates = feature.geometry.coordinates
+                            const coordinates = geometry.coordinates
                                 .map(
                                     ([lng, lat]) =>
                                         new naver.maps.LatLng(lat, lng),
                                 )
                                 .slice(1, -1);
-                            pathList.push(...coordinates);
+                            accPathList.push(...coordinates);
 
-                            if (feature.properties.roadType < 2) {
-                                roadNameList.push(feature.properties.name);
+                            if (properties.roadType < 2) {
+                                accRoadNameList.push(properties.name);
                             }
                         }
-                        if (feature.geometry.type === 'Point') {
-                            const [lng, lat] = feature.geometry.coordinates;
-                            pathList.push(new naver.maps.LatLng(lat, lng));
+                        if (geometry.type === 'Point') {
+                            const [lng, lat] = geometry.coordinates;
+                            accPathList.push(new naver.maps.LatLng(lat, lng));
                         }
-                        return [pathList, roadNameList];
+                        return {
+                            pathList: accPathList,
+                            roadNameList: accRoadNameList,
+                        };
                     },
-                    [[], []],
+                    { pathList: [], roadNameList: [] },
                 );
 
             return {
