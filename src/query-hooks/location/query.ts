@@ -1,4 +1,5 @@
 import {
+    UseQueryOptions,
     useInfiniteQuery,
     useQuery,
 } from '@tanstack/react-query';
@@ -95,28 +96,44 @@ export const useGetDestinationPath = ({
                 endX,
                 endY,
             }),
-        select: ({ features }) =>
-            features
+        select: ({ features }) => {
+            const [pathList, roadNameList] = features
                 .slice(0, -1)
-                .reduce<naver.maps.LatLng[]>((acc, feature) => {
-                    if (
-                        feature.geometry.type === 'LineString' &&
-                        feature.properties?.description !==
-                            '경유지와 연결된 가상의 라인입니다'
-                    ) {
-                        const coordinates = feature.geometry.coordinates
-                            .map(
-                                ([lng, lat]) => new naver.maps.LatLng(lat, lng),
-                            )
-                            .slice(1, -1);
-                        acc.push(...coordinates);
-                    }
-                    if (feature.geometry.type === 'Point') {
-                        const [lng, lat] = feature.geometry.coordinates;
-                        acc.push(new naver.maps.LatLng(lat, lng));
-                    }
-                    return acc;
-                }, []),
+                .reduce<[naver.maps.LatLng[], string[]]>(
+                    ([pathList, roadNameList], feature) => {
+                        if (
+                            feature.geometry.type === 'LineString' &&
+                            feature.properties?.description !==
+                                '경유지와 연결된 가상의 라인입니다'
+                        ) {
+                            const coordinates = feature.geometry.coordinates
+                                .map(
+                                    ([lng, lat]) =>
+                                        new naver.maps.LatLng(lat, lng),
+                                )
+                                .slice(1, -1);
+                            pathList.push(...coordinates);
+
+                            if (feature.properties.roadType < 2) {
+                                roadNameList.push(feature.properties.name);
+                            }
+                        }
+                        if (feature.geometry.type === 'Point') {
+                            const [lng, lat] = feature.geometry.coordinates;
+                            pathList.push(new naver.maps.LatLng(lat, lng));
+                        }
+                        return [pathList, roadNameList];
+                    },
+                    [[], []],
+                );
+
+            return {
+                journeyPathList: pathList,
+                roadNames: [...new Set(roadNameList)]
+                    .map((highway) => highway.replace(/ 고속도로$/, '선'))
+                    .join(','),
+            };
+        },
         staleTime: 1000 * 60,
     });
 };
