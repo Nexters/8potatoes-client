@@ -1,0 +1,1 @@
+export { RestAreaFoodMenu } from './RestAreaFoodMenu';
