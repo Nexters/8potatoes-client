@@ -23,7 +23,7 @@ export const RestAreaMapPage = () => {
     const { origin, destination } = location.state;
 
     const {
-        data: {journeyPathList = [], roadNames = []} = {},
+        data: {journeyPathList = [], roadNames = ''} = {},
         isSuccess: isValidJourney,
     } = useGetDestinationPath({
         startX: origin.lon,
@@ -36,9 +36,7 @@ export const RestAreaMapPage = () => {
         {
             from: `${origin.lat},${origin.lon}`,
             to: `${destination.lat},${destination.lon}`,
-            roadNames: [...new Set(roadNames)]
-                .map((highway) => highway.replace(/ 고속도로$/, '선'))
-                .join(','),
+            roadNames,
         },
         { enabled: isValidJourney },
     );

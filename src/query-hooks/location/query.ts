@@ -9,6 +9,7 @@ import {
     getReverseGeocodingData,
     getVehiclePath,
 } from '#/apis/tmap';
+import { HIGHWAY_LIST } from '#/constants/highway';
 import { LOCATION_QUERY_KEY } from '#/constants/query-key';
 import {
     GeolocationCoordinatesType,
@@ -145,6 +146,7 @@ export const useGetDestinationPath = ({
                 journeyPathList: pathList,
                 roadNames: [...new Set(roadNameList)]
                     .map((highway) => highway.replace(/ 고속도로$/, '선'))
+                    .filter((highway) => HIGHWAY_LIST.includes(highway))
                     .join(','),
             };
         },
