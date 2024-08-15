@@ -1,4 +1,5 @@
 export const Z_INDEX = {
-    TOOLTIP: 10,
-    HEADER: 999,
+    DRAWER: 3,
+    TOOLTIP: 5,
+    HEADER: 1,
 };

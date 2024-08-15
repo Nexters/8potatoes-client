@@ -9,7 +9,7 @@ export const Container = styled.div<{
 }>`
     box-sizing: border-box;
     width: 100%;
-    padding: 12px 16px;
+    padding: 12px 12px 12px 16px;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -18,7 +18,7 @@ export const Container = styled.div<{
         isActive ? theme.color.wht[100] : theme.color.blk[5]};
     border: ${({ isValid, isInvalid, theme }) =>
         `1px solid ${isInvalid ? theme.color.error[100] : isValid ? theme.color.select[100] : theme.color.blk[20]}`};
-    border-radius: 16px;
+    border-radius: 12px;
 `;
 
 export const Input = styled.input`

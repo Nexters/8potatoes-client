@@ -30,8 +30,9 @@ export async function getRestAreaDetailInfo({
     reststopCode,
 }: RestAreaDetailInfoParams) {
     return API.get<RestAreaDetailInfoResponse, RestAreaDetailInfoParams>(
-        `/reststops/${reststopCode}`,
+        `/reststop/info`,
         {
+            params: { reststopCode },
             baseURL: import.meta.env.VITE_SERVER_URL,
         },
     );

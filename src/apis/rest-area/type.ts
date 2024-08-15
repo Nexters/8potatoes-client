@@ -24,6 +24,7 @@ export interface RestAreaDetailInfoParams {
 export interface RestAreaDetailInfoResponse {
     name: string; // 휴게소 이름
     isOperating: boolean; // 식당 운영중 여부
+    direction?: string; // 방향 정보
     startTime?: string; // 식당 운영 시작 시간 (옵션 필드)
     endTime?: string; // 식당 운영 종료 시간 (옵션 필드)
     naverRating?: number; // 네이버 평점 (옵션 필드, Float 대신 number 사용)

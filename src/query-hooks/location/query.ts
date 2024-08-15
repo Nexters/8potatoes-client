@@ -1,7 +1,4 @@
-import {
-    useInfiniteQuery,
-    useQuery,
-} from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import {
     getLocationSearchData,
@@ -49,7 +46,7 @@ export const useGetLocationSearch = ({
             const totalCount = parseInt(searchPoiInfo.totalCount);
             return page * count >= totalCount ? undefined : page + 1;
         },
-        enabled: !!searchKeyword,
+        enabled: searchKeyword.length >= 2,
     });
 };
 

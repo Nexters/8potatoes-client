@@ -3,163 +3,83 @@ import CopyIcon from '#/assets/icons/copy.svg?react';
 import LocationIcon from '#/assets/icons/location.svg?react';
 import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
+import { RestAreaDetailSection } from '#/features/rest-area/rest-area-detail-section';
+import { useGetRestAreaRestStopInfo } from '#/query-hooks/rest-area/query';
 import { theme } from '#/styles/theme';
 import { handleCopyToClipboard } from '#/utils/common';
 
 import * as S from './RestAreaOtherInformation.style';
 
-interface RestAreaOtherInformationProps {
-    otherInformation: {
-        workingHours: {
-            title: string;
-            hour: string;
-        }[];
-        brands: {
-            title: string;
-            img: string;
-        }[];
-        amenities: {
-            title: string;
-            img: string;
-        }[];
-        address: string;
-        cellphone: string;
-    };
-}
-
-export function RestAreaOtherInformation({
-    otherInformation,
-}: RestAreaOtherInformationProps) {
-    const { workingHours, brands, amenities, address, cellphone } =
-        otherInformation;
+export function RestAreaOtherInformation() {
+    const { data: restStop } = useGetRestAreaRestStopInfo();
 
     return (
         <S.Container gap={8}>
-            <S.Section>
-                <S.Title>
-                    <img
-                        alt="영업 시간 표시 아이콘"
-                        src=""
-                        width={24}
-                        height={24}
-                    />
-                    <Text
-                        typography="headingBold20"
-                        color={theme.color.blk[100]}
-                    >
-                        영업 시간
-                    </Text>
-                </S.Title>
-
+            <RestAreaDetailSection title="영업 시간" iconSrc="" iconAlt="">
                 <S.HourList as="ul" gap={12}>
-                    {workingHours.map((working) => (
+                    {restStop.restaurantOperatingTimes.map((restaurant) => (
                         <FlexBox
                             as="li"
                             row
                             flexOption={{ justifyContent: 'space-between' }}
-                            key={working.title}
+                            key={restaurant.restaurantName}
                         >
                             <Text
                                 typography="bodyBold16"
                                 color={theme.color.blk[60]}
                             >
-                                {working.title}
+                                {restaurant.restaurantName}
                             </Text>
                             <Text
                                 typography="bodyBold16"
                                 color={theme.color.blk[100]}
                             >
-                                {working.hour}
+                                {restaurant.operatingTime}
                             </Text>
                         </FlexBox>
                     ))}
                 </S.HourList>
-            </S.Section>
+            </RestAreaDetailSection>
 
-            <S.Section>
-                <S.Title>
-                    <img
-                        alt="입점 브랜드 표시 아이콘"
-                        src=""
-                        width={24}
-                        height={24}
-                    />
-                    <Text
-                        typography="headingBold20"
-                        color={theme.color.blk[100]}
-                    >
-                        입점 브랜드
-                    </Text>
-                </S.Title>
-
+            <RestAreaDetailSection title="입점 브랜드" iconSrc="" iconAlt="">
                 <S.FacilityList>
-                    {brands.map((brand) => (
-                        <S.FacilityListItem as="li" key={brand.title}>
+                    {restStop.brands.map((brand) => (
+                        <S.FacilityListItem as="li" key={brand.brandName}>
                             <S.Image
-                                alt={`${brand.title} 브랜드 이미지`}
-                                src={brand.img}
+                                alt={`${brand.brandName} 브랜드 이미지`}
+                                src={brand.brandLogoUrl}
                             />
                             <Text
                                 typography="bodySemiBold16"
                                 color={theme.color.blk[100]}
                             >
-                                {brand.title}
+                                {brand.brandName}
                             </Text>
                         </S.FacilityListItem>
                     ))}
                 </S.FacilityList>
-            </S.Section>
+            </RestAreaDetailSection>
 
-            <S.Section>
-                <S.Title>
-                    <img
-                        alt="편의시설 표시 아이콘"
-                        src=""
-                        width={24}
-                        height={24}
-                    />
-                    <Text
-                        typography="headingBold20"
-                        color={theme.color.blk[100]}
-                    >
-                        편의시설
-                    </Text>
-                </S.Title>
-
+            <RestAreaDetailSection title="편의시설" iconSrc="" iconAlt="">
                 <S.FacilityList>
-                    {amenities.map((amenity) => (
-                        <S.FacilityListItem as="li" key={amenity.title}>
+                    {restStop.amenities.map((amenity) => (
+                        <S.FacilityListItem as="li" key={amenity.amenityName}>
                             <S.Image
-                                alt={`${amenity.title} 편의시설 이미지`}
-                                src={amenity.img}
+                                alt={`${amenity.amenityName} 편의시설 이미지`}
+                                src={amenity.amenityLogoUrl}
                             />
                             <Text
                                 typography="bodySemiBold16"
                                 color={theme.color.blk[100]}
                             >
-                                {amenity.title}
+                                {amenity.amenityName}
                             </Text>
                         </S.FacilityListItem>
                     ))}
                 </S.FacilityList>
-            </S.Section>
+            </RestAreaDetailSection>
 
-            <S.Section>
-                <S.Title>
-                    <img
-                        alt="기타 정보 표시 아이콘"
-                        src=""
-                        width={24}
-                        height={24}
-                    />
-                    <Text
-                        typography="headingBold20"
-                        color={theme.color.blk[100]}
-                    >
-                        기타 정보
-                    </Text>
-                </S.Title>
-
+            <RestAreaDetailSection title="기타 정보" iconSrc="" iconAlt="">
                 <S.OtherInformationContainer>
                     <S.InformationBox
                         flexOption={{ justifyContent: 'space-between' }}
@@ -174,7 +94,7 @@ export function RestAreaOtherInformation({
                                 typography="bodySemiBold16"
                                 color={theme.color.blk[100]}
                             >
-                                {address}
+                                {restStop.address}
                             </Text>
                         </FlexBox>
 
@@ -182,18 +102,20 @@ export function RestAreaOtherInformation({
                             cursor="pointer"
                             width={24}
                             height={24}
-                            onClick={() => handleCopyToClipboard(address)}
+                            onClick={() =>
+                                handleCopyToClipboard(restStop.address)
+                            }
                         />
                     </S.InformationBox>
 
-                    <a href={`tel:${cellphone}`}>
+                    <a href={`tel:${restStop.phoneNumber}`}>
                         <S.InformationBox gap={12}>
                             <CallIcon width={24} height={24} />
                             <Text
                                 typography="bodySemiBold16"
                                 color={theme.color.blk[100]}
                             >
-                                {cellphone}
+                                {restStop.phoneNumber}
                             </Text>
                         </S.InformationBox>
                     </a>
@@ -221,7 +143,7 @@ export function RestAreaOtherInformation({
                         </Text>
                     </Text>
                 </S.Description>
-            </S.Section>
+            </RestAreaDetailSection>
         </S.Container>
     );
 }
