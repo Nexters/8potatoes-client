@@ -100,7 +100,14 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
                 transition={{ duration: 0.1 }}
             >
                 <FlexBox gap={16}>
-                    <FlexBox row gap={12} flexOption={{ alignItems: 'center' }}>
+                    <FlexBox
+                        row
+                        gap={12}
+                        flexOption={{
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                    >
                         <Text
                             typography="headingBold20"
                             color={theme.color.blk[100]}
