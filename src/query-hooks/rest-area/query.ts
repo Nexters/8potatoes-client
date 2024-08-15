@@ -19,7 +19,7 @@ export const useGetHighwayRestAreaList = ({
     });
 };
 
-export const useGetRestAreaDetailInfo = () => {
+export const useGetRestAreaBaseInfo = () => {
     const { restAreaId } = useParams();
 
     if (!restAreaId) {
