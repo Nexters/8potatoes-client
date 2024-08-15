@@ -9,6 +9,7 @@ export default defineConfig({
     },
     plugins: [react(), svgr()],
     server: {
+        host: '0.0.0.0',
         proxy: {
             '/tmap': {
                 target: 'https://apis.openapi.sk.com',

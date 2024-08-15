@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import ArrowLeftIcon from '#/assets/icons/arrow-left.svg?react';
 import CloseIcon from '#/assets/icons/close.svg?react';
 import { theme } from '#/styles/theme';
@@ -7,7 +9,7 @@ import { Text } from '../text';
 import * as S from './Header.style';
 
 export interface HeaderProps {
-    title: string;
+    title: ReactNode;
     isVisibleBackspace?: boolean;
     onClickBackspace?: () => void;
     isVisibleClose?: boolean;

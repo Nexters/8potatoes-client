@@ -1,6 +1,5 @@
 import { RestAreaInformation } from '#/features/rest-area/rest-area-information';
 
-import { Drawer } from './components/drawer';
 import { Text } from './components/text/Text';
 import { RestAreaOtherInformation } from './features/rest-area/rest-area-other-information';
 import { theme } from './styles/theme';
@@ -66,7 +65,7 @@ const data = {
 
 function App() {
     return (
-        <>
+        <div style={{ height: '100dvh' }}>
             <RestAreaOtherInformation otherInformation={data} />
             <Text
                 as="h1"
@@ -85,7 +84,7 @@ function App() {
                 openDate={new Date('2024-08-07')}
                 closeDate={new Date('2024-08-08')}
             />
-        </>
+        </div>
     );
 }
 
