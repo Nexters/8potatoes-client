@@ -12,21 +12,13 @@ import { RestAreaDetailSection } from '../../features/rest-area/rest-area-detail
 import * as S from './RestAreaOtherInformation.style';
 
 export function RestAreaOtherInformation() {
-    const {
-        data: {
-            restaurantOperatingTimes,
-            brands,
-            amenities,
-            address,
-            phoneNumber,
-        },
-    } = useGetRestAreaRestStopInfo();
+    const { data: restStop } = useGetRestAreaRestStopInfo();
 
     return (
         <S.Container gap={8}>
             <RestAreaDetailSection title="영업 시간" iconSrc="" iconAlt="">
                 <S.HourList as="ul" gap={12}>
-                    {restaurantOperatingTimes.map((restaurant) => (
+                    {restStop.restaurantOperatingTimes.map((restaurant) => (
                         <FlexBox
                             as="li"
                             row
@@ -52,7 +44,7 @@ export function RestAreaOtherInformation() {
 
             <RestAreaDetailSection title="입점 브랜드" iconSrc="" iconAlt="">
                 <S.FacilityList>
-                    {brands.map((brand) => (
+                    {restStop.brands.map((brand) => (
                         <S.FacilityListItem as="li" key={brand.brandName}>
                             <S.Image
                                 alt={`${brand.brandName} 브랜드 이미지`}
@@ -71,7 +63,7 @@ export function RestAreaOtherInformation() {
 
             <RestAreaDetailSection title="편의시설" iconSrc="" iconAlt="">
                 <S.FacilityList>
-                    {amenities.map((amenity) => (
+                    {restStop.amenities.map((amenity) => (
                         <S.FacilityListItem as="li" key={amenity.amenityName}>
                             <S.Image
                                 alt={`${amenity.amenityName} 편의시설 이미지`}
@@ -103,7 +95,7 @@ export function RestAreaOtherInformation() {
                                 typography="bodySemiBold16"
                                 color={theme.color.blk[100]}
                             >
-                                {address}
+                                {restStop.address}
                             </Text>
                         </FlexBox>
 
@@ -111,18 +103,20 @@ export function RestAreaOtherInformation() {
                             cursor="pointer"
                             width={24}
                             height={24}
-                            onClick={() => handleCopyToClipboard(address)}
+                            onClick={() =>
+                                handleCopyToClipboard(restStop.address)
+                            }
                         />
                     </S.InformationBox>
 
-                    <a href={`tel:${phoneNumber}`}>
+                    <a href={`tel:${restStop.phoneNumber}`}>
                         <S.InformationBox gap={12}>
                             <CallIcon width={24} height={24} />
                             <Text
                                 typography="bodySemiBold16"
                                 color={theme.color.blk[100]}
                             >
-                                {phoneNumber}
+                                {restStop.phoneNumber}
                             </Text>
                         </S.InformationBox>
                     </a>

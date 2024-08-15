@@ -1,7 +1,8 @@
-import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
 import { theme } from '#/styles/theme';
 import dayjs from '#/utils/dayjs';
+
+import { RestAreaDetailSection } from '../rest-area-detail-section';
 
 import * as S from './RestAreaParkingInformation.style';
 
@@ -21,32 +22,12 @@ export const RestAreaParkingInformation = ({
     updateDate,
 }: RestAreaParkingInformationProps) => {
     return (
-        <S.Section gap={32}>
-            <FlexBox
-                row
-                flexOption={{
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                }}
-            >
-                <S.Title row gap={12}>
-                    <img
-                        alt="주차 공간 표시 아이콘"
-                        src=""
-                        width={24}
-                        height={24}
-                    />
-                    <Text
-                        typography="headingBold20"
-                        color={theme.color.blk[100]}
-                    >
-                        주차 공간
-                    </Text>
-                </S.Title>
-                <Text color={theme.color.blk[40]} typography="bodySemiBold14">
-                    {totalSpace}대 주차 가능
-                </Text>
-            </FlexBox>
+        <RestAreaDetailSection
+            title="주차 공간"
+            iconSrc=""
+            iconAlt=""
+            description={`${totalSpace}대 주차 가능`}
+        >
             <S.CardGroup row gap={12}>
                 <S.Card gap={20}>
                     <Text color={theme.color.blk[60]} typography="bodyMedium16">
@@ -96,6 +77,6 @@ export const RestAreaParkingInformation = ({
                     본 정보는 특정 시점에 수집되어 실제와 다를 수 있습니다.
                 </Text>
             </S.UpdateNotice>
-        </S.Section>
+        </RestAreaDetailSection>
     );
 };

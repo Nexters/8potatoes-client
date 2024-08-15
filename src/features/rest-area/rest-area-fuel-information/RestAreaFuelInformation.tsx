@@ -2,6 +2,8 @@ import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
 import { theme } from '#/styles/theme';
 
+import { RestAreaDetailSection } from '../rest-area-detail-section';
+
 import * as S from './RestAreaFuelInformation.style';
 
 interface RestAreaFuelInformationProps {
@@ -20,18 +22,7 @@ export const RestAreaFuelInformation = ({
     isHydrogenChargingStation,
 }: RestAreaFuelInformationProps) => {
     return (
-        <S.Section gap={24}>
-            <S.Title gap={12} row>
-                <img
-                    alt="주유 및 충전 표시 아이콘"
-                    src=""
-                    width={24}
-                    height={24}
-                />
-                <Text typography="headingBold20" color={theme.color.blk[100]}>
-                    주유 및 충전
-                </Text>
-            </S.Title>
+        <RestAreaDetailSection title="주유 및 충전" iconSrc="" iconAlt="">
             <S.CardGroup row gap={12}>
                 {gasolinePrice && (
                     <S.Card gap={20}>
@@ -108,6 +99,6 @@ export const RestAreaFuelInformation = ({
                     </Text>
                 </S.AvailableChargeOption>
             </FlexBox>
-        </S.Section>
+        </RestAreaDetailSection>
     );
 };
