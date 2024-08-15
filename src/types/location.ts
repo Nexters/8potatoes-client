@@ -1,3 +1,5 @@
+import { SEARCH_OPTION } from '#/constants/location';
+
 export interface GeolocationCoordinatesType {
     latitude: number;
     longitude: number;
@@ -65,3 +67,6 @@ export interface SelectedLocationType {
     lon: number;
     addressName: string;
 }
+
+export type SearchOptionType =
+    (typeof SEARCH_OPTION)[keyof typeof SEARCH_OPTION];

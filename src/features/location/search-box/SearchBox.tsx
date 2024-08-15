@@ -69,8 +69,8 @@ export function SearchBox({
     const handleSelectLocation = (location: LocationInformationType) => {
         const { noorLat = '', noorLon = '', name = '' } = location;
         const selectedLocation = {
-            lat: parseInt(noorLat),
-            lon: parseInt(noorLon),
+            lat: Number(noorLat),
+            lon: Number(noorLon),
             addressName: name,
         };
 

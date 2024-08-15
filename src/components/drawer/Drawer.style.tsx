@@ -35,6 +35,10 @@ export const ContentWrapper = styled(motion.div)`
     justify-content: space-between;
 
     overflow: hidden;
+
+    &:focus-visible {
+        outline: none;
+    }
 `;
 
 export const HolderWrapper = styled(motion.div)`

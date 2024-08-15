@@ -106,6 +106,7 @@ export const DrawerContent = ({
                             exit={{ opacity: 0, y: '100%' }}
                             style={{
                                 maxHeight: height,
+                                height,
                                 top,
                             }}
                             layout
