@@ -29,8 +29,16 @@ export const useGetRestAreaBaseInfo = () => {
     return useSuspenseQuery({
         queryKey: REST_AREA_QUERY_KEY.detail(restAreaId),
         queryFn: () => getRestAreaDetailInfo({ reststopCode: restAreaId }),
-        select: ({ name, isOperating, startTime, endTime, naverRating }) => ({
+        select: ({
             name,
+            direction,
+            isOperating,
+            startTime,
+            endTime,
+            naverRating,
+        }) => ({
+            name,
+            direction,
             isOperating,
             startTime,
             endTime,
