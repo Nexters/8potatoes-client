@@ -32,7 +32,7 @@ export const CTABottomSection = styled(BottomSection)`
 export const LocationPointerContainer = styled.div`
     position: absolute;
     right: 20px;
-    bottom: 214px;
+    bottom: 185px;
 
     padding: 14px;
     background-color: ${theme.color.wht[100]};
