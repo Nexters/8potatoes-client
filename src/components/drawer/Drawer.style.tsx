@@ -1,8 +1,13 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 
+import { Z_INDEX } from '#/constants/z-index';
 import { theme } from '#/styles/theme';
+
+export const Container = styled.div`
+    position: relative;
+    z-index: ${Z_INDEX.DRAWER};
+`;
 
 export const Overlay = styled(motion.div)`
     position: fixed;
