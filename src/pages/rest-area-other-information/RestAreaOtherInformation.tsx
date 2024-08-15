@@ -3,11 +3,10 @@ import CopyIcon from '#/assets/icons/copy.svg?react';
 import LocationIcon from '#/assets/icons/location.svg?react';
 import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
+import { RestAreaDetailSection } from '#/features/rest-area/rest-area-detail-section';
 import { useGetRestAreaRestStopInfo } from '#/query-hooks/rest-area/query';
 import { theme } from '#/styles/theme';
 import { handleCopyToClipboard } from '#/utils/common';
-
-import { RestAreaDetailSection } from '../../features/rest-area/rest-area-detail-section';
 
 import * as S from './RestAreaOtherInformation.style';
 

@@ -1,6 +1,5 @@
 import { LocationInformationType } from '#/types/location';
-
-import { ReverseGeocodingInformationType } from '../../types/location';
+import { ReverseGeocodingInformationType } from '#/types/location';
 
 export interface LocationSearchParams {
     page: number;
@@ -39,7 +38,7 @@ export interface VehiclePathParams {
     passList?: string;
     reqCoordType?: string;
     resCoordType?: string;
-};
+}
 
 export interface VehiclePathResponse {
     features: {
@@ -52,7 +51,7 @@ export interface VehiclePathResponse {
             | {
                   coordinates: [number, number][];
                   type: 'LineString';
-              }
+              };
         properties: {
             index: number;
             name: string;
@@ -62,4 +61,4 @@ export interface VehiclePathResponse {
             pointType: 'S' | 'E' | 'B1' | 'B2' | 'B3' | 'N';
         };
     }[];
-};
+}
