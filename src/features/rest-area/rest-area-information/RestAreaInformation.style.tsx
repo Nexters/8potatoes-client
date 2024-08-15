@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import { theme } from '#/styles/theme';
 import { FlexBox } from '#/components/flex-box';
+import { theme } from '#/styles/theme';
 
 export const Container = styled.div`
     width: 100%;
@@ -15,9 +15,11 @@ export const Container = styled.div`
     background-color: rgba(255, 241, 231, 0.7);
     border-radius: 20px;
 
+    cursor: pointer;
+
     &:not(:last-child) {
         position: relative;
-    
+
         &::after {
             z-index: 1;
             content: '';
@@ -50,14 +52,12 @@ export const NaverRating = styled(FlexBox)`
     }
 `;
 
-export const OpenStateBadge = styled.div<{ isRestAreaOpen: boolean }>(
-    ({ isRestAreaOpen }) => {
-        const backgroundColor = isRestAreaOpen
+export const OpenStateBadge = styled.div<{ isOperating: boolean }>(
+    ({ isOperating }) => {
+        const backgroundColor = isOperating
             ? theme.color.main[100]
             : theme.color.blk[10];
-        const color = isRestAreaOpen
-            ? theme.color.wht[100]
-            : theme.color.blk[60];
+        const color = isOperating ? theme.color.wht[100] : theme.color.blk[60];
 
         return css`
             height: fit-content;
