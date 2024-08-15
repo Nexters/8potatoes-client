@@ -5,14 +5,7 @@ import { Outlet } from 'react-router-dom';
 import DotIcon from '#/assets/icons/dot.svg?react';
 import { TabHeader } from '#/components/tab-header';
 import useIntersectionObserver from '#/hooks/useIntersectionObserver';
-
-const restInformation = {
-    title: '천안 삼거리 휴게소',
-    direction: '서울',
-    isWorking: true,
-    endTime: '24:00',
-    ranking: 4.2,
-};
+import { useGetRestAreaBaseInfo } from '#/query-hooks/rest-area/query';
 
 const tabTitles = [
     { title: '먹거리', url: 'foods' },
@@ -32,6 +25,8 @@ export function RestAreaDetail() {
     const tabHeaderRef = useRef<HTMLDivElement>(null);
 
     const [isMinHeader, setIsMinHeader] = useState(false);
+
+    const { data: restInformation } = useGetRestAreaBaseInfo();
 
     const { targetRef: contentRef } = useIntersectionObserver<HTMLDivElement>({
         onIntersect: (isIntersect) => setIsMinHeader(isIntersect),

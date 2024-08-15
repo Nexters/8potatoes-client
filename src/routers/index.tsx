@@ -10,6 +10,7 @@ import App from '#/App';
 import { LocationSearch } from '#/pages/location-search';
 import { RestAreaFuelPage } from '#/pages/rest-area-fuel';
 import { RestAreaMapPage } from '#/pages/rest-area-map';
+import { RestAreaOtherInformation } from '#/pages/rest-area-other-information';
 import { MobileView } from '#/pages/templates/mobile-view';
 import { RestAreaDetail } from '#/pages/templates/rest-area-detail';
 import { GlobalStyle } from '#/styles/global';
@@ -74,7 +75,7 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                         },
                         {
                             path: 'other-information',
-                            element: <div>other information</div>,
+                            element: <RestAreaOtherInformation />,
                         },
                     ],
                 },

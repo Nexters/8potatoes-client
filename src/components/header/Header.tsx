@@ -32,7 +32,11 @@ export function Header({
                     <ArrowLeftIcon />
                 </S.BackSpace>
             )}
-            <Text typography="headingBold18" color={theme.color.blk[100]}>
+            <Text
+                as="span"
+                typography="headingBold18"
+                color={theme.color.blk[100]}
+            >
                 {title}
             </Text>
             {isVisibleClose && (

@@ -4,14 +4,7 @@ import { FlexBox } from '#/components/flex-box';
 import { theme } from '#/styles/theme';
 
 export const Container = styled(FlexBox)`
-    background-color: #f9f9f9;
-`;
-
-export const Section = styled(FlexBox)`
-    gap: 24px;
-    padding: 40px 20px;
-
-    background-color: ${theme.color.wht[100]};
+    background-color: ${theme.color.blk[5]};
 `;
 
 export const Title = styled(FlexBox)`
@@ -36,6 +29,7 @@ export const FacilityListItem = styled(FlexBox)`
     align-items: center;
     gap: 16px;
     word-break: keep-all;
+    text-align: center;
 `;
 
 export const OtherInformationContainer = styled(FlexBox)`

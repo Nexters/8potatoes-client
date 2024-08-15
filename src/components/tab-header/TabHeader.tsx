@@ -16,11 +16,12 @@ type TabTitleType = { title: ReactNode; url: string };
 
 interface TabHeaderProps {
     headerInformation: {
-        title: string;
-        direction: string;
-        isWorking: boolean;
-        endTime: string;
-        ranking: number;
+        name: string;
+        isOperating: boolean;
+        direction?: string;
+        startTime?: string;
+        endTime?: string;
+        naverRating?: number;
     };
     tabTitles: TabTitleType[];
     isMinSize: boolean;
@@ -38,7 +39,8 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
 
     const currentHeader = location.pathname.split('/').at(-1);
 
-    const { title, direction, isWorking, endTime, ranking } = headerInformation;
+    const { name, direction, isOperating, startTime, endTime, naverRating } =
+        headerInformation;
 
     const headerVariants = {
         min: {
@@ -55,17 +57,37 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
         return isMinSize ? (
             <FlexBox row gap={12} flexOption={{ alignItems: 'center' }}>
                 <Text typography="headingBold18" color={theme.color.blk[100]}>
-                    {title}
+                    {name}
                 </Text>
-                <S.SplitLine />
-                <Text typography="bodySemiBold18" color={theme.color.blk[40]}>
-                    {direction} 방향
-                </Text>
+                {direction && (
+                    <>
+                        <S.SplitLine />
+                        <Text
+                            typography="bodySemiBold18"
+                            color={theme.color.blk[40]}
+                        >
+                            {direction} 방향
+                        </Text>
+                    </>
+                )}
             </FlexBox>
         ) : (
             ''
         );
-    }, [isMinSize, title, direction]);
+    }, [isMinSize, name, direction]);
+
+    const operatingStatus = useMemo(() => {
+        return isOperating ? (
+            <>
+                식당 영업중 <DotIcon /> {endTime}
+                까지
+            </>
+        ) : (
+            <>
+                식당 영업끝 <DotIcon /> {startTime}-{endTime}
+            </>
+        );
+    }, [isOperating, startTime, endTime]);
 
     return (
         <S.Container ref={ref}>
@@ -75,23 +97,34 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
                 initial={{ y: 0 }}
                 variants={headerVariants}
                 animate={isMinSize ? 'min' : 'max'}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.1 }}
             >
                 <FlexBox gap={16}>
-                    <FlexBox row gap={12} flexOption={{ alignItems: 'center' }}>
+                    <FlexBox
+                        row
+                        gap={12}
+                        flexOption={{
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                    >
                         <Text
                             typography="headingBold20"
                             color={theme.color.blk[100]}
                         >
-                            {title}
+                            {name}
                         </Text>
-                        <S.SplitLine />
-                        <Text
-                            typography="headingSemiBold20"
-                            color={theme.color.blk[40]}
-                        >
-                            {direction} 방향
-                        </Text>
+                        {direction && (
+                            <>
+                                <S.SplitLine />
+                                <Text
+                                    typography="headingSemiBold20"
+                                    color={theme.color.blk[40]}
+                                >
+                                    {direction} 방향
+                                </Text>
+                            </>
+                        )}
                     </FlexBox>
 
                     <FlexBox row gap={12}>
@@ -99,14 +132,12 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
                             typography="bodySemiBold14"
                             color={theme.color.blk[60]}
                         >
-                            식당 {isWorking ? '영업중' : '마감시간'} <DotIcon />{' '}
-                            {endTime}
-                            까지
+                            {operatingStatus}
                         </Text>
                         <S.RankingInformation>
                             <StarIcon width={12} height={12} />
                             <Text typography="bodyBold14">
-                                {ranking} <DotIcon />
+                                {naverRating} <DotIcon />
                             </Text>
                             <Text typography="bodySemiBold14">네이버평점</Text>
                         </S.RankingInformation>
