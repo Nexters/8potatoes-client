@@ -1,6 +1,6 @@
 import { ReactNode, forwardRef, useMemo } from 'react';
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import DotIcon from '#/assets/icons/dot.svg?react';
 import StarIcon from '#/assets/icons/star.svg?react';
@@ -33,8 +33,10 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
     { headerInformation, tabTitles, isMinSize },
     ref,
 ) {
-    const { restAreaId } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const currentHeader = location.pathname.split('/').at(-1);
 
     const { title, direction, isWorking, endTime, ranking } = headerInformation;
 
@@ -114,7 +116,7 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
 
             <S.TabContainer>
                 {tabTitles.map((tabTitle, idx) => {
-                    const isSelected = tabTitle.url === restAreaId;
+                    const isSelected = tabTitle.url === currentHeader;
                     return (
                         <S.Tab key={idx}>
                             <S.TabTitle

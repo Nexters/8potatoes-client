@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import { Outlet } from 'react-router-dom';
 
@@ -15,32 +15,39 @@ const restInformation = {
 };
 
 const tabTitles = [
-    { title: '먹거리', url: '/rest-area/foods' },
+    { title: '먹거리', url: 'foods' },
     {
         title: (
             <>
                 주유 <DotIcon /> 주차
             </>
         ),
-        url: '/rest-area/fuel-parking',
+        url: 'fuel-parking',
     },
-    { title: '기타정보', url: '/rest-area/other-information' },
+    { title: '기타정보', url: 'other-information' },
 ];
 
 export function RestAreaDetail() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const contentRef = useRef<HTMLDivElement>(null);
     const tabHeaderRef = useRef<HTMLDivElement>(null);
 
+    const [isMinHeader, setIsMinHeader] = useState(false);
+
+    const { targetRef: contentRef } = useIntersectionObserver<HTMLDivElement>({
+        onIntersect: (isIntersect) => setIsMinHeader(isIntersect),
+        enabled: true,
+        rootMargin: `0px 0px ${-((containerRef.current?.offsetHeight ?? 0) - (tabHeaderRef.current?.offsetHeight ?? 0) + 1)}px 0px`,
+    });
+
     return (
-        <div style={{ height: '100dvh' }} ref={containerRef}>
+        <div ref={containerRef}>
             <TabHeader
                 ref={tabHeaderRef}
                 headerInformation={restInformation}
                 tabTitles={tabTitles}
-                isMinSize={false}
+                isMinSize={isMinHeader}
             />
-            <div ref={contentRef} style={{ height: '200dvh' }}>
+            <div ref={contentRef}>
                 <Outlet />
             </div>
         </div>

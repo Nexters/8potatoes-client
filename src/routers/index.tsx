@@ -64,7 +64,9 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                     children: [
                         {
                             path: 'foods',
-                            element: <div>food</div>,
+                            element: (
+                                <div style={{ height: '200dvh' }}>food</div>
+                            ),
                         },
                         {
                             path: 'fuel-parking',

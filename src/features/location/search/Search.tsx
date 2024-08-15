@@ -42,7 +42,7 @@ export function Search({
 
     const rootRef = useRef<HTMLDivElement>(null);
     const { targetRef } = useIntersectionObserver<HTMLDivElement>({
-        onIntersect: fetchNextPage,
+        onIntersect: (isIntersect) => isIntersect && fetchNextPage(),
         enabled: !!hasNextPage,
         root: rootRef.current,
         rootMargin: '40px',
