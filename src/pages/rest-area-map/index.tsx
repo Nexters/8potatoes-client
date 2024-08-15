@@ -11,6 +11,7 @@ import { DestinationMarker } from '#/features/rest-area/destination-marker';
 import { RestAreaBubbleMarker } from '#/features/rest-area/rest-area-bubble-marker';
 import { RestAreaListDrawer } from '#/features/rest-area/rest-area-drawer';
 import { useGetDestinationPath } from '#/query-hooks/location/query';
+import { useGetHighwayRestAreaList } from '#/query-hooks/rest-area/query';
 import { theme } from '#/styles/theme';
 import type { SearchOptionType, SelectedLocationType } from '#/types/location';
 
@@ -21,13 +22,29 @@ export const RestAreaMapPage = () => {
 
     const { origin, destination } = location.state;
 
-    const { data: journeyPathList, isSuccess: isValidJourney } =
-        useGetDestinationPath({
-            startX: origin.lon,
-            startY: origin.lat,
-            endX: destination.lon,
-            endY: destination.lat,
-        });
+    const {
+        data: {
+            journeyPathList = [],
+            squareCoordinateMap,
+            roadNames = '',
+        } = {},
+        isSuccess: isValidJourney,
+    } = useGetDestinationPath({
+        startX: origin.lon,
+        startY: origin.lat,
+        endX: destination.lon,
+        endY: destination.lat,
+    });
+
+    const { data: restAreaData, isSuccess: isValidHighwayRestArea } =
+        useGetHighwayRestAreaList(
+            {
+                from: `${origin.lat},${origin.lon}`,
+                to: `${destination.lat},${destination.lon}`,
+                roadNames,
+            },
+            { enabled: isValidJourney },
+        );
 
     const mapBound = {
         north: Math.max(origin.lat, destination.lat),
@@ -50,11 +67,13 @@ export const RestAreaMapPage = () => {
                     start={origin.addressName}
                     end={destination.addressName}
                 />
-                <RestAreaListDrawer />
-                <NaverMap
-                    maxBounds={mapBound}
-                    overlayZoomEffect="all"
-                >
+                {isValidHighwayRestArea && (
+                    <RestAreaListDrawer
+                        totalRestAreaCount={restAreaData.totalReststopCount}
+                        restAreaList={restAreaData.reststops}
+                    />
+                )}
+                <NaverMap maxBounds={mapBound} overlayZoomEffect="all">
                     {isValidJourney && (
                         <>
                             <Polyline
@@ -72,6 +91,26 @@ export const RestAreaMapPage = () => {
                             <DestinationMarker position={endPosition} />
                         </>
                     )}
+                    {isValidHighwayRestArea &&
+                        restAreaData.reststops.map(
+                            ({
+                                name,
+                                location,
+                                isRecommend,
+                            }) => (
+                                <RestAreaBubbleMarker
+                                    direction={'부산'}
+                                    restAreaName={name}
+                                    isRecommend={isRecommend}
+                                    position={
+                                        new naver.maps.LatLng(
+                                            location.latitude,
+                                            location.longitude,
+                                        )
+                                    }
+                                />
+                            ),
+                        )}
                 </NaverMap>
             </NaverMapContainer>
         </>

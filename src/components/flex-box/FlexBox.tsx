@@ -1,4 +1,4 @@
-import { CSSProperties, ComponentProps, ElementType } from 'react';
+import { CSSProperties, ComponentProps, ElementType, forwardRef } from 'react';
 
 import * as S from './FlexBox.style';
 
@@ -22,23 +22,29 @@ export interface FlexBoxProps extends ComponentProps<'div'> {
     >;
 }
 
-export const FlexBox = ({
-    as,
-    row = false,
-    gap = 0,
-    flexOption,
-    className,
-    children,
-    ...restProps
-}: FlexBoxProps) => (
-    <S.Container
-        as={as || 'div'}
-        row={row}
-        gap={gap}
-        flexOption={flexOption}
-        className={className}
-        {...restProps}
-    >
-        {children}
-    </S.Container>
+export const FlexBox = forwardRef<HTMLDivElement, FlexBoxProps>(
+    (
+        {
+            as,
+            row = false,
+            gap = 0,
+            flexOption,
+            className,
+            children,
+            ...restProps
+        },
+        ref,
+    ) => (
+        <S.Container
+            ref={ref}
+            as={as || 'div'}
+            row={row}
+            gap={gap}
+            flexOption={flexOption}
+            className={className}
+            {...restProps}
+        >
+            {children}
+        </S.Container>
+    ),
 );

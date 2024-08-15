@@ -4,6 +4,7 @@ import {
     type SetStateAction,
     createContext,
     useContext,
+    useEffect,
     useMemo,
 } from 'react';
 
@@ -66,6 +67,18 @@ export const DrawerRoot = ({
             setDrawerOpen,
         ],
     );
+
+    useEffect(() => {
+        if (isDrawerOpen && !isOverlayExist) {
+            const timer = setTimeout(() => {
+                document.body.style.pointerEvents = '';
+            }, 0);
+
+            return () => clearTimeout(timer);
+        } else {
+            document.body.style.pointerEvents = 'auto';
+        }
+    }, [isDrawerOpen, isOverlayExist]);
 
     return (
         <DrawerContext.Provider value={value}>

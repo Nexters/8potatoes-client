@@ -5,6 +5,7 @@ import {
     getReverseGeocodingData,
     getVehiclePath,
 } from '#/apis/tmap';
+import { HIGHWAY_LIST } from '#/constants/highway';
 import { LOCATION_QUERY_KEY } from '#/constants/query-key';
 import {
     GeolocationCoordinatesType,
@@ -77,6 +78,11 @@ interface DestinationPathQueryParams {
     endY: number;
 }
 
+interface DestinationPathSelectedResult {
+    pathList: naver.maps.LatLng[];
+    roadNameList: string[];
+}
+
 export const useGetDestinationPath = ({
     startX,
     startY,
@@ -92,28 +98,81 @@ export const useGetDestinationPath = ({
                 endX,
                 endY,
             }),
-        select: ({ features }) =>
-            features
+        select: ({ features }) => {
+            function getBoundingBox(coordinates: [number, number][]) {
+                const lats = coordinates.map((point) => point[1]);
+                const lngs = coordinates.map((point) => point[0]);
+
+                const minLat = Math.min(...lats);
+                const maxLat = Math.max(...lats);
+                const minLng = Math.min(...lngs);
+                const maxLng = Math.max(...lngs);
+
+                const topLeft = [minLng, maxLat];
+                const topRight = [maxLng, maxLat];
+                const bottomLeft = [minLng, minLat];
+                const bottomRight = [maxLng, minLat];
+
+                return [topLeft, topRight, bottomLeft, bottomRight];
+            }
+
+            const squareCoordinateMap: Record<string, number[][][]> = {};
+            const { pathList, roadNameList } = features
                 .slice(0, -1)
-                .reduce<naver.maps.LatLng[]>((acc, feature) => {
-                    if (
-                        feature.geometry.type === 'LineString' &&
-                        feature.properties?.description !==
-                            '경유지와 연결된 가상의 라인입니다'
-                    ) {
-                        const coordinates = feature.geometry.coordinates
-                            .map(
-                                ([lng, lat]) => new naver.maps.LatLng(lat, lng),
-                            )
-                            .slice(1, -1);
-                        acc.push(...coordinates);
-                    }
-                    if (feature.geometry.type === 'Point') {
-                        const [lng, lat] = feature.geometry.coordinates;
-                        acc.push(new naver.maps.LatLng(lat, lng));
-                    }
-                    return acc;
-                }, []),
+                .reduce<DestinationPathSelectedResult>(
+                    (
+                        {
+                            pathList: accPathList,
+                            roadNameList: accRoadNameList,
+                        },
+                        { geometry, properties },
+                    ) => {
+                        if (
+                            geometry.type === 'LineString' &&
+                            properties?.description !==
+                                '경유지와 연결된 가상의 라인입니다'
+                        ) {
+                            const coordinates = geometry.coordinates
+                                .map(
+                                    ([lng, lat]) =>
+                                        new naver.maps.LatLng(lat, lng),
+                                )
+                                .slice(1, -1);
+                            accPathList.push(...coordinates);
+
+                            if (properties.roadType < 2) {
+                                const roadName = properties.name;
+                                accRoadNameList.push(roadName);
+                                squareCoordinateMap[roadName] = [
+                                    ...(squareCoordinateMap[roadName] ?? []),
+                                    getBoundingBox(
+                                        geometry.coordinates,
+                                    ),
+                                ];
+                            }
+                            
+                        }
+                        if (geometry.type === 'Point') {
+                            const [lng, lat] = geometry.coordinates;
+                            accPathList.push(new naver.maps.LatLng(lat, lng));
+                        }
+                        return {
+                            pathList: accPathList,
+                            roadNameList: accRoadNameList,
+                        };
+                    },
+                    { pathList: [], roadNameList: [] },
+                );
+
+            return {
+                journeyPathList: pathList,
+                squareCoordinateMap,
+                roadNames: [...new Set(roadNameList)]
+                    .map((highway) => highway.replace(/ 고속도로$/, '선'))
+                    .filter((highway) => HIGHWAY_LIST.includes(highway))
+                    .join(','),
+            };
+        },
         staleTime: 1000 * 60,
     });
 };

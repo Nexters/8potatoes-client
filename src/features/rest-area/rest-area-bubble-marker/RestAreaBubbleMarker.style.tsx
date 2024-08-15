@@ -1,18 +1,19 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
+import { FlexBox } from '#/components/flex-box';
 import { theme } from '#/styles/theme';
 
 import type { RestAreaBubbleMarkerImplProps } from './RestAreaBubbleMarker';
 
-type ContainerProps = Pick<RestAreaBubbleMarkerImplProps, 'isCenter'>;
+type ContainerProps = Pick<RestAreaBubbleMarkerImplProps, 'isRecommend'>;
 
-export const Container = styled.div(({ isCenter }: ContainerProps) => {
-    const backgroundColor = isCenter
+export const Container = styled(FlexBox)(({ isRecommend }: ContainerProps) => {
+    const backgroundColor = isRecommend
         ? theme.color.main[100]
         : theme.color.wht[100];
-    const borderColor = isCenter ? 'transparent' : theme.color.main[100];
-    const color = isCenter ? theme.color.wht[100] : theme.color.main[100];
+    const borderColor = isRecommend ? 'transparent' : theme.color.main[100];
+    const color = isRecommend ? theme.color.wht[100] : theme.color.main[100];
 
     return css`
         width: max-content;
@@ -23,6 +24,7 @@ export const Container = styled.div(({ isCenter }: ContainerProps) => {
         box-sizing: border-box;
         color: ${color};
         position: relative;
+        align-items: center;
 
         &::before {
             content: '';
@@ -36,6 +38,10 @@ export const Container = styled.div(({ isCenter }: ContainerProps) => {
             background-color: ${backgroundColor};
             transform: translateY(-50%) rotate(-27.5deg);
             clip-path: polygon(100% 50%, 0 0, 0 100%);
+        }
+
+        & > svg {
+            margin: auto 0;
         }
     `;
 });

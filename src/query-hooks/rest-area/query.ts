@@ -1,19 +1,30 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import {
+    type UseQueryOptions,
+    type UseSuspenseQueryOptions,
+    useQuery,
+    useSuspenseQuery,
+} from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 
 import {
     getHighwayRestAreaList,
     getRestAreaDetailInfo,
 } from '#/apis/rest-area';
-import { HighwayRestAreaListParams } from '#/apis/rest-area/type';
+import {
+    HighwayRestAreaListParams,
+    HighwayRestAreaListResponse,
+} from '#/apis/rest-area/type';
 import { REST_AREA_QUERY_KEY } from '#/constants/query-key';
 
-export const useGetHighwayRestAreaList = ({
-    from,
-    to,
-    roadNames,
-}: HighwayRestAreaListParams) => {
-    return useSuspenseQuery({
+export const useGetHighwayRestAreaList = (
+    { from, to, roadNames }: HighwayRestAreaListParams,
+    options: Omit<
+        UseQueryOptions<HighwayRestAreaListResponse>,
+        'queryKey' | 'queryFn'
+    >,
+) => {
+    return useQuery<HighwayRestAreaListResponse>({
+        ...options,
         queryKey: REST_AREA_QUERY_KEY.highwayList({ from, to, roadNames }),
         queryFn: () => getHighwayRestAreaList({ from, to, roadNames }),
     });
