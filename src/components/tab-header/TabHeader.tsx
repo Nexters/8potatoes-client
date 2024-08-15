@@ -18,6 +18,7 @@ interface TabHeaderProps {
     headerInformation: {
         name: string;
         isOperating: boolean;
+        direction?: string;
         startTime?: string;
         endTime?: string;
         naverRating?: number;
@@ -29,8 +30,6 @@ interface TabHeaderProps {
 const TOTAL_HEADER_HEIGHT = 166;
 const HEADER_CONTENTS_HEIGHT = 95;
 
-const direction = '서울';
-
 const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
     { headerInformation, tabTitles, isMinSize },
     ref,
@@ -40,7 +39,7 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
 
     const currentHeader = location.pathname.split('/').at(-1);
 
-    const { name, isOperating, startTime, endTime, naverRating } =
+    const { name, direction, isOperating, startTime, endTime, naverRating } =
         headerInformation;
 
     const headerVariants = {
@@ -60,10 +59,17 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
                 <Text typography="headingBold18" color={theme.color.blk[100]}>
                     {name}
                 </Text>
-                <S.SplitLine />
-                <Text typography="bodySemiBold18" color={theme.color.blk[40]}>
-                    {direction} 방향
-                </Text>
+                {direction && (
+                    <>
+                        <S.SplitLine />
+                        <Text
+                            typography="bodySemiBold18"
+                            color={theme.color.blk[40]}
+                        >
+                            {direction} 방향
+                        </Text>
+                    </>
+                )}
             </FlexBox>
         ) : (
             ''
@@ -101,13 +107,17 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
                         >
                             {name}
                         </Text>
-                        <S.SplitLine />
-                        <Text
-                            typography="headingSemiBold20"
-                            color={theme.color.blk[40]}
-                        >
-                            {direction} 방향
-                        </Text>
+                        {direction && (
+                            <>
+                                <S.SplitLine />
+                                <Text
+                                    typography="headingSemiBold20"
+                                    color={theme.color.blk[40]}
+                                >
+                                    {direction} 방향
+                                </Text>
+                            </>
+                        )}
                     </FlexBox>
 
                     <FlexBox row gap={12}>
