@@ -5,19 +5,19 @@ import { theme } from '#/styles/theme';
 import * as S from './RestAreaFuelInformation.style';
 
 interface RestAreaFuelInformationProps {
-    gasolinePrice?: number;
-    dieselPrice?: number;
-    lpgPrice?: number;
-    isElectricChargeAvailable?: boolean;
-    isHydrogenChargeAvailable?: boolean;
+    gasolinePrice?: string;
+    dieselPrice?: string;
+    lpgPrice?: string;
+    isElectricChargingStation?: boolean;
+    isHydrogenChargingStation?: boolean;
 }
 
 export const RestAreaFuelInformation = ({
     gasolinePrice,
     dieselPrice,
     lpgPrice,
-    isElectricChargeAvailable,
-    isHydrogenChargeAvailable,
+    isElectricChargingStation,
+    isHydrogenChargingStation,
 }: RestAreaFuelInformationProps) => {
     return (
         <S.Section gap={24}>
@@ -92,7 +92,7 @@ export const RestAreaFuelInformation = ({
                         color={theme.color.blk[100]}
                         typography="bodySemiBold16"
                     >
-                        {isElectricChargeAvailable ? '가능' : '불가능'}
+                        {isElectricChargingStation ? '가능' : '불가능'}
                     </Text>
                 </S.AvailableChargeOption>
                 <S.AvailableChargeOption row gap={12}>
@@ -104,7 +104,7 @@ export const RestAreaFuelInformation = ({
                         color={theme.color.blk[100]}
                         typography="bodySemiBold16"
                     >
-                        {isHydrogenChargeAvailable ? '가능' : '불가능'}
+                        {isHydrogenChargingStation ? '가능' : '불가능'}
                     </Text>
                 </S.AvailableChargeOption>
             </FlexBox>

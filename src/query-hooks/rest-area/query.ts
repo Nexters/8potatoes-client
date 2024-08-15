@@ -1,4 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 
 import {
     getHighwayRestAreaList,
@@ -18,45 +19,75 @@ export const useGetHighwayRestAreaList = ({
     });
 };
 
-export const useGetRestAreaDetailInfo = (reststopCode: string) => {
+export const useGetRestAreaDetailInfo = () => {
+    const { restAreaId } = useParams();
+
+    if (!restAreaId) {
+        throw new Error('restAreaId가 없습니다.');
+    }
+
     return useSuspenseQuery({
-        queryKey: REST_AREA_QUERY_KEY.detail(reststopCode),
-        queryFn: () => getRestAreaDetailInfo({ reststopCode }),
+        queryKey: REST_AREA_QUERY_KEY.detail(restAreaId),
+        queryFn: () => getRestAreaDetailInfo({ reststopCode: restAreaId }),
         staleTime: 1000 * 60,
     });
 };
 
-export const useGetRestAreaGasStationInfo = (reststopCode: string) => {
+export const useGetRestAreaGasStationInfo = () => {
+    const { restAreaId } = useParams();
+
+    if (!restAreaId) {
+        throw new Error('restAreaId가 없습니다.');
+    }
+
     return useSuspenseQuery({
-        queryKey: REST_AREA_QUERY_KEY.detail(reststopCode),
-        queryFn: () => getRestAreaDetailInfo({ reststopCode }),
+        queryKey: REST_AREA_QUERY_KEY.detail(restAreaId),
+        queryFn: () => getRestAreaDetailInfo({ reststopCode: restAreaId }),
         select: (response) => response.gasStationData,
         staleTime: 1000 * 60,
     });
 };
 
-export const useGetRestAreaParkingInfo = (reststopCode: string) => {
+export const useGetRestAreaParkingInfo = () => {
+    const { restAreaId } = useParams();
+
+    if (!restAreaId) {
+        throw new Error('restAreaId가 없습니다.');
+    }
+
     return useSuspenseQuery({
-        queryKey: REST_AREA_QUERY_KEY.detail(reststopCode),
-        queryFn: () => getRestAreaDetailInfo({ reststopCode }),
+        queryKey: REST_AREA_QUERY_KEY.detail(restAreaId),
+        queryFn: () => getRestAreaDetailInfo({ reststopCode: restAreaId }),
         select: (response) => response.parkingData,
         staleTime: 1000 * 60,
     });
 };
 
-export const useGetRestAreaMenuInfo = (reststopCode: string) => {
+export const useGetRestAreaMenuInfo = () => {
+    const { restAreaId } = useParams();
+
+    if (!restAreaId) {
+        throw new Error('restAreaId가 없습니다.');
+    }
+
     return useSuspenseQuery({
-        queryKey: REST_AREA_QUERY_KEY.detail(reststopCode),
-        queryFn: () => getRestAreaDetailInfo({ reststopCode }),
+        queryKey: REST_AREA_QUERY_KEY.detail(restAreaId),
+        queryFn: () => getRestAreaDetailInfo({ reststopCode: restAreaId }),
         select: (response) => response.menuData,
         staleTime: 1000 * 60,
     });
 };
 
-export const useGetRestAreaRestStopInfo = (reststopCode: string) => {
+export const useGetRestAreaRestStopInfo = () => {
+    const { restAreaId } = useParams();
+
+    if (!restAreaId) {
+        throw new Error('restAreaId가 없습니다.');
+    }
+
     return useSuspenseQuery({
-        queryKey: REST_AREA_QUERY_KEY.detail(reststopCode),
-        queryFn: () => getRestAreaDetailInfo({ reststopCode }),
+        queryKey: REST_AREA_QUERY_KEY.detail(restAreaId),
+        queryFn: () => getRestAreaDetailInfo({ reststopCode: restAreaId }),
         select: (response) => response.reststopData,
         staleTime: 1000 * 60,
     });

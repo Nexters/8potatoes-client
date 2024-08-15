@@ -1,5 +1,3 @@
-import { useParams } from 'react-router-dom';
-
 import CallIcon from '#/assets/icons/call.svg?react';
 import CopyIcon from '#/assets/icons/copy.svg?react';
 import LocationIcon from '#/assets/icons/location.svg?react';
@@ -14,8 +12,6 @@ import { RestAreaDetailSection } from '../../features/rest-area/rest-area-detail
 import * as S from './RestAreaOtherInformation.style';
 
 export function RestAreaOtherInformation() {
-    const { restAreaId } = useParams();
-
     const {
         data: {
             restaurantOperatingTimes,
@@ -24,7 +20,7 @@ export function RestAreaOtherInformation() {
             address,
             phoneNumber,
         },
-    } = useGetRestAreaRestStopInfo(restAreaId ?? '');
+    } = useGetRestAreaRestStopInfo();
 
     return (
         <S.Container gap={8}>
