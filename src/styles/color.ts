@@ -9,7 +9,7 @@ const blk = {
     30: '#BCB6AD',
     20: '#D2CEC6',
     10: '#E9E5DE',
-    5: '#F4F0EA',
+    5: '#F9F9F9',
 } as const;
 
 const wht = {

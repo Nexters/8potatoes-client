@@ -4,7 +4,7 @@ import { FlexBox } from '#/components/flex-box';
 import { theme } from '#/styles/theme';
 
 export const Container = styled(FlexBox)`
-    background-color: #f9f9f9;
+    background-color: ${theme.color.blk[5]};
 `;
 
 export const Title = styled(FlexBox)`
