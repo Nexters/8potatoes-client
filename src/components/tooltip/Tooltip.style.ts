@@ -1,37 +1,59 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
+import ArrowIcon from '#/assets/icons/tooltip-arrow.svg?react';
 import { Z_INDEX } from '#/constants/z-index';
 import { theme } from '#/styles/theme';
 
-export const Arrow = styled.div<{ direction: 'top' | 'bottom' }>(
-    ({ direction }) => {
-        const directionTop = {
-            'border-top': `12px solid ${theme.color.main[100]}`,
-            bottom: '-10px',
-        };
-        const directionBottom = {
-            'border-bottom': `12px solid ${theme.color.main[100]}`,
-            top: '-10px',
-        };
+export const Arrow = styled(ArrowIcon)<{ direction: 'top' | 'bottom' }>(({
+    direction,
+}) => {
+    const directionTop = {
+        transform: 'translateX(-50%)',
+        bottom: '-8px',
+    };
+    const directionBottom = {
+        transform: 'translateX(-50%) rotate(180deg)',
+        top: '-8px',
+    };
+    const arrowOption = direction === 'top' ? directionTop : directionBottom;
 
-        const arrowOption =
-            direction === 'top' ? directionTop : directionBottom;
+    return css`
+        position: absolute;
+        left: 50%;
 
-        return css`
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
+        ${arrowOption}
+    `;
+});
 
-            border-left: 7px solid transparent;
-            border-right: 7px solid transparent;
+// export const Arrow = styled.div<{ direction: 'top' | 'bottom' }>(
+//     ({ direction }) => {
+//         const directionTop = {
+//             'border-top': `12px solid ${theme.color.main[100]}`,
+//             bottom: '-10px',
+//         };
+//         const directionBottom = {
+//             'border-bottom': `12px solid ${theme.color.main[100]}`,
+//             top: '-10px',
+//         };
 
-            ${arrowOption}
-        `;
-    },
-);
+//         const arrowOption =
+//             direction === 'top' ? directionTop : directionBottom;
+
+//         return css`
+//             position: absolute;
+//             left: 50%;
+//             transform: translateX(-50%);
+//             width: 0;
+//             height: 0;
+
+//             border-left: 7px solid transparent;
+//             border-right: 7px solid transparent;
+
+//             ${arrowOption}
+//         `;
+//     },
+// );
 
 export const Container = styled.div`
     z-index: ${Z_INDEX.TOOLTIP};
@@ -48,7 +70,7 @@ export const TooltipContents = styled.div<{ left: string; top: string }>(
             left: ${left};
             top: ${top};
 
-            border-radius: 16px;
+            border-radius: 18px;
             padding: 8px 20px;
             background-color: ${theme.color.main[100]};
             filter: drop-shadow(2px 4px 4px rgba(255, 117, 18, 0.2));
