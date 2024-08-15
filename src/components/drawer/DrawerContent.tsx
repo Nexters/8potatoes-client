@@ -81,7 +81,7 @@ export const DrawerContent = ({
     return (
         <AnimatePresence>
             {isDrawerOpen && (
-                <>
+                <S.Container>
                     {isOverlayExist ? (
                         <Dialog.Overlay forceMount asChild>
                             <S.Overlay
@@ -119,7 +119,7 @@ export const DrawerContent = ({
                             {children}
                         </S.ContentWrapper>
                     </Dialog.Content>
-                </>
+                </S.Container>
             )}
         </AnimatePresence>
     );
