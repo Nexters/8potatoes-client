@@ -36,18 +36,15 @@ export const RestAreaMapPage = () => {
         endY: destination.lat,
     });
 
-    console.log(squareCoordinateMap);
-
-    const { data: restAreaList } = useGetHighwayRestAreaList(
-        {
-            from: `${origin.lat},${origin.lon}`,
-            to: `${destination.lat},${destination.lon}`,
-            roadNames,
-        },
-        { enabled: isValidJourney },
-    );
-
-    console.log(journeyPathList, roadNames, isValidJourney);
+    const { data: restAreaData, isSuccess: isValidHighwayRestArea } =
+        useGetHighwayRestAreaList(
+            {
+                from: `${origin.lat},${origin.lon}`,
+                to: `${destination.lat},${destination.lon}`,
+                roadNames,
+            },
+            { enabled: isValidJourney },
+        );
 
     const mapBound = {
         north: Math.max(origin.lat, destination.lat),
@@ -70,7 +67,12 @@ export const RestAreaMapPage = () => {
                     start={origin.addressName}
                     end={destination.addressName}
                 />
-                <RestAreaListDrawer />
+                {isValidHighwayRestArea && (
+                    <RestAreaListDrawer
+                        totalRestAreaCount={restAreaData.totalReststopCount}
+                        restAreaList={restAreaData.reststops}
+                    />
+                )}
                 <NaverMap maxBounds={mapBound} overlayZoomEffect="all">
                     {isValidJourney && (
                         <>

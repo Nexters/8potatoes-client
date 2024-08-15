@@ -12,6 +12,11 @@ export interface RestAreaDetailAtHighwayType {
     lpgPrice?: string;
     naverRating: number;
     foodMenusCount: number;
+    location: {
+        latitude: number;
+        longitude: number;
+    }
+    isRecommend?: boolean;
 }
 
 export interface RestAreaGasStationDataType {

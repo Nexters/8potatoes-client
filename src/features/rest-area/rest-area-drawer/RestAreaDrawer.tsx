@@ -6,71 +6,9 @@ import {
 } from '#/components/uncontrolled-drawer';
 import { RestAreaInformation } from '#/features/rest-area/rest-area-information';
 import { theme } from '#/styles/theme';
+import type { RestAreaDetailAtHighwayType } from '#/types/rest-area';
 
 import * as S from './RestAreaDrawer.style';
-
-const mockUpRestAreaList = [
-    {
-        restAreaName: '서울만남의광장',
-        direction: '부산',
-        naverRating: 4.4,
-        gasolinePrice: 1020,
-        dieselPrice: 1000,
-        menuAmount: 17,
-        openDate: new Date('2024-08-07'),
-        closeDate: new Date('2024-08-08'),
-    },
-    {
-        restAreaName: '서울만남의광장',
-        direction: '부산',
-        naverRating: 4.4,
-        gasolinePrice: 1020,
-        dieselPrice: 1000,
-        menuAmount: 17,
-        openDate: new Date('2024-08-07'),
-        closeDate: new Date('2024-08-08'),
-    },
-    {
-        restAreaName: '천안 삼거리',
-        direction: '부산',
-        naverRating: 4.0,
-        gasolinePrice: 1020,
-        dieselPrice: 1000,
-        menuAmount: 17,
-        openDate: new Date('2024-08-07'),
-        closeDate: new Date('2024-08-08'),
-    },
-    {
-        restAreaName: '서울만남의광장',
-        direction: '부산',
-        naverRating: 4.4,
-        gasolinePrice: 1020,
-        dieselPrice: 1000,
-        menuAmount: 17,
-        openDate: new Date('2024-08-07'),
-        closeDate: new Date('2024-08-08'),
-    },
-    {
-        restAreaName: '서울만남의광장',
-        direction: '부산',
-        naverRating: 4.4,
-        gasolinePrice: 1020,
-        dieselPrice: 1000,
-        menuAmount: 17,
-        openDate: new Date('2024-08-07'),
-        closeDate: new Date('2024-08-08'),
-    },
-    {
-        restAreaName: '서울만남의광장',
-        direction: '부산',
-        naverRating: 4.4,
-        gasolinePrice: 1020,
-        dieselPrice: 1000,
-        menuAmount: 17,
-        openDate: new Date('2024-08-07'),
-        closeDate: new Date('2024-08-08'),
-    },
-];
 
 const RestAreaDrawerHeightStepList: HeightStepType[] = [
     { value: 95, unit: 'px' },
@@ -78,7 +16,15 @@ const RestAreaDrawerHeightStepList: HeightStepType[] = [
     { value: 90, unit: 'dvh' },
 ];
 
-export const RestAreaListDrawer = () => {
+interface RestAreaListDrawerProps {
+    totalRestAreaCount: number;
+    restAreaList: RestAreaDetailAtHighwayType[];
+}
+
+export const RestAreaListDrawer = ({
+    totalRestAreaCount,
+    restAreaList,
+}: RestAreaListDrawerProps) => {
     return (
         <UnControlledDrawer
             initialOpen={true}
@@ -97,7 +43,7 @@ export const RestAreaListDrawer = () => {
                                 color={theme.color.main[100]}
                                 typography="headingBold18"
                             >
-                                {mockUpRestAreaList.length}개
+                                {totalRestAreaCount}개
                             </Text>
                             의 휴게소를 들릴 수 있어요
                         </S.RestAreaAmount>
@@ -111,7 +57,7 @@ export const RestAreaListDrawer = () => {
                     </S.Header>
                     <S.RestAreaList>
                         <FlexBox>
-                            {mockUpRestAreaList.map((restArea) => (
+                            {restAreaList.map((restArea) => (
                                 <RestAreaInformation {...restArea} />
                             ))}
                         </FlexBox>
