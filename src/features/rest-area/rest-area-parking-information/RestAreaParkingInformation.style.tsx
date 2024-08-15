@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { FlexBox } from '#/components/flex-box';
+import { theme } from '#/styles/theme';
 
 export const CardGroup = styled(FlexBox)`
     width: 100%;
@@ -13,6 +14,9 @@ export const Card = styled(FlexBox)`
     flex-grow: 1;
     text-align: center;
     white-space: nowrap;
+
+    background-color: ${theme.color.main[10]};
+    border-radius: 16px;
 `;
 
 export const UpdateNotice = styled(FlexBox)`

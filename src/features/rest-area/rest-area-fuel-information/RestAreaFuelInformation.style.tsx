@@ -14,6 +14,9 @@ export const Card = styled(FlexBox)`
     flex-grow: 1;
     text-align: center;
     white-space: nowrap;
+
+    background-color: ${theme.color.main[10]};
+    border-radius: 16px;
 `;
 
 export const AvailableChargeOption = styled(FlexBox)`
