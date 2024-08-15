@@ -38,6 +38,7 @@ export const DestinationMarker = ({
     const icon = {
         content: renderToString(<DestinationMarkerImpl isStart={isStart} />),
         anchor: new naver.maps.Point(16, 48),
+        size: new naver.maps.Size(37, 62),
     };
     return (
         <>
@@ -48,7 +49,6 @@ export const DestinationMarker = ({
             />
             <DestinationMarkerImpl
                 isStart={isStart}
-                style={{ display: 'none' }}
             />
         </>
     );

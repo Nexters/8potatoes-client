@@ -58,7 +58,10 @@ export const RestAreaListDrawer = ({
                     <S.RestAreaList>
                         <FlexBox>
                             {restAreaList.map((restArea) => (
-                                <RestAreaInformation {...restArea} />
+                                <RestAreaInformation
+                                    key={restArea.name}
+                                    {...restArea}
+                                />
                             ))}
                         </FlexBox>
                     </S.RestAreaList>

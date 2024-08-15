@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import { FlexBox } from '#/components/flex-box';
 import { theme } from '#/styles/theme';
+import { Text } from '#/components/text';
 
 export const Container = styled.div`
     width: 100%;
@@ -90,3 +91,13 @@ export const BannerContainer = styled(FlexBox)`
     background-color: rgba(255, 214, 184, 50%);
     color: ${theme.color.main[100]};
 `;
+
+type PriceTextProps = { isExist: boolean };
+
+export const PriceText = styled(Text)(({ isExist }: PriceTextProps) => {
+    const color = isExist ? theme.color.blk[100] : theme.color.blk[40];
+    return css`
+        color: ${color};
+        flex-grow: 1;
+    `
+})

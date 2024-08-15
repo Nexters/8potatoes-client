@@ -6,6 +6,7 @@ import { RestaurantInfoType } from "./restaurant";
 export interface RestAreaDetailAtHighwayType {
     name: string;
     code: string;
+    direction?: string;
     isOperating: boolean;
     gasolinePrice?: string;
     dieselPrice?: string;

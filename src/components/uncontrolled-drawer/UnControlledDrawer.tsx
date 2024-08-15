@@ -1,4 +1,4 @@
-import { type ComponentProps, createContext, useContext, useMemo } from 'react';
+import { type ComponentProps, createContext, useContext, useEffect, useMemo } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { AnimatePresence, MotionValue, useMotionValue } from 'framer-motion';
@@ -66,6 +66,18 @@ export const UnControlledDrawerRoot = ({
             closeDrawer,
         ],
     );
+
+    useEffect(() => {
+        if (isDrawerOpen) {
+            const timer = setTimeout(() => {
+                document.body.style.pointerEvents = '';
+            }, 0);
+
+            return () => clearTimeout(timer);
+        } else {
+            document.body.style.pointerEvents = 'auto';
+        }
+    }, [isDrawerOpen]);
 
     return (
         <DrawerContext.Provider value={value}>

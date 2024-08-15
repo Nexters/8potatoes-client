@@ -24,6 +24,7 @@ const CenterRestAreaBanner = () => (
 export const RestAreaInformation = ({
     name,
     code,
+    direction,
     isOperating,
     gasolinePrice,
     dieselPrice,
@@ -42,13 +43,17 @@ export const RestAreaInformation = ({
             <FlexBox row gap={20}>
                 {isRecommend && <CenterRestAreaBanner />}
                 <FlexBox gap={[8, 0]} flexOption={{ flexGrow: 1 }}>
-                    <Text typography="headingBold18">{`${name} 휴게소`}</Text>
+                    <Text typography="headingBold18">{name}</Text>
                     <FlexBox row flexOption={{ alignItems: 'center' }}>
-                        <Text
-                            color={theme.color.blk[60]}
-                            typography="smallTextMedium12"
-                        >{`${'a'} 방향`}</Text>
-                        <S.Divider />
+                        {direction && (
+                            <>
+                                <Text
+                                    color={theme.color.blk[60]}
+                                    typography="smallTextMedium12"
+                                >{`${direction} 방향`}</Text>
+                                <S.Divider />
+                            </>
+                        )}
                         <S.NaverRating row gap={2}>
                             <Text typography="smallTextBold12">
                                 네이버 평점
@@ -66,27 +71,35 @@ export const RestAreaInformation = ({
                 </S.OpenStateBadge>
             </FlexBox>
             <S.BottomSection row gap={8}>
-                <FlexBox row gap={4} flexOption={{ alignItems: 'center' }}>
+                <FlexBox
+                    row
+                    gap={4}
+                    flexOption={{ alignItems: 'center', flexGrow: 1 }}
+                >
                     <Text typography="bodyMedium14" color={theme.color.blk[40]}>
                         휘발유
                     </Text>
-                    <Text
+                    <S.PriceText 
+                        isExist={!!gasolinePrice}
                         typography="bodySemiBold14"
-                        color={theme.color.blk[100]}
                     >
-                        {gasolinePrice}
-                    </Text>
+                        {gasolinePrice ?? '-'}
+                    </S.PriceText>
                 </FlexBox>
-                <FlexBox row gap={4} flexOption={{ alignItems: 'center' }}>
+                <FlexBox
+                    row
+                    gap={4}
+                    flexOption={{ alignItems: 'center', flexGrow: 1 }}
+                >
                     <Text typography="bodyMedium14" color={theme.color.blk[40]}>
                         경유
                     </Text>
-                    <Text
+                    <S.PriceText 
+                        isExist={!!gasolinePrice}
                         typography="bodySemiBold14"
-                        color={theme.color.blk[100]}
                     >
-                        {dieselPrice}
-                    </Text>
+                        {dieselPrice ?? '-'}
+                    </S.PriceText>
                 </FlexBox>
                 <S.Divider />
                 <FlexBox row gap={4} flexOption={{ alignItems: 'center' }}>

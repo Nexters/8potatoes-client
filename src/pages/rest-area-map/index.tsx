@@ -91,6 +91,26 @@ export const RestAreaMapPage = () => {
                             <DestinationMarker position={endPosition} />
                         </>
                     )}
+                    {isValidHighwayRestArea &&
+                        restAreaData.reststops.map(
+                            ({
+                                name,
+                                location,
+                                isRecommend,
+                            }) => (
+                                <RestAreaBubbleMarker
+                                    direction={'부산'}
+                                    restAreaName={name}
+                                    isRecommend={isRecommend}
+                                    position={
+                                        new naver.maps.LatLng(
+                                            location.latitude,
+                                            location.longitude,
+                                        )
+                                    }
+                                />
+                            ),
+                        )}
                 </NaverMap>
             </NaverMapContainer>
         </>
