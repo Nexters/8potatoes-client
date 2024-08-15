@@ -16,11 +16,11 @@ type TabTitleType = { title: ReactNode; url: string };
 
 interface TabHeaderProps {
     headerInformation: {
-        title: string;
-        direction: string;
-        isWorking: boolean;
-        endTime: string;
-        ranking: number;
+        name: string;
+        isOperating: boolean;
+        startTime?: string;
+        endTime?: string;
+        naverRating?: number;
     };
     tabTitles: TabTitleType[];
     isMinSize: boolean;
@@ -28,6 +28,8 @@ interface TabHeaderProps {
 
 const TOTAL_HEADER_HEIGHT = 166;
 const HEADER_CONTENTS_HEIGHT = 95;
+
+const direction = '서울';
 
 const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
     { headerInformation, tabTitles, isMinSize },
@@ -38,7 +40,8 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
 
     const currentHeader = location.pathname.split('/').at(-1);
 
-    const { title, direction, isWorking, endTime, ranking } = headerInformation;
+    const { name, isOperating, startTime, endTime, naverRating } =
+        headerInformation;
 
     const headerVariants = {
         min: {
@@ -55,7 +58,7 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
         return isMinSize ? (
             <FlexBox row gap={12} flexOption={{ alignItems: 'center' }}>
                 <Text typography="headingBold18" color={theme.color.blk[100]}>
-                    {title}
+                    {name}
                 </Text>
                 <S.SplitLine />
                 <Text typography="bodySemiBold18" color={theme.color.blk[40]}>
@@ -65,7 +68,20 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
         ) : (
             ''
         );
-    }, [isMinSize, title, direction]);
+    }, [isMinSize, name, direction]);
+
+    const operatingStatus = useMemo(() => {
+        return isOperating ? (
+            <>
+                식당 영업중 <DotIcon /> {endTime}
+                까지
+            </>
+        ) : (
+            <>
+                식당 영업끝 <DotIcon /> {startTime}-{endTime}
+            </>
+        );
+    }, [isOperating, startTime, endTime]);
 
     return (
         <S.Container ref={ref}>
@@ -83,7 +99,7 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
                             typography="headingBold20"
                             color={theme.color.blk[100]}
                         >
-                            {title}
+                            {name}
                         </Text>
                         <S.SplitLine />
                         <Text
@@ -99,14 +115,12 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
                             typography="bodySemiBold14"
                             color={theme.color.blk[60]}
                         >
-                            식당 {isWorking ? '영업중' : '마감시간'} <DotIcon />{' '}
-                            {endTime}
-                            까지
+                            {operatingStatus}
                         </Text>
                         <S.RankingInformation>
                             <StarIcon width={12} height={12} />
                             <Text typography="bodyBold14">
-                                {ranking} <DotIcon />
+                                {naverRating} <DotIcon />
                             </Text>
                             <Text typography="bodySemiBold14">네이버평점</Text>
                         </S.RankingInformation>
