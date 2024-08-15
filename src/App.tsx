@@ -1,7 +1,7 @@
 import { RestAreaInformation } from '#/features/rest-area/rest-area-information';
 
 import { Text } from './components/text/Text';
-import { RestAreaOtherInformation } from './features/rest-area/rest-area-other-information';
+import { RestAreaOtherInformation } from './pages/rest-area-other-information';
 import { theme } from './styles/theme';
 
 const data = {

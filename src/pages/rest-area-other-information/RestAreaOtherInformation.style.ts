@@ -7,13 +7,6 @@ export const Container = styled(FlexBox)`
     background-color: #f9f9f9;
 `;
 
-export const Section = styled(FlexBox)`
-    gap: 24px;
-    padding: 40px 20px;
-
-    background-color: ${theme.color.wht[100]};
-`;
-
 export const Title = styled(FlexBox)`
     flex-direction: row;
     gap: 12px;

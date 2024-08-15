@@ -6,51 +6,75 @@ import { Text } from '#/components/text';
 import { theme } from '#/styles/theme';
 import { handleCopyToClipboard } from '#/utils/common';
 
+import { RestAreaDetailSection } from '../../features/rest-area/rest-area-detail-section';
+
 import * as S from './RestAreaOtherInformation.style';
 
-interface RestAreaOtherInformationProps {
-    otherInformation: {
-        workingHours: {
-            title: string;
-            hour: string;
-        }[];
-        brands: {
-            title: string;
-            img: string;
-        }[];
-        amenities: {
-            title: string;
-            img: string;
-        }[];
-        address: string;
-        cellphone: string;
-    };
-}
+const data = {
+    workingHours: [
+        {
+            title: '식당가 (라면/우동)',
+            hour: '07:00 - 23:00',
+        },
+        {
+            title: '식당가 (한식)',
+            hour: '07:00 - 23:30',
+        },
+    ],
+    brands: [
+        {
+            title: 'BBQ',
+            img: 'src',
+        },
+        {
+            title: '파리바게뜨',
+            img: 'src',
+        },
+        {
+            title: '코바코',
+            img: 'src',
+        },
+        {
+            title: '뚜레쥬르',
+            img: 'src',
+        },
+        {
+            title: 'BHC',
+            img: 'src',
+        },
+    ],
+    amenities: [
+        {
+            title: '내고장특산물',
+            img: 'src',
+        },
+        {
+            title: '세차장',
+            img: 'src',
+        },
+        {
+            title: '약국',
+            img: 'src',
+        },
+        {
+            title: '수유실',
+            img: 'src',
+        },
+        {
+            title: '화장실',
+            img: 'src',
+        },
+    ],
+    address: '충남 천안시 동남구 쉼1길 42',
+    cellphone: '041-551-2480',
+};
 
-export function RestAreaOtherInformation({
-    otherInformation,
-}: RestAreaOtherInformationProps) {
-    const { workingHours, brands, amenities, address, cellphone } =
-        otherInformation;
+export function RestAreaOtherInformation() {
+    const { workingHours, brands, amenities, address, cellphone } = data;
 
     return (
         <S.Container gap={8}>
-            <S.Section>
-                <S.Title>
-                    <img
-                        alt="영업 시간 표시 아이콘"
-                        src=""
-                        width={24}
-                        height={24}
-                    />
-                    <Text
-                        typography="headingBold20"
-                        color={theme.color.blk[100]}
-                    >
-                        영업 시간
-                    </Text>
-                </S.Title>
-
+            <RestAreaDetailSection title="영업 시간" iconSrc="" iconAlt="">
                 <S.HourList as="ul" gap={12}>
                     {workingHours.map((working) => (
                         <FlexBox
@@ -74,24 +98,9 @@ export function RestAreaOtherInformation({
                         </FlexBox>
                     ))}
                 </S.HourList>
-            </S.Section>
+            </RestAreaDetailSection>
 
-            <S.Section>
-                <S.Title>
-                    <img
-                        alt="입점 브랜드 표시 아이콘"
-                        src=""
-                        width={24}
-                        height={24}
-                    />
-                    <Text
-                        typography="headingBold20"
-                        color={theme.color.blk[100]}
-                    >
-                        입점 브랜드
-                    </Text>
-                </S.Title>
-
+            <RestAreaDetailSection title="입점 브랜드" iconSrc="" iconAlt="">
                 <S.FacilityList>
                     {brands.map((brand) => (
                         <S.FacilityListItem as="li" key={brand.title}>
@@ -108,24 +117,9 @@ export function RestAreaOtherInformation({
                         </S.FacilityListItem>
                     ))}
                 </S.FacilityList>
-            </S.Section>
+            </RestAreaDetailSection>
 
-            <S.Section>
-                <S.Title>
-                    <img
-                        alt="편의시설 표시 아이콘"
-                        src=""
-                        width={24}
-                        height={24}
-                    />
-                    <Text
-                        typography="headingBold20"
-                        color={theme.color.blk[100]}
-                    >
-                        편의시설
-                    </Text>
-                </S.Title>
-
+            <RestAreaDetailSection title="편의시설" iconSrc="" iconAlt="">
                 <S.FacilityList>
                     {amenities.map((amenity) => (
                         <S.FacilityListItem as="li" key={amenity.title}>
@@ -142,24 +136,9 @@ export function RestAreaOtherInformation({
                         </S.FacilityListItem>
                     ))}
                 </S.FacilityList>
-            </S.Section>
+            </RestAreaDetailSection>
 
-            <S.Section>
-                <S.Title>
-                    <img
-                        alt="기타 정보 표시 아이콘"
-                        src=""
-                        width={24}
-                        height={24}
-                    />
-                    <Text
-                        typography="headingBold20"
-                        color={theme.color.blk[100]}
-                    >
-                        기타 정보
-                    </Text>
-                </S.Title>
-
+            <RestAreaDetailSection title="기타 정보" iconSrc="" iconAlt="">
                 <S.OtherInformationContainer>
                     <S.InformationBox
                         flexOption={{ justifyContent: 'space-between' }}
@@ -221,7 +200,7 @@ export function RestAreaOtherInformation({
                         </Text>
                     </Text>
                 </S.Description>
-            </S.Section>
+            </RestAreaDetailSection>
         </S.Container>
     );
 }
