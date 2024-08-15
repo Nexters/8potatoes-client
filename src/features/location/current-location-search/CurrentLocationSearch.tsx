@@ -156,7 +156,7 @@ export function CurrentLocationSearch({
                                     handleSelectLocation(data?.addressInfo)
                                 }
                             >
-                                이 위치로 설정하기
+                                휴게소 찾기
                             </Button>
                         </S.CTABottomSection>
                     </S.BottomContainer>

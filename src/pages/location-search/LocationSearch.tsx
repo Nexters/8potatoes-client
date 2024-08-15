@@ -69,7 +69,7 @@ export function LocationSearch() {
                 />
             )}
 
-            <Drawer.Content heightStepList={[{ value: 90, unit: 'dvh' }]}>
+            <Drawer.Content heightStepList={[{ value: 95, unit: 'dvh' }]}>
                 <Search
                     onSelect={handleSelectLocation}
                     onClose={handleCancelSelect}
