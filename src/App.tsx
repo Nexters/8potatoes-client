@@ -1,34 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
-
-import DotIcon from '#/assets/icons/dot.svg?react';
 import { RestAreaInformation } from '#/features/rest-area/rest-area-information';
 
-import { Drawer } from './components/drawer';
-import { TabHeader } from './components/tab-header';
 import { Text } from './components/text/Text';
 import { RestAreaOtherInformation } from './features/rest-area/rest-area-other-information';
 import { theme } from './styles/theme';
-
-const restInformation = {
-    title: '천안 삼거리 휴게소',
-    direction: '서울',
-    isWorking: true,
-    endTime: '24:00',
-    ranking: 4.2,
-};
-
-const tabTitles = [
-    { title: '먹거리', url: '/rest-area/foods' },
-    {
-        title: (
-            <>
-                주유 <DotIcon /> 주차
-            </>
-        ),
-        url: '/rest-area/fuel-parking',
-    },
-    { title: '기타정보', url: '/rest-area/other-information' },
-];
 
 const data = {
     workingHours: [
@@ -90,27 +64,8 @@ const data = {
 };
 
 function App() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const contentRef = useRef<HTMLDivElement>(null);
-    const tabHeaderRef = useRef<HTMLDivElement>(null);
-
     return (
-        <div style={{ height: '100dvh' }} ref={containerRef}>
-            <TabHeader
-                ref={tabHeaderRef}
-                headerInformation={restInformation}
-                tabTitles={tabTitles}
-                isMinSize={false}
-            />
-            <div
-                ref={contentRef}
-                style={{ height: '200dvh', overflow: 'scroll' }}
-            >
-                hih
-            </div>
-
-            {/* <Text
-        <>
+        <div style={{ height: '100dvh' }}>
             <RestAreaOtherInformation otherInformation={data} />
             <Text
                 as="h1"
@@ -128,7 +83,7 @@ function App() {
                 menuAmount={17}
                 openDate={new Date('2024-08-07')}
                 closeDate={new Date('2024-08-08')}
-            /> */}
+            />
         </div>
     );
 }
