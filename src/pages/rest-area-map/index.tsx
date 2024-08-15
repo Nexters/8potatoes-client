@@ -23,7 +23,11 @@ export const RestAreaMapPage = () => {
     const { origin, destination } = location.state;
 
     const {
-        data: {journeyPathList = [], roadNames = ''} = {},
+        data: {
+            journeyPathList = [],
+            squareCoordinateMap,
+            roadNames = '',
+        } = {},
         isSuccess: isValidJourney,
     } = useGetDestinationPath({
         startX: origin.lon,
@@ -31,6 +35,8 @@ export const RestAreaMapPage = () => {
         endX: destination.lon,
         endY: destination.lat,
     });
+
+    console.log(squareCoordinateMap);
 
     const { data: restAreaList } = useGetHighwayRestAreaList(
         {

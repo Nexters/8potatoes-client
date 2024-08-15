@@ -1,5 +1,4 @@
 import {
-    UseQueryOptions,
     useInfiniteQuery,
     useQuery,
 } from '@tanstack/react-query';
@@ -103,6 +102,24 @@ export const useGetDestinationPath = ({
                 endY,
             }),
         select: ({ features }) => {
+            function getBoundingBox(coordinates: [number, number][]) {
+                const lats = coordinates.map((point) => point[1]);
+                const lngs = coordinates.map((point) => point[0]);
+
+                const minLat = Math.min(...lats);
+                const maxLat = Math.max(...lats);
+                const minLng = Math.min(...lngs);
+                const maxLng = Math.max(...lngs);
+
+                const topLeft = [minLng, maxLat];
+                const topRight = [maxLng, maxLat];
+                const bottomLeft = [minLng, minLat];
+                const bottomRight = [maxLng, minLat];
+
+                return [topLeft, topRight, bottomLeft, bottomRight];
+            }
+
+            const squareCoordinateMap: Record<string, number[][][]> = {};
             const { pathList, roadNameList } = features
                 .slice(0, -1)
                 .reduce<DestinationPathSelectedResult>(
@@ -127,8 +144,16 @@ export const useGetDestinationPath = ({
                             accPathList.push(...coordinates);
 
                             if (properties.roadType < 2) {
-                                accRoadNameList.push(properties.name);
+                                const roadName = properties.name;
+                                accRoadNameList.push(roadName);
+                                squareCoordinateMap[roadName] = [
+                                    ...(squareCoordinateMap[roadName] ?? []),
+                                    getBoundingBox(
+                                        geometry.coordinates,
+                                    ),
+                                ];
                             }
+                            
                         }
                         if (geometry.type === 'Point') {
                             const [lng, lat] = geometry.coordinates;
@@ -144,6 +169,7 @@ export const useGetDestinationPath = ({
 
             return {
                 journeyPathList: pathList,
+                squareCoordinateMap,
                 roadNames: [...new Set(roadNameList)]
                     .map((highway) => highway.replace(/ 고속도로$/, '선'))
                     .filter((highway) => HIGHWAY_LIST.includes(highway))
