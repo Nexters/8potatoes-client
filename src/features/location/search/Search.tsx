@@ -48,7 +48,7 @@ export function Search({
         rootMargin: '40px',
     });
 
-    const isEmptyInput = searchKeyword.length === 0;
+    const isEmptyInput = searchKeyword.length < 2;
     const hasResult = !isEmptyInput && !isLoading && isSuccess;
     const hasNoResult = !isEmptyInput && !isLoading && !isSuccess;
 
