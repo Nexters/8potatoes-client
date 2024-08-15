@@ -91,7 +91,7 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
                 initial={{ y: 0 }}
                 variants={headerVariants}
                 animate={isMinSize ? 'min' : 'max'}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.1 }}
             >
                 <FlexBox gap={16}>
                     <FlexBox row gap={12} flexOption={{ alignItems: 'center' }}>
