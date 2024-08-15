@@ -13,13 +13,14 @@ export async function getHighwayRestAreaList({
     roadNames,
 }: HighwayRestAreaListParams) {
     return API.get<HighwayRestAreaListResponse, HighwayRestAreaListParams>(
-        `/api/highways/reststops`,
+        `/highways/reststops`,
         {
             params: {
                 from,
                 to,
                 roadNames,
             },
+            baseURL: import.meta.env.VITE_SERVER_URL,
         },
     );
 }
@@ -28,6 +29,10 @@ export async function getRestAreaDetailInfo({
     reststopCode,
 }: RestAreaDetailInfoParams) {
     return API.get<RestAreaDetailInfoResponse, RestAreaDetailInfoParams>(
-        `/api/reststops/${reststopCode}`,
+        `/reststop/info`,
+        {
+            params: { reststopCode },
+            baseURL: import.meta.env.VITE_SERVER_URL,
+        },
     );
 }
