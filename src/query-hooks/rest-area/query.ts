@@ -1,6 +1,5 @@
 import {
     type UseQueryOptions,
-    type UseSuspenseQueryOptions,
     useQuery,
     useSuspenseQuery,
 } from '@tanstack/react-query';
@@ -17,7 +16,7 @@ import {
 import { REST_AREA_QUERY_KEY } from '#/constants/query-key';
 
 export const useGetHighwayRestAreaList = (
-    { from, to, roadNames }: HighwayRestAreaListParams,
+    { from, to, highways }: HighwayRestAreaListParams,
     options: Omit<
         UseQueryOptions<HighwayRestAreaListResponse>,
         'queryKey' | 'queryFn'
@@ -25,8 +24,8 @@ export const useGetHighwayRestAreaList = (
 ) => {
     return useQuery<HighwayRestAreaListResponse>({
         ...options,
-        queryKey: REST_AREA_QUERY_KEY.highwayList({ from, to, roadNames }),
-        queryFn: () => getHighwayRestAreaList({ from, to, roadNames }),
+        queryKey: REST_AREA_QUERY_KEY.highwayList({ from, to }),
+        queryFn: () => getHighwayRestAreaList({ from, to, highways }),
     });
 };
 
