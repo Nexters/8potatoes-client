@@ -40,8 +40,8 @@ export const RestAreaInformation = ({
 
     return (
         <S.Container onClick={handleClickRestArea}>
+            {isRecommend && <CenterRestAreaBanner />}
             <FlexBox row gap={20}>
-                {isRecommend && <CenterRestAreaBanner />}
                 <FlexBox gap={[8, 0]} flexOption={{ flexGrow: 1 }}>
                     <Text typography="headingBold18">{name}</Text>
                     <FlexBox row flexOption={{ alignItems: 'center' }}>

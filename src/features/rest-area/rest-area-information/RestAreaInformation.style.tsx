@@ -88,7 +88,10 @@ export const Divider = styled.div`
 
 // CenterBanner Style
 export const BannerContainer = styled(FlexBox)`
+    padding: 4px;
+    justify-content: center;
     background-color: rgba(255, 214, 184, 50%);
+    border-radius: 8px;
     color: ${theme.color.main[100]};
 `;
 
