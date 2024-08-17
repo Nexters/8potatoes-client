@@ -31,7 +31,7 @@ export function RestAreaDetail() {
     const { targetRef: contentRef } = useIntersectionObserver<HTMLDivElement>({
         onIntersect: (isIntersect) => setIsMinHeader(isIntersect),
         enabled: true,
-        rootMargin: `0px 0px ${-((containerRef.current?.offsetHeight ?? 0) - (tabHeaderRef.current?.offsetHeight ?? 0) + 1)}px 0px`,
+        rootMargin: `0px 0px ${-(containerRef.current?.offsetHeight ?? 0)}px 0px`,
     });
 
     return (
