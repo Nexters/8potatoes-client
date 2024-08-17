@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import DotIcon from '#/assets/icons/dot.svg?react';
 import { TabHeader } from '#/components/tab-header';
@@ -21,6 +21,8 @@ const tabTitles = [
 ];
 
 export function RestAreaDetail() {
+    const location = useLocation();
+
     const containerRef = useRef<HTMLDivElement>(null);
     const tabHeaderRef = useRef<HTMLDivElement>(null);
 
@@ -33,6 +35,10 @@ export function RestAreaDetail() {
         enabled: true,
         rootMargin: `0px 0px ${-(containerRef.current?.offsetHeight ?? 0)}px 0px`,
     });
+
+    useEffect(() => {
+        setIsMinHeader(false);
+    }, [location]);
 
     return (
         <div ref={containerRef}>
