@@ -1,9 +1,13 @@
+import { useRef, useState } from 'react';
+
 import AlternativeImage from '#/assets/images/alternative-image.png';
 import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
 import { RestAreaDetailSection } from '#/features/rest-area/rest-area-detail-section';
 import { RestAreaFoodCategory } from '#/features/rest-area/rest-area-food-category';
 import { RestAreaFoodMenu } from '#/features/rest-area/rest-area-food-menu';
+import { useDisclosure } from '#/hooks/useDisclosure';
+import useIntersectionObserver from '#/hooks/useIntersectionObserver';
 import useValidatedSearchParams from '#/hooks/useValidSearchParams';
 import { theme } from '#/styles/theme';
 
@@ -36,25 +40,36 @@ const BEST_MENU = {
 };
 
 export const RestAreaFoodPage = () => {
+    const contentRef = useRef<HTMLDivElement | null>(null);
+
+    const { state: isCategoryStickey, toggle: toggleCategoryStickey } =
+        useDisclosure(false);
+
+    const { targetRef } = useIntersectionObserver<HTMLDivElement>({
+        onIntersect: (isIntersect) => isIntersect && toggleCategoryStickey(),
+        root: contentRef.current,
+        enabled: true,
+    });
+
     useValidatedSearchParams({
         paramName: 'category',
         expectedValue: [
-            'total',
-            'recommendation',
-            'snack',
-            'western',
-            'chinese',
-            'korean',
-            'asian',
+            '전체',
+            '추천',
+            '스낵',
+            '양식',
+            '중식',
+            '한식',
+            '아시안',
         ],
-        defaultValue: 'total',
+        defaultValue: '전체',
         checkIfNull: true,
     });
 
     const totalMenuAmount = FOOD_MENUS.length;
 
     return (
-        <S.Container gap={8}>
+        <S.Container gap={8} ref={contentRef}>
             <S.BestMenuSection>
                 <Text typography="headingBold20" color={theme.color.blk[100]}>
                     오직 이곳에서만 먹을 수 있는
@@ -93,7 +108,7 @@ export const RestAreaFoodPage = () => {
                     iconAlt="전체 메뉴 아이콘"
                     description={`${totalMenuAmount}개의 메뉴`}
                 >
-                    <RestAreaFoodCategory />
+                    <RestAreaFoodCategory ref={targetRef} />
                 </RestAreaDetailSection>
                 <S.MenuWrapper>
                     <FlexBox gap={40}>

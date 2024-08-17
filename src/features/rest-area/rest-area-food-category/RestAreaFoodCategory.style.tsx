@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { motion } from 'framer-motion';
 
 import { FlexBox } from '#/components/flex-box';
 import { theme } from '#/styles/theme';
@@ -13,13 +14,14 @@ export const Container = styled.div`
     }
 `;
 
-export const CategoryList = styled(FlexBox)`
+export const CategoryList = styled(motion(FlexBox))`
     width: max-content;
-`
+    cursor: grab;
+`;
 
 type CategoryOptionType = { isSelected?: boolean };
 
-export const CategoryOption = styled(FlexBox)(({
+export const CategoryOption = styled(motion(FlexBox))(({
     isSelected,
 }: CategoryOptionType) => {
     const color = isSelected ? theme.color.main[100] : theme.color.blk[100];

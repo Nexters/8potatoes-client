@@ -5,7 +5,6 @@ import { theme } from '#/styles/theme';
 
 export const Container = styled(FlexBox)`
     width: 100%;
-    max-height: 100dvh;
     background-color: ${theme.color.blk[5]};
 `;
 
