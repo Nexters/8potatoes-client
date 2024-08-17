@@ -29,10 +29,9 @@ export const REST_AREA_QUERY_KEY = {
         'detail',
         restAreaCode,
     ],
-    highwayList: ({ from, to, roadNames }: HighwayRestAreaListParams) => [
+    highwayList: ({ from, to }: Omit<HighwayRestAreaListParams, 'highways'>) => [
         ...REST_AREA_QUERY_KEY.base,
         'highway-list',
         { from, to },
-        roadNames
     ],
 };

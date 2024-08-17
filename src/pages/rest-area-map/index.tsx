@@ -25,8 +25,7 @@ export const RestAreaMapPage = () => {
     const {
         data: {
             journeyPathList = [],
-            squareCoordinateMap,
-            roadNames = '',
+            highways = {},
         } = {},
         isSuccess: isValidJourney,
     } = useGetDestinationPath({
@@ -41,7 +40,7 @@ export const RestAreaMapPage = () => {
             {
                 from: `${origin.lat},${origin.lon}`,
                 to: `${destination.lat},${destination.lon}`,
-                roadNames,
+                highways,
             },
             { enabled: isValidJourney },
         );
@@ -73,7 +72,7 @@ export const RestAreaMapPage = () => {
                         restAreaList={restAreaData.reststops}
                     />
                 )}
-                <NaverMap maxBounds={mapBound} overlayZoomEffect="all">
+                <NaverMap maxBounds={mapBound}>
                     {isValidJourney && (
                         <>
                             <Polyline
