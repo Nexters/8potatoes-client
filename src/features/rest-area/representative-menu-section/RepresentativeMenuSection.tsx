@@ -15,18 +15,14 @@ export const RepresentativeMenuSection = () => {
 
     const isNeedPagination = representativeMenuData.length > 1;
     const selectedMenuIndex = useMotionValue(0);
-    const translateX = useTransform(selectedMenuIndex, [0, 1], [0, -375], {
-        ease: cubicBezier(0.17, 0.67, 0.83, 0.67),
-    });
+    const translateX = useTransform(selectedMenuIndex, [0, 1], [0, -375]);
 
     return (
         <S.Container>
             <S.BestMenuContainer
                 row
-                style={{
-                    translateX,
-                }}
-                transition={{ type: "spring", stiffness: 100 }}
+                style={{ translateX }}
+                transition={{ type: "spring", stiffness: 100, duration: 0.2 }}
             >
                 {representativeMenuData.map(
                     (
@@ -59,7 +55,7 @@ export const RepresentativeMenuSection = () => {
                                 <FlexBox gap={8}>
                                     <S.Description
                                         typography="bodyMedium16"
-                                        color={theme.color.blk[80]}
+                                        color={theme.color.blk[40]}
                                     >
                                         {representativeMenuDescription}
                                     </S.Description>
@@ -72,7 +68,7 @@ export const RepresentativeMenuSection = () => {
                                 </FlexBox>
                                 <Text
                                     typography="bodySemiBold16"
-                                    color={theme.color.blk[90]}
+                                    color={theme.color.blk[60]}
                                 >
                                     {representativeMenuPrice.toLocaleString()}원
                                 </Text>
