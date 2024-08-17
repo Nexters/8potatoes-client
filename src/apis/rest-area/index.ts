@@ -12,8 +12,8 @@ export async function getHighwayRestAreaList({
     to,
     roadNames,
 }: HighwayRestAreaListParams) {
-    const [response] = await API.get<
-        HighwayRestAreaListResponse[],
+    return API.get<
+        HighwayRestAreaListResponse,
         HighwayRestAreaListParams
     >(`/highways/reststops`, {
         params: {
@@ -23,7 +23,6 @@ export async function getHighwayRestAreaList({
         },
         baseURL: import.meta.env.VITE_SERVER_URL,
     });
-    return response;
 }
 
 export async function getRestAreaDetailInfo({
