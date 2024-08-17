@@ -1,10 +1,5 @@
 export const FOOD_CATEGORIES = [
     {
-        id: '전체',
-        label: '전체보기',
-        icon: ''
-    },
-    {
         id: '추천',
         label: '추천',
         icon: ''
@@ -20,7 +15,7 @@ export const FOOD_CATEGORIES = [
         icon: ''
     },
     {
-        id: 'chinese',
+        id: '중식',
         label: '중식',
         icon: ''
     },

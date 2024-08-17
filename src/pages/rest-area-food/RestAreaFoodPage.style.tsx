@@ -8,21 +8,6 @@ export const Container = styled(FlexBox)`
     background-color: ${theme.color.blk[5]};
 `;
 
-export const BestMenuSection = styled.div`
-    padding: 40px;
-    text-align: center;
-    white-space: nowrap;
-    background-color: ${theme.color.wht[100]};
-`;
-
-export const BestMenuImage = styled.img`
-    width: 180px;
-    height: 180px;
-
-    margin: 32px 0 20px 0;
-    border-radius: 180px;
-`;
-
 export const MenuSection = styled(FlexBox)`
     overflow-y: hidden;
 `;
