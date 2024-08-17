@@ -1,28 +1,32 @@
-import { API } from "../api";
+import { API } from '../api';
 
 import type {
     HighwayRestAreaListParams,
     HighwayRestAreaListResponse,
     RestAreaDetailInfoParams,
     RestAreaDetailInfoResponse,
-} from "./type";
+} from './type';
 
 export async function getHighwayRestAreaList({
     from,
     to,
     highways,
 }: HighwayRestAreaListParams) {
-    return API.get<
-        HighwayRestAreaListResponse,
-        HighwayRestAreaListParams
-    >(`/highways/reststops`, {
-        params: {
-            from,
-            to,
-            roadNames,
+    const [response] = await API.post<
+        HighwayRestAreaListResponse[],
+        Pick<HighwayRestAreaListParams, 'highways'>
+    >(
+        `/highways/reststops`,
+        { highways },
+        {
+            params: {
+                from,
+                to,
+            },
+            baseURL: import.meta.env.VITE_SERVER_URL,
         },
-        baseURL: import.meta.env.VITE_SERVER_URL,
-    });
+    );
+    return response;
 }
 
 export async function getRestAreaDetailInfo({
