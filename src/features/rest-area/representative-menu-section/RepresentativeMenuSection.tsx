@@ -1,4 +1,4 @@
-import { cubicBezier, useMotionValue, useTransform } from 'framer-motion';
+import { useMotionValue, useTransform } from 'framer-motion';
 
 import AlternativeImage from '#/assets/images/alternative-image.png';
 import { FlexBox } from '#/components/flex-box';
