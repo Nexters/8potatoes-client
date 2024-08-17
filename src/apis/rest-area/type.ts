@@ -31,5 +31,5 @@ export interface RestAreaDetailInfoResponse {
     gasStationData: RestAreaGasStationDataType; // 주유소 정보
     parkingData: RestAreaParkingDataType; // 주차 정보
     reststopData: RestAreaAdditionalDataType; // 휴게소 기타 정보
-    menuData: RestAreaMenuDataType[]; // 메뉴 데이터 리스트
+    menuData: RestAreaMenuDataType; // 메뉴 데이터 리스트
 }

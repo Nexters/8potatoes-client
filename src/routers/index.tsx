@@ -8,6 +8,7 @@ import { Outlet, createBrowserRouter } from 'react-router-dom';
 
 import App from '#/App';
 import { LocationSearch } from '#/pages/location-search';
+import { RestAreaFoodPage } from '#/pages/rest-area-food';
 import { RestAreaFuelPage } from '#/pages/rest-area-fuel';
 import { RestAreaMapPage } from '#/pages/rest-area-map';
 import { RestAreaOtherInformation } from '#/pages/rest-area-other-information';
@@ -65,9 +66,7 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                     children: [
                         {
                             path: 'foods',
-                            element: (
-                                <div style={{ height: '200dvh' }}>food</div>
-                            ),
+                            element: <RestAreaFoodPage />,
                         },
                         {
                             path: 'fuel-parking',

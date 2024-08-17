@@ -1,7 +1,7 @@
-import { AmenityType } from "./amenity";
-import { BrandType } from "./brand";
-import { MenuDataType, RepresentativeMenuDataType } from "./menu";
-import { RestaurantInfoType } from "./restaurant";
+import { AmenityType } from './amenity';
+import { BrandType } from './brand';
+import { MenuDataType, RepresentativeMenuDataType } from './menu';
+import { RestaurantInfoType } from './restaurant';
 
 export interface RestAreaDetailAtHighwayType {
     name: string;
@@ -16,7 +16,7 @@ export interface RestAreaDetailAtHighwayType {
     location: {
         latitude: number;
         longitude: number;
-    }
+    };
     isRecommend?: boolean;
 }
 
@@ -45,7 +45,9 @@ export interface RestAreaAdditionalDataType {
 }
 
 export interface RestAreaMenuDataType {
-    representativeMenuData: RepresentativeMenuDataType[]; // 대표 메뉴 데이터 (최대 2개)
+    representativeMenuData:
+        | RepresentativeMenuDataType
+        | RepresentativeMenuDataType[]; // 대표 메뉴 데이터 (최대 2개)
     totalMenuCount: number; // 전체 메뉴 개수
     recommendedMenuData: MenuDataType[]; // 추천 메뉴 데이터 리스트
     normalMenuData: MenuDataType[]; // 일반 메뉴 데이터 리스트

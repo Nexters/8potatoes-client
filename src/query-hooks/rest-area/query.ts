@@ -14,6 +14,7 @@ import {
     HighwayRestAreaListResponse,
 } from '#/apis/rest-area/type';
 import { REST_AREA_QUERY_KEY } from '#/constants/query-key';
+import { MenuCategoryType, MenuDataType } from '#/types/menu';
 
 export const useGetHighwayRestAreaList = (
     { from, to, highways }: HighwayRestAreaListParams,
@@ -98,7 +99,34 @@ export const useGetRestAreaMenuInfo = () => {
     return useSuspenseQuery({
         queryKey: REST_AREA_QUERY_KEY.detail(restAreaId),
         queryFn: () => getRestAreaDetailInfo({ reststopCode: restAreaId }),
-        select: (response) => response.menuData,
+        select: ({ menuData }) => {
+            const groupedNormalizedMenus =
+                menuData.normalMenuData.reduce(
+                    (groupMenuMap, currentMenu) => {
+                        groupMenuMap.set(currentMenu.menuCategory, [
+                            ...(groupMenuMap.get(currentMenu.menuCategory) ??
+                                []),
+                            currentMenu,
+                        ]);
+                        return groupMenuMap;
+                    },
+                    new Map<MenuCategoryType, MenuDataType[]>(),
+                );
+            groupedNormalizedMenus.forEach((menuList) => {
+                menuList.sort(
+                    (a, b) =>
+                        Number(b.isPopularMenu) * 2 +
+                        Number(b.isSignatureMenu) -
+                        (Number(a.isPopularMenu) * 2 +
+                            Number(a.isSignatureMenu)),
+                );
+            });
+
+            return {
+                ...menuData,
+                normalMenuData: groupedNormalizedMenus,
+            };
+        },
         staleTime: 1000 * 60,
     });
 };
