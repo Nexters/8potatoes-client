@@ -99,30 +99,31 @@ export const useGetRestAreaMenuInfo = () => {
     return useSuspenseQuery({
         queryKey: REST_AREA_QUERY_KEY.detail(restAreaId),
         queryFn: () => getRestAreaDetailInfo({ reststopCode: restAreaId }),
-        select: (response) => {
-            const normalizedMenuData = response.menuData.normalMenuData;
-            const groupedNormalizedMenus = normalizedMenuData.reduce(
-                (groupMenuMap, currentMenu) => {
-                    groupMenuMap.set(currentMenu.menuCategory, [
-                        ...(groupMenuMap.get(currentMenu.menuCategory) ?? []),
-                        currentMenu,
-                    ]);
-                    return groupMenuMap;
-                },
-                new Map<MenuCategoryType, MenuDataType[]>(),
-            );
+        select: ({ menuData }) => {
+            const groupedNormalizedMenus =
+                menuData.normalMenuData.reduce(
+                    (groupMenuMap, currentMenu) => {
+                        groupMenuMap.set(currentMenu.menuCategory, [
+                            ...(groupMenuMap.get(currentMenu.menuCategory) ??
+                                []),
+                            currentMenu,
+                        ]);
+                        return groupMenuMap;
+                    },
+                    new Map<MenuCategoryType, MenuDataType[]>(),
+                );
             groupedNormalizedMenus.forEach((menuList) => {
-                menuList.sort((a, b) => {
-                    const priorityA =
-                        Number(a.isPopularMenu) + Number(a.isSignatureMenu);
-                    const priorityB =
-                        Number(b.isPopularMenu) + Number(b.isSignatureMenu);
-                    return priorityB - priorityA;
-                });
+                menuList.sort(
+                    (a, b) =>
+                        Number(b.isPopularMenu) * 2 +
+                        Number(b.isSignatureMenu) -
+                        (Number(a.isPopularMenu) * 2 +
+                            Number(a.isSignatureMenu)),
+                );
             });
 
             return {
-                ...response.menuData,
+                ...menuData,
                 normalMenuData: groupedNormalizedMenus,
             };
         },
