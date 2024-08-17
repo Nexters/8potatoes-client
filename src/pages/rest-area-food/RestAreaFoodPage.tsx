@@ -3,13 +3,13 @@ import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { FlexBox } from '#/components/flex-box';
+import { FOOD_CATEGORY_ORDER } from '#/constants/food-menu';
 import { RepresentativeMenuSection } from '#/features/rest-area/representative-menu-section';
 import { RestAreaDetailSection } from '#/features/rest-area/rest-area-detail-section';
 import { RestAreaFoodCategory } from '#/features/rest-area/rest-area-food-category';
 import { RestAreaFoodMenu } from '#/features/rest-area/rest-area-food-menu';
 import useValidatedSearchParams from '#/hooks/useValidSearchParams';
 import { useGetRestAreaMenuInfo } from '#/query-hooks/rest-area/query';
-import type { MenuCategoryType } from '#/types/menu';
 
 import * as S from './RestAreaFoodPage.style';
 
@@ -23,8 +23,9 @@ export const RestAreaFoodPage = () => {
         data: { totalMenuCount, recommendedMenuData, normalMenuData },
     } = useGetRestAreaMenuInfo();
 
-    const availableMenuCategory: MenuCategoryType[] = Array.from(
-        normalMenuData.keys(),
+    const availableMenuCategory = Array.from(normalMenuData.keys()).toSorted(
+        (a, b) =>
+            FOOD_CATEGORY_ORDER.indexOf(a) - FOOD_CATEGORY_ORDER.indexOf(b),
     );
 
     useValidatedSearchParams({
@@ -39,7 +40,7 @@ export const RestAreaFoodPage = () => {
         if (menuElement) {
             menuElement.scrollIntoView({
                 behavior: 'smooth',
-                block: 'start',
+                block: 'center',
             });
         }
     }, [selectedCategory]);
