@@ -5,12 +5,13 @@ import {
     getReverseGeocodingData,
     getVehiclePath,
 } from '#/apis/tmap';
-import { HIGHWAY_LIST } from '#/constants/highway';
 import { LOCATION_QUERY_KEY } from '#/constants/query-key';
-import {
+import type {
     GeolocationCoordinatesType,
     LocationInformationType,
 } from '#/types/location';
+
+import { getBoundingCoordinates } from './util';
 
 interface LocationSearchQueryParams {
     searchKeyword: string;
@@ -78,11 +79,6 @@ interface DestinationPathQueryParams {
     endY: number;
 }
 
-interface DestinationPathSelectedResult {
-    pathList: naver.maps.LatLng[];
-    roadNameList: string[];
-}
-
 export const useGetDestinationPath = ({
     startX,
     startY,
@@ -99,32 +95,12 @@ export const useGetDestinationPath = ({
                 endY,
             }),
         select: ({ features }) => {
-            function getBoundingBox(coordinates: [number, number][]) {
-                const lats = coordinates.map((point) => point[1]);
-                const lngs = coordinates.map((point) => point[0]);
-
-                const minLat = Math.min(...lats);
-                const maxLat = Math.max(...lats);
-                const minLng = Math.min(...lngs);
-                const maxLng = Math.max(...lngs);
-
-                const topLeft = [minLng, maxLat];
-                const topRight = [maxLng, maxLat];
-                const bottomLeft = [minLng, minLat];
-                const bottomRight = [maxLng, minLat];
-
-                return [topLeft, topRight, bottomLeft, bottomRight];
-            }
-
-            const squareCoordinateMap: Record<string, number[][][]> = {};
-            const { pathList, roadNameList } = features
+            const coordinateMapByRoad: Record<string, number[][][]> = {};
+            const pathList: naver.maps.LatLng[] = [];
+            features
                 .slice(0, -1)
-                .reduce<DestinationPathSelectedResult>(
+                .map(
                     (
-                        {
-                            pathList: accPathList,
-                            roadNameList: accRoadNameList,
-                        },
                         { geometry, properties },
                     ) => {
                         if (
@@ -138,39 +114,28 @@ export const useGetDestinationPath = ({
                                         new naver.maps.LatLng(lat, lng),
                                 )
                                 .slice(1, -1);
-                            accPathList.push(...coordinates);
+                                pathList.push(...coordinates);
 
-                            if (properties.roadType < 2) {
+                            if (properties.roadType === 0) {
                                 const roadName = properties.name;
-                                accRoadNameList.push(roadName);
-                                squareCoordinateMap[roadName] = [
-                                    ...(squareCoordinateMap[roadName] ?? []),
-                                    getBoundingBox(
+                                coordinateMapByRoad[roadName] = [
+                                    ...(coordinateMapByRoad[roadName] ?? []),
+                                    getBoundingCoordinates(
                                         geometry.coordinates,
                                     ),
                                 ];
                             }
-                            
                         }
                         if (geometry.type === 'Point') {
                             const [lng, lat] = geometry.coordinates;
-                            accPathList.push(new naver.maps.LatLng(lat, lng));
+                            pathList.push(new naver.maps.LatLng(lat, lng));
                         }
-                        return {
-                            pathList: accPathList,
-                            roadNameList: accRoadNameList,
-                        };
-                    },
-                    { pathList: [], roadNameList: [] },
+                    }
                 );
 
             return {
                 journeyPathList: pathList,
-                squareCoordinateMap,
-                roadNames: [...new Set(roadNameList)]
-                    .map((highway) => highway.replace(/ 고속도로$/, '선'))
-                    .filter((highway) => HIGHWAY_LIST.includes(highway))
-                    .join(','),
+                highways: coordinateMapByRoad,
             };
         },
         staleTime: 1000 * 60,

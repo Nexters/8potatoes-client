@@ -1,16 +1,16 @@
-import { API } from '../api';
+import { API } from "../api";
 
 import type {
     HighwayRestAreaListParams,
     HighwayRestAreaListResponse,
     RestAreaDetailInfoParams,
     RestAreaDetailInfoResponse,
-} from './type';
+} from "./type";
 
 export async function getHighwayRestAreaList({
     from,
     to,
-    roadNames,
+    highways,
 }: HighwayRestAreaListParams) {
     return API.get<
         HighwayRestAreaListResponse,

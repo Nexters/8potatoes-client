@@ -9,7 +9,7 @@ import type {
 export interface HighwayRestAreaListParams {
     from: string;
     to: string;
-    roadNames: string;
+    highways: Record<string, number[][][]>;
 }
 
 export interface HighwayRestAreaListResponse {
