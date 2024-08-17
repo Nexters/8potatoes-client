@@ -50,7 +50,7 @@ export const RestAreaFoodMenu = forwardRef<
                                 {isSignatureMenu && (
                                     <S.Badge type="signature">
                                         <Text typography="smallTextBold12">
-                                            시그니쳐
+                                            시그니처
                                         </Text>
                                     </S.Badge>
                                 )}
