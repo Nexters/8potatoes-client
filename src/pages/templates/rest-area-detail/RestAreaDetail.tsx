@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import DotIcon from '#/assets/icons/dot.svg?react';
 import { TabHeader } from '#/components/tab-header';
@@ -22,11 +22,12 @@ const tabTitles = [
 ];
 
 export function RestAreaDetail() {
+    const location = useLocation();
+
     const [isMinHeader, setIsMinHeader] = useState(false);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     const { data: restInformation } = useGetRestAreaBaseInfo();
-
-    const contentRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!contentRef.current) {
@@ -49,6 +50,14 @@ export function RestAreaDetail() {
             }
         };
     }, [contentRef]);
+    useEffect(() => {
+        if (contentRef.current) {
+            contentRef.current.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
+    }, [location]);
 
     return (
         <div>
