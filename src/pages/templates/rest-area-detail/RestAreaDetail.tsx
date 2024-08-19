@@ -1,11 +1,12 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import DotIcon from '#/assets/icons/dot.svg?react';
 import { TabHeader } from '#/components/tab-header';
-import useIntersectionObserver from '#/hooks/useIntersectionObserver';
 import { useGetRestAreaBaseInfo } from '#/query-hooks/rest-area/query';
+
+import * as S from './RestAreaDetail.style';
 
 const tabTitles = [
     { title: '먹거리', url: 'foods' },
@@ -21,30 +22,58 @@ const tabTitles = [
 ];
 
 export function RestAreaDetail() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const tabHeaderRef = useRef<HTMLDivElement>(null);
+    const location = useLocation();
 
     const [isMinHeader, setIsMinHeader] = useState(false);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     const { data: restInformation } = useGetRestAreaBaseInfo();
 
-    const { targetRef: contentRef } = useIntersectionObserver<HTMLDivElement>({
-        onIntersect: (isIntersect) => setIsMinHeader(isIntersect),
-        enabled: true,
-        rootMargin: `0px 0px ${-((containerRef.current?.offsetHeight ?? 0) - (tabHeaderRef.current?.offsetHeight ?? 0) + 1)}px 0px`,
-    });
+    useEffect(() => {
+        if (!contentRef.current) {
+            return;
+        }
+
+        const handleScroll = () => {
+            if (!contentRef.current) {
+                return;
+            }
+            const scrollTop = contentRef.current.scrollTop;
+            setIsMinHeader(scrollTop > 30);
+        };
+
+        contentRef.current.addEventListener('scroll', handleScroll);
+
+        return () => {
+            if (contentRef.current) {
+                contentRef.current.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, [contentRef]);
+    useEffect(() => {
+        if (contentRef.current) {
+            contentRef.current.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
+    }, [location]);
 
     return (
-        <div ref={containerRef}>
+        <div>
             <TabHeader
-                ref={tabHeaderRef}
                 headerInformation={restInformation}
                 tabTitles={tabTitles}
                 isMinSize={isMinHeader}
             />
-            <div ref={contentRef}>
+            <S.Contents
+                ref={contentRef}
+                animate={{
+                    paddingTop: isMinHeader ? '64px' : '214px',
+                }}
+            >
                 <Outlet />
-            </div>
+            </S.Contents>
         </div>
     );
 }

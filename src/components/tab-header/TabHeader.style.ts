@@ -10,7 +10,8 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
 
-    position: sticky;
+    position: absolute;
+    width: 375px;
     top: 0;
     background-color: ${theme.color.wht[100]};
 `;
