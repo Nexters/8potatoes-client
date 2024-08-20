@@ -4,9 +4,16 @@ import { renderToString } from 'react-dom/server';
 import { Marker } from 'react-naver-maps';
 
 import MarkerFlagIcon from '#/assets/icons/marker-flag.svg?react';
+import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
 import { useDisclosure } from '#/hooks/useDisclosure';
 
+import {
+    LeftSideBubbleMarker,
+    LeftSideRecommendMarker,
+    RightSideBubbleMarker,
+    RightSideRecommendMarker,
+} from './BubbleSideMarker';
 import * as S from './RestAreaBubbleMarker.style';
 
 export interface RestAreaBubbleMarkerImplProps extends ComponentProps<'div'> {
@@ -19,17 +26,31 @@ export const RestAreaBubbleMarkerImpl = forwardRef<
     HTMLDivElement,
     RestAreaBubbleMarkerImplProps
 >(({ isRecommend, restAreaName, direction, ...restProps }, ref) => {
+    const LeftSideMarker = isRecommend
+        ? LeftSideRecommendMarker
+        : LeftSideBubbleMarker;
+    const RightSideMarker = isRecommend
+        ? RightSideRecommendMarker
+        : RightSideBubbleMarker;
+
     return (
-        <S.Container
+        <FlexBox
             row
-            gap={4}
-            ref={ref}
-            isRecommend={isRecommend}
-            {...restProps}
+            flexOption={{ alignItems: 'center', justifyContent: 'center' }}
         >
-            {isRecommend && <MarkerFlagIcon color="inherit" />}
-            <Text typography="bodyBold14">{restAreaName}</Text>
-        </S.Container>
+            <LeftSideMarker />
+            <S.Container
+                row
+                gap={4}
+                ref={ref}
+                isRecommend={isRecommend}
+                {...restProps}
+            >
+                {isRecommend && <MarkerFlagIcon color="inherit" />}
+                <Text typography="bodyBold14">{restAreaName}</Text>
+            </S.Container>
+            <RightSideMarker />
+        </FlexBox>
     );
 });
 
@@ -53,8 +74,8 @@ export const RestAreaBubbleMarker = ({
                 direction={direction}
             />,
         ),
-        size: new naver.maps.Size(width + 8, 16),
-        anchor: new naver.maps.Point(width + 8, 16),
+        size: new naver.maps.Size(width + 40, 16),
+        anchor: new naver.maps.Point(width + 40, 16),
     };
 
     // NOTE : Emotion Style 을 적용하기 위해 Marker 컴포넌트와 RestAreaBubbleMarkerImpl 컴포넌트를 렌더링
@@ -65,9 +86,9 @@ export const RestAreaBubbleMarker = ({
                 ref={(element) => {
                     if (element && !isRender) {
                         const { width } = element.getBoundingClientRect();
+                        console.log(width);
                         setWidth(width);
                         turnOnRender();
-                        element.style.display = 'none';
                     }
                 }}
                 isRecommend={isRecommend}
