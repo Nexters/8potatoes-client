@@ -61,7 +61,10 @@ export function Route({
 
     return (
         <S.Container>
-            <img src="" style={{ width: '100%', height: '327px' }} />
+            <img
+                alt="메인 이미지"
+                src={`${import.meta.env.VITE_ASSET_URL}/main-route.png`}
+            />
 
             <S.Contents>
                 <S.Title

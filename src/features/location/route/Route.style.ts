@@ -17,7 +17,7 @@ export const Title = styled(Text)`
 
 export const Contents = styled.div`
     padding: 0 20px;
-    margin-top: 40px;
+    margin-top: 20px;
 `;
 
 export const Route = styled.div`
