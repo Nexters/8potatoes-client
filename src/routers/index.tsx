@@ -52,11 +52,6 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                 {
                     path: '/',
                     errorElement: <div>에러</div>,
-                    element: <App />,
-                },
-                {
-                    path: '/location-search',
-                    errorElement: <div>에러</div>,
                     element: <LocationSearch />,
                 },
                 {
