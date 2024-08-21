@@ -109,7 +109,9 @@ export function Search({
                 <S.ListContents ref={rootRef}>
                     {(isEmptyInput || hasNoResult) && (
                         <S.SearchTipContainer>
-                            <SearchTip>
+                            <SearchTip
+                                imgSrc={`${import.meta.env.VITE_ASSET_URL}/search-empty.png`}
+                            >
                                 {isEmptyInput
                                     ? '위치를 입력해주세요.'
                                     : '검색 결과가 없습니다.'}

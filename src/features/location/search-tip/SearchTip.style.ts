@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 
 import { Text } from '#/components/text';
-import { theme } from '#/styles/theme';
 
 export const Container = styled.span`
     height: 100%;
@@ -11,10 +10,9 @@ export const Container = styled.span`
     align-items: center;
 `;
 
-export const IconBackground = styled.div`
-    border-radius: 30px;
-    background-color: ${theme.color.main[10]};
-    padding: 10px;
+export const Image = styled.img`
+    width: 200px;
+    height: 200px;
 `;
 
 export const Tip = styled(Text)`
