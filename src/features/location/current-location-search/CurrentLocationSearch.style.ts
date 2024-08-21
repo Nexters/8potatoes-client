@@ -34,10 +34,6 @@ export const LocationPointerContainer = styled.div`
     right: 20px;
     bottom: 185px;
 
-    padding: 14px;
-    background-color: ${theme.color.wht[100]};
-    border-radius: 30px;
-
     filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.05));
 `;
 

@@ -94,9 +94,7 @@ export function Search({
                     <S.CurrentLocation
                         onClick={handleOpenCurrentLocationSearch}
                     >
-                        <S.LocationPointerContainer>
-                            <LocationPointerIcon width={12} height={12} />
-                        </S.LocationPointerContainer>
+                        <LocationPointerIcon />
                         <Text
                             typography="bodySemiBold14"
                             color={theme.color.blk[40]}
