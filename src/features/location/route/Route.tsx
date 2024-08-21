@@ -132,7 +132,7 @@ export function Route({
                             stroke={
                                 isSelectEnd
                                     ? theme.color.main[100]
-                                    : theme.color.main[30]
+                                    : theme.color.main[50]
                             }
                         />
                     </button>
