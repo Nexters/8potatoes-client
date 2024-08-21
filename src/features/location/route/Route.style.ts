@@ -3,10 +3,16 @@ import styled from '@emotion/styled';
 
 import dottedLine from '#/assets/icons/dotted-line.svg';
 import { BottomSection } from '#/components/bottom-section';
+import { Text } from '#/components/text';
 import { theme } from '#/styles/theme';
 
 export const Container = styled.div`
-    padding-top: 64px;
+    background-color: ${theme.color.bg[30]};
+    height: 100dvh;
+`;
+
+export const Title = styled(Text)`
+    padding-left: 17px;
 `;
 
 export const Contents = styled.div`
