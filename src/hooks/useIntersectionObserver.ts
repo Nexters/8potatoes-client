@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-interface UseIntersectionObserverOptions<T> {
+interface UseIntersectionObserverOptions {
     onIntersect: (isIntersect: boolean) => void;
     enabled: boolean;
     root?: Element | null;
@@ -12,7 +12,7 @@ function useIntersectionObserver<T extends HTMLElement>({
     enabled,
     root,
     rootMargin = '0px',
-}: UseIntersectionObserverOptions<T>) {
+}: UseIntersectionObserverOptions) {
     const targetRef = useRef<T>(null);
 
     useEffect(() => {
