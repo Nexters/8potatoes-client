@@ -8,15 +8,13 @@ import * as S from './RestAreaDetailSection.style';
 
 interface RestAreaDetailSectionProps extends ComponentProps<typeof FlexBox> {
     title: string;
-    iconSrc: string;
-    iconAlt: string;
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
     description?: string;
 }
 
 export const RestAreaDetailSection = ({
     title,
-    iconSrc,
-    iconAlt,
+    icon: Icon,
     description,
     children,
     ...restProps
@@ -30,12 +28,7 @@ export const RestAreaDetailSection = ({
             }}
         >
             <S.Title row gap={12}>
-                <img
-                    alt={iconAlt}
-                    src={iconSrc}
-                    width={24}
-                    height={24}
-                />
+                <Icon width={24} height={24} />
                 <Text typography="headingBold20" color={theme.color.blk[100]}>
                     {title}
                 </Text>

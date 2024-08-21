@@ -1,3 +1,4 @@
+import ParkingSpaceIcon from '#/assets/icons/parking-space.svg?react';
 import { Text } from '#/components/text';
 import { theme } from '#/styles/theme';
 import dayjs from '#/utils/dayjs';
@@ -24,8 +25,7 @@ export const RestAreaParkingInformation = ({
     return (
         <RestAreaDetailSection
             title="주차 공간"
-            iconSrc=""
-            iconAlt=""
+            icon={ParkingSpaceIcon}
             description={`${totalSpace}대 주차 가능`}
         >
             <S.CardGroup row gap={12}>

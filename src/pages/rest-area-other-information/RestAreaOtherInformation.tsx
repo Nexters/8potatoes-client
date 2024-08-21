@@ -1,6 +1,10 @@
+import AmenitiesIcon from '#/assets/icons/amenities.svg?react';
 import CallIcon from '#/assets/icons/call.svg?react';
 import CopyIcon from '#/assets/icons/copy.svg?react';
 import LocationIcon from '#/assets/icons/location.svg?react';
+import OtherInformationIcon from '#/assets/icons/other-information.svg?react';
+import RestaurantTimeIcon from '#/assets/icons/restaurant-time.svg?react';
+import StoreBrandIcon from '#/assets/icons/store-brand.svg?react';
 import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
 import { RestAreaDetailSection } from '#/features/rest-area/rest-area-detail-section';
@@ -15,7 +19,7 @@ export function RestAreaOtherInformation() {
 
     return (
         <S.Container gap={8}>
-            <RestAreaDetailSection title="영업 시간" iconSrc="" iconAlt="">
+            <RestAreaDetailSection title="영업 시간" icon={RestaurantTimeIcon}>
                 <S.HourList as="ul" gap={12}>
                     {restStop.restaurantOperatingTimes.map((restaurant) => (
                         <FlexBox
@@ -41,7 +45,7 @@ export function RestAreaOtherInformation() {
                 </S.HourList>
             </RestAreaDetailSection>
 
-            <RestAreaDetailSection title="입점 브랜드" iconSrc="" iconAlt="">
+            <RestAreaDetailSection title="입점 브랜드" icon={StoreBrandIcon}>
                 <S.FacilityList>
                     {restStop.brands.map((brand) => (
                         <S.FacilityListItem as="li" key={brand.brandName}>
@@ -60,7 +64,7 @@ export function RestAreaOtherInformation() {
                 </S.FacilityList>
             </RestAreaDetailSection>
 
-            <RestAreaDetailSection title="편의시설" iconSrc="" iconAlt="">
+            <RestAreaDetailSection title="편의시설" icon={AmenitiesIcon}>
                 <S.FacilityList>
                     {restStop.amenities.map((amenity) => (
                         <S.FacilityListItem as="li" key={amenity.amenityName}>
@@ -79,7 +83,10 @@ export function RestAreaOtherInformation() {
                 </S.FacilityList>
             </RestAreaDetailSection>
 
-            <RestAreaDetailSection title="기타 정보" iconSrc="" iconAlt="">
+            <RestAreaDetailSection
+                title="기타 정보"
+                icon={OtherInformationIcon}
+            >
                 <S.OtherInformationContainer>
                     <S.InformationBox
                         flexOption={{ justifyContent: 'space-between' }}
