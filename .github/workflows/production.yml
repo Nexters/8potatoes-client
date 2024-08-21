@@ -1,0 +1,53 @@
+name: audy-client-production
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }},
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+
+jobs:
+  build-project:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Environment Variable Setting
+        run: |
+          echo "VITE_TMAP_APP_KEY=${{ secrets.TMAP_APP_KEY }}" >> .env.production
+          echo "VITE_SERVER_URL=${{ secretsSERVER_URL }}" >> .env.production
+          echo "VITE_X_NCP_APIGW_API_KEY_ID=${{ secrets.X_NCP_APIGW_API_KEY_ID }}" >> .env.production
+          echo VITE_X_NCP_APIGW_API_KEY=${{ secrets.X_NCP_APIGW_API_KEY }}" >> .env.production
+
+      - name: Build vite app
+        run: pnpm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_ID }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Upload Build File to S3
+        run: aws s3 cp --recursive --region $AWS_REGION dist s3://$S3_BUCKET_NAME

@@ -23,10 +23,7 @@ export const RestAreaMapPage = () => {
     const { origin, destination } = location.state;
 
     const {
-        data: {
-            journeyPathList = [],
-            highways = {},
-        } = {},
+        data: { journeyPathList = [], highways = {} } = {},
         isSuccess: isValidJourney,
     } = useGetDestinationPath({
         startX: origin.lon,
@@ -60,58 +57,49 @@ export const RestAreaMapPage = () => {
         : new naverMaps.LatLng(destination.lat, destination.lon);
 
     return (
-        <>
-            <NaverMapContainer style={{ height: '100dvh' }}>
-                <DestinationIndicator
-                    start={origin.addressName}
-                    end={destination.addressName}
+        <NaverMapContainer style={{ height: '100dvh' }}>
+            <DestinationIndicator
+                start={origin.addressName}
+                end={destination.addressName}
+            />
+            {isValidHighwayRestArea && (
+                <RestAreaListDrawer
+                    totalRestAreaCount={restAreaData.totalReststopCount}
+                    restAreaList={restAreaData.reststops}
                 />
-                {isValidHighwayRestArea && (
-                    <RestAreaListDrawer
-                        totalRestAreaCount={restAreaData.totalReststopCount}
-                        restAreaList={restAreaData.reststops}
-                    />
+            )}
+            <NaverMap maxBounds={mapBound}>
+                {isValidJourney && (
+                    <>
+                        <Polyline
+                            path={journeyPathList}
+                            strokeColor={theme.color.main[100]}
+                            strokeLineJoin="round"
+                            strokeWeight={6}
+                            strokeStyle="solid"
+                            clickable={false}
+                        />
+                        <DestinationMarker isStart position={startPosition} />
+                        <DestinationMarker position={endPosition} />
+                    </>
                 )}
-                <NaverMap maxBounds={mapBound}>
-                    {isValidJourney && (
-                        <>
-                            <Polyline
-                                path={journeyPathList}
-                                strokeColor={theme.color.main[100]}
-                                strokeLineJoin="round"
-                                strokeWeight={6}
-                                strokeStyle="solid"
-                                clickable={false}
+                {isValidHighwayRestArea &&
+                    restAreaData.reststops.map(
+                        ({ name, location, isRecommend }) => (
+                            <RestAreaBubbleMarker
+                                direction={'부산'}
+                                restAreaName={name}
+                                isRecommend={isRecommend}
+                                position={
+                                    new naver.maps.LatLng(
+                                        location.latitude,
+                                        location.longitude,
+                                    )
+                                }
                             />
-                            <DestinationMarker
-                                isStart
-                                position={startPosition}
-                            />
-                            <DestinationMarker position={endPosition} />
-                        </>
+                        ),
                     )}
-                    {isValidHighwayRestArea &&
-                        restAreaData.reststops.map(
-                            ({
-                                name,
-                                location,
-                                isRecommend,
-                            }) => (
-                                <RestAreaBubbleMarker
-                                    direction={'부산'}
-                                    restAreaName={name}
-                                    isRecommend={isRecommend}
-                                    position={
-                                        new naver.maps.LatLng(
-                                            location.latitude,
-                                            location.longitude,
-                                        )
-                                    }
-                                />
-                            ),
-                        )}
-                </NaverMap>
-            </NaverMapContainer>
-        </>
+            </NaverMap>
+        </NaverMapContainer>
     );
 };
