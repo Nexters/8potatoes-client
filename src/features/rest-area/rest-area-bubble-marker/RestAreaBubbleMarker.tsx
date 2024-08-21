@@ -81,12 +81,12 @@ export const RestAreaBubbleMarker = ({
     // NOTE : Emotion Style 을 적용하기 위해 Marker 컴포넌트와 RestAreaBubbleMarkerImpl 컴포넌트를 렌더링
     return (
         <>
-            <Marker icon={icon} {...restProps} />
+            <Marker icon={icon} zIndex={Number(isRecommend)} {...restProps} />
             <RestAreaBubbleMarkerImpl
                 ref={(element) => {
                     if (element && !isRender) {
                         const { width } = element.getBoundingClientRect();
-                        console.log(width);
+                        element.style.display = 'none';
                         setWidth(width);
                         turnOnRender();
                     }

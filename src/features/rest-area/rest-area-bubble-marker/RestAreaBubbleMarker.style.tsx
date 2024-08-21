@@ -18,9 +18,8 @@ export const Container = styled(FlexBox)(({ isRecommend }: ContainerProps) => {
     return css`
         width: max-content;
         height: 32px;
-        max-height: 32px;
 
-        padding: 4px 12px;
+        padding: 4px 0;
         background-color: ${backgroundColor};
         border-top: 1px solid ${borderColor};
         border-bottom: 1px solid ${borderColor};

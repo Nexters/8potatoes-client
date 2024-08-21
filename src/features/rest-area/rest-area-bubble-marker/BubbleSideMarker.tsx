@@ -20,8 +20,8 @@ export const LeftSideBubbleMarker = () => (
         </mask>
         <g mask="url(#mask0_1184_12593)">
             <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M8 0C3.58172 0 0 3.58172 0 8V24C0 28.4183 3.58172 32 8 32H150C154.418 32 158 28.4183 158 24V17.8169L163.901 6.46108C164.247 5.79539 163.764 5 163.013 5H157.418C156.232 2.06817 153.357 0 150 0H8Z"
                 fill="white"
             />
@@ -34,8 +34,8 @@ export const LeftSideBubbleMarker = () => (
                 height="32"
             >
                 <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M8 0C3.58172 0 0 3.58172 0 8V24C0 28.4183 3.58172 32 8 32H150C154.418 32 158 28.4183 158 24V17.8169L163.901 6.46108C164.247 5.79539 163.764 5 163.013 5H157.418C156.232 2.06817 153.357 0 150 0H8Z"
                     fill="white"
                 />
@@ -70,8 +70,8 @@ export const RightSideBubbleMarker = () => (
         </mask>
         <g mask="url(#mask0_1184_12602)">
             <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M-137 0C-141.418 0 -145 3.58172 -145 8V24C-145 28.4183 -141.418 32 -137 32H5C9.418 32 13 28.4183 13 24V17.8169L18.901 6.46108C19.247 5.79539 18.764 5 18.013 5H12.418C11.232 2.06817 8.35699 0 5 0H-137Z"
                 fill="white"
             />
@@ -84,8 +84,8 @@ export const RightSideBubbleMarker = () => (
                 height="32"
             >
                 <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M-137 0C-141.418 0 -145 3.58172 -145 8V24C-145 28.4183 -141.418 32 -137 32H5C9.418 32 13 28.4183 13 24V17.8169L18.901 6.46108C19.247 5.79539 18.764 5 18.013 5H12.418C11.232 2.06817 8.35699 0 5 0H-137Z"
                     fill="white"
                 />
@@ -120,8 +120,8 @@ export const LeftSideRecommendMarker = () => (
         </mask>
         <g mask="url(#mask0_1184_12611)">
             <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M8 0C3.58172 0 0 3.58172 0 8V24C0 28.4183 3.58171 32 7.99999 32H157.856C162.275 32 165.856 28.4183 165.856 24V18.0922L171.9 6.46108C172.246 5.79539 171.763 5 171.013 5H165.275C164.088 2.06817 161.214 0 157.856 0H8Z"
                 fill={theme.color.main[100]}
             />
@@ -149,8 +149,8 @@ export const RightSideRecommendMarker = () => (
         </mask>
         <g mask="url(#mask0_1184_12616)">
             <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M-145 0C-149.418 0 -153 3.58172 -153 8V24C-153 28.4183 -149.418 32 -145 32H4.856C9.27501 32 12.856 28.4183 12.856 24V18.0922L18.9 6.46108C19.246 5.79539 18.763 5 18.013 5H12.275C11.088 2.06817 8.214 0 4.856 0H-145Z"
                 fill={theme.color.main[100]}
             />
