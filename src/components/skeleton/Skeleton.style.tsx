@@ -10,14 +10,14 @@ export const shine = keyframes`
 `;
 
 export const Container = styled.div`
-    background-color: ${theme.color.blk[20]};
+    background-color: ${theme.color.blk[10]};
     border-radius: 4px;
 
     background-image: linear-gradient(
         90deg,
-        ${theme.color.blk[20]},
         ${theme.color.blk[10]},
-        ${theme.color.blk[20]}
+        ${theme.color.blk[5]},
+        ${theme.color.blk[10]}
     );
     background-position: left -4rem top 0;
     background-size: 4rem 100%;
