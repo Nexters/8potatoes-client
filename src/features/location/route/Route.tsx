@@ -61,19 +61,24 @@ export function Route({
 
     return (
         <>
-            <Header title="로고" />
-
             <S.Container>
-                <img src="" style={{ width: '100%', height: '327px' }} />
+                <img
+                    src="https://hyusik-matju-bucket.s3.ap-northeast-2.amazonaws.com/assets/main-route.png"
+                    style={{
+                        width: '100%',
+                        height: '431px',
+                        objectFit: 'cover',
+                    }}
+                />
 
                 <S.Contents>
                     <Text
                         typography="headingBold24"
-                        color={theme.color.blk[100]}
+                        color={theme.color.blk[80]}
                     >
-                        쥬쥬와 함께
+                        여행길에 딱 맞는
                         <br />
-                        휴게소 맛집을 찾아보세요!
+                        휴게소를 찾아보세요!
                     </Text>
 
                     <S.RouteContainer>

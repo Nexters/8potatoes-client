@@ -6,12 +6,13 @@ import { BottomSection } from '#/components/bottom-section';
 import { theme } from '#/styles/theme';
 
 export const Container = styled.div`
-    padding-top: 64px;
+    background-color: ${theme.color.bg[30]};
+    height: 100%;
 `;
 
 export const Contents = styled.div`
     padding: 0 20px;
-    margin-top: 40px;
+    margin-top: 20px;
 `;
 
 export const Route = styled.div`
@@ -22,7 +23,7 @@ export const BorderLine = styled.div<{ isFill: boolean }>(({ isFill }) => {
     const borderTop = `1px solid ${isFill ? theme.color.main[30] : theme.color.bg[100]}`;
 
     return css`
-        margin: 20px 0;
+        margin: 16px 0;
         border-top: ${borderTop};
     `;
 });
