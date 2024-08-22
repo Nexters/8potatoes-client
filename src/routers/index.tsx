@@ -6,7 +6,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { NavermapsProvider } from 'react-naver-maps';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 
-import App from '#/App';
 import { LocationSearch } from '#/pages/location-search';
 import { RestAreaFoodPage } from '#/pages/rest-area-food';
 import { RestAreaFuelPage } from '#/pages/rest-area-fuel';
