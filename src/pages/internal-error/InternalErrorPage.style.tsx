@@ -8,16 +8,16 @@ export const Container = styled(FlexBox)`
     align-items: center;
     justify-content: center;
     margin: auto;
-`
+`;
 
 export const PreviousButton = styled.button`
-      width: 100%;
-        display: flex;
-        justify-content: center;
-        padding: 16px;
-        margin-top: 8px;
-        border-radius: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    margin-top: 8px;
+    border-radius: 16px;
 
-        background-color: ${theme.color.main[100]};
-        cursor: pointer;
-`
+    background-color: ${theme.color.main[100]};
+    cursor: pointer;
+`;

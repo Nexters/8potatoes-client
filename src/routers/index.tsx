@@ -80,6 +80,11 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                     element: <RestAreaMapPage />,
                 },
             ],
-            errorElement: <NotFoundPage />,
+            errorElement: (
+                <>
+                    <GlobalStyle />
+                    <NotFoundPage />
+                </>
+            ),
         },
     ]);
