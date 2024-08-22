@@ -16,8 +16,11 @@ export async function getLocationSearchData({
     centerLat,
     appKey,
 }: LocationSearchParams) {
+    const baseURL = `https://apis.openapi.sk.com`;
+
     return API.get<LocationSearchResponse, LocationSearchParams>(`/tmap/pois`, {
         params: { page, searchKeyword, centerLon, centerLat, appKey },
+        baseURL,
     });
 }
 
@@ -26,11 +29,14 @@ export async function getReverseGeocodingData({
     lon,
     appKey,
 }: ReverseGeocodingParams) {
+    const baseURL = `https://apis.openapi.sk.com`;
+
     const data = await API.get<
         ReverseGeocodingResponse,
         ReverseGeocodingParams
     >(`/tmap/geo/reversegeocoding`, {
         params: { lat, lon, appKey },
+        baseURL,
     });
     return data;
 }
