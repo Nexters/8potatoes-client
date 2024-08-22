@@ -6,8 +6,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { NavermapsProvider } from 'react-naver-maps';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 
-import { NotFoundPage } from '#/pages/not-found';
+import { InternalErrorPage } from '#/pages/internal-error';
 import { LocationSearch } from '#/pages/location-search';
+import { NotFoundPage } from '#/pages/not-found';
 import { RestAreaFoodPage } from '#/pages/rest-area-food';
 import { RestAreaFuelPage } from '#/pages/rest-area-fuel';
 import { RestAreaMapPage } from '#/pages/rest-area-map';
@@ -51,12 +52,12 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
             children: [
                 {
                     path: '/',
-                    errorElement: <div>에러</div>,
+                    errorElement: <InternalErrorPage />,
                     element: <LocationSearch />,
                 },
                 {
                     path: '/rest-area/:restAreaId',
-                    errorElement: <div>에러</div>,
+                    errorElement: <InternalErrorPage />,
                     element: <RestAreaDetail />,
                     children: [
                         {
@@ -75,7 +76,7 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                 },
                 {
                     path: '/map',
-                    errorElement: <div>에러</div>,
+                    errorElement: <InternalErrorPage />,
                     element: <RestAreaMapPage />,
                 },
             ],
