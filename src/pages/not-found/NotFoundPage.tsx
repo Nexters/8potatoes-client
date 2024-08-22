@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 
-import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
 import { MobileView } from '#/pages/templates/mobile-view';
 import { theme } from '#/styles/theme';
@@ -23,7 +22,7 @@ export const NotFoundPage = () => {
                         alt="not_found"
                     />
                     <Text typography="bodyMedium16" color={theme.color.blk[40]}>
-                        찾을 수 없는 페이지 입니다.
+                        유효하지 않은 페이지 입니다.
                     </Text>
                     <S.PreviousButton onClick={handleBackPreviousPage}>
                         <Text

@@ -69,7 +69,7 @@ export const RestAreaMapPage = () => {
                 {isValidHighwayRestArea && (
                     <RestAreaListDrawer
                         totalRestAreaCount={restAreaData.totalReststopCount}
-                        restAreaList={restAreaData.reststopsdfs}
+                        restAreaList={restAreaData.reststops}
                     />
                 )}
                 <NaverMap maxBounds={mapBound}>
