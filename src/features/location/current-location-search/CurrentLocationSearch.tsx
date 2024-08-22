@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { NaverMap, useNavermaps } from 'react-naver-maps';
 
-import CurrentPositionIcon from '#/assets/icons/current-position.svg?react';
-import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
+import CurrentLocationIcon from '#/assets/icons/current-location.svg?react';
+import LocationMovingIcon from '#/assets/icons/location-moving.svg?react';
 import { Button } from '#/components/button';
 import { Header } from '#/components/header';
 import { Text } from '#/components/text';
@@ -127,7 +127,7 @@ export function CurrentLocationSearch({
 
                         <Tooltip content="표시된 위치가 맞나요?">
                             <S.CurrentPositionContainer>
-                                <CurrentPositionIcon />
+                                <CurrentLocationIcon />
                             </S.CurrentPositionContainer>
                         </Tooltip>
                     </S.MapContainer>
@@ -137,7 +137,7 @@ export function CurrentLocationSearch({
                             getCurrentPosition(geolocationCoordinates)
                         }
                     >
-                        <LocationPointerIcon width={20} height={20} />
+                        <LocationMovingIcon />
                     </S.LocationPointerContainer>
 
                     <S.BottomContainer>

@@ -42,3 +42,24 @@ export const CategoryOption = styled(motion(FlexBox))(({
         }
     `;
 });
+
+export const Icon = styled(FlexBox)<{ isSelected: boolean }>(({
+    isSelected,
+}) => {
+    const boxShadow = isSelected
+        ? ``
+        : `0px 4px 8px 0px rgba(77, 66, 52, 0.04)`;
+    const border = isSelected
+        ? `1.5px solid ${theme.color.main[100]}`
+        : `1px solid ${theme.color.blk[5]}`;
+
+    return css`
+        width: 64px;
+        height: 64px;
+
+        border: ${border};
+        border-radius: 50px;
+
+        box-shadow: ${boxShadow};
+    `;
+});

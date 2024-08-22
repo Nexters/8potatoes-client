@@ -94,9 +94,7 @@ export function Search({
                     <S.CurrentLocation
                         onClick={handleOpenCurrentLocationSearch}
                     >
-                        <S.LocationPointerContainer>
-                            <LocationPointerIcon width={12} height={12} />
-                        </S.LocationPointerContainer>
+                        <LocationPointerIcon />
                         <Text
                             typography="bodySemiBold14"
                             color={theme.color.blk[40]}
@@ -109,12 +107,12 @@ export function Search({
                 </S.HeaderContents>
 
                 <S.ListContents ref={rootRef}>
-                    {(isEmptyInput || hasNoResult) && (
+                    {hasNoResult && (
                         <S.SearchTipContainer>
-                            <SearchTip>
-                                {isEmptyInput
-                                    ? '위치를 입력해주세요.'
-                                    : '검색 결과가 없습니다.'}
+                            <SearchTip
+                                imgSrc={`${import.meta.env.VITE_ASSET_URL}/search-empty.png`}
+                            >
+                                검색 결과가 없습니다.
                             </SearchTip>
                         </S.SearchTipContainer>
                     )}

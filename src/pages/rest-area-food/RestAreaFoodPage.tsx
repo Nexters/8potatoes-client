@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
+import MenuIcon from '#/assets/icons/menu.svg?react';
 import { FlexBox } from '#/components/flex-box';
 import { FOOD_CATEGORY_ORDER } from '#/constants/food-menu';
 import { RepresentativeMenuSection } from '#/features/rest-area/representative-menu-section';
@@ -51,8 +52,7 @@ export const RestAreaFoodPage = () => {
             <S.MenuSection>
                 <RestAreaDetailSection
                     title="전체 메뉴"
-                    iconSrc=""
-                    iconAlt="전체 메뉴 아이콘"
+                    icon={MenuIcon}
                     description={`${totalMenuCount}개의 메뉴`}
                 >
                     <RestAreaFoodCategory

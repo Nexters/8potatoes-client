@@ -1,3 +1,4 @@
+import FuelingAndChargingIcon from '#/assets/icons/fueling-and-charging.svg?react';
 import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
 import { theme } from '#/styles/theme';
@@ -24,10 +25,17 @@ export const RestAreaFuelInformation = ({
     const hasNoFuelInfo = !gasolinePrice && !dieselPrice && !lpgPrice;
 
     return (
-        <RestAreaDetailSection title="주유 및 충전" iconSrc="" iconAlt="">
+        <RestAreaDetailSection
+            title="주유 및 충전"
+            icon={FuelingAndChargingIcon}
+        >
             {hasNoFuelInfo ? (
                 <FlexBox gap={20} flexOption={{ alignItems: 'center' }}>
-                    <img src="" width={120} height={120} />
+                    <img
+                        src={`${import.meta.env.VITE_ASSET_URL}/fuel-empty.png`}
+                        width={100}
+                        height={100}
+                    />
                     <Text typography="bodyBold16" color={theme.color.blk[40]}>
                         해당 휴게소의 주유소 정보가 없습니다.
                     </Text>
