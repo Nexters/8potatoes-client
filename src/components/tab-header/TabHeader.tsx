@@ -91,7 +91,11 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
 
     return (
         <S.Container ref={ref}>
-            <Header title={headerTitle} isVisibleBackspace />
+            <Header
+                title={headerTitle}
+                onClickBackspace={() => navigate(-1)}
+                isVisibleBackspace
+            />
 
             <S.HeaderContents
                 initial={{ y: 0 }}
