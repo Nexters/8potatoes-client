@@ -2,6 +2,8 @@ import { type ComponentProps, type PropsWithChildren, Suspense } from 'react';
 
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary';
 
+import { ErrorBox } from '../error-box';
+
 interface PropsType
     extends Omit<ComponentProps<typeof ErrorBoundary>, 'fallbackRender'> {
     pendingFallback: ComponentProps<typeof Suspense>['fallback'];
@@ -9,7 +11,9 @@ interface PropsType
 }
 
 // FIXME : 추후 에러 Fallback UI 시안이 나올 경우 대체해야 함
-const FallbackComponent = ({ error }: FallbackProps) => <p>{error.message}</p>;
+const FallbackComponent = ({ error }: FallbackProps) => (
+    <ErrorBox>{error.message}</ErrorBox>
+);
 
 export const AsyncBoundary = ({
     pendingFallback,
