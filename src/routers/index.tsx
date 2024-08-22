@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { NavermapsProvider } from 'react-naver-maps';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 
+import { NotFoundPage } from '#/pages/not-found';
 import { LocationSearch } from '#/pages/location-search';
 import { RestAreaFoodPage } from '#/pages/rest-area-food';
 import { RestAreaFuelPage } from '#/pages/rest-area-fuel';
@@ -78,5 +79,6 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                     element: <RestAreaMapPage />,
                 },
             ],
+            errorElement: <NotFoundPage />,
         },
     ]);
