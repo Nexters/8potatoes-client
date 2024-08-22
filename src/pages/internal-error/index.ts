@@ -1,0 +1,1 @@
+export { InternalErrorPage } from './InternalErrorPage';
