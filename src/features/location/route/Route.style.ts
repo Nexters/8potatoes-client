@@ -13,6 +13,7 @@ export const Container = styled.div`
 
 export const Title = styled(Text)`
     padding-left: 17px;
+    height: 100%;
 `;
 
 export const Contents = styled.div`
@@ -28,7 +29,7 @@ export const BorderLine = styled.div<{ isFill: boolean }>(({ isFill }) => {
     const borderTop = `1px solid ${isFill ? theme.color.main[30] : theme.color.bg[100]}`;
 
     return css`
-        margin: 20px 0;
+        margin: 16px 0;
         border-top: ${borderTop};
     `;
 });

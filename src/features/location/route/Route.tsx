@@ -7,7 +7,6 @@ import LocationIcon from '#/assets/icons/location.svg?react';
 import OriginIcon from '#/assets/icons/origin.svg?react';
 import { Button } from '#/components/button';
 import { Drawer } from '#/components/drawer';
-import { Header } from '#/components/header';
 import { Text } from '#/components/text';
 import { SEARCH_OPTION } from '#/constants/location';
 import { LocationSelectField } from '#/features/location/location-select-field';
@@ -64,6 +63,11 @@ export function Route({
             <img
                 alt="메인 이미지"
                 src={`${import.meta.env.VITE_ASSET_URL}/main-route.png`}
+                style={{
+                    width: '100%',
+                    height: '431px',
+                    objectFit: 'cover',
+                }}
             />
 
             <S.Contents>

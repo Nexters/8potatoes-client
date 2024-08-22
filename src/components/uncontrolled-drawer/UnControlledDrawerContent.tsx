@@ -109,6 +109,9 @@ export const UnControlledDrawerContent = ({
                                 height,
                                 top,
                             }}
+                            transition={{
+                                layout: { duration: 0.05 }
+                            }}
                             layout
                             onPanStart={handlePanStart}
                             onPanEnd={handlePanEnd}

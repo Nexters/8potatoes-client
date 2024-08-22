@@ -1,4 +1,4 @@
-import type { ComponentProps, PropsWithChildren } from 'react';
+import type { ComponentProps } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 
