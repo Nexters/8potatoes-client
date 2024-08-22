@@ -11,7 +11,7 @@ export const ErrorBox = ({ children }: PropsWithChildren<unknown>) => (
         <S.ErrorImage
             width={225}
             height={225}
-            src="https://hyusik-matju-bucket.s3.ap-northeast-2.amazonaws.com/assets/error.png"
+            src={`${import.meta.env.VITE_ASSET_URL}/error.png`}
             alt="not_found"
         />
         <S.TextSection gap={4}>

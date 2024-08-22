@@ -18,7 +18,7 @@ export const NotFoundPage = () => {
             <S.Container>
                 <S.NotFoundSection gap={8}>
                     <img
-                        src="https://hyusik-matju-bucket.s3.ap-northeast-2.amazonaws.com/assets/not-found.png"
+                        src={`${import.meta.env.VITE_ASSET_URL}/not-found.png`}
                         alt="not_found"
                     />
                     <Text typography="bodyMedium16" color={theme.color.blk[40]}>
