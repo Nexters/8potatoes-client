@@ -29,6 +29,7 @@ export const RestAreaFoodPage = () => {
     const selectedCategory = searchParam.get('category') ?? '추천';
 
     const menuListRef = useRef<Map<string, HTMLDivElement>>(new Map());
+    const pageContainerRef = useRef<HTMLDivElement>(null);
 
     const {
         data: { totalMenuCount, recommendedMenuData, normalMenuData },
@@ -48,11 +49,21 @@ export const RestAreaFoodPage = () => {
 
     useEffect(() => {
         const menuElement = menuListRef.current.get(selectedCategory);
-        if (menuElement) {
-            menuElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center',
-            });
+        const tabContentElement = document.getElementById('tab-content');
+
+        if (menuElement && tabContentElement) {
+            const menuElementPosition = menuElement.getBoundingClientRect().top;
+            const tabContentPosition =
+                tabContentElement.getBoundingClientRect().top;
+            const scrollOffset = menuElementPosition - tabContentPosition - 120;
+
+            if (scrollOffset >= 0) {
+                menuElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                });
+    
+            }
         }
     }, [selectedCategory]);
 

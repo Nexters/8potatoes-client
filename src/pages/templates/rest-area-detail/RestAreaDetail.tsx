@@ -69,6 +69,7 @@ export function RestAreaDetail() {
             />
             <S.Contents
                 ref={contentRef}
+                id="tab-content"
                 animate={{
                     paddingTop: isMinHeader ? '120px' : '214px',
                 }}
