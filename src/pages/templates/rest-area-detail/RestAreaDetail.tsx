@@ -50,6 +50,7 @@ export function RestAreaDetail() {
             }
         };
     }, [contentRef]);
+
     useEffect(() => {
         if (contentRef.current) {
             contentRef.current.scrollTo({
@@ -69,7 +70,7 @@ export function RestAreaDetail() {
             <S.Contents
                 ref={contentRef}
                 animate={{
-                    paddingTop: isMinHeader ? '64px' : '214px',
+                    paddingTop: isMinHeader ? '120px' : '214px',
                 }}
             >
                 <Outlet />
