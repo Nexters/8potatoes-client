@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 
+import { FlexBox } from '#/components/flex-box';
+import { Text } from '#/components/text';
+import { Z_INDEX } from '#/constants/z-index';
 import { theme } from '#/styles/theme';
-
-import { FlexBox } from '../flex-box';
-import { Text } from '../text';
 
 export const Container = styled.div`
     display: flex;
@@ -14,6 +14,7 @@ export const Container = styled.div`
     width: 375px;
     top: 0;
     background-color: ${theme.color.wht[100]};
+    z-index: ${Z_INDEX.HEADER};
 `;
 
 export const HeaderContents = styled(motion.div)`
