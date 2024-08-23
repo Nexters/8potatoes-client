@@ -1,18 +1,20 @@
-import { Suspense } from 'react';
-
 import { ThemeProvider } from '@emotion/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { NavermapsProvider } from 'react-naver-maps';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 
+import { AsyncBoundary } from '#/components/async-boundary';
 import { InternalErrorPage } from '#/pages/internal-error';
 import { LocationSearch } from '#/pages/location-search';
 import { NotFoundPage } from '#/pages/not-found';
 import { RestAreaFoodPage } from '#/pages/rest-area-food';
 import { RestAreaFuelPage } from '#/pages/rest-area-fuel';
 import { RestAreaMapPage } from '#/pages/rest-area-map';
-import { RestAreaOtherInformation } from '#/pages/rest-area-other-information';
+import {
+    RestAreaOtherInformation,
+    RestAreaOtherInformationLoading,
+} from '#/pages/rest-area-other-information';
 import { MobileView } from '#/pages/templates/mobile-view';
 import { RestAreaDetail } from '#/pages/templates/rest-area-detail';
 import { GlobalStyle } from '#/styles/global';
@@ -68,7 +70,15 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                         },
                         {
                             path: 'other-information',
-                            element: <RestAreaOtherInformation />,
+                            element: (
+                                <AsyncBoundary
+                                    pendingFallback={
+                                        <RestAreaOtherInformationLoading />
+                                    }
+                                >
+                                    <RestAreaOtherInformation />
+                                </AsyncBoundary>
+                            ),
                         },
                     ],
                 },
