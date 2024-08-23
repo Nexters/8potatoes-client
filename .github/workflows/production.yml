@@ -1,4 +1,4 @@
-name: audy-client-production
+name: 8potatoes-client-production
 
 on:
   push:
@@ -43,11 +43,14 @@ jobs:
         run: pnpm run build
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_ID }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Upload Build File to S3
-        run: aws s3 cp --recursive --region $AWS_REGION dist s3://$S3_BUCKET_NAME
+        run: aws s3 sync --region $AWS_REGION dist s3://$S3_BUCKET_NAME --delete
+
+      - name: Invalidate CloudFront Cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
