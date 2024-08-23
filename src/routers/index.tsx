@@ -35,11 +35,9 @@ const InitializedDataProvider = () => (
             >
                 <ReactQueryDevtools />
                 <GlobalStyle />
-                <Suspense fallback={<div>Loading</div>}>
-                    <MobileView>
-                        <Outlet />
-                    </MobileView>
-                </Suspense>
+                <MobileView>
+                    <Outlet />
+                </MobileView>
             </NavermapsProvider>
         </ThemeProvider>
     </QueryClientProvider>

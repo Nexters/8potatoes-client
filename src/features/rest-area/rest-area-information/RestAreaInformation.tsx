@@ -79,7 +79,7 @@ export const RestAreaInformation = ({
                     <Text typography="bodyMedium14" color={theme.color.blk[40]}>
                         휘발유
                     </Text>
-                    <S.PriceText 
+                    <S.PriceText
                         isExist={!!gasolinePrice}
                         typography="bodySemiBold14"
                     >
@@ -94,7 +94,7 @@ export const RestAreaInformation = ({
                     <Text typography="bodyMedium14" color={theme.color.blk[40]}>
                         경유
                     </Text>
-                    <S.PriceText 
+                    <S.PriceText
                         isExist={!!gasolinePrice}
                         typography="bodySemiBold14"
                     >
