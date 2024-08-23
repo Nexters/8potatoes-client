@@ -34,10 +34,11 @@ jobs:
 
       - name: Environment Variable Setting
         run: |
-          echo "VITE_TMAP_APP_KEY=${{ secrets.TMAP_APP_KEY }}" >> .env.production
-          echo "VITE_SERVER_URL=${{ secretsSERVER_URL }}" >> .env.production
-          echo "VITE_X_NCP_APIGW_API_KEY_ID=${{ secrets.X_NCP_APIGW_API_KEY_ID }}" >> .env.production
-          echo VITE_X_NCP_APIGW_API_KEY=${{ secrets.X_NCP_APIGW_API_KEY }}" >> .env.production
+          echo "VITE_TMAP_APP_KEY=${{ secrets.TMAP_APP_KEY }}" >> .env
+          echo "VITE_SERVER_URL=${{ secrets.SERVER_URL }}" >> .env
+          echo "VITE_X_NCP_APIGW_API_KEY_ID=${{ secrets.X_NCP_APIGW_API_KEY_ID }}" >> .env
+          echo "VITE_X_NCP_APIGW_API_KEY=${{ secrets.X_NCP_APIGW_API_KEY }}" >> .env
+          echo "VITE_ASSET_URL=${{ secrets.ASSET_URL }}" >> .env
 
       - name: Build vite app
         run: pnpm run build
