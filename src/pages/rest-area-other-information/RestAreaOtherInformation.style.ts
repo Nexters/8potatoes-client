@@ -30,6 +30,7 @@ export const FacilityListItem = styled(FlexBox)`
     gap: 16px;
     word-break: keep-all;
     text-align: center;
+    min-width: 80px;
 `;
 
 export const OtherInformationContainer = styled(FlexBox)`
