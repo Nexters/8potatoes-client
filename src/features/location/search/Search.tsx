@@ -1,6 +1,8 @@
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 import LocationPointerIcon from '#/assets/icons/location-pointer.svg?react';
+import { FlexBox } from '#/components/flex-box';
+import { Skeleton } from '#/components/skeleton';
 import { Text } from '#/components/text';
 import { useGeolocationPosition } from '#/hooks/useGeolocationPosition';
 import useIntersectionObserver from '#/hooks/useIntersectionObserver';
@@ -117,20 +119,30 @@ export function Search({
                         </S.SearchTipContainer>
                     )}
 
+                    {isLoading && (
+                        <S.SkeletonContainer gap={42}>
+                            {new Array(5).fill(null).map((_, idx) => (
+                                <FlexBox key={idx} gap={12}>
+                                    <Skeleton width={100} height={23} />
+                                    <Skeleton width={250} height={20} />
+                                    <Skeleton width={200} height={20} />
+                                </FlexBox>
+                            ))}
+                        </S.SkeletonContainer>
+                    )}
+
                     {isSuccess && (
-                        <>
-                            <S.SearchList>
-                                {data.map((item: LocationInformationType) => (
-                                    <SearchBox
-                                        key={item.pkey}
-                                        searchInput={searchInput}
-                                        location={item}
-                                        onSelect={onSelect}
-                                    />
-                                ))}
-                                <div ref={targetRef}></div>
-                            </S.SearchList>
-                        </>
+                        <S.SearchList>
+                            {data.map((item: LocationInformationType) => (
+                                <SearchBox
+                                    key={item.pkey}
+                                    searchInput={searchInput}
+                                    location={item}
+                                    onSelect={onSelect}
+                                />
+                            ))}
+                            <div ref={targetRef}></div>
+                        </S.SearchList>
                     )}
                 </S.ListContents>
             </S.ContentsContainer>
