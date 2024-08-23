@@ -163,7 +163,9 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
                                         ? theme.color.main[100]
                                         : theme.color.blk[40]
                                 }
-                                onClick={() => navigate(tabTitle.url)}
+                                onClick={() =>
+                                    navigate(tabTitle.url, { replace: true })
+                                }
                             >
                                 {tabTitle.title}
                             </S.TabTitle>

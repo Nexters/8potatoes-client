@@ -4,7 +4,7 @@ import {
     Polyline,
     useNavermaps,
 } from 'react-naver-maps';
-import { type Location, useLocation } from 'react-router-dom';
+import { type Location, useLocation, useNavigate } from 'react-router-dom';
 
 import { DestinationIndicator } from '#/features/rest-area/destination-indicator';
 import { DestinationMarker } from '#/features/rest-area/destination-marker';
@@ -19,6 +19,7 @@ export const RestAreaMapPage = () => {
     const naverMaps = useNavermaps();
     const location: Location<Record<SearchOptionType, SelectedLocationType>> =
         useLocation();
+    const navigate = useNavigate();
 
     const { origin, destination } = location.state;
 
@@ -61,6 +62,9 @@ export const RestAreaMapPage = () => {
             <DestinationIndicator
                 start={origin.addressName}
                 end={destination.addressName}
+                onClick={() =>
+                    navigate('/', { state: { origin, destination } })
+                }
             />
             {isValidHighwayRestArea && (
                 <RestAreaListDrawer
