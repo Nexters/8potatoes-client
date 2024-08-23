@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { flushSync } from 'react-dom';
+import { useLocation } from 'react-router-dom';
 
 import { Drawer } from '#/components/drawer';
 import { SEARCH_OPTION } from '#/constants/location';
@@ -12,6 +13,9 @@ import { SelectedLocationType } from '#/types/location';
 type SearchOptionType = (typeof SEARCH_OPTION)[keyof typeof SEARCH_OPTION];
 
 export function LocationSearch() {
+    const location = useLocation();
+    const { state } = location;
+
     const [routeLocation, setRouteLocation] = useState<
         Record<SearchOptionType, SelectedLocationType | null>
     >({
@@ -26,6 +30,13 @@ export function LocationSearch() {
 
     const [isCurrentLocationSearch, setIsCurrentLocationSearch] =
         useState<boolean>(false);
+
+    useEffect(() => {
+        if (state) {
+            const { origin, destination } = state;
+            setRouteLocation({ origin, destination });
+        }
+    }, [state]);
 
     const handleSelectLocation = (location: SelectedLocationType) => {
         if (!searchOption) {
