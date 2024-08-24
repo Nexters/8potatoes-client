@@ -33,6 +33,7 @@ export const ContentWrapper = styled(motion.div)`
     justify-content: space-between;
 
     overflow: hidden;
+    touch-action: auto;
 
     &:focus-visible {
         outline: none;
