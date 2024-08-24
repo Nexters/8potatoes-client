@@ -22,7 +22,8 @@ export const BestMenuSection = styled.div(
         const padding = isNeedPagination ? '40px 20px 32px 20px' : '40px 20px';
 
         return css`
-            width: 375px;
+            width: 100dvw;
+            max-width: 375px;
             padding: ${padding};
             text-align: center;
             white-space: nowrap;

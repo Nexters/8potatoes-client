@@ -10,8 +10,10 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
 
+    width: 100dvw;
+    max-width: 375px;
+
     position: absolute;
-    width: 375px;
     top: 0;
     background-color: ${theme.color.wht[100]};
     z-index: ${Z_INDEX.HEADER};

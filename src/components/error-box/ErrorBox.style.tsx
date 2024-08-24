@@ -12,6 +12,7 @@ export const TextSection = styled(FlexBox)`
 `;
 
 export const ErrorImage = styled.img`
+    width: 100dvw;
     max-width: 375px;
     max-height: 375px;
     aspect-ratio: 1 / 1;
