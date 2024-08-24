@@ -10,22 +10,28 @@ import { FOOD_CATEGORIES } from './RestAreaFoodCategory.constants';
 import * as S from './RestAreaFoodCategory.style';
 
 interface RestAreaFoodCategoryProps {
+    isRecommendedMenuAvailable: boolean;
     availableCategories: MenuCategoryType[];
 }
 
 export const RestAreaFoodCategory = forwardRef<
     HTMLDivElement,
     RestAreaFoodCategoryProps
->(({ availableCategories }, containerRef) => {
+>(({ isRecommendedMenuAvailable, availableCategories }, containerRef) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const currentDeltaX = useMotionValue(0);
 
     const categoryListRef = useRef<HTMLDivElement>(null);
 
-    const currentSelectedCategory = searchParams.get('category') ?? '추천';
+    const currentSelectedCategory =
+        searchParams.get('category') ??
+        (isRecommendedMenuAvailable ? '추천' : availableCategories[0]);
+
     const filteredCategories = FOOD_CATEGORIES.filter(
         (category) =>
-            category.id === '추천' || availableCategories.includes(category.id),
+            (isRecommendedMenuAvailable && category.id === '추천') ||
+            (category.id !== '추천' &&
+                availableCategories.includes(category.id)),
     );
 
     const handleSelectCategory = (category: string) => {

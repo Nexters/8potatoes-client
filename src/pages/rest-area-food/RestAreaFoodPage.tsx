@@ -20,22 +20,31 @@ export const RestAreaFoodPage = () => {
     const selectedCategory = searchParam.get('category') ?? '추천';
 
     const menuListRef = useRef<Map<string, HTMLDivElement>>(new Map());
-    const { contentRef } =
-        useOutletContext<RestAreaDetailOutletContextType>();
+    const { contentRef } = useOutletContext<RestAreaDetailOutletContextType>();
 
     const {
         data: { totalMenuCount, recommendedMenuData, normalMenuData },
     } = useGetRestAreaMenuInfo();
+
+    const isRecommendedMenuAvailable = recommendedMenuData.length > 0;
 
     const availableMenuCategory = Array.from(normalMenuData.keys()).toSorted(
         (a, b) =>
             FOOD_CATEGORY_ORDER.indexOf(a) - FOOD_CATEGORY_ORDER.indexOf(b),
     );
 
+    const defaultSelectedCategory = isRecommendedMenuAvailable
+        ? '추천'
+        : availableMenuCategory[0];
+
+    const availableSelectedCategory = isRecommendedMenuAvailable
+        ? ['추천', ...availableMenuCategory]
+        : availableMenuCategory;
+
     useValidatedSearchParams({
         paramName: 'category',
-        expectedValue: ['추천', ...availableMenuCategory],
-        defaultValue: '추천',
+        expectedValue: availableSelectedCategory,
+        defaultValue: defaultSelectedCategory,
         checkIfNull: true,
     });
 
@@ -66,15 +75,18 @@ export const RestAreaFoodPage = () => {
                     description={`${totalMenuCount}개의 메뉴`}
                 >
                     <RestAreaFoodCategory
+                        isRecommendedMenuAvailable={isRecommendedMenuAvailable}
                         availableCategories={availableMenuCategory}
                     />
                 </RestAreaDetailSection>
                 <S.MenuWrapper>
                     <FlexBox gap={40}>
-                        <RestAreaFoodMenu
-                            title="추천"
-                            menus={recommendedMenuData}
-                        />
+                        {recommendedMenuData.length ? (
+                            <RestAreaFoodMenu
+                                title="추천"
+                                menus={recommendedMenuData}
+                            />
+                        ) : null}
                         {availableMenuCategory.map((menuCategory) =>
                             normalMenuData.get(menuCategory)?.length ? (
                                 <RestAreaFoodMenu
