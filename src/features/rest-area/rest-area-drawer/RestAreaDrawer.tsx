@@ -1,10 +1,14 @@
+import { AsyncBoundary } from '#/components/async-boundary';
 import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
 import {
     type HeightStepType,
     UnControlledDrawer,
 } from '#/components/uncontrolled-drawer';
-import { RestAreaInformation } from '#/features/rest-area/rest-area-information';
+import {
+    RestAreaInformation,
+    RestAreaInformationLoading,
+} from '#/features/rest-area/rest-area-information';
 import { theme } from '#/styles/theme';
 import type { RestAreaDetailAtHighwayType } from '#/types/rest-area';
 
@@ -78,12 +82,16 @@ export const RestAreaListDrawer = ({
                     </S.Header>
                     <S.RestAreaList>
                         <FlexBox>
-                            {restAreaList.map((restArea) => (
-                                <RestAreaInformation
-                                    key={restArea.name}
-                                    {...restArea}
-                                />
-                            ))}
+                            <AsyncBoundary
+                                pendingFallback={<RestAreaInformationLoading />}
+                            >
+                                {restAreaList.map((restArea) => (
+                                    <RestAreaInformation
+                                        key={restArea.name}
+                                        {...restArea}
+                                    />
+                                ))}
+                            </AsyncBoundary>
                         </FlexBox>
                     </S.RestAreaList>
                 </S.Container>

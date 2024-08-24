@@ -3,12 +3,22 @@ import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import MenuIcon from '#/assets/icons/menu.svg?react';
+import { AsyncBoundary } from '#/components/async-boundary';
 import { FlexBox } from '#/components/flex-box';
 import { FOOD_CATEGORY_ORDER } from '#/constants/food-menu';
-import { RepresentativeMenuSection } from '#/features/rest-area/representative-menu-section';
+import {
+    RepresentativeMenuSection,
+    RepresentativeMenuSectionLoading,
+} from '#/features/rest-area/representative-menu-section';
 import { RestAreaDetailSection } from '#/features/rest-area/rest-area-detail-section';
-import { RestAreaFoodCategory } from '#/features/rest-area/rest-area-food-category';
-import { RestAreaFoodMenu } from '#/features/rest-area/rest-area-food-menu';
+import {
+    RestAreaFoodCategory,
+    RestAreaFoodCategoryLoading,
+} from '#/features/rest-area/rest-area-food-category';
+import {
+    RestAreaFoodMenu,
+    RestAreaFoodMenuLoading,
+} from '#/features/rest-area/rest-area-food-menu';
 import useValidatedSearchParams from '#/hooks/useValidSearchParams';
 import { useGetRestAreaMenuInfo } from '#/query-hooks/rest-area/query';
 
@@ -48,39 +58,53 @@ export const RestAreaFoodPage = () => {
 
     return (
         <S.Container gap={8}>
-            <RepresentativeMenuSection />
+            <AsyncBoundary
+                pendingFallback={<RepresentativeMenuSectionLoading />}
+            >
+                <RepresentativeMenuSection />
+            </AsyncBoundary>
             <S.MenuSection>
                 <RestAreaDetailSection
                     title="전체 메뉴"
                     icon={MenuIcon}
                     description={`${totalMenuCount}개의 메뉴`}
                 >
-                    <RestAreaFoodCategory
-                        availableCategories={availableMenuCategory}
-                    />
+                    <AsyncBoundary
+                        pendingFallback={<RestAreaFoodCategoryLoading />}
+                    >
+                        <RestAreaFoodCategory
+                            availableCategories={availableMenuCategory}
+                        />
+                    </AsyncBoundary>
                 </RestAreaDetailSection>
                 <S.MenuWrapper>
-                    <FlexBox gap={40}>
-                        <RestAreaFoodMenu
-                            title="추천"
-                            menus={recommendedMenuData}
-                        />
-                        {availableMenuCategory.map((menuCategory) =>
-                            normalMenuData.get(menuCategory)?.length ? (
-                                <RestAreaFoodMenu
-                                    ref={(element) =>
-                                        element &&
-                                        menuListRef.current.set(
-                                            menuCategory,
-                                            element,
-                                        )
-                                    }
-                                    title={menuCategory}
-                                    menus={normalMenuData.get(menuCategory)!}
-                                />
-                            ) : null,
-                        )}
-                    </FlexBox>
+                    <AsyncBoundary
+                        pendingFallback={<RestAreaFoodMenuLoading />}
+                    >
+                        <FlexBox gap={40}>
+                            <RestAreaFoodMenu
+                                title="추천"
+                                menus={recommendedMenuData}
+                            />
+                            {availableMenuCategory.map((menuCategory) =>
+                                normalMenuData.get(menuCategory)?.length ? (
+                                    <RestAreaFoodMenu
+                                        ref={(element) =>
+                                            element &&
+                                            menuListRef.current.set(
+                                                menuCategory,
+                                                element,
+                                            )
+                                        }
+                                        title={menuCategory}
+                                        menus={
+                                            normalMenuData.get(menuCategory)!
+                                        }
+                                    />
+                                ) : null,
+                            )}
+                        </FlexBox>
+                    </AsyncBoundary>
                 </S.MenuWrapper>
             </S.MenuSection>
         </S.Container>

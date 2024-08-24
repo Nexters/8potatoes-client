@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import DotIcon from '#/assets/icons/dot.svg?react';
-import { TabHeader } from '#/components/tab-header';
+import { TabHeader, TabHeaderLoading } from '#/components/tab-header';
 import { useGetRestAreaBaseInfo } from '#/query-hooks/rest-area/query';
 
 import * as S from './RestAreaDetail.style';
