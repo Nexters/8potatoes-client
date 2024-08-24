@@ -1,1 +1,4 @@
-export { RestAreaDetail } from './RestAreaDetail';
+export {
+    RestAreaDetail,
+    type RestAreaDetailOutletContextType,
+} from './RestAreaDetail';

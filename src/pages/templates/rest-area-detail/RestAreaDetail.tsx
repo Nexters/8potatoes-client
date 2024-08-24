@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 
 import { Outlet, useLocation } from 'react-router-dom';
 
@@ -21,12 +21,17 @@ const tabTitles = [
     { title: '기타정보', url: 'other-information' },
 ];
 
+export type RestAreaDetailOutletContextType = {
+    headerRef: RefObject<HTMLDivElement>;
+    contentRef: RefObject<HTMLDivElement>;
+};
+
 export function RestAreaDetail() {
-    const location = useLocation();
-
-    const [isMinHeader, setIsMinHeader] = useState(false);
     const contentRef = useRef<HTMLDivElement>(null);
+    const headerRef = useRef<HTMLDivElement>(null);
 
+    const location = useLocation();
+    const [isMinHeader, setIsMinHeader] = useState(false);
     const { data: restInformation } = useGetRestAreaBaseInfo();
 
     useEffect(() => {
@@ -63,6 +68,7 @@ export function RestAreaDetail() {
     return (
         <div>
             <TabHeader
+                ref={headerRef}
                 headerInformation={restInformation}
                 tabTitles={tabTitles}
                 isMinSize={isMinHeader}
@@ -74,7 +80,14 @@ export function RestAreaDetail() {
                     paddingTop: isMinHeader ? '120px' : '214px',
                 }}
             >
-                <Outlet />
+                <Outlet
+                    context={
+                        {
+                            headerRef,
+                            contentRef,
+                        } satisfies RestAreaDetailOutletContextType
+                    }
+                />
             </S.Contents>
         </div>
     );
