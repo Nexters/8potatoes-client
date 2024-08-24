@@ -75,6 +75,7 @@ export const RestAreaMapPage = () => {
             <NaverMap
                 maxBounds={mapBound}
                 keyboardShortcuts={false}
+                scrollWheel={false}
                 overlayZoomEffect="all"
                 disableDoubleClickZoom
                 disableDoubleTapZoom

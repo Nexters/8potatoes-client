@@ -39,7 +39,7 @@ export const RouteContainer = styled.div`
     align-items: center;
     gap: 20px;
 
-    margin-top: 64px;
+    margin-top: 48px;
 `;
 
 export const CTABottomSection = styled(BottomSection)`

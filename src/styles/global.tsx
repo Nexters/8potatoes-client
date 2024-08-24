@@ -1,4 +1,5 @@
 import { Global, css } from '@emotion/react';
+import { theme } from './theme';
 
 const globalCss = css`
     *,
@@ -68,6 +69,7 @@ const globalCss = css`
         scroll-behavior: smooth;
         margin: 0;
 
+        background-color: ${theme.color.main[10]}10;
         font-family: 'SUIT Variable';
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;

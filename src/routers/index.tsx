@@ -7,7 +7,6 @@ import { NavermapsProvider } from 'react-naver-maps';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 
 import { AsyncBoundary } from '#/components/async-boundary';
-import { Skeleton } from '#/components/skeleton';
 import { InternalErrorPage } from '#/pages/internal-error';
 import { LocationSearch, LocationSearchLoading } from '#/pages/location-search';
 import { NotFoundPage } from '#/pages/not-found';

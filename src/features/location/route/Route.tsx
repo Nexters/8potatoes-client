@@ -63,7 +63,7 @@ export function Route({
                 src={`${import.meta.env.VITE_ASSET_URL}/main-route.png`}
                 style={{
                     width: '100%',
-                    height: '431px',
+                    height: '380px',
                     objectFit: 'cover',
                 }}
             />

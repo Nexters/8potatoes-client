@@ -14,7 +14,7 @@ export const Overlay = styled(motion.div)`
 
 export const ContentWrapper = styled(motion.div)`
     position: fixed;
-    width: 375px;
+    width: 100dvw;
     max-width: 375px;
 
     padding: 0 16px;
