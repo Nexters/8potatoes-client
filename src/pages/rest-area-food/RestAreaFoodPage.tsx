@@ -20,7 +20,7 @@ export const RestAreaFoodPage = () => {
     const selectedCategory = searchParam.get('category') ?? '추천';
 
     const menuListRef = useRef<Map<string, HTMLDivElement>>(new Map());
-    const { headerRef, contentRef } =
+    const { contentRef } =
         useOutletContext<RestAreaDetailOutletContextType>();
 
     const {

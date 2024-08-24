@@ -3,11 +3,9 @@ import { type ComponentProps, forwardRef, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import { Marker } from 'react-naver-maps';
 
-import MarkerFlagIcon from '#/assets/icons/marker-flag.svg?react';
 import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
 import { useDisclosure } from '#/hooks/useDisclosure';
-import { theme } from '#/styles/theme';
 
 import {
     LeftSideBubbleMarker,
@@ -27,7 +25,7 @@ export interface RestAreaBubbleMarkerImplProps extends ComponentProps<'div'> {
 export const RestAreaBubbleMarkerImpl = forwardRef<
     HTMLDivElement,
     RestAreaBubbleMarkerImplProps
->(({ isRecommend, restAreaName, direction, ...restProps }, ref) => {
+>(({ isRecommend, restAreaName, ...restProps }, ref) => {
     const LeftSideMarker = isRecommend
         ? LeftSideRecommendMarker
         : LeftSideBubbleMarker;
