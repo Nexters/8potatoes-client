@@ -19,7 +19,7 @@ export const RestAreaFoodPage = () => {
     const [searchParam] = useSearchParams();
 
     const menuListRef = useRef<Map<string, HTMLDivElement>>(new Map());
-    // const { contentRef } = useOutletContext<RestAreaDetailOutletContextType>();
+    const { contentRef } = useOutletContext<RestAreaDetailOutletContextType>();
 
     const {
         data: { totalMenuCount, recommendedMenuData, normalMenuData },
@@ -47,6 +47,25 @@ export const RestAreaFoodPage = () => {
         checkIfNull: true,
     });
 
+    useEffect(() => {
+        const menuElement = menuListRef.current.get(selectedCategory);
+        const contentElement = contentRef.current;
+
+        if (menuElement && contentElement) {
+            const menuElementPosition = menuElement.getBoundingClientRect().top;
+            const scrollOffset = menuElementPosition - 120;
+
+            setTimeout(
+                () =>
+                    contentElement.scrollTo({
+                        top: scrollOffset,
+                        behavior: 'smooth',
+                    }),
+                0,
+            );
+        }
+    }, [contentRef, selectedCategory]);
+
     return (
         <S.Container gap={8}>
             <RepresentativeMenuSection />
@@ -69,25 +88,21 @@ export const RestAreaFoodPage = () => {
                                 menus={recommendedMenuData}
                             />
                         ) : null}
-                        {availableMenuCategory
-                            .filter((menu) => menu === selectedCategory)
-                            .map((menuCategory) =>
-                                normalMenuData.get(menuCategory)?.length ? (
-                                    <RestAreaFoodMenu
-                                        ref={(element) =>
-                                            element &&
-                                            menuListRef.current.set(
-                                                menuCategory,
-                                                element,
-                                            )
-                                        }
-                                        title={menuCategory}
-                                        menus={
-                                            normalMenuData.get(menuCategory)!
-                                        }
-                                    />
-                                ) : null,
-                            )}
+                        {availableMenuCategory.map((menuCategory) =>
+                            normalMenuData.get(menuCategory)?.length ? (
+                                <RestAreaFoodMenu
+                                    ref={(element) =>
+                                        element &&
+                                        menuListRef.current.set(
+                                            menuCategory,
+                                            element,
+                                        )
+                                    }
+                                    title={menuCategory}
+                                    menus={normalMenuData.get(menuCategory)!}
+                                />
+                            ) : null,
+                        )}
                     </FlexBox>
                 </S.MenuWrapper>
             </S.MenuSection>
