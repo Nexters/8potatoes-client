@@ -17,9 +17,10 @@ import type { SearchOptionType, SelectedLocationType } from '#/types/location';
 
 export const RestAreaMapPage = () => {
     const naverMaps = useNavermaps();
+    const navigate = useNavigate();
+
     const location: Location<Record<SearchOptionType, SelectedLocationType>> =
         useLocation();
-    const navigate = useNavigate();
 
     const { origin, destination } = location.state;
 
@@ -72,7 +73,7 @@ export const RestAreaMapPage = () => {
                     restAreaList={restAreaData.reststops}
                 />
             )}
-            <NaverMap maxBounds={mapBound}>
+            <NaverMap maxBounds={mapBound} scrollWheel={false}>
                 {isValidJourney && (
                     <>
                         <Polyline
