@@ -112,7 +112,11 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                 {
                     path: '/map',
                     errorElement: <InternalErrorPage />,
-                    element: <RestAreaMapPage />,
+                    element: (
+                        <Suspense fallback={<div></div>}>
+                            <RestAreaMapPage />
+                        </Suspense>
+                    ),
                 },
             ],
             errorElement: (

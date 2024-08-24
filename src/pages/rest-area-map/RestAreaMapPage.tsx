@@ -1,7 +1,6 @@
 import {
     NaverMap,
     Container as NaverMapContainer,
-    Polyline,
     useNavermaps,
 } from 'react-naver-maps';
 import { type Location, useLocation, useNavigate } from 'react-router-dom';
@@ -13,7 +12,6 @@ import { RestAreaBubbleMarker } from '#/features/rest-area/rest-area-bubble-mark
 import { RestAreaListDrawer } from '#/features/rest-area/rest-area-drawer';
 import { useGetDestinationPath } from '#/query-hooks/location/query';
 import { useGetHighwayRestAreaList } from '#/query-hooks/rest-area/query';
-import { theme } from '#/styles/theme';
 import type { SearchOptionType, SelectedLocationType } from '#/types/location';
 
 export const RestAreaMapPage = () => {
@@ -86,7 +84,7 @@ export const RestAreaMapPage = () => {
                 <DestinationMarker isStart position={startPosition} />
                 <DestinationMarker position={endPosition} />
                 <JourneyPath
-                    journeyPathList={isValidJourney ? journeyPathList : []}
+                    journeyPathList={journeyPathList}
                 />
                 {isValidHighwayRestArea &&
                     restAreaData.reststops.map(
