@@ -1,25 +1,16 @@
 import { useEffect, useRef } from 'react';
 
-import { useSearchParams } from 'react-router-dom';
+import { useOutletContext, useSearchParams } from 'react-router-dom';
 
 import MenuIcon from '#/assets/icons/menu.svg?react';
-import { AsyncBoundary } from '#/components/async-boundary';
 import { FlexBox } from '#/components/flex-box';
 import { FOOD_CATEGORY_ORDER } from '#/constants/food-menu';
-import {
-    RepresentativeMenuSection,
-    RepresentativeMenuSectionLoading,
-} from '#/features/rest-area/representative-menu-section';
+import { RepresentativeMenuSection } from '#/features/rest-area/representative-menu-section';
 import { RestAreaDetailSection } from '#/features/rest-area/rest-area-detail-section';
-import {
-    RestAreaFoodCategory,
-    RestAreaFoodCategoryLoading,
-} from '#/features/rest-area/rest-area-food-category';
-import {
-    RestAreaFoodMenu,
-    RestAreaFoodMenuLoading,
-} from '#/features/rest-area/rest-area-food-menu';
+import { RestAreaFoodCategory } from '#/features/rest-area/rest-area-food-category';
+import { RestAreaFoodMenu } from '#/features/rest-area/rest-area-food-menu';
 import useValidatedSearchParams from '#/hooks/useValidSearchParams';
+import type { RestAreaDetailOutletContextType } from '#/pages/templates/rest-area-detail';
 import { useGetRestAreaMenuInfo } from '#/query-hooks/rest-area/query';
 
 import * as S from './RestAreaFoodPage.style';
@@ -29,7 +20,8 @@ export const RestAreaFoodPage = () => {
     const selectedCategory = searchParam.get('category') ?? '추천';
 
     const menuListRef = useRef<Map<string, HTMLDivElement>>(new Map());
-    const pageContainerRef = useRef<HTMLDivElement>(null);
+    const { headerRef, contentRef } =
+        useOutletContext<RestAreaDetailOutletContextType>();
 
     const {
         data: { totalMenuCount, recommendedMenuData, normalMenuData },
@@ -49,73 +41,56 @@ export const RestAreaFoodPage = () => {
 
     useEffect(() => {
         const menuElement = menuListRef.current.get(selectedCategory);
-        const tabContentElement = document.getElementById('tab-content');
+        const contentElement = contentRef.current;
 
-        if (menuElement && tabContentElement) {
+        if (menuElement && contentElement) {
             const menuElementPosition = menuElement.getBoundingClientRect().top;
-            const tabContentPosition =
-                tabContentElement.getBoundingClientRect().top;
-            const scrollOffset = menuElementPosition - tabContentPosition - 120;
+            const scrollOffset = menuElementPosition - 120;
 
-            if (scrollOffset >= 0) {
-                menuElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start',
-                });
-    
-            }
+            console.log(contentElement, scrollOffset, selectedCategory);
+
+            contentElement.scrollTo({
+                top: scrollOffset,
+                behavior: 'smooth',
+            });
         }
-    }, [selectedCategory]);
+    }, [contentRef, selectedCategory]);
 
     return (
         <S.Container gap={8}>
-            <AsyncBoundary
-                pendingFallback={<RepresentativeMenuSectionLoading />}
-            >
-                <RepresentativeMenuSection />
-            </AsyncBoundary>
+            <RepresentativeMenuSection />
             <S.MenuSection>
                 <RestAreaDetailSection
                     title="전체 메뉴"
                     icon={MenuIcon}
                     description={`${totalMenuCount}개의 메뉴`}
                 >
-                    <AsyncBoundary
-                        pendingFallback={<RestAreaFoodCategoryLoading />}
-                    >
-                        <RestAreaFoodCategory
-                            availableCategories={availableMenuCategory}
-                        />
-                    </AsyncBoundary>
+                    <RestAreaFoodCategory
+                        availableCategories={availableMenuCategory}
+                    />
                 </RestAreaDetailSection>
                 <S.MenuWrapper>
-                    <AsyncBoundary
-                        pendingFallback={<RestAreaFoodMenuLoading />}
-                    >
-                        <FlexBox gap={40}>
-                            <RestAreaFoodMenu
-                                title="추천"
-                                menus={recommendedMenuData}
-                            />
-                            {availableMenuCategory.map((menuCategory) =>
-                                normalMenuData.get(menuCategory)?.length ? (
-                                    <RestAreaFoodMenu
-                                        ref={(element) =>
-                                            element &&
-                                            menuListRef.current.set(
-                                                menuCategory,
-                                                element,
-                                            )
-                                        }
-                                        title={menuCategory}
-                                        menus={
-                                            normalMenuData.get(menuCategory)!
-                                        }
-                                    />
-                                ) : null,
-                            )}
-                        </FlexBox>
-                    </AsyncBoundary>
+                    <FlexBox gap={40}>
+                        <RestAreaFoodMenu
+                            title="추천"
+                            menus={recommendedMenuData}
+                        />
+                        {availableMenuCategory.map((menuCategory) =>
+                            normalMenuData.get(menuCategory)?.length ? (
+                                <RestAreaFoodMenu
+                                    ref={(element) =>
+                                        element &&
+                                        menuListRef.current.set(
+                                            menuCategory,
+                                            element,
+                                        )
+                                    }
+                                    title={menuCategory}
+                                    menus={normalMenuData.get(menuCategory)!}
+                                />
+                            ) : null,
+                        )}
+                    </FlexBox>
                 </S.MenuWrapper>
             </S.MenuSection>
         </S.Container>
