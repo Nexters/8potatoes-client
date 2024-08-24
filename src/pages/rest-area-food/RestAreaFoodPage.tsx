@@ -17,10 +17,9 @@ import * as S from './RestAreaFoodPage.style';
 
 export const RestAreaFoodPage = () => {
     const [searchParam] = useSearchParams();
-    const selectedCategory = searchParam.get('category') ?? '추천';
 
     const menuListRef = useRef<Map<string, HTMLDivElement>>(new Map());
-    const { contentRef } = useOutletContext<RestAreaDetailOutletContextType>();
+    // const { contentRef } = useOutletContext<RestAreaDetailOutletContextType>();
 
     const {
         data: { totalMenuCount, recommendedMenuData, normalMenuData },
@@ -33,9 +32,9 @@ export const RestAreaFoodPage = () => {
             FOOD_CATEGORY_ORDER.indexOf(a) - FOOD_CATEGORY_ORDER.indexOf(b),
     );
 
-    const defaultSelectedCategory = isRecommendedMenuAvailable
-        ? '추천'
-        : availableMenuCategory[0];
+    const selectedCategory =
+        searchParam.get('category') ??
+        (isRecommendedMenuAvailable ? '추천' : availableMenuCategory[0]);
 
     const availableSelectedCategory = isRecommendedMenuAvailable
         ? ['추천', ...availableMenuCategory]
@@ -44,26 +43,9 @@ export const RestAreaFoodPage = () => {
     useValidatedSearchParams({
         paramName: 'category',
         expectedValue: availableSelectedCategory,
-        defaultValue: defaultSelectedCategory,
+        defaultValue: selectedCategory,
         checkIfNull: true,
     });
-
-    useEffect(() => {
-        const menuElement = menuListRef.current.get(selectedCategory);
-        const contentElement = contentRef.current;
-
-        if (menuElement && contentElement) {
-            const menuElementPosition = menuElement.getBoundingClientRect().top;
-            const scrollOffset = menuElementPosition - 120;
-
-            console.log(contentElement, scrollOffset, selectedCategory);
-
-            contentElement.scrollTo({
-                top: scrollOffset,
-                behavior: 'smooth',
-            });
-        }
-    }, [contentRef, selectedCategory]);
 
     return (
         <S.Container gap={8}>
@@ -87,21 +69,25 @@ export const RestAreaFoodPage = () => {
                                 menus={recommendedMenuData}
                             />
                         ) : null}
-                        {availableMenuCategory.map((menuCategory) =>
-                            normalMenuData.get(menuCategory)?.length ? (
-                                <RestAreaFoodMenu
-                                    ref={(element) =>
-                                        element &&
-                                        menuListRef.current.set(
-                                            menuCategory,
-                                            element,
-                                        )
-                                    }
-                                    title={menuCategory}
-                                    menus={normalMenuData.get(menuCategory)!}
-                                />
-                            ) : null,
-                        )}
+                        {availableMenuCategory
+                            .filter((menu) => menu === selectedCategory)
+                            .map((menuCategory) =>
+                                normalMenuData.get(menuCategory)?.length ? (
+                                    <RestAreaFoodMenu
+                                        ref={(element) =>
+                                            element &&
+                                            menuListRef.current.set(
+                                                menuCategory,
+                                                element,
+                                            )
+                                        }
+                                        title={menuCategory}
+                                        menus={
+                                            normalMenuData.get(menuCategory)!
+                                        }
+                                    />
+                                ) : null,
+                            )}
                     </FlexBox>
                 </S.MenuWrapper>
             </S.MenuSection>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import { flushSync } from 'react-dom';
 import { useLocation } from 'react-router-dom';
@@ -68,10 +68,12 @@ export function LocationSearch() {
     return (
         <Drawer isDrawerOpen={isDrawerOpen} setDrawerOpen={setIsDrawerOpen}>
             {isCurrentLocationSearch ? (
-                <CurrentLocationSearch
-                    onSelect={handleSelectLocation}
-                    onClose={handleCloseCurrentLocation}
-                />
+                <Suspense fallback={<div />}>
+                    <CurrentLocationSearch
+                        onSelect={handleSelectLocation}
+                        onClose={handleCloseCurrentLocation}
+                    />
+                </Suspense>
             ) : (
                 <Route
                     routeLocation={routeLocation}
