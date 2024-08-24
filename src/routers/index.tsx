@@ -7,8 +7,9 @@ import { NavermapsProvider } from 'react-naver-maps';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 
 import { AsyncBoundary } from '#/components/async-boundary';
+import { Skeleton } from '#/components/skeleton';
 import { InternalErrorPage } from '#/pages/internal-error';
-import { LocationSearch } from '#/pages/location-search';
+import { LocationSearch, LocationSearchLoading } from '#/pages/location-search';
 import { NotFoundPage } from '#/pages/not-found';
 import {
     RestAreaFoodPage,
@@ -64,7 +65,11 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                 {
                     path: '/',
                     errorElement: <InternalErrorPage />,
-                    element: <LocationSearch />,
+                    element: (
+                        <Suspense fallback={<LocationSearchLoading />}>
+                            <LocationSearch />
+                        </Suspense>
+                    ),
                 },
                 {
                     path: '/rest-area/:restAreaId',
