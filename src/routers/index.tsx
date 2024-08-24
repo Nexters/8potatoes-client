@@ -6,15 +6,28 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { NavermapsProvider } from 'react-naver-maps';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 
+import { AsyncBoundary } from '#/components/async-boundary';
 import { InternalErrorPage } from '#/pages/internal-error';
 import { LocationSearch } from '#/pages/location-search';
 import { NotFoundPage } from '#/pages/not-found';
-import { RestAreaFoodPage } from '#/pages/rest-area-food';
-import { RestAreaFuelPage } from '#/pages/rest-area-fuel';
-import { RestAreaMapPage } from '#/pages/rest-area-map';
-import { RestAreaOtherInformation } from '#/pages/rest-area-other-information';
+import {
+    RestAreaFoodPage,
+    RestAreaFoodPageLoading,
+} from '#/pages/rest-area-food';
+import {
+    RestAreaFuelPage,
+    RestAreaFuelPageLoading,
+} from '#/pages/rest-area-fuel';
+import { RestAreaMapPage, RestAreaMapPageLoading } from '#/pages/rest-area-map';
+import {
+    RestAreaOtherInformation,
+    RestAreaOtherInformationLoading,
+} from '#/pages/rest-area-other-information';
 import { MobileView } from '#/pages/templates/mobile-view';
-import { RestAreaDetail } from '#/pages/templates/rest-area-detail';
+import {
+    RestAreaDetail,
+    RestAreaDetailLoading,
+} from '#/pages/templates/rest-area-detail';
 import { GlobalStyle } from '#/styles/global';
 import { theme } from '#/styles/theme';
 
@@ -35,11 +48,9 @@ const InitializedDataProvider = () => (
             >
                 <ReactQueryDevtools />
                 <GlobalStyle />
-                <Suspense fallback={<div>Loading</div>}>
-                    <MobileView>
-                        <Outlet />
-                    </MobileView>
-                </Suspense>
+                <MobileView>
+                    <Outlet />
+                </MobileView>
             </NavermapsProvider>
         </ThemeProvider>
     </QueryClientProvider>
@@ -58,26 +69,54 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                 {
                     path: '/rest-area/:restAreaId',
                     errorElement: <InternalErrorPage />,
-                    element: <RestAreaDetail />,
+                    element: (
+                        <Suspense fallback={<RestAreaDetailLoading />}>
+                            <RestAreaDetail />
+                        </Suspense>
+                    ),
                     children: [
                         {
                             path: 'foods',
-                            element: <RestAreaFoodPage />,
+                            element: (
+                                <Suspense
+                                    fallback={<RestAreaFoodPageLoading />}
+                                >
+                                    <RestAreaFoodPage />
+                                </Suspense>
+                            ),
                         },
                         {
                             path: 'fuel-parking',
-                            element: <RestAreaFuelPage />,
+                            element: (
+                                <Suspense
+                                    fallback={<RestAreaFuelPageLoading />}
+                                >
+                                    <RestAreaFuelPage />
+                                </Suspense>
+                            ),
                         },
                         {
                             path: 'other-information',
-                            element: <RestAreaOtherInformation />,
+                            element: (
+                                <AsyncBoundary
+                                    pendingFallback={
+                                        <RestAreaOtherInformationLoading />
+                                    }
+                                >
+                                    <RestAreaOtherInformation />
+                                </AsyncBoundary>
+                            ),
                         },
                     ],
                 },
                 {
                     path: '/map',
                     errorElement: <InternalErrorPage />,
-                    element: <RestAreaMapPage />,
+                    element: (
+                        <Suspense fallback={<RestAreaMapPageLoading />}>
+                            <RestAreaMapPage />
+                        </Suspense>
+                    ),
                 },
             ],
             errorElement: (

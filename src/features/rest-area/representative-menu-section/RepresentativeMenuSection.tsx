@@ -1,4 +1,6 @@
-import { useMotionValue, useTransform } from 'framer-motion';
+import { useEffect, useState } from 'react';
+
+import { useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 import AlternativeImage from '#/assets/images/alternative-image.png';
 import { FlexBox } from '#/components/flex-box';
@@ -15,15 +17,21 @@ export const RepresentativeMenuSection = () => {
 
     const isNeedPagination = representativeMenuData.length > 1;
     const selectedMenuIndex = useMotionValue(0);
-    const translateX = useTransform(selectedMenuIndex, [0, 1], [0, -375]);
+    const rawTranslateX = useTransform(selectedMenuIndex, [0, 1], [0, -375]);
+    const translateX = useSpring(rawTranslateX, {
+        stiffness: 300,
+        damping: 30,
+    });
+
+    const [selectedIndex, setSelectedIndex] = useState(0);
+
+    useEffect(() => {
+        selectedMenuIndex.on('change', (latest) => setSelectedIndex(latest));
+    }, [selectedMenuIndex]);
 
     return (
         <S.Container>
-            <S.BestMenuContainer
-                row
-                style={{ translateX }}
-                transition={{ type: "spring", stiffness: 100, duration: 0.2 }}
-            >
+            <S.BestMenuContainer row style={{ translateX }}>
                 {representativeMenuData.map(
                     (
                         {
@@ -51,7 +59,7 @@ export const RepresentativeMenuSection = () => {
                                     event.currentTarget.src = AlternativeImage;
                                 }}
                             />
-                            <FlexBox gap={20}>
+                            <FlexBox gap={16}>
                                 <FlexBox gap={8}>
                                     <S.Description
                                         typography="bodyMedium16"
@@ -83,7 +91,7 @@ export const RepresentativeMenuSection = () => {
                         {representativeMenuData.map((_, index) => (
                             <S.PaginationIcon
                                 key={`pagination_${index + 1}`}
-                                isActive={index === 0}
+                                isActive={selectedIndex === index}
                                 onClick={() => selectedMenuIndex.set(index)}
                             />
                         ))}

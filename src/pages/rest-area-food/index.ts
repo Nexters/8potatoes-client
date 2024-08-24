@@ -1,1 +1,3 @@
-export { RestAreaFoodPage } from './RestAreaFoodPage';
+import { RestAreaFoodPageLoading } from './RestAreaFoodPage.loading';
+import { RestAreaFoodPage } from './RestAreaFoodPage';
+export { RestAreaFoodPage, RestAreaFoodPageLoading }

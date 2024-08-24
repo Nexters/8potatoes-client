@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { useSearchParams } from 'react-router-dom';
+import { useOutletContext, useSearchParams } from 'react-router-dom';
 
 import MenuIcon from '#/assets/icons/menu.svg?react';
 import { FlexBox } from '#/components/flex-box';
@@ -10,6 +10,7 @@ import { RestAreaDetailSection } from '#/features/rest-area/rest-area-detail-sec
 import { RestAreaFoodCategory } from '#/features/rest-area/rest-area-food-category';
 import { RestAreaFoodMenu } from '#/features/rest-area/rest-area-food-menu';
 import useValidatedSearchParams from '#/hooks/useValidSearchParams';
+import type { RestAreaDetailOutletContextType } from '#/pages/templates/rest-area-detail';
 import { useGetRestAreaMenuInfo } from '#/query-hooks/rest-area/query';
 
 import * as S from './RestAreaFoodPage.style';
@@ -19,6 +20,8 @@ export const RestAreaFoodPage = () => {
     const selectedCategory = searchParam.get('category') ?? '추천';
 
     const menuListRef = useRef<Map<string, HTMLDivElement>>(new Map());
+    const { headerRef, contentRef } =
+        useOutletContext<RestAreaDetailOutletContextType>();
 
     const {
         data: { totalMenuCount, recommendedMenuData, normalMenuData },
@@ -38,13 +41,20 @@ export const RestAreaFoodPage = () => {
 
     useEffect(() => {
         const menuElement = menuListRef.current.get(selectedCategory);
-        if (menuElement) {
-            menuElement.scrollIntoView({
+        const contentElement = contentRef.current;
+
+        if (menuElement && contentElement) {
+            const menuElementPosition = menuElement.getBoundingClientRect().top;
+            const scrollOffset = menuElementPosition - 120;
+
+            console.log(contentElement, scrollOffset, selectedCategory);
+
+            contentElement.scrollTo({
+                top: scrollOffset,
                 behavior: 'smooth',
-                block: 'center',
             });
         }
-    }, [selectedCategory]);
+    }, [contentRef, selectedCategory]);
 
     return (
         <S.Container gap={8}>

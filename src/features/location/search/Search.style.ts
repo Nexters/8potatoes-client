@@ -1,11 +1,17 @@
 import styled from '@emotion/styled';
 
 import dashedLine from '#/assets/icons/dashed-line.svg';
+import { FlexBox } from '#/components/flex-box';
 import { Header } from '#/components/header';
 import { theme } from '#/styles/theme';
 
 export const SearchHeader = styled(Header)`
     width: calc(100% - 16px);
+`;
+
+export const SkeletonContainer = styled(FlexBox)`
+    width: 100%;
+    margin: 60px 32px 0;
 `;
 
 export const SearchList = styled.ul`

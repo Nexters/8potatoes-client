@@ -1,38 +1,21 @@
 import { RefObject, useEffect, useRef, useState } from 'react';
 
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
-import DotIcon from '#/assets/icons/dot.svg?react';
-import { TabHeader } from '#/components/tab-header';
-import { useGetRestAreaBaseInfo } from '#/query-hooks/rest-area/query';
+import { TabHeaderLoading } from '#/components/tab-header';
 
 import * as S from './RestAreaDetail.style';
-
-const tabTitles = [
-    { title: '먹거리', url: 'foods' },
-    {
-        title: (
-            <>
-                주유 <DotIcon /> 주차
-            </>
-        ),
-        url: 'fuel-parking',
-    },
-    { title: '기타정보', url: 'other-information' },
-];
 
 export type RestAreaDetailOutletContextType = {
     headerRef: RefObject<HTMLDivElement>;
     contentRef: RefObject<HTMLDivElement>;
 };
 
-export function RestAreaDetail() {
+export function RestAreaDetailLoading() {
     const contentRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
 
-    const location = useLocation();
     const [isMinHeader, setIsMinHeader] = useState(false);
-    const { data: restInformation } = useGetRestAreaBaseInfo();
 
     useEffect(() => {
         if (!contentRef.current) {
@@ -56,23 +39,9 @@ export function RestAreaDetail() {
         };
     }, [contentRef]);
 
-    useEffect(() => {
-        if (contentRef.current) {
-            contentRef.current.scrollTo({
-                top: 0,
-                behavior: 'smooth',
-            });
-        }
-    }, [location]);
-
     return (
         <div>
-            <TabHeader
-                ref={headerRef}
-                headerInformation={restInformation}
-                tabTitles={tabTitles}
-                isMinSize={isMinHeader}
-            />
+            <TabHeaderLoading />
             <S.Contents
                 ref={contentRef}
                 id="tab-content"

@@ -6,10 +6,12 @@ import DotIcon from '#/assets/icons/dot.svg?react';
 import StarIcon from '#/assets/icons/star.svg?react';
 import { theme } from '#/styles/theme';
 
+import { AsyncBoundary } from '../async-boundary';
 import { FlexBox } from '../flex-box';
 import { Header } from '../header';
 import { Text } from '../text';
 
+import { TabHeaderLoading } from './TabHeader.loading';
 import * as S from './TabHeader.style';
 
 type TabTitleType = { title: ReactNode; url: string };
@@ -97,57 +99,61 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
                 isVisibleBackspace
             />
 
-            <S.HeaderContents
-                initial={{ y: 0 }}
-                variants={headerVariants}
-                animate={isMinSize ? 'min' : 'max'}
-                transition={{ duration: 0.1 }}
-            >
-                <FlexBox gap={16}>
-                    <FlexBox
-                        row
-                        gap={12}
-                        flexOption={{
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                        }}
-                    >
-                        <Text
-                            typography="headingBold20"
-                            color={theme.color.blk[100]}
+            <AsyncBoundary pendingFallback={<TabHeaderLoading />}>
+                <S.HeaderContents
+                    initial={{ y: 0 }}
+                    variants={headerVariants}
+                    animate={isMinSize ? 'min' : 'max'}
+                    transition={{ duration: 0.1 }}
+                >
+                    <FlexBox gap={16}>
+                        <FlexBox
+                            row
+                            gap={12}
+                            flexOption={{
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
                         >
-                            {name}
-                        </Text>
-                        {direction && (
-                            <>
-                                <S.SplitLine />
-                                <Text
-                                    typography="headingSemiBold20"
-                                    color={theme.color.blk[40]}
-                                >
-                                    {direction} 방향
-                                </Text>
-                            </>
-                        )}
-                    </FlexBox>
-
-                    <FlexBox row gap={12}>
-                        <Text
-                            typography="bodySemiBold14"
-                            color={theme.color.blk[60]}
-                        >
-                            {operatingStatus}
-                        </Text>
-                        <S.RankingInformation>
-                            <StarIcon width={12} height={12} />
-                            <Text typography="bodyBold14">
-                                {naverRating} <DotIcon />
+                            <Text
+                                typography="headingBold20"
+                                color={theme.color.blk[100]}
+                            >
+                                {name}
                             </Text>
-                            <Text typography="bodySemiBold14">네이버평점</Text>
-                        </S.RankingInformation>
+                            {direction && (
+                                <>
+                                    <S.SplitLine />
+                                    <Text
+                                        typography="headingSemiBold20"
+                                        color={theme.color.blk[40]}
+                                    >
+                                        {direction} 방향
+                                    </Text>
+                                </>
+                            )}
+                        </FlexBox>
+
+                        <FlexBox row gap={12}>
+                            <Text
+                                typography="bodySemiBold14"
+                                color={theme.color.blk[60]}
+                            >
+                                {operatingStatus}
+                            </Text>
+                            <S.RankingInformation>
+                                <StarIcon width={12} height={12} />
+                                <Text typography="bodyBold14">
+                                    {naverRating} <DotIcon />
+                                </Text>
+                                <Text typography="bodySemiBold14">
+                                    네이버평점
+                                </Text>
+                            </S.RankingInformation>
+                        </FlexBox>
                     </FlexBox>
-                </FlexBox>
-            </S.HeaderContents>
+                </S.HeaderContents>
+            </AsyncBoundary>
 
             <S.TabContainer>
                 {tabTitles.map((tabTitle, idx) => {
@@ -163,7 +169,9 @@ const TabHeader = forwardRef<HTMLDivElement, TabHeaderProps>(function TabHeader(
                                         ? theme.color.main[100]
                                         : theme.color.blk[40]
                                 }
-                                onClick={() => navigate(tabTitle.url)}
+                                onClick={() =>
+                                    navigate(tabTitle.url, { replace: true })
+                                }
                             >
                                 {tabTitle.title}
                             </S.TabTitle>

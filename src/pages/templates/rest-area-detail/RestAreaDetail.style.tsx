@@ -4,4 +4,8 @@ import { motion } from 'framer-motion';
 export const Contents = styled(motion.div)`
     height: 100dvh;
     overflow: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;

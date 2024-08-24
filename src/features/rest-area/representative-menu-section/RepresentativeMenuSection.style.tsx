@@ -19,7 +19,7 @@ export const BestMenuContainer = styled(motion(FlexBox))`
 
 export const BestMenuSection = styled.div(
     ({ isNeedPagination }: { isNeedPagination: boolean }) => {
-        const padding = isNeedPagination ? '40px 44px 32px 44px' : '40px';
+        const padding = isNeedPagination ? '40px 20px 32px 20px' : '40px 20px';
 
         return css`
             width: 375px;
@@ -35,7 +35,7 @@ export const BestMenuImage = styled.img`
     width: 180px;
     height: 180px;
 
-    margin: 32px 0 20px 0;
+    margin: 28px 0 20px 0;
     border-radius: 180px;
 `;
 
@@ -47,6 +47,8 @@ export const PaginationSection = styled(FlexBox)`
     width: 100%;
     align-items: center;
     justify-content: center;
+    background-color: ${theme.color.wht[100]};
+    padding-bottom: 40px;
 `;
 
 export const PaginationIcon = styled.div(

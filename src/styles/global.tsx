@@ -1,13 +1,6 @@
 import { Global, css } from '@emotion/react';
 
 const globalCss = css`
-    @font-face {
-        font-family: 'SUIT Variable';
-        font-weight: 100 900;
-        src: url('./src/assets/fonts/SUIT-Variable.woff2')
-            format('woff2-variations');
-    }
-
     *,
     *::before,
     *::after {

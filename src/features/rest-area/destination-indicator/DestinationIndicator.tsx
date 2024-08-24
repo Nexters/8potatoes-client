@@ -6,22 +6,30 @@ import * as S from './DestinationIndicator.style';
 interface DestinationIndicatorProps {
     start: string;
     end: string;
+    onClick: () => void;
 }
 
 export const DestinationIndicator = ({
     start = '',
     end = '',
+    onClick,
 }: DestinationIndicatorProps) => {
     return (
-        <S.Container>
+        <S.Container onClick={onClick}>
             <S.Destination>
-                <S.DestinationText typography="bodyMedium16" color={theme.color.blk[60]}>
+                <S.DestinationText
+                    typography="bodyMedium16"
+                    color={theme.color.blk[60]}
+                >
                     {start}
                 </S.DestinationText>
             </S.Destination>
             <ArrowRightIcon color={theme.color.main[50]} />
             <S.Destination>
-                <S.DestinationText typography="bodyMedium16" color={theme.color.blk[60]}>
+                <S.DestinationText
+                    typography="bodyMedium16"
+                    color={theme.color.blk[60]}
+                >
                     {end}
                 </S.DestinationText>
             </S.Destination>

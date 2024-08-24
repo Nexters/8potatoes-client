@@ -93,6 +93,9 @@ importers:
       vite:
         specifier: ^5.3.1
         version: 5.3.3(@types/node@20.14.12)(terser@5.31.3)
+      vite-plugin-open-graph:
+        specifier: ^2.0.5
+        version: 2.0.5
       vite-plugin-svgr:
         specifier: ^4.2.0
         version: 4.2.0(rollup@4.18.1)(typescript@5.5.3)(vite@5.3.3(@types/node@20.14.12)(terser@5.31.3))
@@ -1956,6 +1959,10 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  vite-plugin-open-graph@2.0.5:
+    resolution: {integrity: sha512-vOZ1qYFJ5vC7wuBLnAIcbWt9CgoOoAEDkKENWq5uPQbOQN/yO1tCOCH7QtwWx4D7ViQixLv18oJTPCyy6oF5Tg==}
+    engines: {node: '>=16'}
 
   vite-plugin-svgr@4.2.0:
     resolution: {integrity: sha512-SC7+FfVtNQk7So0XMjrrtLAbEC8qjFPifyD7+fs/E6aaNdVde6umlVVh0QuwDLdOMu7vp5RiGFsB70nj5yo0XA==}
@@ -3839,6 +3846,8 @@ snapshots:
       tslib: 2.6.3
     optionalDependencies:
       '@types/react': 18.3.3
+
+  vite-plugin-open-graph@2.0.5: {}
 
   vite-plugin-svgr@4.2.0(rollup@4.18.1)(typescript@5.5.3)(vite@5.3.3(@types/node@20.14.12)(terser@5.31.3)):
     dependencies:

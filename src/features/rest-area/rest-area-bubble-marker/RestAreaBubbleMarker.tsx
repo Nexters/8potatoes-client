@@ -7,10 +7,12 @@ import MarkerFlagIcon from '#/assets/icons/marker-flag.svg?react';
 import { FlexBox } from '#/components/flex-box';
 import { Text } from '#/components/text';
 import { useDisclosure } from '#/hooks/useDisclosure';
+import { theme } from '#/styles/theme';
 
 import {
     LeftSideBubbleMarker,
     LeftSideRecommendMarker,
+    RecommendFlagIcon,
     RightSideBubbleMarker,
     RightSideRecommendMarker,
 } from './BubbleSideMarker';
@@ -46,7 +48,7 @@ export const RestAreaBubbleMarkerImpl = forwardRef<
                 isRecommend={isRecommend}
                 {...restProps}
             >
-                {isRecommend && <MarkerFlagIcon color="inherit" />}
+                {isRecommend && <RecommendFlagIcon />}
                 <Text typography="bodyBold14">{restAreaName}</Text>
             </S.Container>
             <RightSideMarker />
