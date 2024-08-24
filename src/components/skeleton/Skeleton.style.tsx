@@ -11,7 +11,7 @@ export const shine = keyframes`
 
 export const Container = styled.div`
     background-color: ${theme.color.blk[10]};
-    border-radius: 4px;
+    border-radius: 12px;
 
     background-image: linear-gradient(
         90deg,
@@ -22,5 +22,5 @@ export const Container = styled.div`
     background-position: left -4rem top 0;
     background-size: 4rem 100%;
     background-repeat: no-repeat;
-    animation: ${shine} 1.5s infinite ease-in-out;
+    animation: ${shine} 1.2s infinite ease-in-out;
 `;

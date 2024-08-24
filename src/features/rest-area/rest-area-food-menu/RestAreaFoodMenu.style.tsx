@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import { FlexBox } from '#/components/flex-box';
 import { theme } from '#/styles/theme';
+import { Text } from '#/components/text';
 
 export const Header = styled.div`
     position: relative;
@@ -31,6 +32,11 @@ export const Container = styled(FlexBox)`
 export const FoodMenu = styled(FlexBox)`
     align-items: flex-start;
     justify-content: space-between;
+`
+
+export const FoodName = styled(Text)`
+    max-width: 191px;
+    word-break: break-word;
 `
 
 export const Badge = styled.span(

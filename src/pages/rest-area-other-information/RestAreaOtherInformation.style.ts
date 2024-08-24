@@ -23,6 +23,10 @@ export const FacilityList = styled(FlexBox)`
     overflow: auto;
     width: 100%;
     gap: 18px;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 export const FacilityListItem = styled(FlexBox)`
@@ -52,7 +56,7 @@ export const Description = styled.div`
 `;
 
 export const Image = styled.img`
-    width: 80px;
-    height: 80px;
+    min-width: 80px;
+    min-height: 80px;
     border-radius: 50px;
 `;

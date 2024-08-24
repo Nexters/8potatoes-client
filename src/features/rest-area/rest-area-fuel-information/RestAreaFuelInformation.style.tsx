@@ -9,7 +9,7 @@ export const CardGroup = styled(FlexBox)`
 `;
 
 export const Card = styled(FlexBox)`
-    padding: 24px;
+    padding: 20px;
     align-items: center;
     flex-grow: 1;
     text-align: center;

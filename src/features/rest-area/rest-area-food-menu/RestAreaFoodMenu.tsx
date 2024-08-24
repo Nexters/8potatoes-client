@@ -33,12 +33,12 @@ export const RestAreaFoodMenu = forwardRef<
                     }) => (
                         <S.FoodMenu row key={menuName}>
                             <FlexBox gap={8}>
-                                <Text
+                                <S.FoodName
                                     typography="headingBold18"
                                     color={theme.color.blk[100]}
                                 >
                                     {menuName}
-                                </Text>
+                                </S.FoodName>
                                 <Text
                                     typography="bodySemiBold16"
                                     color={theme.color.blk[60]}
