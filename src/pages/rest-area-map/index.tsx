@@ -1,4 +1,1 @@
-import { RestAreaMapPage } from './RestAreaMapPage';
-import { RestAreaMapPageLoading } from './RestAreaMapPage.loading';
-
-export { RestAreaMapPage, RestAreaMapPageLoading };
+export { RestAreaMapPage } from './RestAreaMapPage';

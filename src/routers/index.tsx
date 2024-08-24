@@ -18,7 +18,7 @@ import {
     RestAreaFuelPage,
     RestAreaFuelPageLoading,
 } from '#/pages/rest-area-fuel';
-import { RestAreaMapPage, RestAreaMapPageLoading } from '#/pages/rest-area-map';
+import { RestAreaMapPage } from '#/pages/rest-area-map';
 import {
     RestAreaOtherInformation,
     RestAreaOtherInformationLoading,
@@ -112,11 +112,7 @@ export const applicationRouter: ReturnType<typeof createBrowserRouter> =
                 {
                     path: '/map',
                     errorElement: <InternalErrorPage />,
-                    element: (
-                        <Suspense fallback={<RestAreaMapPageLoading />}>
-                            <RestAreaMapPage />
-                        </Suspense>
-                    ),
+                    element: <RestAreaMapPage />,
                 },
             ],
             errorElement: (
