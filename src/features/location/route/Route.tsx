@@ -53,7 +53,6 @@ export function Route({
     };
 
     const handleClickSearch = () => {
-        console.log(routeLocation);
         navigate('/map', { state: routeLocation });
     };
 

@@ -6,6 +6,7 @@ import {
 } from 'react-naver-maps';
 import { type Location, useLocation, useNavigate } from 'react-router-dom';
 
+import { JourneyPath } from '#/features/location/journey-path';
 import { DestinationIndicator } from '#/features/rest-area/destination-indicator';
 import { DestinationMarker } from '#/features/rest-area/destination-marker';
 import { RestAreaBubbleMarker } from '#/features/rest-area/rest-area-bubble-marker';
@@ -51,12 +52,12 @@ export const RestAreaMapPage = () => {
         west: Math.min(origin.lon, destination.lon),
     };
 
-    const startPosition = isValidJourney
-        ? journeyPathList[0]
-        : new naverMaps.LatLng(origin.lat, origin.lon);
-    const endPosition = isValidJourney
-        ? journeyPathList.at(-1)
-        : new naverMaps.LatLng(destination.lat, destination.lon);
+    const [startPosition, endPosition] = isValidJourney
+        ? [journeyPathList[0], journeyPathList.at(-1)!]
+        : [
+              new naverMaps.LatLng(origin.lat, origin.lon),
+              new naverMaps.LatLng(destination.lat, destination.lon),
+          ];
 
     return (
         <NaverMapContainer style={{ height: '100dvh' }}>
@@ -73,21 +74,20 @@ export const RestAreaMapPage = () => {
                     restAreaList={restAreaData.reststops}
                 />
             )}
-            <NaverMap maxBounds={mapBound} scrollWheel={false}>
-                {isValidJourney && (
-                    <>
-                        <Polyline
-                            path={journeyPathList}
-                            strokeColor={theme.color.main[100]}
-                            strokeLineJoin="round"
-                            strokeWeight={6}
-                            strokeStyle="solid"
-                            clickable={false}
-                        />
-                        <DestinationMarker isStart position={startPosition} />
-                        <DestinationMarker position={endPosition} />
-                    </>
-                )}
+            <NaverMap
+                maxBounds={mapBound}
+                keyboardShortcuts={false}
+                overlayZoomEffect="all"
+                disableDoubleClickZoom
+                disableDoubleTapZoom
+                disableKineticPan
+                disableTwoFingerTapZoom
+            >
+                <DestinationMarker isStart position={startPosition} />
+                <DestinationMarker position={endPosition} />
+                <JourneyPath
+                    journeyPathList={isValidJourney ? journeyPathList : []}
+                />
                 {isValidHighwayRestArea &&
                     restAreaData.reststops.map(
                         ({ name, location, isRecommend }) => (

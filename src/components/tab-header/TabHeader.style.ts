@@ -48,7 +48,7 @@ export const TabContainer = styled.div`
 `;
 
 export const Tab = styled.div`
-    padding-bottom: 23px;
+    padding-bottom: 20px;
     position: relative;
 `;
 

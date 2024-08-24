@@ -17,7 +17,7 @@ export function Button({
     ...restProps
 }: ButtonProps) {
     return (
-        <S.Button isValid={isValid} onClick={onClick} {...restProps}>
+        <S.Button isValid={isValid} onClick={onClick} disabled={!isValid} {...restProps}>
             <Text typography="buttonBold16" color={theme.color.wht[100]}>
                 {children}
             </Text>
